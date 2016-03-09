@@ -5,6 +5,9 @@ s3477089 - Sarah Vasiliki Giapitzakis
 
 s3495671 - Wolf Zimmermann
 
+s3485769 - Joshua
+
+s3400586 - Jeet
 
 #slack info
 https://septgroupteam.slack.com/
