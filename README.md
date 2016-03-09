@@ -10,8 +10,8 @@ s3495671 - Wolf Zimmermann
 https://septgroupteam.slack.com/
 
 #####Bots:
-+todo to use todo use type "/todo help" in any slack channel to see the commands
-+lucidchart /lucidchart 
++ todo to use todo use type "/todo help" in any slack channel to see the commands
++ lucidchart /lucidchart 
 
 #####Integrations
 + github: gitub updated will be automaticly posted into the #git-updates channel
