@@ -14,4 +14,37 @@ public class WISApplication {
 	
 	 
  }
+ 
+ public void showInfo(){
+	 return;
+ }
+ 
+ public void storeFav(){
+	 return;
+ }
+ 
+ public void updateView(){
+	 return;
+ }
+ 
+ public void refreshView(){
+	 return;
+ }
+ 
+ public void adjustWindow(){
+	 return;
+ }
+ 
+ public void reportError(){
+	 
+ }
+ 
+ private void getUser(){
+	 return;
+ }
+ 
+ private void getInto(State state){
+	 return;
+ }
+ 
 }
