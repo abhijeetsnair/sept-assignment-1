@@ -16,6 +16,8 @@ State[] states = new State[statesAbv.length];
 	for(int i = 0; i < statesAbv.length; i++){
 		states[i] = new State(statesAbv[i]);
 	} 
+	
+	//Run states weather update function
 	 return false;
 	 
 	 
