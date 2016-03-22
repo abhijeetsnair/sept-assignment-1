@@ -1,8 +1,11 @@
 package com.sept01.main;
 
+import java.util.ArrayList;
+
 public class Area {
-String name;
-String id;
+private String name;
+private String id;
+ArrayList<WeatherStation> weatherStations = new ArrayList<>();
    public Area(String name, String id){
       this.name = name;
       this.id = id;

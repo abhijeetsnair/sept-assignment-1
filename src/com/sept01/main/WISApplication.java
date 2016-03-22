@@ -11,6 +11,10 @@ public class WISApplication {
  
  public static void initializeWeather(){
 	Weather weather = new Weather();
+	System.out.println(weather.states[0].areas.get(1).getName());
+	for(int i = 0; i < weather.states.length ; i++){
+	   System.out.println(weather.states[i].name);
+	}
 	
 	 
  }
