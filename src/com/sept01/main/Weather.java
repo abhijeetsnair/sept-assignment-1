@@ -15,7 +15,9 @@ State[] states = new State[statesAbv.length];
 	 
 	for(int i = 0; i < statesAbv.length; i++){
 		states[i] = new State(statesAbv[i]);
-	} 
+	}
+	System.out.println(states[0].areas.get(0).getName());
+	System.out.println(states[0].areas.get(0).getId());
 	
 	//Run states weather update function
 	 return false;

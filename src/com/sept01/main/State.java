@@ -1,5 +1,5 @@
 package com.sept01.main;
-import java.util.Iterator;
+import java.util.*;
 
 import com.jaunt.Element;
 import com.jaunt.Elements;
@@ -7,27 +7,36 @@ import com.jaunt.JauntException;
 import com.jaunt.UserAgent;
 public class State {
 String name;
+
+//Currently only holding strings to weather station pages
+ArrayList<Object> areaNames = new ArrayList<>();
+ArrayList<Area> areas = new ArrayList<>();
 	public State(String name){
 		this.name = name;
-		System.out.println(this.name);
 		updateWeather();
 	}
 	
+	//update weather for entire state
 	protected boolean updateWeather(){
 		try{
 			UserAgent userAgent = new UserAgent();
 			 userAgent.visit("http://www.bom.gov.au/"+name+"/observations/"+name+"all.shtml");                        //visit a url  
-			 Elements elements = userAgent.doc.findEvery("<a href>");
-		
+//			 Elements elements = userAgent.doc.findEvery("<a href>");
+			 Elements elements = userAgent.doc.findEvery("<h2>");
 			 Iterator<Element> itr = elements.iterator();
 			 int x = 0;
 			 while(itr.hasNext()){
-				 if(elements.getElement(x).getAtString("href").contains("product")){
-					 System.out.println("search results:\n" + elements.getElement(x).getAtString("href")); 
+//				 if(elements.getElement(x).getAtString("href").contains("product")){
+			    if(elements.getElement(x).innerText().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0){
+					 //System.out.println("weather station: "+elements.getElement(x).getAtString("href")); 
+//					 weatherStations.add(elements.getElement(x).getAtString("href"));
+			       areas.add(new Area(elements.getElement(x).innerText(), "t"+elements.getElement(x).getAtString("id")));
+			       areaNames.add(elements.getElement(x).innerText());
 				 }
 				 itr.next();
 				 x++;
 			 }
+			 
 		}catch(JauntException e){
 			 System.err.println(e);
 		}
