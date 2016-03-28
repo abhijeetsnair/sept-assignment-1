@@ -12,13 +12,14 @@ State[] states = new State[statesAbv.length];
  
  private boolean initialize(State[] state){
 	 //initialize states with abbreviations as name
-	 
+	int perDone;
 	for(int i = 0; i < statesAbv.length; i++){
+		
 		states[i] = new State(statesAbv[i]);
+		perDone = (int) (((float)i)/((float)statesAbv.length) * 100);
+		System.out.println(perDone + "% done");
 	}
- System.out.println(states[0].areas.get(0).getName());
-//	System.out.println(states[0].areas.get(0).getId());
-	
+
 	//Run states weather update function
 	 return false;
 	 

@@ -1,6 +1,9 @@
 package com.sept01.main;
 
+import java.util.HashMap;
+
 public class WISApplication {
+static Weather weather;
  public static void main (String[] args){
     System.out.println("Hello");
     System.out.println(" :D ");
@@ -10,11 +13,14 @@ public class WISApplication {
  }
  
  public static void initializeWeather(){
-	Weather weather = new Weather();
-	System.out.println(weather.states[0].areas.get(1).getName());
-	for(int i = 0; i < weather.states.length ; i++){
-	   System.out.println(weather.states[i].name);
-	}
+	weather = new Weather();
+	HashMap[] weatherD = weather.states[0].areas.get(0).weatherStations.get(0).getData();
+	System.out.println(weatherD[0].get("wind_spd_kmh"));
+	
+//	System.out.println(weather.states[0].areas.get(1).getName());
+//	for(int i = 0; i < weather.states.length ; i++){
+//	   System.out.println(weather.states[i].name);
+//	}
 	
 	 
  }

@@ -20,8 +20,7 @@ ArrayList<WeatherStation> weatherStations = new ArrayList<>();
       //loop just to test that we are getting just the stations for this area remove it to tidy up
  	 Iterator<Element> titr = ((Elements) weatherStationTable).iterator();
  	 while(titr.hasNext()){	
- 		System.out.println(name);
-		 System.out.println("weather station: "+titr.next().getAtString("href"));
+		 weatherStations.add(new WeatherStation(titr.next().getAtString("href")));
 		 
 	 }
    }
