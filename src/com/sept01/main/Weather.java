@@ -1,27 +1,31 @@
 package com.sept01.main;
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import com.jaunt.*;
 public class Weather {
 //abbreviations for BOM web scraping
-String[] statesAbv = {"vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant"};
+private String[] statesAbv = {"vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant"};
+private HashMap<String, State> states = new HashMap<String, State>();
 //Array of state objects
-State[] states = new State[statesAbv.length];
  public Weather(){
 	 initialize(states);
  }
  
- private boolean initialize(State[] state){
+ private boolean initialize(HashMap states){
 	 //initialize states with abbreviations as name
 	int perDone;
+	System.out.println("Loading classes please wait");
+	// populate states
+	// this will create all classes for the data
 	for(int i = 0; i < statesAbv.length; i++){
 		
-		states[i] = new State(statesAbv[i]);
+		states.put(statesAbv[i],new State(statesAbv[i]));
 		perDone = (int) (((float)i)/((float)statesAbv.length) * 100);
 		System.out.println(perDone + "% done");
 	}
 
-	//Run states weather update function
-	 return false;
+	 return true;
 	 
 	 
  }
@@ -29,7 +33,7 @@ State[] states = new State[statesAbv.length];
  protected State getStateWeather(String state){
 	
 	 
-	 return null;
+	 return states.get(state);
 	  
  }
  

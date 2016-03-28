@@ -19,7 +19,7 @@ ArrayList<Area> areas = new ArrayList<>();
 	protected boolean updateWeather(){
 		try{
 			UserAgent userAgent = new UserAgent();
-			 userAgent.visit("http://www.bom.gov.au/"+name+"/observations/"+name+"all.shtml");                        //visit a url  
+			 userAgent.visit("http://www.bom.gov.au/"+name+"/observations/"+name+"all.shtml"); 
 //			 Elements elements = userAgent.doc.findEvery("<a href>");
 			 Elements elements = userAgent.doc.findEvery("<h2>");
 			 Elements tElements = userAgent.doc.findEvery("<table>");

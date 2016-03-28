@@ -11,8 +11,9 @@ import com.jaunt.ResponseException;
 import com.jaunt.UserAgent;
 
 public class WeatherStation {
-	HashMap<String, String> pairs = new HashMap<String, String>();
+	
 	String name;
+	String stateName;
 	String url;
 	String jsonUrl = null;
 	JSONObject json;
@@ -51,15 +52,16 @@ public class WeatherStation {
 		try {
 			json = new JSONObject(userAgent.json.get("observations").toString());
 		} catch (NotFound e) {
-			// TODO Auto-generated catch block
+			loadData();
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			loadData();
 			e.printStackTrace();
 		}
 		data = json.getJSONArray("data");
 		JSONObject temp = (JSONObject) json.getJSONArray("header").get(0);
 		name = temp.getString("name");
+		stateName = temp.getString("state");
 
 	}
 
@@ -69,6 +71,7 @@ public class WeatherStation {
 		//creates HASHMAP for storing data
 		dataMap = new HashMap[data.length()];
 		for (int i = 0; i < data.length(); i++) {
+			HashMap<String, String> pairs = new HashMap<String, String>();
 			JSONObject j = data.optJSONObject(i);
 			Iterator it = j.keys();
 			while (it.hasNext()) {
