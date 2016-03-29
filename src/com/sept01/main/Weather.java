@@ -1,3 +1,11 @@
+/*
+ * MAIN weather class
+ * this class its the access point for all weather data
+ * when a weather object is created it will create object for all states,area and
+ * weather stations.
+ * 
+ */
+
 package com.sept01.main;
 import java.util.HashMap;
 
@@ -24,6 +32,7 @@ private HashMap<String, State> states = new HashMap<String, State>();
 		perDone = (int) (((float)i)/((float)statesAbv.length) * 100);
 		System.out.println(perDone + "% done");
 	}
+	System.out.println(100 + "% done");
 
 	 return true;
 	 
@@ -35,6 +44,10 @@ private HashMap<String, State> states = new HashMap<String, State>();
 	 
 	 return states.get(state);
 	  
+ }
+ protected String[] getStateNames(){
+	 
+	 return statesAbv;
  }
  
  

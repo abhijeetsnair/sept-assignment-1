@@ -9,7 +9,8 @@ public class WISApplication {
 		System.out.println("Hello");
 		System.out.println(" :D ");
 		initializeWeather();
-		State state = weather.getStateWeather("vic");
+
+	State state = weather.getStateWeather("wa");
 
 		for (int x = 0; x < state.areas.size(); x++) {
 			for (int i = 0; i < state.areas.get(x).weatherStations.size(); i++) {
@@ -24,14 +25,7 @@ public class WISApplication {
 	}
 
 	public static void initializeWeather() {
-
 		weather = new Weather();
-
-		// System.out.println(weather.states[0].areas.get(1).getName());
-		// for(int i = 0; i < weather.states.length ; i++){
-		// System.out.println(weather.states[i].name);
-		// }
-
 	}
 
 	public void showInfo() {

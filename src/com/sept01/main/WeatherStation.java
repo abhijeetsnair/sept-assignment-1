@@ -1,3 +1,8 @@
+/*
+ * Weather station class
+ * This class hold all weather data for a weather station
+ * Also this object will scrap the json data for the object
+ */
 package com.sept01.main;
 
 import java.util.HashMap;
@@ -38,7 +43,6 @@ public class WeatherStation {
 				}
 
 			} catch (ResponseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -46,7 +50,7 @@ public class WeatherStation {
 		try {
 			userAgent.sendGET(jsonUrl);
 		} catch (ResponseException e) {
-			// TODO Auto-generated catch block
+			loadData();
 			e.printStackTrace();
 		}
 		try {
