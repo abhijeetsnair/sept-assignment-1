@@ -6,11 +6,12 @@ public class WISApplication {
 	static Weather weather;
 
 	public static void main(String[] args) {
+	   
 		System.out.println("Hello");
 		System.out.println(" :D ");
 		initializeWeather();
 
-	State state = weather.getStateWeather("wa");
+	State state = weather.getStateWeather("vic");
 
 		for (int x = 0; x < state.areas.size(); x++) {
 			for (int i = 0; i < state.areas.get(x).weatherStations.size(); i++) {
