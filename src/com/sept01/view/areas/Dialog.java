@@ -3,6 +3,7 @@ package com.sept01.view.areas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,14 +14,51 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.sept01.controller.JDialogListener;
+import com.sept01.main.Singleton;
+import com.sept01.main.State;
 
 public class Dialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
+	private String state_name;
+	private HashMap[] weatherD;
 
-	public Dialog(JFrame parent, String title, String message) {
-		super(parent, title);
+	public Dialog(JFrame parent, String weather_station, String message,String state_name) {
+		super(parent, weather_station);
+		this.state_name =state_name;
+			
+	
+	State state  = Singleton.getInstance().getWeather().getStateWeather(state_name);		
+		/**
+		 * I need more functionality from the data side
+		 * i should simply be able to obtain all the data pertaining to a particular state
+		 * directly by having done state.getArea(" ").getData()
+		 * 
+		 * 
+		 */
+	
+	for (int x = 0; x < state.getAreas().size(); x++) {
+		for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
+					
+				if(state.getAreas().get(x).getWeatherStations().get(i).getName().compareTo(weather_station)==0)
+					{
+						weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
+						for(int j=0;j<weatherD.length;j++)
+						{
+							
+							System.out.println(weatherD[j].get("local_date_time") + " "
+									+ state.getAreas().get(x).getName() + " Weather station "
+									+ weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt") + "kmh" + "Name :"
+									+ weatherD[j].get("name"));
+						}
+					}
+				
+		}
+	}	
+		
+	System.out.println("This is the length of weatherdata present in length"+weatherD.length) ;	
+	
 		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "D/r", "Spd", "Gust",
 				"Spd", "Gust", "QNH", "MSL", "Rain" };
 		String data[][] = new String[14][14];
@@ -35,6 +73,28 @@ public class Dialog extends JDialog {
 
 		}
 
+		
+		 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		jt = new JTable(data, coloumns);
 		jt.setPreferredScrollableViewportSize(new Dimension(600, 200));
 		jt.setFillsViewportHeight(true);

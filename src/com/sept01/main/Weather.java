@@ -39,9 +39,7 @@ private HashMap<String, State> states = new HashMap<String, State>();
 	 
  }
  
- protected State getStateWeather(String state){
-	
-	 
+ public State getStateWeather(String state){
 	 return states.get(state);
 	  
  }

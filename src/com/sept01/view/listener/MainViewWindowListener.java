@@ -4,18 +4,14 @@ import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import com.sept01.main.ReadFavoriate;
-import com.sept01.main.ReadScreenLoc;
-import com.sept01.main.SaveFavouriate;
-import com.sept01.main.SaveScreenLocation;
 import com.sept01.view.MainView;
 
 public class MainViewWindowListener implements WindowListener {
 
 	public MainViewWindowListener(MainView mainView) {
 		// TODO Auto-generated constructor stub
-		new ReadFavoriate();
-		new ReadScreenLoc();
+//		new ReadFavoriate();
+//		new ReadScreenLoc();
 	}
 
 	@Override
@@ -32,9 +28,9 @@ public class MainViewWindowListener implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-	 new SaveFavouriate();	
+//	 new SaveFavouriate();	
 	Point loc =arg0.getWindow().getLocationOnScreen();	
-	new SaveScreenLocation(loc);
+//	new SaveScreenLocation(loc);
 			
 	}
 

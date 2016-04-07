@@ -31,7 +31,7 @@ public class MainView extends JFrame {
 
 	public MainView() {
 
-		// Main UI frame for the programme
+		// Main UI frame for the Program
 		initUI();
 	}
 

@@ -2,7 +2,7 @@ package com.sept01.main;
 
 public class Favourites {
 
-	WeatherData[] weatherdata;
+	WeatherStation station;
 	User user;
 	
 	public User getUser(){
@@ -12,13 +12,14 @@ public class Favourites {
 	public void setUser(User user){
 		this.user = user;
 	}
-	
-	public WeatherData[] getWetherData(){
-		return weatherdata;
+
+	public WeatherStation getStation() {
+		return station;
+	}
+
+	public void setStation(WeatherStation station) {
+		this.station = station;
 	}
 	
-	public void setWeatherData(WeatherData[] weatherdata){
-		this.weatherdata = weatherdata;
-	}
 	
 }

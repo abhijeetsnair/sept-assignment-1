@@ -6,50 +6,69 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import com.sept01.main.Area;
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
-import com.sept01.main.User;
-import com.sept01.main.WISApplication;
+import com.sept01.main.WeatherStation;
 import com.sept01.view.areas.Dialog;
 
 public class CityClickListener implements ActionListener {
-	private ShowAllStates states = new ShowAllStates();
+	private ShowAllStates states = new ShowAllStates();	
+	private String state;
+
+	public CityClickListener(String State) {
+		 this.state =State;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		String weather_station_clicked = ((JButton) arg0.getSource()).getText();
 
-		String buttonClicked = ((JButton) arg0.getSource()).getText();
-		String title = "Location: " + ((JButton) arg0.getSource()).getText();
-		Dialog dialog = new Dialog(new JFrame(), title, "Latest Weather Observation for " +buttonClicked);	
-		
+		/*
+		 * Opening a dialog window to display information of the weather station
+		 * clicked
+		 */
+		Dialog dialog = new Dialog(new JFrame(), weather_station_clicked,
+				"Latest Weather Observation for " + weather_station_clicked,state);
 		// set the size of the window
 		dialog.setSize(300, 150);
-		WISApplication application = new WISApplication();
 
+		/*
+		 * Storing favorite as the application launches the application
+		 */
 		Favourites fav = new Favourites();
-		//fav.setUser(new User("Anonnymous", "0415397357", "He"));
+		WeatherStation fav_station = new WeatherStation(weather_station_clicked,weather_station_clicked);
+		fav_station.setName(weather_station_clicked);
 
-		System.out.println("Button Clickeed :" + buttonClicked);
-
-		Area areaclicked = Singleton.getInstance().getArea(buttonClicked);
-		System.out.println("Name of the area " + areaclicked.getName());
-
-		//fav.setArea(areaclicked);
-		Singleton.getInstance().addFav(fav);
-
-		// Attempting to see if the change in data gets reflected over
-		// favouriates
-		Singleton data = Singleton.getInstance();
-		data.getEastPanel().addFavoriates();
-		data.getEastPanel().repaint();
-		data.getEastPanel().revalidate();
-
-		System.out.println("-------");
-
-		for (int i = 0; i < Singleton.getInstance().getFav().size(); i++) {
-			//System.out.println("Favoriates" + Singleton.getInstance().getFav().get(i).getArea().getName());
-		}
+		/*
+		 * 
+		 * Adds the favorites to the WIS Application
+		 */
+		fav.setStation(fav_station);
+		Singleton.getInstance().getApplication().addFav(fav);
+		Singleton.getInstance().getEastPanel().addFavoriates();
+		Singleton.getInstance().getEastPanel().repaint();
+		Singleton.getInstance().getEastPanel().revalidate();
+		// System.out.println("Button Clickeed :" + buttonClicked);
+		//
+		// Area areaclicked = Singleton.getInstance().getArea(buttonClicked);
+		// System.out.println("Name of the area " + areaclicked.getName());
+		//
+		// //fav.setArea(areaclicked);
+		// Singleton.getInstance().addFav(fav);
+		//
+		// // Attempting to see if the change in data gets reflected over
+		// // favouriates
+		// Singleton data = Singleton.getInstance();
+		// data.getEastPanel().addFavoriates();
+		// data.getEastPanel().repaint();
+		// data.getEastPanel().revalidate();
+		//
+		// System.out.println("-------");
+		//
+		// for (int i = 0; i < Singleton.getInstance().getFav().size(); i++) {
+		// //System.out.println("Favoriates" +
+		// Singleton.getInstance().getFav().get(i).getArea().getName());
+		// }
 
 		// System.out.println("Comes here on clicks");
 		// JFrame frame = new JFrame();

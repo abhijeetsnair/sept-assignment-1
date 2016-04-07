@@ -15,7 +15,6 @@ import com.sept01.view.MainView;
 @SuppressWarnings("serial")
 public class WestPanel extends JPanel {
 	private MainView view;
-
 	public WestPanel(MainView mainView) {
 		this.setView(mainView);
 		this.setLayout(new BorderLayout());

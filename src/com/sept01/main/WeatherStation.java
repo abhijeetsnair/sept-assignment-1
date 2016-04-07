@@ -17,15 +17,30 @@ import com.jaunt.UserAgent;
 
 public class WeatherStation {
 	
+	public String getName() {
+		return name;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	String name;
 	String stateName;
 	String url;
 	String jsonUrl = null;
 	JSONObject json;
 	JSONArray data;
-	HashMap[] dataMap;
-	public WeatherStation(String url) {
+	HashMap[] dataMap;	
+		
+
+		
+	public WeatherStation(String url,String name) {
 		this.url = url;
+		this.name = name;
 	}
 
 	public void loadData() {

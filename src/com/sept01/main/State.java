@@ -14,9 +14,9 @@ import com.jaunt.JauntException;
 import com.jaunt.UserAgent;
 public class State {
 String name;
-ArrayList<Area> areas = new ArrayList<>();
+private ArrayList<Area> areas = new ArrayList<>();
 	public State(String name){
-		this.name = name;
+		this.name = name.toLowerCase();
 		updateWeather();
 	}
 	
@@ -32,7 +32,7 @@ ArrayList<Area> areas = new ArrayList<>();
 
 			    if(elements.getElement(x).innerText().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0){
 
-			       areas.add(new Area(elements.getElement(x).innerText(), "t"+ elements.getElement(x).getAtString("id"),userAgent.doc.findEvery("<table id="+"t"+ elements.getElement(x).getAtString("id")+">")));
+			       getAreas().add(new Area(elements.getElement(x).innerText(), "t"+ elements.getElement(x).getAtString("id"),userAgent.doc.findEvery("<table id="+"t"+ elements.getElement(x).getAtString("id")+">")));
 				 }
 				 itr.next();
 				 x++;
@@ -46,6 +46,14 @@ ArrayList<Area> areas = new ArrayList<>();
 		return false;
 		
 		
+	}
+
+	public ArrayList<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(ArrayList<Area> areas) {
+		this.areas = areas;
 	}
 	
 	

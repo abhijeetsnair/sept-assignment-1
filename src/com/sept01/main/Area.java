@@ -10,7 +10,7 @@ public class Area {
 private String name;
 private String id;
 Element weatherStationTable;
-ArrayList<WeatherStation> weatherStations = new ArrayList<>();
+private ArrayList<WeatherStation> weatherStations = new ArrayList<>();
    public Area(String name, String id,Element table){
       this.name = name;
       this.id = id;
@@ -20,7 +20,9 @@ ArrayList<WeatherStation> weatherStations = new ArrayList<>();
       //loop just to test that we are getting just the stations for this area remove it to tidy up
  	 Iterator<Element> titr = ((Elements) weatherStationTable).iterator();
  	 while(titr.hasNext()){	
-		 weatherStations.add(new WeatherStation(titr.next().getAtString("href")));
+ 		 Element e = titr.next();
+ 		 System.out.println(e.innerHTML());
+		 getWeatherStations().add(new WeatherStation(e.getAtString("href"),e.innerHTML()));
 		 
 	 }
    }
@@ -30,6 +32,12 @@ ArrayList<WeatherStation> weatherStations = new ArrayList<>();
    public String getId(){
       return id;
    }
+public ArrayList<WeatherStation> getWeatherStations() {
+	return weatherStations;
+}
+public void setWeatherStations(ArrayList<WeatherStation> weatherStations) {
+	this.weatherStations = weatherStations;
+}
   
 
 }

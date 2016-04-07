@@ -1,28 +1,45 @@
 package com.sept01.main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.sept01.view.MainView;
+
+import sun.applet.Main;
 
 public class WISApplication {
 	static Weather weather;
+	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
+
+	public ArrayList<Favourites> getFav() {
+		return fav;
+	}
+
+	public void setFav(ArrayList<Favourites> fav) {
+		this.fav = fav;
+	}
+
+	public WISApplication() {
+		Singleton.getInstance().setApplication(this);
+	}
 
 	public static void main(String[] args) {
-	   
+		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
 		initializeWeather();
+		// Weather instance saved to singleton class
+		Singleton.getInstance().setWeather(weather);
 
-	State state = weather.getStateWeather("vic");
+		MainView view = new MainView();
+		view.show();
 
-		for (int x = 0; x < state.areas.size(); x++) {
-			for (int i = 0; i < state.areas.get(x).weatherStations.size(); i++) {
-
-				HashMap[] weatherD = state.areas.get(x).weatherStations.get(i).getData();
-				System.out.println(weatherD[0].get("local_date_time")+" "
-						+ state.areas.get(x).weatherStations.get(i).stateName + " Weather station "
-						+ weatherD[0].get("name") + " Wind speed: " + weatherD[0].get("wind_spd_kmh") + "kmh");
-			}
-		}
-
+		
+		
+		
+		
+		
+		
 	}
 
 	public static void initializeWeather() {
@@ -30,10 +47,6 @@ public class WISApplication {
 	}
 
 	public void showInfo() {
-		return;
-	}
-
-	public void storeFav() {
 		return;
 	}
 
@@ -61,4 +74,15 @@ public class WISApplication {
 		return;
 	}
 
+	public void addFav(Favourites fav) {
+		this.fav.add(fav);
+
+	}
+	public void testFav() {
+
+		for (int i = 0; i < fav.size(); i++) {
+		 System.out.println(fav.get(i).getStation().getName());
+		}
+
+	}
 }
