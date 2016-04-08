@@ -2,14 +2,14 @@
   <head> </head>
   <body>
     <div id = list>
-      <h1 id="header">[PROGRAM NAME] User Documentation</h1>
+      <h1 id="header">Weather Information Management System [WIMS] User Documentation</h1>
       <h3>
       <ol>
         <li> <a href="#Introduction">Introduction</a> </li>
         <li> <a href="#Installation">Installation</a> </li>
         <ol>
           <li> <a href="#Installing Java">Installing Java</a> </li>
-          <li> <a href="#Installing [PROGRAM NAME]">Installing [PROGRAM NAME]</a> </li>
+          <li> <a href="#Installing [PROGRAM NAME]">Installing WIMS</a> </li>
         </ol>
         <li> <a href="#Launching the program">Launching the program</a> </li>
         <li> <a href="#Quick Overview">Quick Overview</a> </li>
@@ -32,7 +32,7 @@
     </div>
     <ol>
     <li> <h1 id="Introduction">Introduction</a></h1>
-      <p> [PROGRAM NAME] [VERSION NUMBER] is the latest version. [PROGRAM NAME] is a self contained .jar executable
+      <p> Weather Information Management System [WIMS] [VERSION NUMBER] is the latest version. WIMS is a self contained .jar executable
       <br> program that fetches real time weather data from the <a href="http://www.bom.gov.au/">Bureau of Meteorolgy website</a> and displays it in a user friendly format. <br>
       The program is written in Java [VERSION] and requires your operating system to have Java [VERSION] installed.  <br> </p>
     </li>
@@ -40,31 +40,41 @@
     <ol>
       <li> <h3 id="Installing Java">Installing Java</a></h3> </li>
       <p> To install Java head to the <a href="https://java.com/en/download/">Java website</a> and download the latest version. Follow it's installation instructions.</p>
-      <li> <h3 id="Installing [PROGRAM NAME]">Installing [PROGRAM NAME]</a></h3> </li>
-      <p> [PROGRAM NAME] comes as a self contained .jar executable and does not require installation in order to launch.
+      <li> <h3 id="Installing [PROGRAM NAME]">Installing Weather Information Management System</a></h3> </li>
+      <p> WIMS comes as a self contained .jar executable and does not require installation in order to launch.
     </ol>
     <li> <h1 id="Launching the program">Launching the program</a></h1> </li>
-      <p> To launch [PROGRAM NAME] simply double click the .jar file, or right click and select "OPEN".</p>
+      <p> To launch WIMS simply double click the .jar file, or right click and select "OPEN".</p>
     <li> <h1 id="Quick Overview">Quick Overview</a></h1> </li>
     <p>
       <img src="images/applictaion_overview_01.png" alt="sometext">
       <br>
-      Upon launch, [PROGRAM NAME] should look similar to the above image. This screen contains all you need to begin navigating the program.</p><p>
+      Upon launch, WIMS should look similar to the above image. This screen contains all you need to begin navigating the program.</p><p>
       [INSERT SEVERAL MORE IMAGES WITH HIGHLIGHTED SEGMENTS AND DESCRIPTIONS OF BUTTONS] <br>
       (Wont do this until the UI is more final, so we don't have to retake and re-edit lots of screenshots)
     </p>
     <li> <h1 id="Checking the weather">Checking the weather</a></h1> </li>
       <ol>
         <li> <h3 id="Choosing a state">Choosing a state</a></h3> </li>
+        <p> When the program is initially opened, a list of states is displayed on the left-hand side. (See box 1 for list of states) <br>
+            Simply hover or click on the state in order to reveal a panel containing that state's areas and weather stations. (See box 2 for example of a state) </p>
+        <img src="images/application_states.png" alt="sometext2">
         <li> <h3 id="Finding your area">Finding your area</a></h3> </li>
+        <p> Once you've chosen a state, simply scroll through the list of areas until you find your desired area. [ ! Perhaps I can implement alphabetical sorting?] </p>
+        <img src="images/application_areas.png" alt="sometext2">
         <li> <h3 id="Finding your weather station">Finding your weather station</a></h3> </li>
+        <p> Find your weather station. </p>
       </ol>
       <li> <h1 id="Favourite weather stations">Favourite weather stations</a></h1> </li>
         <ol>
           <li> <h3 id="Adding a favourite weather station">Adding a favourite weather station</a></h3> </li>
+          <p> Add a weather station to favourites. </p>
           <li> <h3 id="Removing a favourite weather station">Removing a favourite weather station</a></h3> </li>
+          <p> Remove a weather station from your favourites. </p>
         </ol>
     <li> <h1 id="Uninstall">Uninstall</a></h1> </li>
+    <p> The program does not need a proper uninstallation to be removed, as it does not need to be installed. Instead, simply delete the .jar file and any assosicated files.
+    </p>
   </ol>
 
   </body>
