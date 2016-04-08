@@ -6,6 +6,7 @@ import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import com.sept01.main.Singleton;
 import com.sept01.view.areas.CenterPanel;
@@ -36,7 +37,11 @@ public class MainView extends JFrame {
 	}
 
 	private void initUI() {
-
+//		try { 
+//		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (Exception e) {
+//		    e.printStackTrace();
+//		}
 		setTitle("WISApplication");
 		setSize(800, 600);
 		setLocationRelativeTo(null);

@@ -31,7 +31,7 @@ public class WestPanel extends JPanel {
 		JButton TAS = new JButton("TAS");
 		JButton ACT = new JButton("ACT");
 		JButton NT = new JButton("NT");
-		JButton ANTARTICA = new JButton("ANTARTICA");
+		JButton ANTARTICA = new JButton("ANT");
 
 		// Adding Listeners to the button
 		NSW.addMouseListener(new StateButtonHoverListener(this, NSW));

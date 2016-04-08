@@ -36,15 +36,15 @@ public class Singleton {
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
 	ArrayList<State> states = new ArrayList<State>();
 	// Create all the states
-	State NSW = new State("NSW");
-	State VIC = new State("VIC");
-	State QLD = new State("QLD");
-	State WA = new State("WA");
-	State SA = new State("SA");
-	State TAS = new State("TAS");
-	State ACT = new State("ACT");
-	State NT = new State("NT");
-	State ANTARTICA = new State("ANTARTICA");
+//	State NSW = new State("NSW");
+//	State VIC = new State("VIC");
+//	State QLD = new State("QLD");
+//	State WA = new State("WA");
+//	State SA = new State("SA");
+//	State TAS = new State("TAS");
+//	State ACT = new State("ACT");
+//	State NT = new State("NT");
+//	State ANTARTICA = new State("ANT");
 
 	public JFrame getMainView() {
 		return MainView;
