@@ -10,7 +10,6 @@ package com.sept01.main;
 import java.util.HashMap;
 
 import org.json.JSONArray;
-import com.jaunt.*;
 public class Weather {
 //abbreviations for BOM web scraping
 private String[] statesAbv = {"vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant"};

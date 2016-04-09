@@ -3,41 +3,48 @@ package com.sept01.main;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.jaunt.Element;
-import com.jaunt.Elements;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+
 
 public class Area {
-private String name;
-private String id;
-Element weatherStationTable;
-private ArrayList<WeatherStation> weatherStations = new ArrayList<>();
-   public Area(String name, String id,Element table){
-      this.name = name;
-      this.id = id;
-      //strip the table and get just the links
-      weatherStationTable =  table.findEvery("<a href>");;
-      
-      //loop just to test that we are getting just the stations for this area remove it to tidy up
- 	 Iterator<Element> titr = ((Elements) weatherStationTable).iterator();
- 	 while(titr.hasNext()){	
- 		 Element e = titr.next();
- 		 System.out.println(e.innerHTML());
-		 getWeatherStations().add(new WeatherStation(e.getAtString("href"),e.innerHTML()));
-		 
-	 }
-   }
-   public String getName(){
-      return name;
-   }
-   public String getId(){
-      return id;
-   }
-public ArrayList<WeatherStation> getWeatherStations() {
-	return weatherStations;
-}
-public void setWeatherStations(ArrayList<WeatherStation> weatherStations) {
-	this.weatherStations = weatherStations;
-}
-  
+	private String name;
+	private String id;
+	Elements weatherStationTable;
+	private ArrayList<WeatherStation> weatherStations = new ArrayList<>();
+
+	public Area(String name, String id, Elements table) {
+		this.name = name;
+		this.id = id;
+		// strip the table and get just the links
+		weatherStationTable = table.select("a[href]");
+		System.out.println(table);
+		Iterator<Element> titr = ((Elements) weatherStationTable).iterator();
+		// Load all the weather station objects - no data apart from name
+		while (titr.hasNext()) {
+			Element e = titr.next();
+			System.out.println(e.text());
+			System.out.println(e.attr("abs:href"));
+			getWeatherStations().add(new WeatherStation(e.attr("abs:href"), e.text()));
+
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public ArrayList<WeatherStation> getWeatherStations() {
+		return weatherStations;
+	}
+
+	public void setWeatherStations(ArrayList<WeatherStation> weatherStations) {
+		this.weatherStations = weatherStations;
+	}
 
 }

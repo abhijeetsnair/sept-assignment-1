@@ -6,46 +6,57 @@
  *
  */
 package com.sept01.main;
+
+import java.io.IOException;
 import java.util.*;
+import org.jsoup.*;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
-import com.jaunt.Element;
-import com.jaunt.Elements;
-import com.jaunt.JauntException;
-import com.jaunt.UserAgent;
+
+
+
 public class State {
-String name;
-private ArrayList<Area> areas = new ArrayList<>();
-	public State(String name){
+	String name;
+	private ArrayList<Area> areas = new ArrayList<>();
+
+	public State(String name) {
 		this.name = name.toLowerCase();
-		updateWeather();
-	}
-	
-	protected boolean updateWeather(){
-		try{
-			UserAgent userAgent = new UserAgent();
-			 userAgent.visit("http://www.bom.gov.au/"+name+"/observations/"+name+"all.shtml"); 
-			 Elements elements = userAgent.doc.findEvery("<h2>");
-			 Elements tElements = userAgent.doc.findEvery("<table>");
-			 Iterator<Element> itr = elements.iterator();
-			 int x = 0;
-			 while(itr.hasNext()){
-
-			    if(elements.getElement(x).innerText().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0){
-
-			       getAreas().add(new Area(elements.getElement(x).innerText(), "t"+ elements.getElement(x).getAtString("id"),userAgent.doc.findEvery("<table id="+"t"+ elements.getElement(x).getAtString("id")+">")));
-				 }
-				 itr.next();
-				 x++;
-			 }
-
-		}catch(JauntException e){
-			 System.err.println(e);
+		try {
+			updateWeather();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
 		}
+	}
+
+	protected boolean updateWeather() throws IOException {
+			//UserAgent userAgent = new UserAgent(); // Create headless browser
+			//visit webpage
+			//userAgent.visit("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml"); 
+			//find all header 2 which will have our area names
+			Document doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
+			Elements elements = doc.select("h2");
+			Iterator<Element> itr = elements.iterator(); // create an iterator
+			//Loop through webpage to get all area names
+			System.out.println(elements.get(1));
+			while (itr.hasNext()) {
+				Element e = itr.next();
+				//find the heading element we want
+				System.out.println(e.text());
+				if (e.text().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0) {
+					//create area and also pass the table with all the weather station links
+					getAreas().add(new Area(e.text(), "t" + e.attr("id"),
+							doc.select("table[id=" + "t" + e.attr("id")+"]" )));
+				}
+
+			}
+
 		
-		
+
 		return false;
-		
-		
+
 	}
 
 	public ArrayList<Area> getAreas() {
@@ -55,7 +66,5 @@ private ArrayList<Area> areas = new ArrayList<>();
 	public void setAreas(ArrayList<Area> areas) {
 		this.areas = areas;
 	}
-	
-	
 
 }
