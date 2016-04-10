@@ -30,7 +30,7 @@ public class CityClickListener implements ActionListener {
 		Dialog dialog = new Dialog(new JFrame(), weather_station_clicked,
 				"Latest Weather Observation for " + weather_station_clicked,state);
 		// set the size of the window
-		dialog.setSize(300, 150);
+		dialog.setSize(900, 400);
 
 		/*
 		 * Storing favorite as the application launches the application

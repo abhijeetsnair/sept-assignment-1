@@ -74,8 +74,6 @@ public class WeatherStation {
 			}
 
 		}
-
-		System.out.println(jsonUrl);
 		String jsonString = null;
 		try {
 			jsonString = Jsoup.connect(jsonUrl).ignoreContentType(true).execute().body();
@@ -83,7 +81,6 @@ public class WeatherStation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(jsonString);
 
 		json = new JSONObject(jsonString);
 		json = json.getJSONObject("observations");

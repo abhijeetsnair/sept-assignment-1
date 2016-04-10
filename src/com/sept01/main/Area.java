@@ -19,13 +19,10 @@ public class Area {
 		this.id = id;
 		// strip the table and get just the links
 		weatherStationTable = table.select("a[href]");
-		System.out.println(table);
 		Iterator<Element> titr = ((Elements) weatherStationTable).iterator();
 		// Load all the weather station objects - no data apart from name
 		while (titr.hasNext()) {
 			Element e = titr.next();
-			System.out.println(e.text());
-			System.out.println(e.attr("abs:href"));
 			getWeatherStations().add(new WeatherStation(e.attr("abs:href"), e.text()));
 
 		}

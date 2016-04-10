@@ -40,11 +40,9 @@ public class State {
 			Elements elements = doc.select("h2");
 			Iterator<Element> itr = elements.iterator(); // create an iterator
 			//Loop through webpage to get all area names
-			System.out.println(elements.get(1));
 			while (itr.hasNext()) {
 				Element e = itr.next();
 				//find the heading element we want
-				System.out.println(e.text());
 				if (e.text().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0) {
 					//create area and also pass the table with all the weather station links
 					getAreas().add(new Area(e.text(), "t" + e.attr("id"),

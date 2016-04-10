@@ -27,18 +27,13 @@ public class WISApplication {
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
+		
 		initializeWeather();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 
 		MainView view = new MainView();
 		view.show();
-
-		
-		
-		
-		
-		
 		
 	}
 
