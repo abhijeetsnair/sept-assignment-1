@@ -27,7 +27,8 @@ public class WISApplication {
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
-		
+		System.setProperty("awt.useSystemAAFontSettings","on");
+		System.setProperty("swing.aatext", "true");
 		initializeWeather();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);

@@ -1,6 +1,7 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
+
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -14,11 +15,12 @@ public class CenterPanel extends JPanel {
 
 	public CenterPanel(MainView mainView) {
 		// TODO Auto-generated constructor stub
+		JPanel dataPanel = new JPanel();
 		bg = new ImageIcon("images/background.png").getImage();
 
 		this.setLayout(new BorderLayout());
 
-		JPanel dataPanel = new JPanel();
+		
 		dataPanel.setOpaque(false);
 		this.add(dataPanel, BorderLayout.CENTER);
 
@@ -33,6 +35,7 @@ public class CenterPanel extends JPanel {
 
 		if (location.compareTo("NSW") == 0) {
 			bg = new ImageIcon("images/NSW.PNG").getImage();
+			System.out.println(this.getWidth());
 		}
 
 		if (location.compareTo("VIC") == 0) {
@@ -60,14 +63,14 @@ public class CenterPanel extends JPanel {
 		if (location.compareTo("NT") == 0) {
 			bg = new ImageIcon("images/NT.PNG").getImage();
 		}
-		if (location.compareTo("ANTARTICA") == 0) {
+		if (location.compareTo("ANT") == 0) {
 			bg = new ImageIcon("images/ANTARTICA.PNG").getImage();
 		}	
 			
 		if (location.compareTo("Default") == 0) {
 			bg = new ImageIcon("images/background.png").getImage();
 		}	
-			
+			//getScaledInstance(this.getHeight(), this.getWidth(),java.awt.Image.SCALE_SMOOTH)
 		
 	}
 

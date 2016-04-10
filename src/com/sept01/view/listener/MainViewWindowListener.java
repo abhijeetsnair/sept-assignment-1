@@ -13,7 +13,6 @@ public class MainViewWindowListener implements WindowListener {
 //		new ReadFavoriate();
 //		new ReadScreenLoc();
 	}
-
 	@Override
 	public void windowActivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub
@@ -45,6 +44,7 @@ public class MainViewWindowListener implements WindowListener {
 		// TODO Auto-generated method stub
 
 	}
+
 
 	@Override
 	public void windowIconified(WindowEvent arg0) {

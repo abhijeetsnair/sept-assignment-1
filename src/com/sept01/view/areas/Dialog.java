@@ -29,7 +29,7 @@ public class Dialog extends JDialog {
 	public Dialog(JFrame parent, String weather_station, String message,String state_name) {
 		super(parent, weather_station);
 		this.state_name =state_name;
-			
+   
 	
 	State state  = Singleton.getInstance().getWeather().getStateWeather(state_name);		
 		/**

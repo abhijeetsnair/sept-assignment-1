@@ -7,6 +7,9 @@
  */
 
 package com.sept01.main;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -34,7 +37,9 @@ private boolean initialize(HashMap<String, State> states){
 	// populate states
 	// this will create all classes for the data
 	JWindow window = new JWindow();
+	window.getContentPane().setBackground(Color.decode("#003366"));
 	JLabel Loading_label = new JLabel("LOADING", SwingConstants.CENTER);
+	Loading_label.setForeground(Color.WHITE);
 	window.getContentPane().add(
 			Loading_label);
 	window.setBounds(500, 150, 300, 200);

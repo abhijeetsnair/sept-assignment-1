@@ -3,6 +3,9 @@ package com.sept01.view;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -73,8 +76,23 @@ public class MainView extends JFrame {
 		add(west, BorderLayout.WEST);
 		add(south, BorderLayout.SOUTH);
 		add(center, BorderLayout.CENTER);
+//		FORCE 16:9
+//		this.addComponentListener(new ComponentAdapter() {
+//			@Override
+//			public void componentResized(ComponentEvent arg0) {
+//			    int W = 16;  
+//			    int H = 9;  
+//			    Rectangle b = arg0.getComponent().getBounds();
+//			    arg0.getComponent().setBounds(b.x, b.y, b.width, b.width*H/W);
+//
+//			}
+//			
+//		});
 
 	}
+	
+	
+
 
 	public EastPanel getEast() {
 		return east;
