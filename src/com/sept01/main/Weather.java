@@ -8,19 +8,13 @@
 
 package com.sept01.main;
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
-import org.json.JSONArray;
 import org.jsoup.Jsoup;
 public class Weather {
 //abbreviations for BOM web scraping
@@ -36,8 +30,7 @@ private boolean initialize(HashMap<String, State> states){
 	 //initialize states with abbreviations as name
 	int perDone;
 	System.out.println("Loading classes please wait");
-	// populate states
-	// this will create all classes for the data
+	//LOADING SCREEN
 	JWindow window = new JWindow();
 	window.getContentPane().setBackground(Color.decode("#003366"));
 	JLabel Loading_label = new JLabel("LOADING", SwingConstants.CENTER);
@@ -51,6 +44,8 @@ private boolean initialize(HashMap<String, State> states){
 	if(!checkConnection("http://www.bom.gov.au/", Loading_label)){
 		System.exit(0);
 	}
+	// populate states
+	// this will create all classes for the data
 	for(int i = 0; i < statesAbv.length; i++){
 		
 		states.put(statesAbv[i],new State(statesAbv[i]));

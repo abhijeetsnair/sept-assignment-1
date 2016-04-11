@@ -32,9 +32,7 @@ public class State {
 	}
 
 	protected boolean updateWeather() throws IOException {
-			//UserAgent userAgent = new UserAgent(); // Create headless browser
 			//visit webpage
-			//userAgent.visit("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml"); 
 			//find all header 2 which will have our area names
 			Document doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
 			Elements elements = doc.select("h2");

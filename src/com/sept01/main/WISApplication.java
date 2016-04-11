@@ -1,11 +1,7 @@
 package com.sept01.main;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.sept01.view.MainView;
-
-import sun.applet.Main;
 
 public class WISApplication {
 	static Weather weather;
@@ -23,6 +19,7 @@ public class WISApplication {
 		Singleton.getInstance().setApplication(this);
 	}
 
+	
 	public static void main(String[] args) {
 		new WISApplication();
 		System.out.println("Hello");
@@ -34,7 +31,8 @@ public class WISApplication {
 		Singleton.getInstance().setWeather(weather);
 
 		MainView view = new MainView();
-		view.show();
+		//view.show();
+		view.setVisible(true);
 		
 	}
 

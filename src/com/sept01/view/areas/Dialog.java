@@ -23,7 +23,9 @@ public class Dialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
+	@SuppressWarnings("unused")
 	private String state_name;
+	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
 
 	public Dialog(JFrame parent, String weather_station, String message,String state_name) {

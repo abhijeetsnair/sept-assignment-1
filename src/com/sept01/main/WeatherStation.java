@@ -6,25 +6,14 @@
 package com.sept01.main;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import org.json.*;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-//import com.jaunt.Element;
-//import com.jaunt.Elements;
-//import com.jaunt.NotFound;
-//import com.jaunt.ResponseException;
-//import com.jaunt.UserAgent;
-
-import sun.misc.IOUtils;
 
 public class WeatherStation {
 
@@ -72,7 +61,6 @@ public class WeatherStation {
 
 				}
 			}
-
 		}
 		String jsonString = null;
 		try {
@@ -81,17 +69,14 @@ public class WeatherStation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		json = new JSONObject(jsonString);
 		json = json.getJSONObject("observations");
-
 		data = json.getJSONArray("data");
 		JSONObject temp = (JSONObject) json.getJSONArray("header").get(0);
 		name = temp.getString("name");
 		stateName = temp.getString("state");
-
 	}
-
+	
 	public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();
@@ -114,10 +99,10 @@ public class WeatherStation {
 					pairs.put(n, (String) j.get(n));
 				}
 			}
-			// Add hashmap pairs to array
+			// Add hash map pairs to array
 			dataMap[i] = pairs;
 		}
-		// return array of hashmaps
+		// return array of hash maps
 		return dataMap;
 
 	}

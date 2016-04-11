@@ -1,8 +1,6 @@
 package com.sept01.controller;
 
 import java.awt.BorderLayout;
-import java.util.HashMap;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
