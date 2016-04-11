@@ -10,6 +10,7 @@ package com.sept01.main;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
 import org.json.JSONArray;
+import org.jsoup.Jsoup;
 public class Weather {
 //abbreviations for BOM web scraping
 private String[] statesAbv = {"vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant"};
@@ -45,6 +47,10 @@ private boolean initialize(HashMap<String, State> states){
 	window.setBounds(500, 150, 300, 200);
 	window.setLocationRelativeTo(null);
 	window.setVisible(true);
+	//Checks if BOM is online if not quit application
+	if(!checkConnection("http://www.bom.gov.au/", Loading_label)){
+		System.exit(0);
+	}
 	for(int i = 0; i < statesAbv.length; i++){
 		
 		states.put(statesAbv[i],new State(statesAbv[i]));
@@ -52,6 +58,8 @@ private boolean initialize(HashMap<String, State> states){
 		System.out.println(perDone + "% done");
 		Loading_label.setText("LOADING: "+perDone + "%");
 	}
+
+	
 	System.out.println(100 + "% done");
 	window.setVisible(false);
 	window.dispose();
@@ -70,6 +78,59 @@ private boolean initialize(HashMap<String, State> states){
 	 return statesAbv;
  }
  
+ public boolean checkConnection(String url,JLabel Loading_label){
+		try {
+			Jsoup.connect(url).get();
+			return true;
+		} catch (IOException e) {
+			Loading_label.setText("Cannot connect to "+url+" retrying");
+			try {
+				Thread.sleep(5000);
+				try {
+					Jsoup.connect(url).get();
+					return true;
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					Loading_label.setText("Cannot connect to "+url+" quiting");
+					return false;
+				}
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+		return true;
+	
+	 
+	 
+ }
+ public boolean checkConnection(String url){
+		try {
+			Jsoup.connect(url).get();
+			return true;
+		} catch (IOException e) {
+	
+			try {
+				Thread.sleep(5000);
+				try {
+					Jsoup.connect(url).get();
+					return true;
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					return false;
+				}
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+		return true;
+	
+	 
+	 
+}
  
  
 }
