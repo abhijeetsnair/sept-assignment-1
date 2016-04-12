@@ -46,7 +46,7 @@ public class MainView extends JFrame {
 //		} catch (Exception e) {
 //		    e.printStackTrace();
 //		}
-	   setIconImage(Toolkit.getDefaultToolkit().getImage("images/background.png"));
+	   setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 		setTitle("WISApplication");
 		setSize(800, 600);
 		setLocationRelativeTo(null);
