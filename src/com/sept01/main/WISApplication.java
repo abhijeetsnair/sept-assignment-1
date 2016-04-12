@@ -1,14 +1,12 @@
 package com.sept01.main;
 
 import java.util.ArrayList;
+
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import com.sept01.view.MainView;
 
-/*
- * I am commiting this edit 
- * Wolf helped me do this
- * 
- * 
- */
 public class WISApplication {
 	static Weather weather;
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
@@ -27,6 +25,16 @@ public class WISApplication {
 
 	
 	public static void main(String[] args) {
+			
+		/**
+		 * Changes the look and feel of the application to the nimbus look and feel
+		 * 
+		 * 	 changeLookAndFeel();	
+
+		 */
+		
+	
+		//changeLookAndFeel();	
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
@@ -39,6 +47,29 @@ public class WISApplication {
 		MainView view = new MainView();
 		//view.show();
 		view.setVisible(true);
+		
+	}
+
+	private static void changeLookAndFeel() {
+		/*
+		 * Makes the UI  look more beautiful and appealing
+		 */
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, fall back to cross-platform
+		    try {
+		        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		    } catch (Exception ex) {
+		        // not worth my time
+		    }
+		}
+			
 		
 	}
 
@@ -75,7 +106,18 @@ public class WISApplication {
 	}
 
 	public void addFav(Favourites fav) {
-		this.fav.add(fav);
+		boolean fav_exists = false;
+			
+		for (int i = 0; i < getFav().size(); i++) {
+			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
+				fav_exists = true;
+			}
+		}
+
+		if (fav_exists == false) {
+			this.fav.add(fav);
+		}
+		
 
 	}
 	public void testFav() {

@@ -1,17 +1,17 @@
 package com.sept01.view.listener;
 
-import java.awt.Point;
+import java.awt.Point;	
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
+import com.sept01.main.*;
 import com.sept01.view.MainView;
 
 public class MainViewWindowListener implements WindowListener {
 
 	public MainViewWindowListener(MainView mainView) {
 		// TODO Auto-generated constructor stub
-//		new ReadFavoriate();
-//		new ReadScreenLoc();
+	new ReadFavoriate();
+	new ReadScreenLoc();
 	}
 	@Override
 	public void windowActivated(WindowEvent arg0) {
@@ -27,9 +27,9 @@ public class MainViewWindowListener implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-//	 new SaveFavouriate();	
+	
 	Point loc =arg0.getWindow().getLocationOnScreen();	
-//	new SaveScreenLocation(loc);
+	new SaveScreenLocation(loc);
 			
 	}
 
