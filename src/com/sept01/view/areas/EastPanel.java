@@ -49,17 +49,22 @@ public class EastPanel extends JPanel {
 
 	public void addFavoriates() {
  System.out.println("Does it come here");
-		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
+		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {		
+				
+			if(checkifFavExists(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == false)	
+			{
 			JButton weather_station = new JButton(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			
 			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			favAreas.add(weather_station);
 			favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
+			}
 		}
 		TextPanel.add(favAreas);
 	}
 
+ 
 	// public void addFavoriates() {
 	//
 	// System.out.println("Size of favouriates " +
@@ -82,14 +87,14 @@ public class EastPanel extends JPanel {
 	// TextPanel.add(favAreas);
 	// }
 
-	// public boolean checkifFavExists(String area) {
-	//
-	//// for (int i = 0; i < favAdded.size(); i++) {
-	//// if (favAdded.get(i).getArea().getName() == area) {
-	//// return true;
-	//// }
-	//// }
-	// return false;
-	// }
+	 public boolean checkifFavExists(String area) {
+	
+	 for (int i = 0; i < favAdded.size(); i++) {
+	 if (favAdded.get(i).getStation().getName() == area) {
+	 return true;
+	 }
+	 }
+	 return false;
+	 }
 
 }
