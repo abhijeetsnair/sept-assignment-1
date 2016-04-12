@@ -3,6 +3,12 @@ package com.sept01.main;
 import java.util.ArrayList;
 import com.sept01.view.MainView;
 
+/*
+ * I am commiting this edit 
+ * Wolf helped me do this
+ * 
+ * 
+ */
 public class WISApplication {
 	static Weather weather;
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
