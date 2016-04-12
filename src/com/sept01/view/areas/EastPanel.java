@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
 import com.sept01.view.MainView;
+import com.sept01.view.listener.FavClickListener;
 
 public class EastPanel extends JPanel {
 	/**
@@ -55,6 +56,7 @@ public class EastPanel extends JPanel {
 			{
 			JButton weather_station = new JButton(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+			weather_station.addActionListener(new FavClickListener());
 			
 			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			favAreas.add(weather_station);
