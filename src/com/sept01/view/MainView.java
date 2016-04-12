@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -45,6 +46,7 @@ public class MainView extends JFrame {
 //		} catch (Exception e) {
 //		    e.printStackTrace();
 //		}
+	   setIconImage(Toolkit.getDefaultToolkit().getImage("images/background.png"));
 		setTitle("WISApplication");
 		setSize(800, 600);
 		setLocationRelativeTo(null);

@@ -14,9 +14,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-
-
 public class State {
 	String name;
 	private ArrayList<Area> areas = new ArrayList<>();

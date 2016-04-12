@@ -51,7 +51,17 @@ public class WeatherStation {
 				doc = Jsoup.connect(url).get();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				try
+            {
+               Thread.sleep(1000);
+               doc = Jsoup.connect(url).get();
+            }
+            catch (InterruptedException | IOException e2)
+            {
+               // TODO Auto-generated catch block
+               e2.printStackTrace();
+            }
+			   e1.printStackTrace();
 			}
 			Elements elements = doc.select("a[href]");
 			for (Element e : elements) {
