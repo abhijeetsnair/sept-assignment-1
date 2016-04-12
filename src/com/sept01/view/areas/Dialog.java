@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -14,6 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
@@ -111,7 +120,7 @@ public class Dialog extends JDialog {
 		// Panel to show graph and Display Message
 		JPanel showGraph = new JPanel();
 		JButton showGraphButton = new JButton("Show Graph");
-		showGraphButton.addActionListener(new JDialogListener(this));
+		showGraphButton.addActionListener(new JDialogListener(this,data));
 		showGraph.setLayout(new FlowLayout());
 		showGraph.add(new JLabel(message));
 		showGraph.add(showGraphButton);
@@ -121,7 +130,11 @@ public class Dialog extends JDialog {
 		buttonPane.add(showGraph);
 		JScrollPane jps = new JScrollPane(jt);
 		buttonPane.add(jps);
-
+		
+		showGraph(buttonPane,data);
+		
+			
+		
 		JPanel CloseMe = new JPanel();
 		JButton closeMe = new JButton("Close me");
 		CloseMe.add(closeMe);
@@ -134,6 +147,51 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
+	}
+
+	private void showGraph(JPanel buttonPane, String[][] data) {
+		
+
+		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+			for(int i =0;i<data.length; i++){
+				System.out.println(data[i][0] + data[i][1] +"Matches with "+ data[i][0].contains(new Date().getDate()+"/09:00am")+data[i][0].contains(new Date().getDate()+"/03:00pm") );			
+
+				if((data[i][0].contains(new Date().getDate()+"/09:00am")) || (data[i][0].contains(new Date().getDate()+"/03:00pm"))||(data[i][0].contains((new Date().getDate()-1)+"/09:00am")) || (data[i][0].contains((new Date().getDate()-1)+"/03:00pm"))||(data[i][0].contains((new Date().getDate()-2)+"/09:00am")) || (data[i][0].contains((new Date().getDate()-2)+"/03:00pm")))
+				{
+					line_chart_dataset.addValue((int)Double.parseDouble(data[i][1]) , "temp" ,data[i][0]);
+				}
+			}
+		
+
+		      JFreeChart lineChartObject = ChartFactory.createLineChart(
+				         "Temperature Vs Time","Time",
+				         " Temperature",
+				         line_chart_dataset,PlotOrientation.VERTICAL,
+				         true,true,false);
+				      
+				      	int width =640;	
+				      	int height=480;
+				      		
+				      ChartPanel panel =new ChartPanel(lineChartObject);	
+				      panel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+				     
+				   buttonPane.add(panel);
+				      	
+				      	
+//				      int width = 640; /* Width of the image */
+//				      int height = 480; /* Height of the image */ 
+				      File lineChart = new File( "LineChart.jpeg" ); 
+				      try {
+						ChartUtilities.saveChartAsJPEG(lineChart ,lineChartObject, width ,height);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			
+			
+			
+		
+		
 	}
 
 }
