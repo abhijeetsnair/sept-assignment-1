@@ -21,7 +21,6 @@ public class ShowAllStates {
 
 	}
 
-	@SuppressWarnings("rawtypes")
 	public ShowAllStates(CenterPanel centrePanel, String clked_state) {
 
 		JPanel slidebar = new JPanel();
@@ -79,7 +78,6 @@ public class ShowAllStates {
 	}
 
 	// Initializes states with new cities
-
 	public void initaliseCities() {
 
 	}
