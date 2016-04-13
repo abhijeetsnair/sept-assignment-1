@@ -1,0 +1,5 @@
+Clould Icon made by icon works from www.flaticon.com
+
+Jsoup from http://jsoup.org/ - MIT License http://jsoup.org/license
+
+org.json from http://mvnrepository.com/artifact/org.json/json - JSON license http://www.json.org/license.html
