@@ -6,7 +6,13 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.sept01.view.MainView;
-
+/**
+ * I changed it
+ * 
+ * 
+ * @author samsung
+ *
+ */
 public class WISApplication {
 	static Weather weather;
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
