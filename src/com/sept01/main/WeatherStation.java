@@ -97,7 +97,7 @@ public class WeatherStation {
 		timeZone = temp.getString("time_zone");
 	}
 	
-	public HashMap[] getData() {
+public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();
 		// creates HASHMAP for storing data
@@ -119,7 +119,6 @@ public class WeatherStation {
 					timeString = new StringBuilder(timeString).append(" A"+timeZone).toString();	
 				
 					j.put(n, timeString);
-					
 				}
 				if (j.get(n).getClass().getName() == "java.lang.Double") {
 					pairs.put(n, Double.toString((double) j.get(n)));
