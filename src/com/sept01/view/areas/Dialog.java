@@ -106,12 +106,6 @@ public class Dialog extends JDialog {
 //		}
 
 		
-		 
-
-		
-		
-		
-		
 		jt = new JTable(data, coloumns);
 //		{
 //			public Component prepareRenderer(TableCellRenderer renderer, int row,int column) {
