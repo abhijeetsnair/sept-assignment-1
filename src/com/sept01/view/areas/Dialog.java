@@ -1,13 +1,15 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,12 +17,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
+import com.sun.swing.internal.plaf.basic.resources.basic;
+
+import javafx.scene.shape.Box;
 
 public class Dialog extends JDialog {
 
@@ -30,117 +40,135 @@ public class Dialog extends JDialog {
 	private String state_name;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd hh:mm:ss zzz");
 
-	public Dialog(JFrame parent, String weather_station, String message,String state_name) {
+	public Dialog(JFrame parent, String weather_station, String message, String state_name) {
 		super(parent, weather_station);
-		this.state_name =state_name;
-   
-	
-	State state  = Singleton.getInstance().getWeather().getStateWeather(state_name);		
+		this.state_name = state_name;
+
+		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
 		/**
-		 * I need more functionality from the data side
-		 * i should simply be able to obtain all the data pertaining to a particular state
-		 * directly by having done state.getArea(" ").getData()
+		 * I need more functionality from the data side i should simply be able
+		 * to obtain all the data pertaining to a particular state directly by
+		 * having done state.getArea(" ").getData()
 		 * 
 		 * 
 		 */
-	
-	for (int x = 0; x < state.getAreas().size(); x++) {
-		for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
-					
-				if(state.getAreas().get(x).getWeatherStations().get(i).getName().compareTo(weather_station)==0)
-					{
-						weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
-						for(int j=0;j<weatherD.length;j++)
-						{	
-//							System.out.println(weatherD[j].get("local_date_time") + " "
-//									+ state.getAreas().get(x).getName() + " Weather station "
-//									+ weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt") + "kmh" + "Name :"
-//									+ weatherD[j].get("name"));
-						}
+
+		for (int x = 0; x < state.getAreas().size(); x++) {
+			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
+
+				if (state.getAreas().get(x).getWeatherStations().get(i).getName().compareTo(weather_station) == 0) {
+					weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
+					for (int j = 0; j < weatherD.length; j++) {
+
+						System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
+								+ " Weather station " + weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt")
+								+ "kmh" + "Name :" + weatherD[j].get("name"));
 					}
-				
-		}
-	}	
-		
-	System.out.println("This is the length of weatherdata present in length"+weatherD.length) ;	
-	
-		String[] coloumns = { "Date/Time", "Temp °C", "App Temp °C", "Dew Point", "Rel Hum %", "Delta-T °C", "Wind Dir", "Wind Spd km/h", "Wind Gust km/h",
-				"Wind Spd kts", "Wind Gust kts", "Press QNH hPa", "Press MSL hPa", "Rain since 9am mm" };
-		String data[][] = new String[weatherD.length][14];
-		
-		for(int i = 0 ; i < weatherD.length; i++){
-				
-				try {
-					data[i][0] = (String) dateFormat.parse((String) weatherD[i].get("local_date_time_full")).toLocaleString();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					data[i][0] = (String) weatherD[i].get("local_date_time_full");
 				}
-				data[i][1] = (String) weatherD[i].get("air_temp");
-				data[i][2] = (String) weatherD[i].get("apparent_t");
-				data[i][3] = (String) weatherD[i].get("dewpt");
-				data[i][4] = (String) weatherD[i].get("rel_hum");
-				data[i][5] = (String) weatherD[i].get("delta_t");
-				data[i][6] = (String) weatherD[i].get("wind_dir");
-				data[i][7] = (String) weatherD[i].get("wind_spd_kmh");
-				data[i][8] = (String) weatherD[i].get("gust_kmh");
-				data[i][9] = (String) weatherD[i].get("wind_spd_kt");
-				data[i][10] = (String) weatherD[i].get("gust_kt");
-				data[i][11] = (String) weatherD[i].get("press_qnh");
-				data[i][12] = (String) weatherD[i].get("press_msl");
-				data[i][13] = (String) weatherD[i].get("rain_trace");
+
+			}
+		}
+
+		System.out.println("This is the length of weatherdata present in length" + weatherD.length);
+
+		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "D/r", "Spd", "Gust",
+				"Spd", "Gust", "QNH", "MSL", "Rain" };
+		String data[][] = new String[weatherD.length][14];
+
+		for (int i = 0; i < weatherD.length; i++) {
+
+			data[i][0] = weatherD[i].get("local_date_time").toString();
+			data[i][1] = (String) weatherD[i].get("air_temp");
+			data[i][2] = (String) weatherD[i].get("apparent_t");
+			data[i][3] = (String) weatherD[i].get("dewpt");
+			data[i][4] = (String) weatherD[i].get("rel_hum");
+			data[i][5] = (String) weatherD[i].get("delta_t");
+			data[i][6] = (String) weatherD[i].get("wind_dir");
+			data[i][7] = (String) weatherD[i].get("wind_spd_kmh");
+			data[i][8] = (String) weatherD[i].get("gust_kmh");
+			data[i][9] = (String) weatherD[i].get("wind_spd_kt");
+			data[i][10] = (String) weatherD[i].get("gust_kt");
+			data[i][11] = (String) weatherD[i].get("press_qnh");
+			data[i][12] = (String) weatherD[i].get("press_msl");
+			data[i][13] = (String) weatherD[i].get("rain_trace");
 
 		}
-		
-//		for (int i = 0; i < data.length; i++) {
-//
-//			for (int j = 0; j < data[i].length; j++) {
-//				data[i][j] = i + " " + j;
-//				data[i][j] = i + " " + j;
-//				System.out.println("This is the data " + i + j + "    " + data[i][j]);
-//			}
-//
-//		}
-		
+
+		// for (int i = 0; i < data.length; i++) {
+		//
+		// for (int j = 0; j < data[i].length; j++) {
+		// data[i][j] = i + " " + j;
+		// data[i][j] = i + " " + j;
+		// System.out.println("This is the data " + i + j + " " + data[i][j]);
+		// }
+		//
+		// }
+
+		JPanel showInfo = new JPanel();
 		jt = new JTable(data, coloumns);
-//		{
-//			public Component prepareRenderer(TableCellRenderer renderer, int row,int column) {
-//					Component component = super.prepareRenderer(renderer, row, column);
-//					int rendererWidth = component.getPreferredSize().width;
-//					TableColumn tableColumn = getColumnModel().getColumn(column);
-//					tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width,tableColumn.getPreferredWidth()));
-//					return component;}};
-//					
-	TableColumn Tc= jt.getColumnModel().getColumn(0);
-	Tc.setPreferredWidth(Tc.getWidth()+100);
-	
-	jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	jt.setPreferredScrollableViewportSize(new Dimension(600,200));jt.setFillsViewportHeight(true);
+		// jt.setPreferredScrollableViewportSize(new Dimension(600, 200));
+		jt.setFillsViewportHeight(true);
 
+		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
+		// Panel to show graph and Display Message
 
+		showInfo.setLayout(new FlowLayout());
+		showInfo.add(new JLabel(message));
 
-	// Panel to show graph and Display Message
-	JPanel showGraph = new JPanel();
-	JButton showGraphButton = new JButton(
-			"Show Graph");showGraphButton.addActionListener(new JDialogListener(this));showGraph.setLayout(new FlowLayout());showGraph.add(new JLabel(message));showGraph.add(showGraphButton);
+		// Create a button
 
-	// Create a button
-	JPanel buttonPane = new JPanel();buttonPane.add(showGraph);
-	JScrollPane jps = new JScrollPane(jt);buttonPane.add(jps);
+		JPanel infoPane = new JPanel();
+		infoPane.setLayout(new FlowLayout());
 
-	JPanel CloseMe = new JPanel();
-	JButton closeMe = new JButton("Close me");CloseMe.add(closeMe);
+		JScrollPane jps = new JScrollPane(jt);
+		infoPane.add(jps);
+		showGraph(infoPane, data);
+		showInfo.add(infoPane);
 
-	// set action listener on the button
-	closeMe.addActionListener(new JDialogListener(this));
+		JPanel CloseMe = new JPanel();
+		JButton closeMe = new JButton("Close me");
+		CloseMe.add(closeMe);
 
-	getContentPane().add(buttonPane);
+		// set action listener on the button
+		closeMe.addActionListener(new JDialogListener(this));
+		
+		getContentPane().add(showInfo);
 		getContentPane().add(CloseMe, BorderLayout.PAGE_END);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
 
+	private void showGraph(JPanel showInfo, String[][] data) {
+
+		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+		for (int i = 0; i < data.length; i++) {
+			System.out.println(
+					data[i][0] + data[i][1] + "Matches with " + data[i][0].contains(new Date().getDate() + "/09:00am")
+							+ data[i][0].contains(new Date().getDate() + "/03:00pm"));
+
+			if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
+					|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
+					|| (data[i][0].contains((new Date().getDate() - 1) + "/09:00am"))
+					|| (data[i][0].contains((new Date().getDate() - 1) + "/03:00pm"))
+					|| (data[i][0].contains((new Date().getDate() - 2) + "/09:00am"))
+					|| (data[i][0].contains((new Date().getDate() - 2) + "/03:00pm"))) {
+				line_chart_dataset.addValue((int) Double.parseDouble(data[i][1]), "temp", data[i][0]);
+			}
+		}
+
+		JFreeChart lineChartObject = ChartFactory.createLineChart("Temperature Vs Time", "Time", " Temperature",
+				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
+
+		// int width =640;
+		// int height=480;
+
+		ChartPanel panel = new ChartPanel(lineChartObject);
+		panel.setLayout(new FlowLayout());
+		
+//		panel.setMaximumSize(getMaximumSize());
+		showInfo.add(panel);
+
+	}
 }
