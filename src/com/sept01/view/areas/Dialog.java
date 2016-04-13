@@ -72,7 +72,7 @@ public class Dialog extends JDialog {
 
 		System.out.println("This is the length of weatherdata present in length" + weatherD.length);
 
-		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "D/r", "Spd", "Gust",
+		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir", "Spd", "Gust",
 				"Spd", "Gust", "QNH", "MSL", "Rain" };
 		String data[][] = new String[weatherD.length][14];
 
