@@ -11,6 +11,7 @@ import com.sept01.main.Area;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
 import com.sept01.view.areas.CenterPanel;
+import com.sept01.view.areas.WestPanel;
 
 public class ShowAllStates {
 	JScrollPane scrollFrame;
@@ -21,12 +22,16 @@ public class ShowAllStates {
 
 	}
 
-	public ShowAllStates(CenterPanel centrePanel, String clked_state) {
+	@SuppressWarnings("rawtypes")
+	public ShowAllStates(CenterPanel centrePanel, String clked_state, WestPanel westPanel) {
 
 		JPanel slidebar = new JPanel();
 		slidebar.setLayout(new BoxLayout(slidebar, BoxLayout.Y_AXIS));
 		// States present in Melbourne
 		// NSW VIC QLD WA SA TAS ACT NT
+		
+		// Set the current state panel for west panel (related to center panel clicking - removal of west panel)
+		westPanel.setCurrentStatePanel(slidebar);
 
 		// Ensure you remove components on the UI before you add newer
 		// components on the layout
@@ -65,7 +70,7 @@ public class ShowAllStates {
 				System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
 				String name = (String) state.getAreas().get(x).getWeatherStations().get(i).getName();
 				JButton stations = new JButton(name);
-				stations.addActionListener(new CityClickListener(clked_state.toLowerCase()));
+				stations.addActionListener(new CityClickListener(clked_state.toLowerCase(),state.getAreas().get(x).getWeatherStations().get(i)));
 				slidebar.add(stations);
 			}
 			scrollFrame = new JScrollPane(slidebar);
@@ -78,6 +83,7 @@ public class ShowAllStates {
 	}
 
 	// Initializes states with new cities
+
 	public void initaliseCities() {
 
 	}

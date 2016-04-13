@@ -11,10 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import com.sept01.controller.CityClickListener;
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
 import com.sept01.view.MainView;
-import com.sept01.view.listener.FavClickListener;
 
 public class EastPanel extends JPanel {
 	/**
@@ -43,12 +43,12 @@ public class EastPanel extends JPanel {
 		// Set border to a textPanel
 		TextPanel.setBorder(blackline);
 		setBackground(Color.DARK_GRAY);
-		// Set layout of favourite
+		// Set layout of favorite
 		favAreas.setLayout(new BoxLayout(favAreas, BoxLayout.Y_AXIS));
-		addFavoriates();
+		addFavourites();
 	}
 
-	public void addFavoriates() {
+	public void addFavourites() {
  System.out.println("Does it come here");
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {		
 				
@@ -56,8 +56,8 @@ public class EastPanel extends JPanel {
 			{
 			JButton weather_station = new JButton(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-			weather_station.addActionListener(new FavClickListener());
-			
+			Singleton.getInstance().getApplication().getFav().get(i).getStation().getData();
+			weather_station.addActionListener(new CityClickListener(Singleton.getInstance().getApplication().getFav().get(i).getStation().getStateAbv().toLowerCase(),Singleton.getInstance().getApplication().getFav().get(i).getStation()));
 			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			favAreas.add(weather_station);
 			favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
