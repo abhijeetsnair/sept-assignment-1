@@ -1,15 +1,10 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -20,7 +15,6 @@ import javax.swing.JTable;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -28,9 +22,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
-import javafx.scene.shape.Box;
 
 public class Dialog extends JDialog {
 
@@ -139,7 +130,15 @@ public class Dialog extends JDialog {
 		pack();
 		setVisible(true);
 	}
-
+	
+	/*	
+	 * 	
+	 * Shows the 9 am and 3 pm temperatures	
+	 * 	
+	 * 	
+	 */
+		
+	
 	private void showGraph(JPanel showInfo, String[][] data) {
 
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
