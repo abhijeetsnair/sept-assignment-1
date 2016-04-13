@@ -2,9 +2,12 @@ package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -22,6 +25,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
+
+import javafx.scene.shape.Box;
 
 public class Dialog extends JDialog {
 
@@ -44,7 +49,7 @@ public class Dialog extends JDialog {
 		 * 
 		 * 
 		 */
-		System.out.println("asdasdasd: "+ state_name);
+		System.out.println("asdasdasd: " + state_name);
 		for (int x = 0; x < state.getAreas().size(); x++) {
 			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
 
@@ -97,24 +102,34 @@ public class Dialog extends JDialog {
 		// }
 
 		JPanel showInfo = new JPanel();
+		JScrollPane panelPane = new JScrollPane(showInfo);
 		jt = new JTable(data, coloumns);
 		// jt.setPreferredScrollableViewportSize(new Dimension(600, 200));
 		jt.setFillsViewportHeight(true);
 
 		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
 		// Panel to show graph and Display Message
-
-		showInfo.setLayout(new FlowLayout());
-		showInfo.add(new JLabel(message));
+		JPanel messagePanel = new JPanel();	
+		messagePanel.setLayout(new BorderLayout());
+		messagePanel.add(new JLabel(message),BorderLayout.NORTH);
+		showInfo.add(messagePanel,BorderLayout.NORTH);
+		showInfo.setLayout(new BoxLayout(showInfo,BoxLayout.Y_AXIS));
+		
 
 		// Create a button
 
 		JPanel infoPane = new JPanel();
-		infoPane.setLayout(new FlowLayout());
-
+		infoPane.setLayout(new GridLayout(2,2));
+		JPanel showGraph = new JPanel();
+		
+		
 		JScrollPane jps = new JScrollPane(jt);
 		infoPane.add(jps);
-		showGraph(infoPane, data);
+		
+		
+		show9pm3pmGraph(showGraph, data);	
+		showMaxMinGraph(showGraph, data);
+		infoPane.add(showGraph);
 		showInfo.add(infoPane);
 
 		JPanel CloseMe = new JPanel();
@@ -124,22 +139,22 @@ public class Dialog extends JDialog {
 		// set action listener on the button
 		closeMe.addActionListener(new JDialogListener(this));
 		
-		getContentPane().add(showInfo);
+		
+		getContentPane().add(panelPane);
 		getContentPane().add(CloseMe, BorderLayout.PAGE_END);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
-	
-	/*	
-	 * 	
-	 * Shows the 9 am and 3 pm temperatures	
-	 * 	
-	 * 	
+
+	/*
+	 * 
+	 * Shows the 9 am and 3 pm temperatures
+	 * 
+	 * 
 	 */
-		
-	
-	private void showGraph(JPanel showInfo, String[][] data) {
+
+	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
 
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 		for (int i = 0; i < data.length; i++) {
@@ -165,9 +180,95 @@ public class Dialog extends JDialog {
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
 		panel.setLayout(new FlowLayout());
-		
-//		panel.setMaximumSize(getMaximumSize());
+
+		// panel.setMaximumSize(getMaximumSize());
 		showInfo.add(panel);
 
 	}
+
+	private void showMaxMinGraph(JPanel showInfo, String[][] data) {
+		int current_h = 0,current_l = 200;
+		int previous_h = 0,previous_l = 200;
+		int day_before_h = 0,day_before_l = 200;
+		
+		String today_h = null,today_l = null;
+		String prev_h = null,prev_l = null;
+		String day_bef_h = null,day_bef_l = null;
+		
+		
+		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+
+		for (int i = 0; i < data.length; i++) {
+			String segments[] = data[i][0].split("/");
+			String date = segments[0];
+			System.out.println("Substring"+date);
+			// Current highest Temperature
+			if((data[i][0].toLowerCase()).contains((""+new Date().getDate()).toLowerCase())){		
+				
+				if((int)Double.parseDouble(data[i][1])>current_h)
+				{
+					current_h=(int)Double.parseDouble(data[i][1]);	
+					today_h =data[i][0];
+				}
+				if((int)Double.parseDouble(data[i][1])<current_l)
+				{
+					current_l=(int)Double.parseDouble(data[i][1]);
+					today_l =data[i][0];
+				}
+					
+				
+			}	
+				//Previous days highest temperature
+			if((data[i][0].toLowerCase()).contains((""+(new Date().getDate()-1)).toLowerCase())){
+				
+				if((int)Double.parseDouble(data[i][1])>previous_h)
+				{
+					previous_h=(int)Double.parseDouble(data[i][1]);
+					prev_h =data[i][0];
+				}
+				if((int)Double.parseDouble(data[i][1])<previous_l)
+				{
+					previous_l=(int)Double.parseDouble(data[i][1]);
+					prev_l =data[i][0];
+
+				}
+			}		
+	if((data[i][0].toLowerCase()).contains((""+(new Date().getDate()-2)).toLowerCase())){
+				
+				if((int)Double.parseDouble(data[i][1])>day_before_h)
+				{
+					day_before_h=(int)Double.parseDouble(data[i][1]);
+					day_bef_h=data[i][0];
+					
+				}
+				if((int)Double.parseDouble(data[i][1])<day_before_l)
+				{
+					day_before_l=(int)Double.parseDouble(data[i][1]);
+					day_bef_l=data[i][0];
+				}
+			}			
+			
+		}
+		System.out.println(today_h+ current_h+" "+today_l+current_l);	
+		System.out.println(prev_h+ previous_h +" "+prev_l+previous_l);	
+		System.out.println(day_bef_h+ day_before_h+" "+day_bef_l+day_before_l);	
+		System.out.println(" Previous "+  previous_h+" "+previous_l);
+		JFreeChart lineChartObject = ChartFactory.createLineChart("Maximum vs Minimum", "Time", " Temperature",
+				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
+		
+		line_chart_dataset.addValue( (current_h), "temp", today_h);	
+		line_chart_dataset.addValue((current_l), "temp", today_l);	
+		line_chart_dataset.addValue( (previous_h), "temp", prev_h);	
+		line_chart_dataset.addValue(( previous_l), "temp", prev_l);	
+		line_chart_dataset.addValue(( day_before_h), "temp", day_bef_h);
+		line_chart_dataset.addValue(( day_before_l), "temp", day_bef_l);
+		
+		// int width =640;
+		// int height=480;
+
+		ChartPanel panel = new ChartPanel(lineChartObject);
+		showInfo.add(panel);
+
+	}
+
 }
