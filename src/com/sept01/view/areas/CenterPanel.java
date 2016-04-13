@@ -8,7 +8,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.sept01.controller.CenterViewListener;
 import com.sept01.view.MainView;
+import com.sept01.view.Metrics;
 
 public class CenterPanel extends JPanel {
 	private Image bg;
@@ -20,9 +22,13 @@ public class CenterPanel extends JPanel {
 
 		this.setLayout(new BorderLayout());
 
+		setSize(Metrics.centerPanelX, Metrics.centerPanelY);
 		
 		dataPanel.setOpaque(false);
 		this.add(dataPanel, BorderLayout.CENTER);
+		
+		// Add a mouse listener to this Center Panel
+		this.addMouseListener(new CenterViewListener(mainView.getWest(), mainView));
 
 	}
 

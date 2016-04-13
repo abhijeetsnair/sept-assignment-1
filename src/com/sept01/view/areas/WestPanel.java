@@ -14,7 +14,14 @@ import com.sept01.view.MainView;
 
 @SuppressWarnings("serial")
 public class WestPanel extends JPanel {
+  
 	private MainView view;
+	
+	/**
+	 * A reference to the currently state JPanel.
+	 */
+	private JPanel currentStatePanel;
+	
 	public WestPanel(MainView mainView) {
 		this.setView(mainView);
 		this.setLayout(new BorderLayout());
@@ -72,5 +79,23 @@ public class WestPanel extends JPanel {
 	public void setView(MainView view) {
 		this.view = view;
 	}
+	
+	/**
+	 * Gets the current state {@link JPanel}
+	 * @return The current state JPanel
+	 * @author Joshua
+	 */
+  public JPanel getCurrentStatePanel() {
+    return currentStatePanel;
+  }
+  
+  /**
+   * Sets the current state {@link JPanel}
+   * @param jPanel The current state JPanel
+   * @author Joshua
+   */
+  public void setCurrentStatePanel(JPanel jPanel) {
+    currentStatePanel = jPanel;
+  }
 
 }

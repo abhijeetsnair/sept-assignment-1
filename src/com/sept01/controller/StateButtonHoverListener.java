@@ -27,7 +27,7 @@ public class StateButtonHoverListener implements MouseListener {
 		CenterPanel centrePanel = panel.getView().getCenter();
 		String State = ((JButton) arg0.getSource()).getText();
 		// JOptionPane.showMessageDialog(panel, State);
-		new ShowAllStates(centrePanel, State);
+		new ShowAllStates(centrePanel, State, panel);
 
 	}
 

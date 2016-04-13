@@ -48,7 +48,8 @@ public class MainView extends JFrame {
 //		}
 	   setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 		setTitle("WISApplication");
-		setSize(800, 600);
+		//setSize(800, 600);
+		setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
