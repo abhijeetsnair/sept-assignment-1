@@ -45,10 +45,10 @@ public class EastPanel extends JPanel {
 		setBackground(Color.DARK_GRAY);
 		// Set layout of favourite
 		favAreas.setLayout(new BoxLayout(favAreas, BoxLayout.Y_AXIS));
-		addFavoriates();
+		addFavourites();
 	}
 
-	public void addFavoriates() {
+	public void addFavourites() {
  System.out.println("Does it come here");
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {		
 				

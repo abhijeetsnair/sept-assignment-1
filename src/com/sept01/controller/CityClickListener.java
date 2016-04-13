@@ -52,7 +52,7 @@ public class CityClickListener implements ActionListener {
 		 */
 		fav.setStation(fav_station);
 		Singleton.getInstance().getApplication().addFav(fav);
-		Singleton.getInstance().getEastPanel().addFavoriates();
+		Singleton.getInstance().getEastPanel().addFavourites();
 		Singleton.getInstance().getEastPanel().repaint();
 		Singleton.getInstance().getEastPanel().revalidate();
 		// System.out.println("Button Clickeed :" + buttonClicked);

@@ -122,10 +122,14 @@ public class WISApplication {
 
 		if (fav_exists == false) {
 			this.fav.add(fav);
+			fav.saveNewFavourite(fav);
 		}
 		
 
 	}
+	
+
+	
 	public void testFav() {
 
 		for (int i = 0; i < fav.size(); i++) {
