@@ -43,7 +43,7 @@ public class EastPanel extends JPanel {
 		// Set border to a textPanel
 		TextPanel.setBorder(blackline);
 		setBackground(Color.DARK_GRAY);
-		// Set layout of favourite
+		// Set layout of favorite
 		favAreas.setLayout(new BoxLayout(favAreas, BoxLayout.Y_AXIS));
 		addFavourites();
 	}
