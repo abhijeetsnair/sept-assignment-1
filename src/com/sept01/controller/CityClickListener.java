@@ -8,15 +8,20 @@ import javax.swing.JFrame;
 
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
+import com.sept01.main.State;
+import com.sept01.main.WISApplication;
+import com.sept01.main.Weather;
 import com.sept01.main.WeatherStation;
 import com.sept01.view.areas.Dialog;
 
 public class CityClickListener implements ActionListener {
 	private ShowAllStates states = new ShowAllStates();	
 	private String state;
+	private WeatherStation weatherStation;
 
-	public CityClickListener(String State) {
+	public CityClickListener(String State, WeatherStation weatherStation) {
 		 this.state =State;
+		 this.weatherStation = weatherStation;
 	}
 
 	@Override
@@ -35,8 +40,10 @@ public class CityClickListener implements ActionListener {
 		/*
 		 * Storing favorite as the application launches the application
 		 */
+
 		Favourites fav = new Favourites();
-		WeatherStation fav_station = new WeatherStation(weather_station_clicked,weather_station_clicked);
+		WeatherStation fav_station = weatherStation;
+				//new WeatherStation(weather_station_clicked,weather_station_clicked);
 		fav_station.setName(weather_station_clicked);
 
 		/*
@@ -45,7 +52,7 @@ public class CityClickListener implements ActionListener {
 		 */
 		fav.setStation(fav_station);
 		Singleton.getInstance().getApplication().addFav(fav);
-		Singleton.getInstance().getEastPanel().addFavoriates();
+		Singleton.getInstance().getEastPanel().addFavourites();
 		Singleton.getInstance().getEastPanel().repaint();
 		Singleton.getInstance().getEastPanel().revalidate();
 		// System.out.println("Button Clickeed :" + buttonClicked);

@@ -6,9 +6,15 @@
 package com.sept01.main;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 
+import org.jfree.data.statistics.SimpleHistogramDataset;
 import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,9 +39,17 @@ public class WeatherStation {
 	String stateName;
 	String url;
 	String jsonUrl = null;
+	String stateAbv;
+	public String getStateAbv() {
+		return stateAbv;
+	}
+
 	JSONObject json;
 	JSONArray data;
 	HashMap[] dataMap;
+	private String timeZone;
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd hh:mm:ss zzz");
+
 
 	public WeatherStation(String url, String name) {
 		this.url = url;
@@ -85,9 +99,11 @@ public class WeatherStation {
 		JSONObject temp = (JSONObject) json.getJSONArray("header").get(0);
 		name = temp.getString("name");
 		stateName = temp.getString("state");
+		timeZone = temp.getString("time_zone");
+		stateAbv = temp.getString("state_time_zone");
 	}
 	
-	public HashMap[] getData() {
+public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();
 		// creates HASHMAP for storing data
@@ -98,7 +114,17 @@ public class WeatherStation {
 			Iterator it = j.keys();
 			while (it.hasNext()) {
 				String n = (String) it.next();
-
+				if(n.compareTo("local_date_time_full") == 0){
+					String timeString = (String) j.get(n);
+					timeString = new StringBuilder(timeString).insert(4, ":").toString();
+					timeString = new StringBuilder(timeString).insert(7, ":").toString();
+					timeString = new StringBuilder(timeString).insert(10, " ").toString();
+					timeString = new StringBuilder(timeString).insert(13, ":").toString();
+					timeString = new StringBuilder(timeString).insert(16, ":").toString();
+					timeString = new StringBuilder(timeString).append(" A"+timeZone).toString();	
+				
+					j.put(n, timeString);
+				}
 				if (j.get(n).getClass().getName() == "java.lang.Double") {
 					pairs.put(n, Double.toString((double) j.get(n)));
 				} else if (j.get(n).getClass().getName() == "java.lang.Integer") {
@@ -113,7 +139,15 @@ public class WeatherStation {
 			dataMap[i] = pairs;
 		}
 		// return array of hash maps
+	
 		return dataMap;
 
+	}
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
 	}
 }
