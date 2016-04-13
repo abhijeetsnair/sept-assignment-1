@@ -108,7 +108,6 @@ public HashMap[] getData() {
 			Iterator it = j.keys();
 			while (it.hasNext()) {
 				String n = (String) it.next();
-				
 				if(n.compareTo("local_date_time_full") == 0){
 					String timeString = (String) j.get(n);
 					timeString = new StringBuilder(timeString).insert(4, ":").toString();

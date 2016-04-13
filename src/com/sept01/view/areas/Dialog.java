@@ -53,8 +53,7 @@ public class Dialog extends JDialog {
 					{
 						weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
 						for(int j=0;j<weatherD.length;j++)
-						{
-							
+						{	
 //							System.out.println(weatherD[j].get("local_date_time") + " "
 //									+ state.getAreas().get(x).getName() + " Weather station "
 //									+ weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt") + "kmh" + "Name :"
@@ -104,7 +103,6 @@ public class Dialog extends JDialog {
 //			}
 //
 //		}
-
 		
 		jt = new JTable(data, coloumns);
 //		{
