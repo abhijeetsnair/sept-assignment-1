@@ -3,6 +3,7 @@ package com.sept01.main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class ReadFavourites {
 	/**
@@ -22,8 +23,13 @@ public class ReadFavourites {
 	        BufferedReader br= new BufferedReader(fr);
 	        System.out.println("--------");
 	    while ((station=br.readLine()) != null){		
-	    	Favourites fav =new Favourites();	
-	    	fav.setStation (new WeatherStation(station,station));
+	    	Favourites fav =new Favourites();
+	    	String[] token = null;
+	    	System.out.println(station);
+	    	String line = station;
+	    	token = line.split("-");
+//	    	System.out.println(token[1]);
+	    	fav.setStation (new WeatherStation(token[1],token[0]));
 	    	Singleton.getInstance().getApplication().addFav(fav);
 	    System.out.println("Fav Area read from the file : "+ fav);
 	        }
