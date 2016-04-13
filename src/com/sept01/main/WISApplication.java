@@ -39,7 +39,7 @@ public class WISApplication {
 
 		 */
 		
-	
+		
 		//changeLookAndFeel();	
 		new WISApplication();
 		System.out.println("Hello");
@@ -49,7 +49,6 @@ public class WISApplication {
 		initializeWeather();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
-
 		MainView view = new MainView();
 		//view.show();
 		view.setVisible(true);
@@ -72,7 +71,7 @@ public class WISApplication {
 		    try {
 		        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		    } catch (Exception ex) {
-		        // not worth my time
+		    	ErrorLog.createErrorPopup(ex);
 		    }
 		}
 			

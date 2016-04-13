@@ -1,16 +1,25 @@
 package com.sept01.main;
 
-import java.sql.Date;
+import java.awt.Color;
+import java.util.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JWindow;
+import javax.swing.SwingConstants;
 
 public class ErrorLog {
 
-	Time time;
-	Date date;
+	static Time time;
+	static Date date;
 	String msg;
-	
-	private String eToString(){
-		String outString = "ERROR " + time.toString() + " " + date.toString() + " " + msg;
+	SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+	private static String eToString(String msg){
+		date = new Date();
+		String outString = "ERROR " + date.toString() + " " + msg;
 		return outString;
 	}
 	
@@ -24,5 +33,19 @@ public class ErrorLog {
 	
 	private String getMsg(){
 		return msg;
+	}
+	public static void createErrorPopup(Exception e){
+		JFrame frame = new JFrame("ERROR");
+		
+		JOptionPane.showMessageDialog(frame, eToString(e.getMessage()),"ERROR ",JOptionPane.ERROR_MESSAGE);
+
+		
+	}
+	public static void createErrorPopup(String e){
+		JFrame frame = new JFrame("ERROR");
+		
+		JOptionPane.showMessageDialog(frame, eToString(e),"ERROR ",JOptionPane.ERROR_MESSAGE);
+
+		
 	}
 }

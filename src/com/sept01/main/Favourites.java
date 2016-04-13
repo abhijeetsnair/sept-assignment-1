@@ -43,6 +43,7 @@ public class Favourites {
 	        System.out.println(
 	            "Error writing to file '"
 	            + fileName + "'");
+	        ErrorLog.createErrorPopup(ex);
 	        // Or we could just do this:
 	        // ex.printStackTrace();
 	    }

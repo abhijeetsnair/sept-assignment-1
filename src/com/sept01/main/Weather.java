@@ -105,13 +105,13 @@ private boolean initialize(HashMap<String, State> states){
 			Jsoup.connect(url).get();
 			return true;
 		} catch (IOException e) {
-	
 			try {
 				Thread.sleep(5000);
 				try {
 					Jsoup.connect(url).get();
 					return true;
 				} catch (IOException e1) {
+					
 					// TODO Auto-generated catch block
 					return false;
 				}
