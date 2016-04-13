@@ -10,7 +10,7 @@ public class MainViewWindowListener implements WindowListener {
 
 	public MainViewWindowListener(MainView mainView) {
 		// TODO Auto-generated constructor stub
-	new ReadFavoriate();
+	new ReadFavourites();
 	new ReadScreenLoc();
 	}
 	@Override
