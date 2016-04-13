@@ -70,7 +70,7 @@ public class ShowAllStates {
 				System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
 				String name = (String) state.getAreas().get(x).getWeatherStations().get(i).getName();
 				JButton stations = new JButton(name);
-				stations.addActionListener(new CityClickListener(clked_state.toLowerCase()));
+				stations.addActionListener(new CityClickListener(clked_state.toLowerCase(),state.getAreas().get(x).getWeatherStations().get(i)));
 				slidebar.add(stations);
 			}
 			scrollFrame = new JScrollPane(slidebar);

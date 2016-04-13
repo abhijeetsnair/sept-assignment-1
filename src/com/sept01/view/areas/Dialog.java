@@ -53,7 +53,7 @@ public class Dialog extends JDialog {
 		 * 
 		 * 
 		 */
-
+		System.out.println("asdasdasd: "+ state_name);
 		for (int x = 0; x < state.getAreas().size(); x++) {
 			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
 

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import com.sept01.controller.CityClickListener;
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
 import com.sept01.view.MainView;
@@ -55,7 +56,8 @@ public class EastPanel extends JPanel {
 			{
 			JButton weather_station = new JButton(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-			
+			Singleton.getInstance().getApplication().getFav().get(i).getStation().getData();
+			weather_station.addActionListener(new CityClickListener(Singleton.getInstance().getApplication().getFav().get(i).getStation().getStateAbv().toLowerCase(),Singleton.getInstance().getApplication().getFav().get(i).getStation()));
 			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			favAreas.add(weather_station);
 			favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));

@@ -39,6 +39,11 @@ public class WeatherStation {
 	String stateName;
 	String url;
 	String jsonUrl = null;
+	String stateAbv;
+	public String getStateAbv() {
+		return stateAbv;
+	}
+
 	JSONObject json;
 	JSONArray data;
 	HashMap[] dataMap;
@@ -95,6 +100,7 @@ public class WeatherStation {
 		name = temp.getString("name");
 		stateName = temp.getString("state");
 		timeZone = temp.getString("time_zone");
+		stateAbv = temp.getString("state_time_zone");
 	}
 	
 public HashMap[] getData() {
