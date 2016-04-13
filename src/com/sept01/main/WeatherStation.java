@@ -40,6 +40,7 @@ public class WeatherStation {
 	String url;
 	String jsonUrl = null;
 	String stateAbv;
+
 	public String getStateAbv() {
 		return stateAbv;
 	}
@@ -49,7 +50,6 @@ public class WeatherStation {
 	HashMap[] dataMap;
 	private String timeZone;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd hh:mm:ss zzz");
-
 
 	public WeatherStation(String url, String name) {
 		this.url = url;
@@ -65,17 +65,14 @@ public class WeatherStation {
 				doc = Jsoup.connect(url).get();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				try
-            {
-               Thread.sleep(1000);
-               doc = Jsoup.connect(url).get();
-            }
-            catch (InterruptedException | IOException e2)
-            {
-               // TODO Auto-generated catch block
-               e2.printStackTrace();
-            }
-			   e1.printStackTrace();
+				try {
+					Thread.sleep(1000);
+					doc = Jsoup.connect(url).get();
+				} catch (InterruptedException | IOException e2) {
+					// TODO Auto-generated catch block
+					ErrorLog.createErrorPopup(e2);
+				}
+				ErrorLog.createErrorPopup(e1);
 			}
 			Elements elements = doc.select("a[href]");
 			for (Element e : elements) {
@@ -90,8 +87,14 @@ public class WeatherStation {
 		try {
 			jsonString = Jsoup.connect(jsonUrl).ignoreContentType(true).execute().body();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				Thread.sleep(1000);
+				jsonString = Jsoup.connect(jsonUrl).ignoreContentType(true).execute().body();
+			} catch (IOException | InterruptedException e1) {
+				// TODO Auto-generated catch block
+				ErrorLog.createErrorPopup(e1);
+				e1.printStackTrace();
+			}
 		}
 		json = new JSONObject(jsonString);
 		json = json.getJSONObject("observations");
@@ -102,8 +105,8 @@ public class WeatherStation {
 		timeZone = temp.getString("time_zone");
 		stateAbv = temp.getString("state_time_zone");
 	}
-	
-public HashMap[] getData() {
+
+	public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();
 		// creates HASHMAP for storing data
@@ -114,15 +117,15 @@ public HashMap[] getData() {
 			Iterator it = j.keys();
 			while (it.hasNext()) {
 				String n = (String) it.next();
-				if(n.compareTo("local_date_time_full") == 0){
+				if (n.compareTo("local_date_time_full") == 0) {
 					String timeString = (String) j.get(n);
 					timeString = new StringBuilder(timeString).insert(4, ":").toString();
 					timeString = new StringBuilder(timeString).insert(7, ":").toString();
 					timeString = new StringBuilder(timeString).insert(10, " ").toString();
 					timeString = new StringBuilder(timeString).insert(13, ":").toString();
 					timeString = new StringBuilder(timeString).insert(16, ":").toString();
-					timeString = new StringBuilder(timeString).append(" A"+timeZone).toString();	
-				
+					timeString = new StringBuilder(timeString).append(" A" + timeZone).toString();
+
 					j.put(n, timeString);
 				}
 				if (j.get(n).getClass().getName() == "java.lang.Double") {
@@ -139,10 +142,11 @@ public HashMap[] getData() {
 			dataMap[i] = pairs;
 		}
 		// return array of hash maps
-	
+
 		return dataMap;
 
 	}
+
 	public SimpleDateFormat getDateFormat() {
 		return dateFormat;
 	}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
 Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
 Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
@@ -190,3 +191,44 @@ Stawell-http://www.bom.gov.au/products/IDV60801/IDV60801.94836.shtml
 Rhyll-http://www.bom.gov.au/products/IDV60801/IDV60801.94892.shtml
 Sheoaks-http://www.bom.gov.au/products/IDV60801/IDV60801.94863.shtml
 Bendigo-http://www.bom.gov.au/products/IDV60801/IDV60801.94855.shtml
+=======
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
+Charlton-http://www.bom.gov.au/products/IDV60801/IDV60801.94839.shtml
+Parawa West-http://www.bom.gov.au/products/IDS60801/IDS60801.94811.shtml
+>>>>>>> origin/master
