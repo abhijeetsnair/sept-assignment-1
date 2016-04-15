@@ -18,6 +18,7 @@ public class CityClickListener implements ActionListener {
 	private ShowAllStates states = new ShowAllStates();	
 	private String state;
 	private WeatherStation weatherStation;
+	private boolean favflag;
 
 	public CityClickListener(String State, WeatherStation weatherStation) {
 		 this.state =State;
@@ -32,8 +33,21 @@ public class CityClickListener implements ActionListener {
 		 * Opening a dialog window to display information of the weather station
 		 * clicked
 		 */
+		
+	 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Dialog dialog = new Dialog(new JFrame(), weather_station_clicked,
-				"Latest Weather Observation for " + weather_station_clicked,state);
+				"Latest Weather Observation for " + weather_station_clicked,state,weatherStation);
+
 		// set the size of the window
 		dialog.setSize(900, 400);
 
@@ -41,20 +55,24 @@ public class CityClickListener implements ActionListener {
 		 * Storing favorite as the application launches the application
 		 */
 
-		Favourites fav = new Favourites();
-		WeatherStation fav_station = weatherStation;
-				//new WeatherStation(weather_station_clicked,weather_station_clicked);
-		fav_station.setName(weather_station_clicked);
-
-		/*
-		 * 
-		 * Adds the favorites to the WIS Application
-		 */
-		fav.setStation(fav_station);
-		Singleton.getInstance().getApplication().addFav(fav);
-		Singleton.getInstance().getEastPanel().addFavourites();
-		Singleton.getInstance().getEastPanel().repaint();
-		Singleton.getInstance().getEastPanel().revalidate();
+//		Favourites fav = new Favourites();
+//		WeatherStation fav_station = weatherStation;
+//				//new WeatherStation(weather_station_clicked,weather_station_clicked);
+//		fav_station.setName(weather_station_clicked);
+//
+//		/*
+//		 * 
+//		 * Adds the favorites to the WIS Application
+//		 */
+//		fav.setStation(fav_station);
+//		Singleton.getInstance().getApplication().addFav(fav);
+//		Singleton.getInstance().getEastPanel().addFavourites();
+//		Singleton.getInstance().getEastPanel().repaint();
+//		Singleton.getInstance().getEastPanel().revalidate();
+		
+		
+		
+		
 		// System.out.println("Button Clickeed :" + buttonClicked);
 		//
 		// Area areaclicked = Singleton.getInstance().getArea(buttonClicked);
@@ -84,6 +102,19 @@ public class CityClickListener implements ActionListener {
 		// frame.setLocationRelativeTo(null);
 		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+	}
+
+	public void setFavFlag(boolean b) {
+		this.setFavflag(b);
+		
+	}
+
+	public boolean isFavflag() {
+		return favflag;
+	}
+
+	public void setFavflag(boolean favflag) {
+		this.favflag = favflag;
 	}
 
 }

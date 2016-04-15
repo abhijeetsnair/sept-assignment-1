@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 import com.sept01.controller.CityClickListener;
@@ -25,6 +26,7 @@ public class EastPanel extends JPanel {
 	private JPanel TextPanel = new JPanel();
 	private ArrayList<Favourites> favAdded = new ArrayList<Favourites>();
 	private JPanel favAreas = new JPanel();
+	private JScrollPane pane = new JScrollPane(favAreas);
 	private Border blackline;
 
 	public EastPanel(MainView mainView) {
@@ -35,42 +37,49 @@ public class EastPanel extends JPanel {
 		// this.add(infoPanel, BorderLayout.NORTH);
 
 		TextPanel.setLayout(new BoxLayout(TextPanel, BoxLayout.Y_AXIS));
-		JLabel fav = new JLabel("Favourites", JLabel.RIGHT);
+		JLabel fav = new JLabel("Favourites", JLabel.CENTER);
 		fav.setBorder(blackline);
-		TextPanel.add(fav);
+		TextPanel.add(fav, BorderLayout.CENTER);
 		TextPanel.setBorder(blackline);
+
 		this.add(TextPanel, BorderLayout.NORTH);
 
 		// Set border to a textPanel
 		TextPanel.setBorder(blackline);
 		setBackground(Color.DARK_GRAY);
-		// Set layout of favorite
+		// Set layout of favorites
 		favAreas.setLayout(new BoxLayout(favAreas, BoxLayout.Y_AXIS));
 		addFavourites();
+		TextPanel.add(pane);
 	}
 
 	public void addFavourites() {
- System.out.println("Does it come here");
-		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {		
-				
-			if(checkifFavExists(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == false)	
-			{	
+		System.out.println("Does it come here");
+		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
+
+			if (checkifFavExists(
+					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == false) {
 				JPanel buttonPanel = new JPanel();
-				buttonPanel.setLayout(new GridLayout(1,1));
-			JButton weather_station = new JButton(
-					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-			Singleton.getInstance().getApplication().getFav().get(i).getStation().getData();
-			weather_station.addActionListener(new CityClickListener(Singleton.getInstance().getApplication().getFav().get(i).getStation().getStateAbv().toLowerCase(),Singleton.getInstance().getApplication().getFav().get(i).getStation()));
-			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-			 buttonPanel.add(weather_station);
-			favAreas.add(buttonPanel);
-			favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
+				buttonPanel.setLayout(new GridLayout(1, 2));
+				JButton weather_station = new JButton(
+						Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+				Singleton.getInstance().getApplication().getFav().get(i).getStation().getData();	
+				
+				CityClickListener listener = new CityClickListener(
+						Singleton.getInstance().getApplication().getFav().get(i).getStation().getStateAbv()
+						.toLowerCase(),
+				Singleton.getInstance().getApplication().getFav().get(i).getStation());
+				weather_station	.addActionListener(listener);
+				listener.setFavFlag(true);
+				System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+				buttonPanel.add(weather_station);
+				favAreas.add(buttonPanel);
+				favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
 			}
 		}
-		TextPanel.add(favAreas);
+
 	}
 
- 
 	// public void addFavoriates() {
 	//
 	// System.out.println("Size of favouriates " +
@@ -93,14 +102,14 @@ public class EastPanel extends JPanel {
 	// TextPanel.add(favAreas);
 	// }
 
-	 public boolean checkifFavExists(String area) {
-	
-	 for (int i = 0; i < favAdded.size(); i++) {
-	 if (favAdded.get(i).getStation().getName() == area) {
-	 return true;
-	 }
-	 }
-	 return false;
-	 }
+	public boolean checkifFavExists(String area) {
+
+		for (int i = 0; i < favAdded.size(); i++) {
+			if (favAdded.get(i).getStation().getName() == area) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.sept01.main.Singleton;
 import com.sept01.view.areas.CenterPanel;
@@ -70,8 +71,9 @@ public class MainView extends JFrame {
 		data.setSouthPanel(south);
 		data.setMainView(this);
 
-		add(north, BorderLayout.NORTH);
-		add(east, BorderLayout.EAST);
+		add(north, BorderLayout.NORTH);	
+		JScrollPane pane = new JScrollPane(east);	
+		add(pane, BorderLayout.EAST);
 		add(west, BorderLayout.WEST);
 		add(south, BorderLayout.SOUTH);
 		add(center, BorderLayout.CENTER);

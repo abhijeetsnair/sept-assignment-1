@@ -4,3 +4,30 @@ Coolangatta-http://www.bom.gov.au/products/IDN60801/IDN60801.94592.shtml
 Grafton Airport-http://www.bom.gov.au/products/IDN60801/IDN60801.95570.shtml
 Murwillumbah-http://www.bom.gov.au/products/IDN60801/IDN60801.94582.shtml
 Casino-http://www.bom.gov.au/products/IDN60801/IDN60801.94573.shtml
+Evans Head-http://www.bom.gov.au/products/IDN60801/IDN60801.94598.shtml
+Dorrigo-http://www.bom.gov.au/products/IDN60801/IDN60801.94789.shtml
+Mount Seaview-http://www.bom.gov.au/products/IDN60801/IDN60801.94783.shtml
+Smoky Cape-http://www.bom.gov.au/products/IDN60801/IDN60801.94790.shtml
+Cessnock Airport-http://www.bom.gov.au/products/IDN60801/IDN60801.95771.shtml
+Lostock-http://www.bom.gov.au/products/IDN60801/IDN60801.95772.shtml
+Murrurundi-http://www.bom.gov.au/products/IDN60801/IDN60801.94756.shtml
+Newcastle University-http://www.bom.gov.au/products/IDN60801/IDN60801.94781.shtml
+Scone-http://www.bom.gov.au/products/IDN60801/IDN60801.94738.shtml
+Norah Head-http://www.bom.gov.au/products/IDN60801/IDN60801.95770.shtml
+Scone Airport-http://www.bom.gov.au/products/IDN60801/IDN60801.95758.shtml
+Ouyen-http://www.bom.gov.au/products/IDV60801/IDV60801.94831.shtml
+Ararat-http://www.bom.gov.au/products/IDV60801/IDV60801.94834.shtml
+Casterton-http://www.bom.gov.au/products/IDV60801/IDV60801.95825.shtml
+Mortlake-http://www.bom.gov.au/products/IDV60801/IDV60801.94840.shtml
+Hamilton-http://www.bom.gov.au/products/IDV60801/IDV60801.94829.shtml
+Cape Nelson-http://www.bom.gov.au/products/IDV60801/IDV60801.94826.shtml
+Cape Otway-http://www.bom.gov.au/products/IDV60801/IDV60801.94842.shtml
+Kerang-http://www.bom.gov.au/products/IDV60801/IDV60801.94844.shtml
+Swan Hill-http://www.bom.gov.au/products/IDV60801/IDV60801.94843.shtml
+Mount William-http://www.bom.gov.au/products/IDV60801/IDV60801.94833.shtml
+Port Fairy-http://www.bom.gov.au/products/IDV60801/IDV60801.94830.shtml
+Portland Harbour-http://www.bom.gov.au/products/IDV60801/IDV60801.95826.shtml
+Westmere-http://www.bom.gov.au/products/IDV60801/IDV60801.95840.shtml
+Aireys Inlet-http://www.bom.gov.au/products/IDV60801/IDV60801.94846.shtml
+King Island Airport-http://www.bom.gov.au/products/IDT60801/IDT60801.94850.shtml
+Sheffield-http://www.bom.gov.au/products/IDT60801/IDT60801.94955.shtml
