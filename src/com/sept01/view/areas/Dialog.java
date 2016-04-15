@@ -1,18 +1,11 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-<<<<<<< HEAD
-import java.awt.GridLayout;
-=======
-import java.io.File;
-import java.io.IOException;
->>>>>>> origin/master
+import java.time.Year;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,11 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -33,11 +26,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
-import com.sun.swing.internal.plaf.basic.resources.basic;
 
-import javafx.scene.shape.Box;
-
-import javafx.scene.shape.Box;
+import jdk.nashorn.internal.scripts.JS;
 
 public class Dialog extends JDialog {
 
@@ -101,47 +91,55 @@ public class Dialog extends JDialog {
 			data[i][13] = (String) weatherD[i].get("rain_trace");
 
 		}
-
-		// for (int i = 0; i < data.length; i++) {
-		//
-		// for (int j = 0; j < data[i].length; j++) {
-		// data[i][j] = i + " " + j;
-		// data[i][j] = i + " " + j;
-		// System.out.println("This is the data " + i + j + " " + data[i][j]);
-		// }
-		//
-		// }
-
+//Splitting the Panel into two vertical sections
+	
+		
+	 
+// Main Panel
 		JPanel showInfo = new JPanel();
+		showInfo.setLayout(new BoxLayout(showInfo,BoxLayout.Y_AXIS));
+//Adding a scroll pane to the JPanel
 		JScrollPane panelPane = new JScrollPane(showInfo);
-		jt = new JTable(data, coloumns);
-		// jt.setPreferredScrollableViewportSize(new Dimension(600, 200));
-		jt.setFillsViewportHeight(true);
 
-		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
-		// Panel to show graph and Display Message
+//Displaying the Message Label and hide label
 		JPanel messagePanel = new JPanel();	
 		messagePanel.setLayout(new BorderLayout());
-		messagePanel.add(new JLabel(message),BorderLayout.NORTH);
-		showInfo.add(messagePanel,BorderLayout.NORTH);
-		showInfo.setLayout(new BoxLayout(showInfo,BoxLayout.Y_AXIS));
+		JLabel msgLabel = new JLabel(message,JLabel.CENTER);
+		messagePanel.add(msgLabel,BorderLayout.CENTER);
+		JButton refersh =new JButton("Refresh");
+		messagePanel.add(refersh, BorderLayout.EAST);
+		showInfo.add(messagePanel);
 		
 
-		// Create a button
-
+		// Create an Pane to display the table information
 		JPanel infoPane = new JPanel();
-		infoPane.setLayout(new GridLayout(2,2));
-		JPanel showGraph = new JPanel();
-		
-		
+		infoPane.setLayout(new BoxLayout(infoPane, BoxLayout.Y_AXIS));
+		//Adding a Table to display the weather information
+				jt = new JTable(data, coloumns);
+				jt.setPreferredScrollableViewportSize(new Dimension(900, 500));
+				jt.setFillsViewportHeight(true);
+				jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
 		JScrollPane jps = new JScrollPane(jt);
-		infoPane.add(jps);
-		
-		
-		show9pm3pmGraph(showGraph, data);	
-		showMaxMinGraph(showGraph, data);
-		infoPane.add(showGraph);
+		infoPane.add(messagePanel);
+		infoPane.add(jps,BorderLayout.WEST);
 		showInfo.add(infoPane);
+		
+		
+		JPanel graphLabel =new JPanel();
+		graphLabel.setLayout(new BorderLayout());
+		JLabel label =new JLabel("Temperature graphs for 9 am,3pm,max and min", JLabel.CENTER);
+		graphLabel.add(label,BorderLayout.NORTH);
+		
+		
+		//Graph Pane to display graph information
+		JPanel showGraph = new JPanel();
+		showGraph.setLayout(new BoxLayout(showGraph,BoxLayout.Y_AXIS));
+		
+		showGraph.add(graphLabel);
+		JPanel tempgraphs =new JPanel ();
+		show9pm3pmGraph(tempgraphs, data);	
+		showMaxMinGraph(tempgraphs, data);
+		showGraph.add(tempgraphs);
 
 		JPanel CloseMe = new JPanel();
 		JButton closeMe = new JButton("Close me");
@@ -151,14 +149,23 @@ public class Dialog extends JDialog {
 		closeMe.addActionListener(new JDialogListener(this));
 		
 		
-		getContentPane().add(panelPane);
+	JSplitPane splitPaneV = new JSplitPane( JSplitPane.VERTICAL_SPLIT );	
+	splitPaneV.setOneTouchExpandable(true);
+		splitPaneV.setLeftComponent( infoPane );
+		splitPaneV.setDividerLocation(500);
+//		infoPane.setMinimumSize(new Dimension(900, 500));
+		splitPaneV.setRightComponent( showGraph);
+		getContentPane().add(splitPaneV);
+		
+		
+//		getContentPane().add(panelPane);
 		getContentPane().add(CloseMe, BorderLayout.PAGE_END);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
 
-<<<<<<< HEAD
+ 
 	/*
 	 * 
 	 * Shows the 9 am and 3 pm temperatures
@@ -167,9 +174,9 @@ public class Dialog extends JDialog {
 	 */
 
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
-=======
-	private void showGraph(JPanel showInfo, String[][] data) {
->>>>>>> origin/master
+ 
+	 
+ 
 
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 		for (int i = 0; i < data.length; i++) {
@@ -190,13 +197,12 @@ public class Dialog extends JDialog {
 		JFreeChart lineChartObject = ChartFactory.createLineChart("Temperature Vs Time", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
 
-		// int width =640;
-		// int height=480;
+		 int width =640;
+		 int height=480;
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
 		panel.setLayout(new FlowLayout());
-
-		// panel.setMaximumSize(getMaximumSize());
+		panel.setPreferredSize( new java.awt.Dimension(600 ,300));
 		showInfo.add(panel);
 
 	}
@@ -271,17 +277,30 @@ public class Dialog extends JDialog {
 		JFreeChart lineChartObject = ChartFactory.createLineChart("Maximum vs Minimum", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
 		
+		
+		/*Check if current days data is available*/
+			
+		if(current_h!=0 && today_h!=null)
 		line_chart_dataset.addValue( (current_h), "temp", today_h);	
+		
+		if(current_l!=200 && today_l!=null)
 		line_chart_dataset.addValue((current_l), "temp", today_l);	
+		
+		if(previous_h!=0 && prev_h!=null)
 		line_chart_dataset.addValue( (previous_h), "temp", prev_h);	
+		
+		if(previous_l!=200 && prev_l!=null)
 		line_chart_dataset.addValue(( previous_l), "temp", prev_l);	
+		
+		if(day_before_h!=0  && day_bef_h!=null)
 		line_chart_dataset.addValue(( day_before_h), "temp", day_bef_h);
+		
+		if(day_before_l!=200 && day_bef_l!=null)
 		line_chart_dataset.addValue(( day_before_l), "temp", day_bef_l);
 		
-		// int width =640;
-		// int height=480;
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
+		panel.setPreferredSize( new java.awt.Dimension(600 ,300));
 		showInfo.add(panel);
 
 	}
