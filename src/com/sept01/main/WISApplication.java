@@ -121,7 +121,7 @@ public class WISApplication {
 
 		if (fav_exists == false) {
 			this.fav.add(fav);
-			fav.saveNewFavourite(fav);
+		//	fav.saveNewFavourite(fav);
 		}
 		
 
@@ -132,7 +132,7 @@ public class WISApplication {
 	public void testFav() {
 
 		for (int i = 0; i < fav.size(); i++) {
-		 System.out.println(fav.get(i).getStation().getName());
+		 System.out.println(fav.get(i).getStation().getName()+"    "+ fav.get(i).getStation().url);
 		}
 
 	}

@@ -2,6 +2,7 @@ package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -53,13 +54,16 @@ public class EastPanel extends JPanel {
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {		
 				
 			if(checkifFavExists(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == false)	
-			{
+			{	
+				JPanel buttonPanel = new JPanel();
+				buttonPanel.setLayout(new GridLayout(1,1));
 			JButton weather_station = new JButton(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
 			Singleton.getInstance().getApplication().getFav().get(i).getStation().getData();
 			weather_station.addActionListener(new CityClickListener(Singleton.getInstance().getApplication().getFav().get(i).getStation().getStateAbv().toLowerCase(),Singleton.getInstance().getApplication().getFav().get(i).getStation()));
 			 System.out.println(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-			favAreas.add(weather_station);
+			 buttonPanel.add(weather_station);
+			favAreas.add(buttonPanel);
 			favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
 			}
 		}

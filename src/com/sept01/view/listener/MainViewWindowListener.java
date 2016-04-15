@@ -29,7 +29,12 @@ public class MainViewWindowListener implements WindowListener {
 		// TODO Auto-generated method stub
 	
 	Point loc =arg0.getWindow().getLocationOnScreen();	
-	new SaveScreenLocation(loc);
+	new SaveScreenLocation(loc);	
+	System.out.println("----Displays all the favouriates present in the system---------");
+	Singleton.getInstance().getApplication().testFav();	
+	new SaveFavourite();
+		
+	
 			
 	}
 

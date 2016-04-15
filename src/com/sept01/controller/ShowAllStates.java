@@ -1,6 +1,10 @@
 package com.sept01.controller;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,6 +51,9 @@ public class ShowAllStates {
 		 * Get all the weather stations present in a particular state and
 		 * display it
 		 */
+		
+		
+		
 		state = Singleton.getInstance().getWeather().getStateWeather(clked_state.toLowerCase());
 		for (int x = 0; x < state.getAreas().size(); x++) {
 
@@ -64,14 +71,17 @@ public class ShowAllStates {
 			 * click listener to the button so that button click event can be
 			 * captured
 			 */
-
+			
 			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
 //				HashMap[] weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
+				JPanel buttonPanel = new JPanel();
+				buttonPanel.setLayout(new GridLayout(1,2));
 				System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
 				String name = (String) state.getAreas().get(x).getWeatherStations().get(i).getName();
 				JButton stations = new JButton(name);
 				stations.addActionListener(new CityClickListener(clked_state.toLowerCase(),state.getAreas().get(x).getWeatherStations().get(i)));
-				slidebar.add(stations);
+				buttonPanel.add(stations);
+				slidebar.add(buttonPanel);
 			}
 			scrollFrame = new JScrollPane(slidebar);
 			slidebar.setAutoscrolls(true);

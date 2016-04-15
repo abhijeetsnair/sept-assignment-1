@@ -33,7 +33,8 @@ public class Favourites {
 
 	        // Note that write() does not automatically
 	        // append a newline character.	
-	        bufferedWriter.append(fav.getStation().getName()+"-"+fav.getStation().url);
+	        bufferedWriter.write(fav.getStation().getName()+"-"+fav.getStation().url);
+	        //	        bufferedWriter.append(fav.getStation().getName()+"-"+fav.getStation().url);
 	        bufferedWriter.newLine();
              
 	        // Always close files.

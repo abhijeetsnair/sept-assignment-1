@@ -3,7 +3,6 @@ package com.sept01.view.areas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.time.Year;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -26,8 +25,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.sept01.controller.JDialogListener;
 import com.sept01.main.Singleton;
 import com.sept01.main.State;
-
-import jdk.nashorn.internal.scripts.JS;
 
 public class Dialog extends JDialog {
 

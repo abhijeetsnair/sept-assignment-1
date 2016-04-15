@@ -3,14 +3,10 @@ package com.sept01.view;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import com.sept01.main.Singleton;
 import com.sept01.view.areas.CenterPanel;

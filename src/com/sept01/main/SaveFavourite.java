@@ -22,9 +22,11 @@ public class SaveFavourite {
         // append a newline character.	
         	
         for(int i=0;i<Singleton.getInstance().getApplication().getFav().size();i++)
-        {
-        	 bufferedWriter.write(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
-             bufferedWriter.newLine();
+        {	
+        		
+            bufferedWriter.write(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()+"-"+Singleton.getInstance().getApplication().getFav().get(i).getStation().url);
+	        //	        bufferedWriter.append(fav.getStation().getName()+"-"+fav.getStation().url);
+	        bufferedWriter.newLine();	
         }
         // Always close files.
         bufferedWriter.close();
