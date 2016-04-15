@@ -27,6 +27,7 @@ import com.sept01.main.Singleton;
 import com.sept01.main.State;
 import com.sept01.main.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
+import com.sept01.view.listener.RemFavListener;
 
 public class Dialog extends JDialog {
 
@@ -36,6 +37,7 @@ public class Dialog extends JDialog {
 	private String state_name;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
+	private boolean addorRemoveFav=false;
 
 	public Dialog(JFrame parent, String weather_station, String message, String state_name, WeatherStation weatherStation) {
 		super(parent, weather_station);
@@ -92,6 +94,11 @@ public class Dialog extends JDialog {
 		}
 		// Splitting the Panel into two vertical sections
 
+		addorRemoveFav =CheckifPresentinFav(weather_station);
+		
+		
+		
+		
 		// Main Panel
 		JPanel showInfo = new JPanel();
 		showInfo.setLayout(new BoxLayout(showInfo, BoxLayout.Y_AXIS));
@@ -106,10 +113,19 @@ public class Dialog extends JDialog {
 		JPanel labelPanel = new JPanel();
 		
 		JButton refresh = new JButton("Refresh");
-		labelPanel.add(refresh);
+		labelPanel.add(refresh);	
+		if(addorRemoveFav==false){
 		JButton add = new JButton("+ Add Favourites");
 		add.addActionListener(new AddtoFavListener(weather_station,weatherStation));
 		labelPanel.add(add);
+		}
+		
+		else if(addorRemoveFav==true)
+		{
+		JButton remove = new JButton("- Remove Favourites");
+		remove.addActionListener(new RemFavListener(weather_station,weatherStation));
+		labelPanel.add(remove);
+		}
 		messagePanel.add(labelPanel, BorderLayout.EAST);
 		showInfo.add(messagePanel);
 
@@ -169,6 +185,21 @@ public class Dialog extends JDialog {
 	 * 
 	 * 
 	 */
+
+	private boolean CheckifPresentinFav(String weather_station) {
+		System.out.println("This is Checkin Fav "+ weather_station);
+		for(int i=0;i<Singleton.getInstance().getApplication().getFav().size();i++)
+		{	
+			if(weather_station .compareTo(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName())==0)
+			{	
+				System.out.println("This is Checkin Fav "+ weather_station+" with "+Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());	
+				
+				return true;
+			}
+				
+		}
+		return false;
+	}
 
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
 

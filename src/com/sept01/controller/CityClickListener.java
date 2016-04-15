@@ -33,18 +33,6 @@ public class CityClickListener implements ActionListener {
 		 * Opening a dialog window to display information of the weather station
 		 * clicked
 		 */
-		
-	 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		Dialog dialog = new Dialog(new JFrame(), weather_station_clicked,
 				"Latest Weather Observation for " + weather_station_clicked,state,weatherStation);
 

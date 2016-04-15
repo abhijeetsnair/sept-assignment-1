@@ -79,7 +79,16 @@ public class EastPanel extends JPanel {
 		}
 
 	}
-
+	
+	public void updateFav(){	
+		favAreas.removeAll();
+		TextPanel.remove(favAreas);
+		favAdded.clear();
+		addFavourites();
+		
+	}
+		
+	
 	// public void addFavoriates() {
 	//
 	// System.out.println("Size of favouriates " +

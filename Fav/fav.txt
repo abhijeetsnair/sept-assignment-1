@@ -1,7 +1,4 @@
-Cape Byron-http://www.bom.gov.au/products/IDN60801/IDN60801.94599.shtml
-Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
 Coolangatta-http://www.bom.gov.au/products/IDN60801/IDN60801.94592.shtml
-Grafton Airport-http://www.bom.gov.au/products/IDN60801/IDN60801.95570.shtml
 Murwillumbah-http://www.bom.gov.au/products/IDN60801/IDN60801.94582.shtml
 Casino-http://www.bom.gov.au/products/IDN60801/IDN60801.94573.shtml
 Evans Head-http://www.bom.gov.au/products/IDN60801/IDN60801.94598.shtml

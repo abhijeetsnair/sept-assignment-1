@@ -136,4 +136,14 @@ public class WISApplication {
 		}
 
 	}
+
+	public void removeFav(Favourites fav) {
+		for (int i = 0; i < getFav().size(); i++) {
+			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
+				System.out.println("----------Removing this guy :" +fav.getStation().getName());
+				this.fav.remove(i);
+			}
+		}
+		
+	}
 }
