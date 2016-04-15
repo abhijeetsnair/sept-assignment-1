@@ -12,17 +12,28 @@ import com.sept01.controller.CenterViewListener;
 import com.sept01.view.MainView;
 import com.sept01.view.Metrics;
 
+/**
+ * A Class that represents the Center Panel of the GUI.
+ */
 public class CenterPanel extends JPanel {
+  
+  /**
+   * Refernece to the background image.
+   */
 	private Image bg;
-
+	
+	/**
+   * Main constructor.
+   */
 	public CenterPanel(MainView mainView) {
-		// TODO Auto-generated constructor stub
 		JPanel dataPanel = new JPanel();
 		bg = new ImageIcon("images/background.png").getImage();
 
 		this.setLayout(new BorderLayout());
 
 		setSize(Metrics.centerPanelX, Metrics.centerPanelY);
+		
+		setOpaque(true);
 		
 		dataPanel.setOpaque(false);
 		this.add(dataPanel, BorderLayout.CENTER);
@@ -34,9 +45,14 @@ public class CenterPanel extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
+	  // Draw the image
 		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
 
+	/**
+	 * A method that sets the image of the panel depending on the given String location.
+	 * @param location String location state, e.g. "VIC", "NSW", etc.
+	 */
 	public void setBackgroundLocation(String location) {
 
 		if (location.compareTo("NSW") == 0) {

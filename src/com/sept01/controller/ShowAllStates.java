@@ -1,6 +1,7 @@
 package com.sept01.controller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -31,6 +32,13 @@ public class ShowAllStates {
 
 		JPanel slidebar = new JPanel();
 		slidebar.setLayout(new BoxLayout(slidebar, BoxLayout.Y_AXIS));
+		
+		slidebar.setBorder(null);
+		slidebar.setBackground(new Color(32, 32, 32));
+		slidebar.setForeground(Color.WHITE);
+		slidebar.setOpaque(true);
+		
+		
 		// States present in Melbourne
 		// NSW VIC QLD WA SA TAS ACT NT
 		
@@ -64,6 +72,8 @@ public class ShowAllStates {
 
 			Area area = state.getAreas().get(x);
 			JLabel area_label = new JLabel(area.getName());
+			area_label.setForeground(new Color(192, 192, 192));
+			
 			slidebar.add(area_label);
 
 			/**
@@ -76,12 +86,24 @@ public class ShowAllStates {
 //				HashMap[] weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
 				JPanel buttonPanel = new JPanel();
 				buttonPanel.setLayout(new GridLayout(1,2));
+				buttonPanel.setBorder(null);
+				buttonPanel.setFocusable(false);
+				buttonPanel.setBackground(null);
+				buttonPanel.setOpaque(true);
+				
+				
 				System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
 				String name = (String) state.getAreas().get(x).getWeatherStations().get(i).getName();
 				JButton stations = new JButton(name);
 				stations.addActionListener(new CityClickListener(clked_state.toLowerCase(),state.getAreas().get(x).getWeatherStations().get(i)));
 				buttonPanel.add(stations);
 				slidebar.add(buttonPanel);
+				
+				stations.setBorder(null);
+				stations.setFocusable(false);
+				
+				//buttonPanel.addMouseListener(new StateButtonListener(new JPanel[] {buttonPanel, slidebar, westPanel}, stations, true, 16));
+				buttonPanel.addMouseListener(new AreaButtonListener(new JPanel[] {buttonPanel, slidebar}, stations));
 			}
 			scrollFrame = new JScrollPane(slidebar);
 			slidebar.setAutoscrolls(true);

@@ -51,7 +51,9 @@ public class MainView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		setContentPane(panel);
-		panel.setLayout(new BorderLayout(5, 10));
+		panel.setLayout(new BorderLayout(0, 10));
+		
+		
 		this.setJMenuBar(new OptionMenu());
 
 		this.addWindowListener(new MainViewWindowListener(this));

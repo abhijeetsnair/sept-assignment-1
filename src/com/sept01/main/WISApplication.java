@@ -40,7 +40,7 @@ public class WISApplication {
 		 */
 		
 		
-		changeLookAndFeel();	
+		//changeLookAndFeel();	
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");

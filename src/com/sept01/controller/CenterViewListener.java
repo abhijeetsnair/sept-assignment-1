@@ -20,6 +20,11 @@ public class CenterViewListener implements MouseListener {
   private WestPanel westPanel;
   private MainView mainView;
   
+  /**
+   * Main constructor.
+   * @param westPanel Reference to the WestPanel instance
+   * @param mainView Reference tot he MainView instance
+   */
   public CenterViewListener(WestPanel westPanel, MainView mainView) {
     // TODO Auto-generated constructor stub
     this.westPanel = westPanel;
@@ -28,10 +33,8 @@ public class CenterViewListener implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    // TODO Auto-generated method stub
-    
-    //System.out.println("CLICKED");
-    
+
+    // Remove the west panel when we click on this panel
     JPanel jPanel = westPanel.getCurrentStatePanel();
     
     if (jPanel != null) {
@@ -39,10 +42,10 @@ public class CenterViewListener implements MouseListener {
       if (parent != null) {
       parent.setVisible(false);
       parent.remove(jPanel);
-      parent.invalidate();
+      parent.repaint();
+      //parent.invalidate();
       }
-      //mainView.removeAll();
-      //mainView.invalidate();
+
     }
   }
 
