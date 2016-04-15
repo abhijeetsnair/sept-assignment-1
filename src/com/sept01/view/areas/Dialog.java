@@ -323,6 +323,8 @@ public class Dialog extends JDialog {
 
 		if (day_before_l != 200 && day_bef_l != null)
 			line_chart_dataset.addValue((day_before_l), "temp", day_bef_l);
+		
+		
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
 		panel.setPreferredSize(new java.awt.Dimension(600, 300));

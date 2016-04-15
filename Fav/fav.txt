@@ -1,2 +1,3 @@
-Cape Byron-http://www.bom.gov.au/products/IDN60801/IDN60801.94599.shtml
+Mount Seaview-http://www.bom.gov.au/products/IDN60801/IDN60801.94783.shtml
+Port Macquarie Airport-http://www.bom.gov.au/products/IDN60801/IDN60801.94786.shtml
 Ballina-http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml
