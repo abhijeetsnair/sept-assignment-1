@@ -29,6 +29,8 @@ import com.sept01.main.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.RemFavListener;
 
+import javafx.scene.shape.Box;
+
 public class Dialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -37,9 +39,10 @@ public class Dialog extends JDialog {
 	private String state_name;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
-	private boolean addorRemoveFav=false;
+	private boolean addorRemoveFav = false;
 
-	public Dialog(JFrame parent, String weather_station, String message, String state_name, WeatherStation weatherStation) {
+	public Dialog(JFrame parent, String weather_station, String message, String state_name,
+			WeatherStation weatherStation) {
 		super(parent, weather_station);
 		this.state_name = state_name;
 
@@ -92,13 +95,12 @@ public class Dialog extends JDialog {
 			data[i][13] = (String) weatherD[i].get("rain_trace");
 
 		}
-		// Splitting the Panel into two vertical sections
 
-		addorRemoveFav =CheckifPresentinFav(weather_station);
-		
-		
-		
-		
+		/**
+		 * Checks if the particular station is already present in the favorite
+		 * list
+		 */
+		addorRemoveFav = CheckifPresentinFav(weather_station);
 		// Main Panel
 		JPanel showInfo = new JPanel();
 		showInfo.setLayout(new BoxLayout(showInfo, BoxLayout.Y_AXIS));
@@ -111,20 +113,19 @@ public class Dialog extends JDialog {
 		JLabel msgLabel = new JLabel(message, JLabel.CENTER);
 		messagePanel.add(msgLabel, BorderLayout.CENTER);
 		JPanel labelPanel = new JPanel();
-		
+
 		JButton refresh = new JButton("Refresh");
-		labelPanel.add(refresh);	
-		if(addorRemoveFav==false){
-		JButton add = new JButton("+ Add Favourites");
-		add.addActionListener(new AddtoFavListener(weather_station,weatherStation));
-		labelPanel.add(add);
+		labelPanel.add(refresh);
+		if (addorRemoveFav == false) {
+			JButton add = new JButton("+ Add Favourites");
+			add.addActionListener(new AddtoFavListener(weather_station, weatherStation));
+			labelPanel.add(add);
 		}
-		
-		else if(addorRemoveFav==true)
-		{
-		JButton remove = new JButton("- Remove Favourites");
-		remove.addActionListener(new RemFavListener(weather_station,weatherStation));
-		labelPanel.add(remove);
+
+		else if (addorRemoveFav == true) {
+			JButton remove = new JButton("- Remove Favourites");
+			remove.addActionListener(new RemFavListener(weather_station, weatherStation));
+			labelPanel.add(remove);
 		}
 		messagePanel.add(labelPanel, BorderLayout.EAST);
 		showInfo.add(messagePanel);
@@ -142,20 +143,29 @@ public class Dialog extends JDialog {
 		infoPane.add(jps, BorderLayout.WEST);
 		showInfo.add(infoPane);
 
-		JPanel graphLabel = new JPanel();
-		graphLabel.setLayout(new BorderLayout());
-		JLabel label = new JLabel("Temperature graphs for 9 am,3pm,max and min", JLabel.CENTER);
-		graphLabel.add(label, BorderLayout.NORTH);
+		
 
 		// Graph Pane to display graph information
 		JPanel showGraph = new JPanel();
-		showGraph.setLayout(new BoxLayout(showGraph, BoxLayout.Y_AXIS));
-
-		showGraph.add(graphLabel);
-		JPanel tempgraphs = new JPanel();
+		showGraph.setLayout(new BorderLayout());
+		
+		JPanel labelNGraph =new JPanel();
+		labelNGraph.setLayout(new BoxLayout(labelNGraph,BoxLayout.Y_AXIS));
+		
+		JPanel graphLabel = new JPanel();
+		graphLabel.setLayout(new BorderLayout());
+		JLabel label = new JLabel("Temperature graphs for 9 am,3pm,max and min", JLabel.CENTER);
+		graphLabel.add(label);
+		
+		
+		JPanel tempgraphs = new JPanel();	
+		tempgraphs.setLayout(new BoxLayout(tempgraphs,BoxLayout.X_AXIS));
 		show9pm3pmGraph(tempgraphs, data);
 		showMaxMinGraph(tempgraphs, data);
-		showGraph.add(tempgraphs);
+		
+		labelNGraph.add(graphLabel);	
+		labelNGraph.add(tempgraphs);
+		showGraph.add(labelNGraph,BorderLayout.NORTH);
 
 		JPanel CloseMe = new JPanel();
 		JButton closeMe = new JButton("Close me");
@@ -187,16 +197,16 @@ public class Dialog extends JDialog {
 	 */
 
 	private boolean CheckifPresentinFav(String weather_station) {
-		System.out.println("This is Checkin Fav "+ weather_station);
-		for(int i=0;i<Singleton.getInstance().getApplication().getFav().size();i++)
-		{	
-			if(weather_station .compareTo(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName())==0)
-			{	
-				System.out.println("This is Checkin Fav "+ weather_station+" with "+Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());	
-				
+		System.out.println("This is Checkin Fav " + weather_station);
+		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
+			if (weather_station
+					.compareTo(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == 0) {
+				System.out.println("This is Checkin Fav " + weather_station + " with "
+						+ Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+
 				return true;
 			}
-				
+
 		}
 		return false;
 	}
