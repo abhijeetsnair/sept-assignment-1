@@ -17,6 +17,11 @@ import com.sept01.view.areas.SouthPanel;
 import com.sept01.view.areas.WestPanel;
 import com.sept01.view.listener.MainViewWindowListener;
 
+/**
+ * The main {@link JFrame} class of the GUI. This central Frame contains almost most of what the user
+ * sees in the GUI, such as the central image, and the buttons to the side of that.
+ *
+ */
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 
@@ -31,12 +36,18 @@ public class MainView extends JFrame {
 	private WestPanel west;
 	private CenterPanel center;
 
+	/**
+	 * Main constructor
+	 */
 	public MainView() {
 
 		// Main UI frame for the Program
 		initUI();
 	}
 
+	/**
+	 * Initialises the UI.
+	 */
 	private void initUI() {
 //		try { 
 //		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -95,8 +106,6 @@ public class MainView extends JFrame {
 	}
 	
 	
-
-
 	public EastPanel getEast() {
 		return east;
 	}

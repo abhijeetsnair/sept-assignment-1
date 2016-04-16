@@ -21,6 +21,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+/**
+ * <p>
+ * The Weather Station Class which holds data about the weather station and its related information such as the weather.
+ * </p>
+ * <p>
+ * In the heirarchy, it is in the lowest level, being that Area will have multiple Weather Stations, and State will have
+ * multiple Areas.
+ * </p>
+ * 
+ * @see Area
+ * 
+ * @version 1.0
+ */
 public class WeatherStation {
 
 	public String getName() {
@@ -57,6 +70,9 @@ public class WeatherStation {
 
 	}
 
+	/**
+	 * Load and pull data from the website, obtaining data from a JSON source
+	 */
 	public void loadData() {
 		Document doc = null;
 		if (jsonUrl == null) {
@@ -106,6 +122,10 @@ public class WeatherStation {
 		stateAbv = temp.getString("state_time_zone");
 	}
 
+	/**
+	 * Obtains data from the JSON URL and stores it into a hashmap of data
+	 * @return
+	 */
 	public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();

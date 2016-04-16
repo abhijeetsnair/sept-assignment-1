@@ -6,10 +6,21 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * <p>
+ * A generalised Class that Handles and stores data regarding "Favourite" stations which are stored Stations.
+ * </p>
+ * @see WeatherStation
+ * @version 1.0
+ */
 public class Favourites {
 
 	WeatherStation station;
 	
+	/**
+	 * Main constructor
+	 * @return
+	 */
 	public WeatherStation getStation() {
 		return station;
 	}

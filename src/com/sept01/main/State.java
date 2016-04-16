@@ -14,16 +14,31 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+/**
+ * <p>
+ * A Class that represents a State (territory) of Australia.
+ * </p>
+ * <p>
+ * This is the highest in the heirarchy, as a State will contain Areas, which will contain Weather Stations.
+ * </p>
+ * 
+ * @see WeatherStation
+ * @see Area
+ * @version 1.0
+ */
 public class State {
 	String name;
 	private ArrayList<Area> areas = new ArrayList<>();
 
+	/**
+	 * Main constructor
+	 * @param name Name of the State
+	 */
 	public State(String name) {
 		this.name = name.toLowerCase();
 		try {
 			updateWeather();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
 		}
 	}

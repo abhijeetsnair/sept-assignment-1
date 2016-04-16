@@ -18,6 +18,9 @@ import com.sept01.main.State;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.WestPanel;
 
+/**
+ * A Class that initialises all the states at the start, thereby creating a button for each state.
+ */
 public class ShowAllStates {
 	JScrollPane scrollFrame;
 	private Singleton data;
@@ -103,7 +106,7 @@ public class ShowAllStates {
 				stations.setFocusable(false);
 				
 				//buttonPanel.addMouseListener(new StateButtonListener(new JPanel[] {buttonPanel, slidebar, westPanel}, stations, true, 16));
-				buttonPanel.addMouseListener(new AreaButtonListener(new JPanel[] {buttonPanel, slidebar}, stations));
+				stations.addMouseListener(new AreaButtonListener(new JPanel[] {buttonPanel, slidebar}, stations));
 			}
 			scrollFrame = new JScrollPane(slidebar);
 			slidebar.setAutoscrolls(true);

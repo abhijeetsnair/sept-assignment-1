@@ -11,6 +11,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
+/**
+ * <p>
+ * A Utility Class that is used for Error Logging related functionality.
+ * </p>
+ * <p>
+ * Examples of Use: Popup messages, Error messages
+ * </p>
+ * @version 1.0
+ * @see Time
+ * @see Date
+ */
 public class ErrorLog {
 
 	static Time time;

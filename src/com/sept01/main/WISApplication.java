@@ -7,11 +7,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.sept01.view.MainView;
 /**
- * I changed it
- * 
- * 
- * @author samsung
- *
+ * <p>
+ * The Main Client Class for the application.
+ * </p>
  */
 public class WISApplication {
 	static Weather weather;
@@ -25,11 +23,18 @@ public class WISApplication {
 		this.fav = fav;
 	}
 
+	/**
+	 * Initialise singleton pattern creation
+	 */
 	public WISApplication() {
 		Singleton.getInstance().setApplication(this);
 	}
 
 	
+	/**
+	 * Starting main() method
+	 * @param args args
+	 */
 	public static void main(String[] args) {
 			
 		/**
@@ -78,6 +83,10 @@ public class WISApplication {
 		
 	}
 
+	/**
+	 * Initialises a new Weather instance, which handles information gathering regarding external Data, that will be
+	 * displayed in the GUI format.
+	 */
 	public static void initializeWeather() {
 		weather = new Weather();
 	}

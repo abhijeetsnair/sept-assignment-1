@@ -20,8 +20,15 @@ public class AreaButtonListener implements MouseListener {
   JPanel[] jPanel;
   JButton jButton;
 
-  Color backColorDef;// = new Color(0, 0, 8, (int) (256 * 0.6f));
-  Color backColorHover;// = new Color(64, 64, 64, (int) (256 * 0.6f));
+  /**
+   * Default background colour of the JButton
+   */
+  Color backColorDef;
+  
+  /**
+   * Hover colour of the JButton
+   */
+  Color backColorHover;
 
   boolean noAlpha;
 
@@ -42,7 +49,7 @@ public class AreaButtonListener implements MouseListener {
     jButton.setFocusPainted(false);
     jButton.setFocusable(false);
     backColorDef = new Color(64, 64, 72);
-      backColorHover = new Color(64, 64, 64);
+    backColorHover = new Color(128, 128, 136);
     
     jButton.setBackground(backColorDef);
 

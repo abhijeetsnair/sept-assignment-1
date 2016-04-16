@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import com.sept01.view.MainView;
 import com.sept01.view.areas.WestPanel;
 
+/**
+ * The main Singleton Class of the application. It is used to reference global variables, for whatever needs possible.
+ */
 public class Singleton {
 	private MainView MainView;
 	private int xloc;

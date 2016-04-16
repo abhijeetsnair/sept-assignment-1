@@ -25,6 +25,17 @@ import com.sept01.controller.StateButtonHoverListener;
 import com.sept01.controller.StateButtonListener;
 import com.sept01.view.MainView;
 
+/**
+ * <p>
+ * A Class that represents the western-side panel of the GUI.
+ * </p>
+ * <p>
+ * It is currently a side bar which holds buttons for all the states.
+ * </p>
+ * 
+ * @version 1.0
+ * @see State
+ */
 @SuppressWarnings("serial")
 public class WestPanel extends JPanel {
 
