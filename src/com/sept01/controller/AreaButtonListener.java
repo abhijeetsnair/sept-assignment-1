@@ -40,7 +40,7 @@ public class AreaButtonListener implements MouseListener {
   public AreaButtonListener(JPanel[] jPanel, JButton jButton) {
     this.jPanel = jPanel;
     this.jButton = jButton;
-    this.noAlpha = noAlpha;
+    
 
     jButton.setForeground(Color.ORANGE);
 

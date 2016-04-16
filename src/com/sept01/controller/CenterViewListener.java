@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 import com.sept01.view.MainView;
 import com.sept01.view.areas.WestPanel;
 
-import sun.net.www.content.image.jpeg;
-
 /**
  * A {@link MouseListener} Class that handles touch events related to the Center Panel in the GUI.
  * @author Joshua
@@ -18,8 +16,6 @@ import sun.net.www.content.image.jpeg;
 public class CenterViewListener implements MouseListener {
   
   private WestPanel westPanel;
-  private MainView mainView;
-  
   /**
    * Main constructor.
    * @param westPanel Reference to the WestPanel instance
@@ -28,7 +24,6 @@ public class CenterViewListener implements MouseListener {
   public CenterViewListener(WestPanel westPanel, MainView mainView) {
     // TODO Auto-generated constructor stub
     this.westPanel = westPanel;
-    this.mainView = mainView;
   }
 
   @Override
