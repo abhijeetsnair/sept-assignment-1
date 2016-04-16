@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -40,11 +41,16 @@ public class Dialog extends JDialog {
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
 	private boolean addorRemoveFav = false;
+	String weather_station,message;
+	WeatherStation weatherStation;
 
 	public Dialog(JFrame parent, String weather_station, String message, String state_name,
 			WeatherStation weatherStation) {
 		super(parent, weather_station);
 		this.state_name = state_name;
+		this.weather_station = weather_station;
+		this.message = message;
+		this.weatherStation = weatherStation;
 
 		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
 		/**
@@ -116,6 +122,7 @@ public class Dialog extends JDialog {
 
 		JButton refresh = new JButton("Refresh");
 		labelPanel.add(refresh);
+		refresh.addActionListener(e->DataRefresh());
 		if (addorRemoveFav == false) {
 			JButton add = new JButton("+ Add Favourites");
 			add.addActionListener(new AddtoFavListener(weather_station, weatherStation));
@@ -189,12 +196,55 @@ public class Dialog extends JDialog {
 		setVisible(true);
 	}
 
-	/*
-	 * 
-	 * Shows the 9 am and 3 pm temperatures
-	 * 
-	 * 
-	 */
+
+	private Object DataRefresh() {
+		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
+		System.out.println("asdasdasd: " + state_name);
+		for (int x = 0; x < state.getAreas().size(); x++) {
+			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
+
+				if (state.getAreas().get(x).getWeatherStations().get(i).getName().compareTo(weather_station) == 0) {
+					weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
+					for (int j = 0; j < weatherD.length; j++) {
+
+						System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
+								+ " Weather station " + weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt")
+								+ "kmh" + "Name :" + weatherD[j].get("name"));
+					}
+				}
+
+			}
+		}
+
+		System.out.println("This is the length of weatherdata present in length" + weatherD.length);
+
+		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir", "Spd", "Gust",
+				"Spd", "Gust", "QNH", "MSL", "Rain" };
+		String data[][] = new String[weatherD.length][14];
+
+		for (int i = 0; i < weatherD.length; i++) {
+
+			data[i][0] = weatherD[i].get("local_date_time").toString();
+			data[i][1] = (String) weatherD[i].get("air_temp");
+			data[i][2] = (String) weatherD[i].get("apparent_t");
+			data[i][3] = (String) weatherD[i].get("dewpt");
+			data[i][4] = (String) weatherD[i].get("rel_hum");
+			data[i][5] = (String) weatherD[i].get("delta_t");
+			data[i][6] = (String) weatherD[i].get("wind_dir");
+			data[i][7] = (String) weatherD[i].get("wind_spd_kmh");
+			data[i][8] = (String) weatherD[i].get("gust_kmh");
+			data[i][9] = (String) weatherD[i].get("wind_spd_kt");
+			data[i][10] = (String) weatherD[i].get("gust_kt");
+			data[i][11] = (String) weatherD[i].get("press_qnh");
+			data[i][12] = (String) weatherD[i].get("press_msl");
+			data[i][13] = (String) weatherD[i].get("rain_trace");
+
+		}
+		DefaultTableModel model = new DefaultTableModel(data,coloumns);
+		jt.setModel(model);
+		model.fireTableDataChanged();
+		return null;
+	}
 
 	private boolean CheckifPresentinFav(String weather_station) {
 		System.out.println("This is Checkin Fav " + weather_station);
