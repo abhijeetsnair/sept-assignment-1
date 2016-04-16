@@ -46,7 +46,12 @@ public class State {
 	protected boolean updateWeather() throws IOException {
 			//visit webpage
 			//find all header 2 which will have our area names
-			Document doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
+		Document doc;
+		if(name == "act"){
+				doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/canberra.shtml").get();
+			}else{
+				doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
+			}
 			Elements elements = doc.select("h2");
 			Iterator<Element> itr = elements.iterator(); // create an iterator
 			//Loop through webpage to get all area names

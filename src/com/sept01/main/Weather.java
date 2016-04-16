@@ -33,7 +33,7 @@ import org.jsoup.Jsoup;
  */
 public class Weather {
   // abbreviations for BOM web scraping
-  private String[] statesAbv = { "vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant" };
+  private String[] statesAbv = { "vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant","act" };
   private HashMap<String, State> states = new HashMap<String, State>();
 
   // Array of state objects
