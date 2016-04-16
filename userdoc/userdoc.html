@@ -1,8 +1,12 @@
 <html>
-  <head> </head>
+  <head>
+    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
   <body>
+    <div class="container">
     <div id = list>
-      <h1 id="header">Weather Information Management System [WIMS] User Documentation</h1>
+      <h1 id="header" class="">Weather Information Management System [WIMS] User Documentation</h1>
       <h3>
       <ol>
         <li> <a href="#Introduction">Introduction</a> </li>
@@ -48,7 +52,7 @@
       <p> To launch WIMS simply double click the .jar file, or right click and select "OPEN".</p>
     <li> <h1 id="Quick Overview">Quick Overview</a></h1> </li>
     <p>
-      <img src="images/applictaion_overview_01.png" alt="sometext">
+      <img src="images/applictaion_overview_01.png" alt="Application overview">
       <br>
       Upon launch, WIMS should look similar to the above image. This screen contains all you need to begin navigating the program.</p><p>
       [INSERT SEVERAL MORE IMAGES WITH HIGHLIGHTED SEGMENTS AND DESCRIPTIONS OF BUTTONS] <br>
@@ -59,20 +63,20 @@
         <li> <h3 id="Choosing a state">Choosing a state</a></h3> </li>
         <p> When the program is initially opened, a list of states is displayed on the left-hand side. (See box 1 for list of states) <br>
             Simply hover or click on the state in order to reveal a panel containing that state's areas and weather stations. (See box 2 for example of a state) </p>
-        <img src="images/application_states.png" alt="sometext2">
+        <img src="images/application_states.png" alt="Listing the states">
         <li> <h3 id="Finding your area">Finding your area</a></h3> </li>
         <p> Once you've chosen a state, simply scroll through the list of areas until you find your desired area. [ ! Perhaps I can implement alphabetical sorting?] </p>
-        <img src="images/application_areas.png" alt="sometext2">
+        <img src="images/application_areas.png" alt="Listing the areas">
         <li> <h3 id="Finding your weather station">Finding your weather station</a></h3> </li>
         <p> To find your weather station, simply scroll through the list of areas weather stations. </p>
         <li> <h3 id="Displaying weather data">Displaying weather data</a></h3></li>
-          <p> To display weather data for your desired weather station simply right-click on the weather station's name. </p>
+          <p> To display weather data for your desired weather station simply click on the weather station's name. </p>
           <img src="images/application_weather_station_select.png" alt="sometext2"><br>
           <p> The weather data for that weather station will appear in a table format similar to the one below. <br></p>
           <img src="images/application_weather_station.png" alt="sometext2">
-          <p>  To display the data in a more visual form, simply right-click the "Show Graph" button display a graph of the data.</p>
-          <img src="images/application_weather_station_show_graph.png" alt="sometext2">
-          <p> [INCLUDE SCREENSHOT OF THE GRAPH HERE ! ]</p>
+          <p>  To display the data in a more visual form, simply click the down arrow to display a graph of the data.</p>
+          <img src="images/application_graph.png" alt="sometext2">
+          <p></p>
       </ol>
       <li> <h1 id="Favourite weather stations">Favourite weather stations</a></h1> </li>
         <ol>
@@ -85,6 +89,6 @@
     <p> The program does not need a proper uninstallation to be removed, as it does not need to be installed. Instead, simply delete the .jar file and any assosicated files.
     </p>
   </ol>
-
+</div>
   </body>
 </html>
