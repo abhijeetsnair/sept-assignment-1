@@ -12,7 +12,7 @@ import com.sept01.view.MainView;
  * </p>
  */
 public class WISApplication {
-	static Weather weather;
+	public static Weather weather;
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
 
 	public ArrayList<Favourites> getFav() {

@@ -72,6 +72,10 @@ public class State {
 
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public ArrayList<Area> getAreas() {
 		return areas;
 	}

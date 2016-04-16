@@ -43,6 +43,9 @@ public class Dialog extends JDialog {
 	private boolean addorRemoveFav = false;
 	String weather_station,message;
 	WeatherStation weatherStation;
+	String data[][];
+	private String[] coloumns = { "Date", "Air Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir", "Spd kmh", "Gust kmh",
+			"Spd kt", "Gust kt", "QNH", "MSL", "Rain since 9am", "Cloud","Cloud Base M","Cloud Oktas","Cloud Type","Vis km"};
 
 	public Dialog(JFrame parent, String weather_station, String message, String state_name,
 			WeatherStation weatherStation) {
@@ -51,57 +54,15 @@ public class Dialog extends JDialog {
 		this.weather_station = weather_station;
 		this.message = message;
 		this.weatherStation = weatherStation;
-
-		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
-		/**
-		 * I need more functionality from the data side i should simply be able
-		 * to obtain all the data pertaining to a particular state directly by
-		 * having done state.getArea(" ").getData()
-		 * 
-		 * 
-		 */
-		System.out.println("asdasdasd: " + state_name);
-		for (int x = 0; x < state.getAreas().size(); x++) {
-			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
-
-				if (state.getAreas().get(x).getWeatherStations().get(i).getName().compareTo(weather_station) == 0) {
-					weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
-					for (int j = 0; j < weatherD.length; j++) {
-
-						System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
-								+ " Weather station " + weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt")
-								+ "kmh" + "Name :" + weatherD[j].get("name"));
-					}
-				}
-
-			}
-		}
-
-		System.out.println("This is the length of weatherdata present in length" + weatherD.length);
-
-		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir", "Spd", "Gust",
-				"Spd", "Gust", "QNH", "MSL", "Rain" };
-		String data[][] = new String[weatherD.length][14];
-
-		for (int i = 0; i < weatherD.length; i++) {
-
-			data[i][0] = weatherD[i].get("local_date_time").toString();
-			data[i][1] = (String) weatherD[i].get("air_temp");
-			data[i][2] = (String) weatherD[i].get("apparent_t");
-			data[i][3] = (String) weatherD[i].get("dewpt");
-			data[i][4] = (String) weatherD[i].get("rel_hum");
-			data[i][5] = (String) weatherD[i].get("delta_t");
-			data[i][6] = (String) weatherD[i].get("wind_dir");
-			data[i][7] = (String) weatherD[i].get("wind_spd_kmh");
-			data[i][8] = (String) weatherD[i].get("gust_kmh");
-			data[i][9] = (String) weatherD[i].get("wind_spd_kt");
-			data[i][10] = (String) weatherD[i].get("gust_kt");
-			data[i][11] = (String) weatherD[i].get("press_qnh");
-			data[i][12] = (String) weatherD[i].get("press_msl");
-			data[i][13] = (String) weatherD[i].get("rain_trace");
-
-		}
-
+		//Fetch the data for the table
+		data = getTData(data);
+		
+		// Adding a Table to display the weather information
+		jt = new JTable(data, coloumns);
+		jt.setPreferredScrollableViewportSize(new Dimension(900, 500));
+		jt.setFillsViewportHeight(true);
+		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
+		JScrollPane jps = new JScrollPane(jt);
 		/**
 		 * Checks if the particular station is already present in the favorite
 		 * list
@@ -140,17 +101,11 @@ public class Dialog extends JDialog {
 		// Create an Pane to display the table information
 		JPanel infoPane = new JPanel();
 		infoPane.setLayout(new BoxLayout(infoPane, BoxLayout.Y_AXIS));
-		// Adding a Table to display the weather information
-		jt = new JTable(data, coloumns);
-		jt.setPreferredScrollableViewportSize(new Dimension(900, 500));
-		jt.setFillsViewportHeight(true);
-		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
-		JScrollPane jps = new JScrollPane(jt);
+
 		infoPane.add(messagePanel);
 		infoPane.add(jps, BorderLayout.WEST);
 		showInfo.add(infoPane);
 
-		
 
 		// Graph Pane to display graph information
 		JPanel showGraph = new JPanel();
@@ -195,9 +150,9 @@ public class Dialog extends JDialog {
 		pack();
 		setVisible(true);
 	}
-
-
-	private Object DataRefresh() {
+	
+	//Gets data from the weather station and puts in into 2d array for the graph
+	private String[][] getTData(String data[][]){
 		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
 		System.out.println("asdasdasd: " + state_name);
 		for (int x = 0; x < state.getAreas().size(); x++) {
@@ -216,11 +171,7 @@ public class Dialog extends JDialog {
 			}
 		}
 
-		System.out.println("This is the length of weatherdata present in length" + weatherD.length);
-
-		String[] coloumns = { "Date", "Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir", "Spd", "Gust",
-				"Spd", "Gust", "QNH", "MSL", "Rain" };
-		String data[][] = new String[weatherD.length][14];
+		data = new String[weatherD.length][19];
 
 		for (int i = 0; i < weatherD.length; i++) {
 
@@ -238,12 +189,25 @@ public class Dialog extends JDialog {
 			data[i][11] = (String) weatherD[i].get("press_qnh");
 			data[i][12] = (String) weatherD[i].get("press_msl");
 			data[i][13] = (String) weatherD[i].get("rain_trace");
+			data[i][14] = (String) weatherD[i].get("cloud");
+			data[i][15] = (String) weatherD[i].get("cloud_base_m");
+			data[i][16] = (String) weatherD[i].get("cloud_oktas");
+			data[i][17] = (String) weatherD[i].get("cloud_type");
+			data[i][18] = (String) weatherD[i].get("vis_km");
 
 		}
+		return data;
+		
+		
+		
+	}
+	//Gets new data and updates the tables data source
+	private void DataRefresh() {
+		
+		data = getTData(data);
 		DefaultTableModel model = new DefaultTableModel(data,coloumns);
 		jt.setModel(model);
 		model.fireTableDataChanged();
-		return null;
 	}
 
 	private boolean CheckifPresentinFav(String weather_station) {
