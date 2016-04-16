@@ -13,7 +13,7 @@ public class StateTest {
 	public void checkifStateCreated() {
 	String name ="Wharton";
 		State state = new State(name);
-		assertThat(name, is(equalTo(state.getName())));
+		assertThat(name.toLowerCase(), is(equalTo(state.getName().toLowerCase())));
 	}
 
 	
