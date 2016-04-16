@@ -19,7 +19,7 @@ import com.sept01.main.Area;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-
+import static org.hamcrest.CoreMatchers.not;
 
 public class DataTest {
 
@@ -52,6 +52,12 @@ public class DataTest {
 			}
 		}
 	
+	}
+	@Test
+	public void checkAreasNotNull(){
+			State state = weather.getStateWeather("vic");
+			ArrayList<Area> area = state.getAreas();
+			assertNotNull(area);
 	}
 
 
