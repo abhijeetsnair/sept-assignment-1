@@ -11,8 +11,8 @@ import com.sept01.model.WeatherStation;
 public class WeatherTest {
 	@Test
 	public void checkifWeatherCreated() {
-	String url="https://septgroupteam.slack.com/messages/general/team/jeet/";	
-	String name ="Wharton";
+	String url="http://www.bom.gov.au/products/IDN60801/IDN60801.94596.shtml";	
+	String name ="bal";
 		WeatherStation weather = new WeatherStation(url,name);
 		assertThat(name, is(equalTo(weather.getName())));
 	}
