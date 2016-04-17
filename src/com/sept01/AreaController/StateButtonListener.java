@@ -21,6 +21,7 @@ import javax.swing.JPanel;
  * @version 1.0
  * @see JButton
  * @see WestPanel
+ * @author Joshua
  */
 public class StateButtonListener implements MouseListener {
 

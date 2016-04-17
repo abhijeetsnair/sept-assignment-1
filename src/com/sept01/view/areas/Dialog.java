@@ -5,8 +5,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Paint;
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -23,10 +30,15 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartTheme;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import com.sept01.AreaController.AreaButtonListener;
+import com.sept01.AreaController.StateButtonListener;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
@@ -80,6 +92,10 @@ public class Dialog extends JDialog {
 		jps.setForeground(foreground);
 		jps.getVerticalScrollBar().setBackground(background.brighter());
 		jps.getHorizontalScrollBar().setBackground(background.brighter());
+		
+		setLocationRelativeTo(null);
+		setSize(new Dimension(720,  720));
+		
 		/**
 		 * Checks if the particular station is already present in the favorite
 		 * list
@@ -113,6 +129,8 @@ public class Dialog extends JDialog {
 		refresh.setForeground(foreground);
 		refresh.setFont(new Font("Verdana", Font.PLAIN, 12));
 		refresh.addActionListener(e -> DataRefresh(refresh));
+		refresh.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, refresh));
+		refresh.setBorder(null);
 
 		/***
 		 * THE ADD TO FAVORIATES OR REMOVE FAVORIATES OPENS UP DEPENDING ON
@@ -123,8 +141,10 @@ public class Dialog extends JDialog {
 		if (addorRemoveFav == false) {
 			JButton add = new JButton("+ Add Favourites");
 			add.addActionListener(new AddtoFavListener(weather_station, weatherStation));
+			add.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, add));
 			add.setBackground(background.brighter());
 			add.setForeground(foreground);
+			add.setBorder(null);
 			labelPanel.add(add);
 		}
 
@@ -136,8 +156,10 @@ public class Dialog extends JDialog {
 		else if (addorRemoveFav == true) {
 			JButton remove = new JButton("- Remove Favourites");
 			remove.addActionListener(new RemFavListener(weather_station, weatherStation));
+			remove.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, remove));
 			remove.setBackground(background.brighter());
 			remove.setForeground(foreground);
+			remove.setBorder(null);
 			labelPanel.add(remove);
 		}
 		messagePanel.add(labelPanel, BorderLayout.EAST);
@@ -183,6 +205,8 @@ public class Dialog extends JDialog {
 
 		JPanel CloseMe = new JPanel();
 		JButton closeMe = new JButton("Close me");
+		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] {CloseMe}, closeMe));
+		closeMe.setBorder(null);
 		CloseMe.add(closeMe);
 
 		// set action listener on the button
@@ -372,6 +396,22 @@ public class Dialog extends JDialog {
 		JFreeChart lineChartObject = ChartFactory.createLineChart("9am,3pm Temperatures", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
 		ChartPanel panel = new ChartPanel(lineChartObject);
+		
+		
+		StandardChartTheme theme = new StandardChartTheme("name");
+		//theme.setBac
+		theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
+		theme.setAxisLabelPaint(Color.orange);
+		theme.setDomainGridlinePaint(Color.orange);
+		
+		//theme.setRegularFont();
+		
+		ChartFactory.setChartTheme(theme);
+		
+		ChartUtilities.applyCurrentTheme(lineChartObject);
+		
+		//panel.setBackground(Color.RED);
+		
 		panel.setLayout(new FlowLayout());
 		panel.setPreferredSize(new java.awt.Dimension(600, 300));
 		showInfo.add(panel);

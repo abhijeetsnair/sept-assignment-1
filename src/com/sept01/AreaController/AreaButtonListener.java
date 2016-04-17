@@ -19,7 +19,7 @@ import com.sept01.view.ShowAllStates;
  * Gets triggered when the area button is clicked in the 
  * Area button listener class if we hover over an state/area the listener
  * responds to the click.
- * 
+ * @author Joshua
  */
 public class AreaButtonListener implements MouseListener {
 
