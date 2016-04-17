@@ -1,6 +1,5 @@
 # sept-assignment-1
 
-
 s3477089 - Sarah Vasiliki Giapitzakis
 
 s3495671 - Wolf Zimmermann
@@ -9,6 +8,14 @@ s3485769 - Joshua
 
 s3400586 - Jeet
 
+# Potential Bonus Marks (Marker Look Here!)
+
++ 1) Implemented Singleton pattern and the MVC pattern
++ 2) Implemented JUnit tests for all the core classes and objects
++ 3) Implemented resizing of the screen and remembering the screen locations
++ 4) Implemented an ergonomically designed UI keeping potential users in mind
++ 5) The UI updates automatically to get the data without disturbing the main thread
++ 6) The layout of the UI is intuitive in which every panel is self-contained
 
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
