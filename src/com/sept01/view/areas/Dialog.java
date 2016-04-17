@@ -41,12 +41,12 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleEdge;
 
-<<<<<<< HEAD
+
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.AreaController.StateButtonListener;
-=======
+
 import com.sept01.main.WISApplication;
->>>>>>> origin/master
+
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
