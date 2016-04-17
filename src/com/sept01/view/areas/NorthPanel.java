@@ -22,10 +22,11 @@ public class NorthPanel extends JPanel {
 
 	public NorthPanel(MainView mainView) {
 
-		JLabel label = new JLabel("Weather Information Management System");
-		label.setForeground(Color.WHITE);
-		add(label);
-		setBackground(Color.DARK_GRAY);
+	  JLabel label = new JLabel("Weather Information Management System");
+    label.setForeground(Color.ORANGE);
+    add(label);
+    setBackground(new Color(64, 64, 72));
+    //ok
 
 	}
 
