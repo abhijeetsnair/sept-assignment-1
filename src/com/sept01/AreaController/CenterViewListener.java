@@ -1,4 +1,4 @@
-package com.sept01.controller;
+package com.sept01.AreaController;
 
 import java.awt.Container;
 import java.awt.event.MouseEvent;

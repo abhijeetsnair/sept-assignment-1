@@ -27,11 +27,11 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.sept01.controller.JDialogListener;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
+import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 
 public class Dialog extends JDialog {
