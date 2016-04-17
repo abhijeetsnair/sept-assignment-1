@@ -65,6 +65,7 @@ public class WeatherStation {
 	 */
 
 
+	@SuppressWarnings("unchecked")
 	public HashMap<String,String>[] getData() {
 		// Loads data from JSON URL
 		loadData();

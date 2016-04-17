@@ -7,14 +7,11 @@ import javax.swing.JPanel;
 
 import com.sept01.view.MainView;
 
-/**
- * <p>
+/*
  * Displays the panel on the North with
  * the label WIS management system
  * which is the name of weather management programe
- * </p>
  * 
- * @version 1.0
  */
 public class NorthPanel extends JPanel {
 
@@ -26,9 +23,9 @@ public class NorthPanel extends JPanel {
 	public NorthPanel(MainView mainView) {
 
 		JLabel label = new JLabel("Weather Information Management System");
-		label.setForeground(Color.ORANGE);
+		label.setForeground(Color.WHITE);
 		add(label);
-		setBackground(new Color(64, 64, 72));
+		setBackground(Color.DARK_GRAY);
 
 	}
 

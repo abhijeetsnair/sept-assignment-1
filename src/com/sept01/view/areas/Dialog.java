@@ -4,18 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
-import java.awt.image.ColorModel;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -32,22 +24,14 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartTheme;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarPainter;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.RectangleEdge;
-
 
 import com.sept01.AreaController.AreaButtonListener;
-import com.sept01.AreaController.StateButtonListener;
-
 import com.sept01.main.WISApplication;
-
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
@@ -55,12 +39,6 @@ import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 
-/**
- * <p>
- * The Dialog class that shows a popup window of weather data, pulled from the website.
- * It also presents the data in a table and 2 visual graphs
- * </p>
- */
 public class Dialog extends JDialog {
 	/**
 	 * DIALOG SHOWS INFORMATION IN THE FORM OF 1) TABLE 2) CHART TABLE SHOWS
@@ -462,10 +440,10 @@ public class Dialog extends JDialog {
 		
 		
 		//panel.setBackground(Color.RED);
-		
+		JScrollPane pane = new JScrollPane(panel);
 		panel.setLayout(new FlowLayout());
 		panel.setPreferredSize(new java.awt.Dimension(600, 300));
-		showInfo.add(panel);
+		showInfo.add(pane);
 
 	}
 
@@ -562,8 +540,9 @@ public class Dialog extends JDialog {
 			line_chart_dataset.addValue((day_before_l), "temp", day_bef_l);
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
+		JScrollPane pane = new JScrollPane(panel);
 		panel.setPreferredSize(new java.awt.Dimension(600, 300));
-		showInfo.add(panel);
+		showInfo.add(pane);
 
 	}
 

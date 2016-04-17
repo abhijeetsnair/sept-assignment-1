@@ -1,9 +1,6 @@
 package com.sept01.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 
@@ -34,7 +31,6 @@ public class MainView extends JFrame {
 	private SouthPanel south;
 	private WestPanel west;
 	private CenterPanel center;
-	private float relativePercentage = 0.7f;
 
 	/**
 	 * Main constructor
@@ -62,16 +58,12 @@ public class MainView extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 		setTitle("WISApplication");
 		// setSize(800, 600);
-		//setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
-		setSize(getRelativeSizeX(), getRelativeSizeY());
+		setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		setContentPane(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		panel.setForeground(Color.ORANGE);
-		
+		panel.setLayout(new BorderLayout(0, 10));
 
 		/** SET THE MENU BAR OF THE PANEL */
 		this.setJMenuBar(new OptionMenu());
@@ -115,21 +107,7 @@ public class MainView extends JFrame {
 		// });
 
 	}
-	
-	public int getRelativeSizeX(){
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		int width = gd.getDisplayMode().getWidth();
-		width = (int) (width * relativePercentage);
-		return width;
-	}
 
-	public int getRelativeSizeY(){
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		int height = gd.getDisplayMode().getHeight();
-		height = (int) (height * relativePercentage);
-		return height;
-	}
-	
 	public EastPanel getEast() {
 		return east;
 	}

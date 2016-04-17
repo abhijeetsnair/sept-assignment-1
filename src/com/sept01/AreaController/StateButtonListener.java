@@ -15,10 +15,8 @@ import javax.swing.JPanel;
  *APPEALING TO THE USER AND UI LOOKS FANCY.
  */
 /**
- * <p>
  * A {@link JButton} Listener that implements {@link MouseListener} . To be used
  * for State Button related functions in the {@link WestPanel}
- * </p>
  * 
  * @version 1.0
  * @see JButton

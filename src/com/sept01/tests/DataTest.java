@@ -20,15 +20,6 @@ import com.sept01.model.Weather;
 import com.sept01.model.WeatherStation;
 
 
-/**
- * <p>
- * A test class that handles the testing of Datas such as the states and the arealoc, assessing
- * whether they conform to the standard requirements in the specifications.
- * </p>
- * 
- * @version 1.0
- *
- */
 public class DataTest {
 
 	Weather weather;

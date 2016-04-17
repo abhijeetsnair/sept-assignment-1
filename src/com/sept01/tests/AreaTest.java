@@ -9,15 +9,6 @@ import org.junit.Test;
 
 import com.sept01.model.Area;
 
-/**
- * <p>
- * A test class that handles the testing of Areas and that data contained within the Areas, assessing
- * whether they conform to the standard requirements in the specifications.
- * </p>
- * 
- * @version 1.0
- *
- */
 public class AreaTest {
 	@Test
 	public void checkifAreaCreated() {

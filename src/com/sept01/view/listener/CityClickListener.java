@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import com.sept01.model.WeatherStation;
-import com.sept01.view.MainView;
 import com.sept01.view.areas.Dialog;
 /*NOTE :
  * CITY CLICK LISTENER GETS CALLED WHEN A CITY IS CLICKED
@@ -19,11 +18,7 @@ public class CityClickListener implements ActionListener {
 	private String state;
 	private WeatherStation weatherStation;
 	private boolean favflag;
-	private float relativePercentageW = 0.7f;
-	private float relativePercentageH = 0.8f;
-	private int w;
-	private int h;
-	
+
 	public CityClickListener(String State, WeatherStation weatherStation) {
 		 this.state =State;
 		 this.weatherStation = weatherStation;
@@ -41,10 +36,7 @@ public class CityClickListener implements ActionListener {
 				"Latest Weather Observation for " + weather_station_clicked,state,weatherStation);
 
 		/*set the size of the Dialog window*/
-		MainView mv = new MainView();
-		w = (int) (mv.getRelativeSizeX() * relativePercentageW);
-		h = (int) (mv.getRelativeSizeY() * relativePercentageH);
-		dialog.setSize(w,h);
+		dialog.setSize(900, 400);
 
 	}
 	

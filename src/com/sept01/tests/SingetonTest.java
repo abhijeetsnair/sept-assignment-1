@@ -8,14 +8,7 @@ import com.sept01.main.WISApplication;
 import com.sept01.model.Singleton;
 import com.sept01.model.Weather;
 
-/**
- * <p> 
- * Checking if no two instances of the same class are created 
- * </p>
- * 
- * @version 1.0
- * 
- * */
+/** Checking if no two instances of the same class are created */
 public class SingetonTest {
 	@Test
 	public void checkifSingletoninstanceSame() {
