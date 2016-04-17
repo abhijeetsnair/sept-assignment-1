@@ -16,6 +16,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.sept01.utility.ErrorLog;
+
 /**
  * NOTE: STATE STORES ALL THE INFORMATION PERTAINING TO THE STATE THE INSTANCES
  * OF THE STATE GETS STORED IN A LIST SO THAT THEY CAN BE ACCESSED BY THE
@@ -48,7 +50,7 @@ public class State {
 		try {
 			updateWeather();
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			ErrorLog.createErrorPopup(e);
 		}
 	}
 
@@ -63,18 +65,24 @@ public class State {
 	public void setAreas(ArrayList<Area> areas) {
 		this.areas = areas;
 	}
-
-	protected boolean updateWeather() throws IOException {
-		// visit webpage
-		// find all header 2 which will have our area names
+	/**
+	 * Attempts to get obtain the state data for this state object
+	 * 
+	 * @author wolf
+	 *
+	 * **/
+	protected void updateWeather() throws IOException {
+		/**Set up document to store the webpage in and the connect and download the webpage**/
 		Document doc;
 		if (name == "act") {
 			doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/canberra.shtml").get();
 		} else {
 			doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
 		}
+		/**Extract the headings that contain the area names**/
 		Elements elements = doc.select("h2");
 		Iterator<Element> itr = elements.iterator(); // create an iterator
+		
 		// Loop through webpage to get all area names
 		while (itr.hasNext()) {
 			Element e = itr.next();
@@ -88,7 +96,7 @@ public class State {
 
 		}
 
-		return false;
+		
 
 	}
 

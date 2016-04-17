@@ -34,6 +34,7 @@ import sun.swing.SwingUtilities2;
  * </p>
  * 
  * @see WISApplication
+ * @author wolf
  */
 public class Weather {
 	// abbreviations for BOM web scraping
@@ -78,6 +79,7 @@ public class Weather {
 	 * @param Loading_label
 	 *            Label
 	 * @return True or false wheteher we could connect or not.
+	 * @author wolf
 	 */
 	public boolean checkConnection(String url, JLabel Loading_label) {
 		try {
@@ -124,11 +126,14 @@ public class Weather {
 	 *            empty and it will be filled with the pulled data.
 	 * @return True or false whether this function has succeeded in obtaining
 	 *         data.
+	 * 
+	 * @author wolf
 	 */
 	private boolean initialize(HashMap<String, State> states) {
 		// initialize states with abbreviations as name
 		int perDone;
 		System.out.println("Loading classes please wait");
+
 		// LOADING SCREEN
 		JWindow window = new JWindow();
 		window.getContentPane().setBackground(Color.decode("#3d3f47"));
@@ -142,6 +147,7 @@ public class Weather {
 		// Checks if BOM is online if not quit application
 		if (!checkConnection("http://www.bom.gov.au/", Loading_label)) {
 			System.exit(0);
+			return false;
 		}
 		// populate states
 		// this will create all classes for the data
