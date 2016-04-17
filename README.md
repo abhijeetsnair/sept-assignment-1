@@ -14,12 +14,15 @@ s3400586 - Jeet
 #####s3477089 - Sarah Vasiliki Giapitzakis
 + Percentage Contributed : %
 + Worked On : 
+
 #####s3495671 - Wolf Zimmermann
 + Percentage Contributed : %
-+ Worked On : 
++ Worked On :
+ 
 #####s3485769 - Joshua
 + Percentage Contributed : %
 + Worked On : 
+
 #####s3400586 - Jeet
 + Percentage Contributed : %
 + Worked On : 
