@@ -130,10 +130,13 @@ public class WeatherStation {
 	 * Load and pull data from the website, obtaining data from a JSON source
 	 */
 	public void loadData() {
+		//create new document to store webpage
 		Document doc = null;
+		//if the json url has not been fetched yet fetch it
 		if (jsonUrl == null) {
 
 			try {
+				//connect and download the current weather stations webpage
 				doc = Jsoup.connect(url).get();
 			} catch (IOException e1) {
 				try {
