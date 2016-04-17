@@ -21,11 +21,11 @@ s3400586 - Jeet
  
 #####s3485769 - Joshua
 + Percentage Contributed : %
-+ Worked On : Gui + ux
++ Worked On : Gui + ux/graphics
 
 #####s3400586 - Jeet
 + Percentage Contributed : %
-+ Worked On : Gui
++ Worked On : Gui + gui prototype
 
 
 #slack info
