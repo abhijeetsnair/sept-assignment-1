@@ -12,19 +12,19 @@ s3400586 - Jeet
 
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
-+ Percentage Contributed : %
++ Percentage Contributed : 25 %
 + Worked On : Testing,program structure
 
 #####s3495671 - Wolf Zimmermann
-+ Percentage Contributed : %
++ Percentage Contributed : 25 %
 + Worked On : Getting the data from the website and creating the data system.
  
 #####s3485769 - Joshua
-+ Percentage Contributed : %
++ Percentage Contributed :25 %
 + Worked On : Gui + ux
 
 #####s3400586 - Jeet
-+ Percentage Contributed : %
++ Percentage Contributed : 25 %
 + Worked On : Gui
 
 
