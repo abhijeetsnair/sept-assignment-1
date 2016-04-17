@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +35,8 @@ import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.RemFavListener;
+import com.sun.glass.events.WindowEvent;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class Dialog extends JDialog {
 	/**
@@ -164,21 +168,69 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
-		  Thread thread = new Thread(){
+		  Thread updateThread = new Thread(){
 			    public void run(){
-			    	while(true){
+			    	Boolean run = true;
+			    	while(run){
 			      DataRefresh(refresh);
 			    	try {
 						this.sleep(10000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						run = false;
 					}
 			    	}
 			    }
 			  };
 
-			  thread.start();
+			  updateThread.start();
+			 
+			  this.addWindowListener(new WindowListener() {
+				
+				@Override
+				public void windowOpened(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowIconified(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeiconified(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeactivated(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowClosing(java.awt.event.WindowEvent e) {
+					updateThread.interrupt();
+				}
+				
+				@Override
+				public void windowClosed(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowActivated(java.awt.event.WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			
+				
+				  
+			  }
+			  );
 	}
 
 	/**
