@@ -7,21 +7,26 @@ import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
 import com.sept01.main.WeatherStation;
 
+/*
+ * SIMPLY ADDS
+ * FAVORIATES TO THE FAVORIATES LIST IN THE 
+ * APPLICATION
+ * SO THAT THE WHOLE APPLICATION HAS ACCESS TO THE FAVORIATES
+ */
 public class AddtoFavListener implements ActionListener {
 	String weather_station;
 	WeatherStation weatherStation;
-	
+
 	public AddtoFavListener(String station, WeatherStation weatherStation) {
-	this.weather_station =station;
-	this.weatherStation=weatherStation;
+		this.weather_station = station;
+		this.weatherStation = weatherStation;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
+
 		Favourites fav = new Favourites();
 		WeatherStation fav_station = weatherStation;
-				//new WeatherStation(weather_station_clicked,weather_station_clicked);
 		fav_station.setName(weather_station);
 
 		/*

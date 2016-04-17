@@ -6,7 +6,12 @@ import java.awt.event.ActionListener;
 import com.sept01.main.Favourites;
 import com.sept01.main.Singleton;
 import com.sept01.main.WeatherStation;
-
+/*
+ * SIMPLY REMOVES
+ * FAVORIATES FROM THE FAVORIATES LIST IN THE 
+ * APPLICATION
+ * SO THAT THE WHOLE APPLICATION HAS ACCESS TO THE FAVORIATES
+ */
 public class RemFavListener implements ActionListener {
 	String weather_station;
 	WeatherStation weatherStation;
@@ -19,7 +24,6 @@ public class RemFavListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		Favourites fav = new Favourites();
 		WeatherStation fav_station = weatherStation;
-				//new WeatherStation(weather_station_clicked,weather_station_clicked);
 		fav_station.setName(weather_station);
 
 		/*

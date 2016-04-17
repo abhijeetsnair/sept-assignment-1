@@ -1,9 +1,6 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
@@ -12,12 +9,16 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 
 import com.sept01.view.MainView;
-import com.sun.org.apache.bcel.internal.generic.FLOAD;
 
 public class SouthPanel extends JPanel {
+	/**
+	 * Displays the panel with Date and time information 
+	 * on the panel.Acts as a south or a task panel for the
+	 * WIS application
+	 */
+	private static final long serialVersionUID = 427142991179292828L;
 	private JLabel clock;
 
 	public SouthPanel(MainView mainView) {

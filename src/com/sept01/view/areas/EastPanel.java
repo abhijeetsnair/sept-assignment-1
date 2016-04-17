@@ -81,10 +81,10 @@ public class EastPanel extends JPanel {
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 	}
 
+	// Adds favorites as buttons to the list of favorites on the UI
 	public void addFavourites() {
-		System.out.println("Does it come here");
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
-
+			// check if the fav exists on the panel
 			if (checkifFavExists(
 					Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == false) {
 				JPanel buttonPanel = new JPanel();
@@ -109,7 +109,7 @@ public class EastPanel extends JPanel {
 				buttonPanel.add(weather_station);
 
 				weather_station.addMouseListener(new AreaButtonListener(new JPanel[] { buttonPanel }, weather_station));
-
+				// add it to the UI
 				favAreas.add(buttonPanel);
 				favAdded.add(Singleton.getInstance().getApplication().getFav().get(i));
 			}
@@ -117,6 +117,7 @@ public class EastPanel extends JPanel {
 
 	}
 
+	// update the favorites list
 	public void updateFav() {
 		favAreas.removeAll();
 		TextPanel.remove(favAreas);
@@ -125,7 +126,8 @@ public class EastPanel extends JPanel {
 
 	}
 
-
+	// Check if favorites exist already on the UI if they exist then do not
+	// re add them to the UI
 	public boolean checkifFavExists(String area) {
 
 		for (int i = 0; i < favAdded.size(); i++) {
