@@ -16,6 +16,8 @@ import com.sept01.main.Weather;
 import com.sept01.main.WeatherStation;
 import com.sun.org.apache.xpath.internal.operations.Equals;
 import com.sept01.main.Area;
+
+import org.jsoup.select.Elements;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -58,6 +60,15 @@ public class DataTest {
 			State state = weather.getStateWeather("vic");
 			ArrayList<Area> area = state.getAreas();
 			assertNotNull(area);
+	}
+	@Test
+	public void checkifAreaCreated() {
+		
+		State state = weather.getStateWeather("vic");
+		ArrayList<Area> area = state.getAreas();
+		area.get(1).getWeatherStations().get(1).getData();
+		System.out.println(area.get(1).getWeatherStations().get(1).getStateName());
+	
 	}
 
 
