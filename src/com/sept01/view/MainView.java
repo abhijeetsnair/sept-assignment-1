@@ -34,6 +34,7 @@ public class MainView extends JFrame {
 	private SouthPanel south;
 	private WestPanel west;
 	private CenterPanel center;
+	private float relativePercentage = 0.7f;
 
 	/**
 	 * Main constructor
@@ -118,14 +119,14 @@ public class MainView extends JFrame {
 	public int getRelativeSizeX(){
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int width = gd.getDisplayMode().getWidth();
-		width = (int) (width * 0.6f);
+		width = (int) (width * relativePercentage);
 		return width;
 	}
 
 	public int getRelativeSizeY(){
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int height = gd.getDisplayMode().getHeight();
-		height = (int) (height * 0.6f);
+		height = (int) (height * relativePercentage);
 		return height;
 	}
 	
