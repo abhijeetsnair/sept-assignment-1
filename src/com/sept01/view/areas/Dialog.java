@@ -9,6 +9,7 @@ import java.awt.Paint;
 import java.awt.PaintContext;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.geom.AffineTransform;
@@ -232,18 +233,24 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 
 		// updates the data at 10 second intervals
 		Thread updateThread = new Thread() {
 			public void run() {
 				Boolean run = true;
 				while (run) {
-					DataRefresh(refresh);
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
+						if(WISApplication.debug == true){
+						System.out.println("END THREAD");
+						}
 						run = false;
 					}
+					DataRefresh(refresh);
+					
 				}
 			}
 		};
@@ -302,7 +309,6 @@ public class Dialog extends JDialog {
 	 **/
 	private String[][] getTData(String data[][]) {
 		State state = Singleton.getInstance().getWeather().getStateWeather(state_name);
-		System.out.println("asdasdasd: " + state_name);
 		for (int x = 0; x < state.getAreas().size(); x++) {
 			for (int i = 0; i < state.getAreas().get(x).getWeatherStations().size(); i++) {
 
