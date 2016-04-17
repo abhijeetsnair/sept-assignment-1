@@ -26,7 +26,7 @@ s3400586 - Jeet
 #####s3495671 - Wolf Zimmermann
 + Percentage Contributed : 25 %
 + Worked On : Getting the data from the website and creating the data system.
- 
+
 #####s3485769 - Joshua
 + Percentage Contributed :25 %
 + Worked On : Gui + ux
@@ -35,15 +35,17 @@ s3400586 - Jeet
 + Percentage Contributed : 25 %
 + Worked On : Gui
 
+#Tutor
+aditya jagtap
+Tuesday 5:30pm tutorial
 
 #slack info
 https://septgroupteam.slack.com/
 
 #####Bots:
 + todo to use todo use type "/todo help" in any slack channel to see the commands
-+ lucidchart /lucidchart 
++ lucidchart /lucidchart
 
 #####Integrations
 + github: gitub updated will be automaticly posted into the #git-updates channel
 + trello: any changes to the trello boards are automaticly posted in the #trello channel
-
