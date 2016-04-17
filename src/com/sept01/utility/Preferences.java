@@ -11,8 +11,10 @@ import com.sept01.model.Favourites;
 import com.sept01.model.Singleton;
 import com.sept01.model.WeatherStation;
 
+//Handles User Preferences such as Screen Location and Favourite Weather Stations
 public class Preferences {
 
+	//Reads the stored favourite weather stations from a text file
 	public void readFavourites() {
 		String fileName = "Fav/fav.txt";
 		String station;
@@ -38,6 +40,7 @@ public class Preferences {
 		}
 	}
 
+	//Reads the previous instance of the applications position on the screen
 	public void readScreenLocation() {
 
 		// file name where it stores the screen location
@@ -72,7 +75,9 @@ public class Preferences {
 		}
 
 	}
-
+	
+	//saves the users favourite weather stations to a text 
+	//file for next time the application is opened
 	public void saveFavourite() {
 		String fileName = "Fav/fav.txt";
 		try {
@@ -105,6 +110,8 @@ public class Preferences {
 		}
 	}
 
+	//saves the location of the appliation on the screen to a text file
+	//for the next time the application is opened
 	public void saveScreenLocation(Point loc) {
 		String fileName = "Fav/loc.txt";
 		try {
