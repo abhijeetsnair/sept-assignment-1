@@ -6,7 +6,7 @@
  * 
  */
 
-package com.sept01.main;
+package com.sept01.model;
 
 import java.awt.Color;
 
@@ -18,6 +18,8 @@ import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
 import org.jsoup.Jsoup;
+
+import com.sept01.main.WISApplication;
 
 /**
  * <p>

@@ -8,12 +8,18 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.sept01.view.ShowAllStates;
+
 /**
  * A {@link JButton} Listener that implements {@link MouseListener} . To be used for State Button related 
  * functions in the {@link ShowAllStates}
  * @version 1.0
  * @see JButton
  * @see ShowAllStates
+ * Gets triggered when the area button is clicked in the 
+ * Area button listener class if we hover over an state/area the listener
+ * responds to the click.
+ * 
  */
 public class AreaButtonListener implements MouseListener {
 

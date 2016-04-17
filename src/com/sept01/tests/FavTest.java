@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.sept01.main.Favourites;
-import com.sept01.main.Singleton;
 import com.sept01.main.WISApplication;
-import com.sept01.main.WeatherStation;
+import com.sept01.model.Favourites;
+import com.sept01.model.Singleton;
+import com.sept01.model.WeatherStation;
 
 /*
  * Tests favoriate such that

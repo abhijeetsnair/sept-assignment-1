@@ -1,7 +1,6 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -15,6 +14,7 @@ import com.sept01.view.Metrics;
 /**
  * A Class that represents the Center Panel of the GUI.
  */
+@SuppressWarnings("serial")
 public class CenterPanel extends JPanel {
   
   /**

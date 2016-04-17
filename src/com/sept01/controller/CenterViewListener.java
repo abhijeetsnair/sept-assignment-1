@@ -34,7 +34,6 @@ public class CenterViewListener implements MouseListener {
     
     if (jPanel != null) {
       Container parent = jPanel.getParent();
-      Container grandParent = parent.getParent();
       
       if (parent != null) {
       parent.setVisible(false);

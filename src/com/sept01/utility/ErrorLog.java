@@ -1,15 +1,11 @@
-package com.sept01.main;
+package com.sept01.utility;
 
-import java.awt.Color;
-import java.util.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JWindow;
-import javax.swing.SwingConstants;
 
 /**
  * <p>
@@ -35,13 +31,15 @@ public class ErrorLog {
 	}
 	
 	public void setTime(Time time){
-		this.time = time;
+		ErrorLog.time = time;
 	}
 	
+	@SuppressWarnings("unused")
 	private Time getTime(){
 		return time;
 	}
 	
+	@SuppressWarnings("unused")
 	private String getMsg(){
 		return msg;
 	}

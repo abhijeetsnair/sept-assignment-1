@@ -1,4 +1,4 @@
-package com.sept01.main;
+package com.sept01.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;

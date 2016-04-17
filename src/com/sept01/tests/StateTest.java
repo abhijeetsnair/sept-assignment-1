@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.sept01.main.State;
+import com.sept01.model.State;
 
 public class StateTest {
 	@Test

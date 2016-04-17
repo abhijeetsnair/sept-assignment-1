@@ -3,23 +3,21 @@
  * This class hold all weather data for a weather station
  * Also this object will scrap the json data for the object
  */
-package com.sept01.main;
+package com.sept01.model;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 
-import org.jfree.data.statistics.SimpleHistogramDataset;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.sept01.utility.ErrorLog;
 
 /**
  * <p>
@@ -50,7 +48,7 @@ public class WeatherStation {
 
 	String name;
 	String stateName;
-	String url;
+	public String url;
 	String jsonUrl = null;
 	String stateAbv;
 
@@ -60,6 +58,7 @@ public class WeatherStation {
 
 	JSONObject json;
 	JSONArray data;
+	@SuppressWarnings("rawtypes")
 	HashMap[] dataMap;
 	private String timeZone;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd hh:mm:ss zzz");
@@ -80,12 +79,10 @@ public class WeatherStation {
 			try {
 				doc = Jsoup.connect(url).get();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				try {
 					Thread.sleep(1000);
 					doc = Jsoup.connect(url).get();
 				} catch (InterruptedException | IOException e2) {
-					// TODO Auto-generated catch block
 					ErrorLog.createErrorPopup(e2);
 				}
 				ErrorLog.createErrorPopup(e1);
@@ -107,7 +104,6 @@ public class WeatherStation {
 				Thread.sleep(1000);
 				jsonString = Jsoup.connect(jsonUrl).ignoreContentType(true).execute().body();
 			} catch (IOException | InterruptedException e1) {
-				// TODO Auto-generated catch block
 				ErrorLog.createErrorPopup(e1);
 				e1.printStackTrace();
 			}
@@ -126,6 +122,7 @@ public class WeatherStation {
 	 * Obtains data from the JSON URL and stores it into a hashmap of data
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public HashMap[] getData() {
 		// Loads data from JSON URL
 		loadData();

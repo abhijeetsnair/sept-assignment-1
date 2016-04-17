@@ -3,23 +3,15 @@ package com.sept01.view.areas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.color.ColorSpace;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import com.sept01.controller.StateButtonHoverListener;
 import com.sept01.controller.StateButtonListener;

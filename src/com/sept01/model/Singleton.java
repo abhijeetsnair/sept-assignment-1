@@ -1,13 +1,26 @@
-package com.sept01.main;
+package com.sept01.model;
 
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sept01.main.WISApplication;
 import com.sept01.view.MainView;
 import com.sept01.view.areas.WestPanel;
-
+/*
+ * NOTE:
+ * SAVES ALL THE INSTANCES OF 
+ * MAINVIEW
+ * WISAPPLICATION
+ * EASTPANEL
+ * WESTPANEL
+ * NORTHPANEL
+ * SOUTHPANEL
+ * SUCH THAT THEY CAN BE ACESSED FROM ANYWHERE WITHIN THE APPLICATION AND 
+ * SAME INSTANCES GET MODIFIED. MODIFICATIONS GET REFLECTED ON THE SAME
+ * INSTANCE OF THE PROGRAM
+ */
 /**
  * The main Singleton Class of the application. It is used to reference global variables, for whatever needs possible.
  */

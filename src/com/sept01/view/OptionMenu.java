@@ -49,7 +49,8 @@ public class OptionMenu extends JMenuBar {
 		
 		
 		MenuItemListener menuItemListener = new MenuItemListener();
-
+		
+		// Shows version information on each of the items present
 	      newMenuItem.addActionListener(menuItemListener);
 	      openMenuItem.addActionListener(menuItemListener);
 	      saveMenuItem.addActionListener(menuItemListener);
@@ -57,7 +58,7 @@ public class OptionMenu extends JMenuBar {
 	      cutMenuItem.addActionListener(menuItemListener);
 	      copyMenuItem.addActionListener(menuItemListener);
 	      pasteMenuItem.addActionListener(menuItemListener);	
-			
+	      version.addActionListener(menuItemListener);
 		
 		// add menu items to menus
 		fileMenu.add(newMenuItem);

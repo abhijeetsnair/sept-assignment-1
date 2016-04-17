@@ -5,9 +5,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
+import com.sept01.view.ShowAllStates;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.WestPanel;
 
+/*NOTE:-
+ * THE STATE BUTTON HOVER LISTENER GETS TRIGGERED WHEN THE 
+ * WE HOVER OVER DIFFERENT STATES CAUSING THE STATE 
+ * INFORMATION TO CHANGE.HOVERING OVER DIFFERENT STATES
+ * CAUSES THE BACKGROUND OF THE CENTRE PANEL TO CHANGE
+ * SUCH THAT THE NEW BACKGROUND SHOWS THE STATES HIGHLIGHTED
+ */
 public class StateButtonHoverListener implements MouseListener {
 	WestPanel panel;
 	JButton button;
@@ -48,9 +56,11 @@ public class StateButtonHoverListener implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		/*Once we exit the button the panel needs to be rechanged to the default
-		 * image which the image of all the states present in the location
-		 * */
+		/*
+		 * Once we exit the button the panel needs to be rechanged to the
+		 * default image which the image of all the states present in the
+		 * location
+		 */
 		button.setBackground(null);
 		panel.getView().getCenter().setBackgroundLocation("Default");
 		panel.getView().getCenter().repaint();
