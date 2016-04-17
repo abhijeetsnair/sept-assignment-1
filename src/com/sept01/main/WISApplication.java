@@ -8,6 +8,7 @@ import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
+import com.sept01.utility.Preferences;
 import com.sept01.view.MainView;
 
 /**
@@ -17,6 +18,7 @@ import com.sept01.view.MainView;
  */
 public class WISApplication {
 	public static Weather weather;
+	
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
 
 	public ArrayList<Favourites> getFav() {
@@ -50,12 +52,15 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
+
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
 		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
 		initializeWeather();
+		Preferences prefs = new Preferences();
+		prefs.readFavourites();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 		MainView view = new MainView();
