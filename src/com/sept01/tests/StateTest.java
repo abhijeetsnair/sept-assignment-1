@@ -11,7 +11,7 @@ import com.sept01.model.State;
 public class StateTest {
 	@Test
 	public void checkifStateCreated() {
-	String name ="Wharton";
+	String name ="vic";
 		State state = new State(name);
 		assertThat(name.toLowerCase(), is(equalTo(state.getName().toLowerCase())));
 	}
