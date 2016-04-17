@@ -9,9 +9,20 @@ s3485769 - Joshua
 
 s3400586 - Jeet
 
-#Peer Reviews
 
-####Wolf Reviews
+# Peer Reviews
+#####s3477089 - Sarah Vasiliki Giapitzakis
++ Percentage Contributed : %
++ Worked On : 
+#####s3495671 - Wolf Zimmermann
++ Percentage Contributed : %
++ Worked On : 
+#####s3485769 - Joshua
++ Percentage Contributed : %
++ Worked On : 
+#####s3400586 - Jeet
++ Percentage Contributed : %
++ Worked On : 
 
 
 #slack info
