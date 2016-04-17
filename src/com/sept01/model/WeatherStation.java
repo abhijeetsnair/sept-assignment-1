@@ -21,11 +21,12 @@ import com.sept01.utility.ErrorLog;
 
 /**
  * <p>
- * The Weather Station Class which holds data about the weather station and its related information such as the weather.
+ * The Weather Station Class which holds data about the weather station and its
+ * related information such as the weather.
  * </p>
  * <p>
- * In the heirarchy, it is in the lowest level, being that Area will have multiple Weather Stations, and State will have
- * multiple Areas.
+ * In the heirarchy, it is in the lowest level, being that Area will have
+ * multiple Weather Stations, and State will have multiple Areas.
  * </p>
  * 
  * @see Area
@@ -34,39 +35,90 @@ import com.sept01.utility.ErrorLog;
  */
 public class WeatherStation {
 
-	public String getName() {
-		return name;
-	}
-
-	public String getStateName() {
-		return stateName;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	String name;
+
 	String stateName;
+
 	public String url;
+
 	String jsonUrl = null;
 	String stateAbv;
-
-	public String getStateAbv() {
-		return stateAbv;
-	}
-
 	JSONObject json;
 	JSONArray data;
 	@SuppressWarnings("rawtypes")
 	HashMap[] dataMap;
+
 	private String timeZone;
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd hh:mm:ss zzz");
 
 	public WeatherStation(String url, String name) {
 		this.url = url;
 		this.name = name;
 
+	}
+
+	/**
+	 * Obtains data from the JSON URL and stores it into a hashmap of data
+	 * 
+	 * @return
+	 */
+
+	public HashMap<String,String>[] getData() {
+		// Loads data from JSON URL
+		loadData();
+		// creates HASHMAP for storing data
+		dataMap = new HashMap[data.length()];
+		for (int i = 0; i < data.length(); i++) {
+			HashMap<String, String> pairs = new HashMap<String, String>();
+			JSONObject j = data.optJSONObject(i);
+			Iterator<String> it = j.keys();
+			while (it.hasNext()) {
+				String n = (String) it.next();
+				if (n.compareTo("local_date_time_full") == 0) {
+					String timeString = (String) j.get(n);
+					timeString = new StringBuilder(timeString).insert(4, ":").toString();
+					timeString = new StringBuilder(timeString).insert(7, ":").toString();
+					timeString = new StringBuilder(timeString).insert(10, " ").toString();
+					timeString = new StringBuilder(timeString).insert(13, ":").toString();
+					timeString = new StringBuilder(timeString).insert(16, ":").toString();
+					timeString = new StringBuilder(timeString).append(" A" + timeZone).toString();
+
+					j.put(n, timeString);
+				}
+				if (j.get(n).getClass().getName() == "java.lang.Double") {
+					pairs.put(n, Double.toString((double) j.get(n)));
+				} else if (j.get(n).getClass().getName() == "java.lang.Integer") {
+					pairs.put(n, Integer.toString((int) (j.get(n))));
+				} else if (j.get(n).getClass().getName() == "org.json.JSONObject$Null") {
+					pairs.put(n, "null");
+				} else {
+					pairs.put(n, (String) j.get(n));
+				}
+			}
+			// Add hash map pairs to array
+			dataMap[i] = pairs;
+		}
+		// return array of hash maps
+
+		return dataMap;
+
+	}
+
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getStateAbv() {
+		return stateAbv;
+	}
+
+	public String getStateName() {
+		return stateName;
 	}
 
 	/**
@@ -118,57 +170,11 @@ public class WeatherStation {
 		stateAbv = temp.getString("state_time_zone");
 	}
 
-	/**
-	 * Obtains data from the JSON URL and stores it into a hashmap of data
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	public HashMap[] getData() {
-		// Loads data from JSON URL
-		loadData();
-		// creates HASHMAP for storing data
-		dataMap = new HashMap[data.length()];
-		for (int i = 0; i < data.length(); i++) {
-			HashMap<String, String> pairs = new HashMap<String, String>();
-			JSONObject j = data.optJSONObject(i);
-			Iterator it = j.keys();
-			while (it.hasNext()) {
-				String n = (String) it.next();
-				if (n.compareTo("local_date_time_full") == 0) {
-					String timeString = (String) j.get(n);
-					timeString = new StringBuilder(timeString).insert(4, ":").toString();
-					timeString = new StringBuilder(timeString).insert(7, ":").toString();
-					timeString = new StringBuilder(timeString).insert(10, " ").toString();
-					timeString = new StringBuilder(timeString).insert(13, ":").toString();
-					timeString = new StringBuilder(timeString).insert(16, ":").toString();
-					timeString = new StringBuilder(timeString).append(" A" + timeZone).toString();
-
-					j.put(n, timeString);
-				}
-				if (j.get(n).getClass().getName() == "java.lang.Double") {
-					pairs.put(n, Double.toString((double) j.get(n)));
-				} else if (j.get(n).getClass().getName() == "java.lang.Integer") {
-					pairs.put(n, Integer.toString((int) (j.get(n))));
-				} else if (j.get(n).getClass().getName() == "org.json.JSONObject$Null") {
-					pairs.put(n, "null");
-				} else {
-					pairs.put(n, (String) j.get(n));
-				}
-			}
-			// Add hash map pairs to array
-			dataMap[i] = pairs;
-		}
-		// return array of hash maps
-
-		return dataMap;
-
-	}
-
-	public SimpleDateFormat getDateFormat() {
-		return dateFormat;
-	}
-
 	public void setDateFormat(SimpleDateFormat dateFormat) {
 		this.dateFormat = dateFormat;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

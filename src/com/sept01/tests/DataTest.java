@@ -3,40 +3,45 @@
  */
 package com.sept01.tests;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.junit.Test;
 
-import com.sept01.main.State;
 import com.sept01.main.WISApplication;
-import com.sept01.main.Weather;
-import com.sept01.main.WeatherStation;
-import com.sun.org.apache.xpath.internal.operations.Equals;
-import com.sept01.main.Area;
+import com.sept01.model.Area;
+import com.sept01.model.State;
+import com.sept01.model.Weather;
+import com.sept01.model.WeatherStation;
 
-import org.jsoup.select.Elements;
-import org.junit.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 
 public class DataTest {
 
 	Weather weather;
+	private String[] statesAbv = { "vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant","act" };
 	public DataTest(){
 		WISApplication.initializeWeather();
 		weather = WISApplication.weather;
 	}
-	private String[] statesAbv = { "vic", "nsw", "tas", "wa", "sa", "nt", "qld", "ant","act" };
 	@Test
-	public void testGotStates() {
-		for(String staten : statesAbv ){
-			State state = weather.getStateWeather(staten);
-			assertEquals(staten,state.getName());
-		}
+	public void checkAreasNotNull(){
+			State state = weather.getStateWeather("vic");
+			ArrayList<Area> area = state.getAreas();
+			assertNotNull(area);
+	}
+	@Test
+	public void checkifAreaCreated() {
+		
+		State state = weather.getStateWeather("vic");
+		ArrayList<Area> area = state.getAreas();
+		area.get(1).getWeatherStations().get(1).getData();
+		System.out.println(area.get(1).getWeatherStations().get(1).getStateName());
+	
 	}
 	@Test
 	public void checkWeatherStation(){
@@ -56,19 +61,11 @@ public class DataTest {
 	
 	}
 	@Test
-	public void checkAreasNotNull(){
-			State state = weather.getStateWeather("vic");
-			ArrayList<Area> area = state.getAreas();
-			assertNotNull(area);
-	}
-	@Test
-	public void checkifAreaCreated() {
-		
-		State state = weather.getStateWeather("vic");
-		ArrayList<Area> area = state.getAreas();
-		area.get(1).getWeatherStations().get(1).getData();
-		System.out.println(area.get(1).getWeatherStations().get(1).getStateName());
-	
+	public void testGotStates() {
+		for(String staten : statesAbv ){
+			State state = weather.getStateWeather(staten);
+			assertEquals(staten,state.getName());
+		}
 	}
 
 

@@ -8,17 +8,18 @@
 package com.sept01.model;
 
 import java.io.IOException;
-import java.util.*;
-import org.jsoup.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * NOTE: 
- * STATE STORES ALL THE INFORMATION PERTAINING TO THE STATE
- * THE INSTANCES OF THE STATE GETS STORED IN A LIST SO THAT THEY 
- * CAN BE ACCESSED BY THE APPLICATION TO GET THE STATE INFORMATION.
+ * NOTE: STATE STORES ALL THE INFORMATION PERTAINING TO THE STATE THE INSTANCES
+ * OF THE STATE GETS STORED IN A LIST SO THAT THEY CAN BE ACCESSED BY THE
+ * APPLICATION TO GET THE STATE INFORMATION.
  * 
  * <p>
  * A Class that represents a State (territory) of Australia.
@@ -51,6 +52,18 @@ public class State {
 		}
 	}
 
+	public ArrayList<Area> getAreas() {
+		return areas;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setAreas(ArrayList<Area> areas) {
+		this.areas = areas;
+	}
+
 	protected boolean updateWeather() throws IOException {
 		// visit webpage
 		// find all header 2 which will have our area names
@@ -77,18 +90,6 @@ public class State {
 
 		return false;
 
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public ArrayList<Area> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(ArrayList<Area> areas) {
-		this.areas = areas;
 	}
 
 }

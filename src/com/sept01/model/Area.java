@@ -6,30 +6,36 @@ import java.util.Iterator;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
 /**
  * <p>
- * The Area Class which represents an idea of an 'Area', regarding a generalised location group, such as "Melbourne".
+ * The Area Class which represents an idea of an 'Area', regarding a generalised
+ * location group, such as "Melbourne".
  * </p>
  * <p>
- * This can be considered a child of "State", where {@link State} would contain many Areas..
+ * This can be considered a child of "State", where {@link State} would contain
+ * many Areas..
  * </p>
+ * 
  * @version 1.0
  * @see State
  */
 public class Area {
-  
-  // Initial variables
+
+	// Initial variables
 	private String name;
 	private String id;
 	Elements weatherStationTable;
 	private ArrayList<WeatherStation> weatherStations = new ArrayList<>();
-	
+
 	/**
 	 * Main constructor
-	 * @param name Name of the area
-	 * @param id ID of the area 
-	 * @param table Reference to the elements table required
+	 * 
+	 * @param name
+	 *            Name of the area
+	 * @param id
+	 *            ID of the area
+	 * @param table
+	 *            Reference to the elements table required
 	 */
 	public Area(String name, String id, Elements table) {
 		this.name = name;
