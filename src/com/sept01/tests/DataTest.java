@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.sept01.main.Area;
-import com.sept01.main.State;
 import com.sept01.main.WISApplication;
-import com.sept01.main.Weather;
-import com.sept01.main.WeatherStation;
+import com.sept01.model.Area;
+import com.sept01.model.State;
+import com.sept01.model.Weather;
+import com.sept01.model.WeatherStation;
 
 public class DataTest {
 

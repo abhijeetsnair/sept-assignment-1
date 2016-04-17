@@ -14,8 +14,8 @@ import javax.swing.JScrollPane;
 
 import com.sept01.controller.AreaButtonListener;
 import com.sept01.controller.CityClickListener;
-import com.sept01.main.Favourites;
-import com.sept01.main.Singleton;
+import com.sept01.model.Favourites;
+import com.sept01.model.Singleton;
 import com.sept01.view.MainView;
 import com.sept01.view.Metrics;
 

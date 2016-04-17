@@ -1,8 +1,12 @@
-package com.sept01.main;
+package com.sept01.utility;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.sept01.model.Favourites;
+import com.sept01.model.Singleton;
+import com.sept01.model.WeatherStation;
 
 public class ReadFavourites {
 	/**

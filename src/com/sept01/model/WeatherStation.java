@@ -3,7 +3,7 @@
  * This class hold all weather data for a weather station
  * Also this object will scrap the json data for the object
  */
-package com.sept01.main;
+package com.sept01.model;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -16,6 +16,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.sept01.utility.ErrorLog;
 
 /**
  * <p>
@@ -46,7 +48,7 @@ public class WeatherStation {
 
 	String name;
 	String stateName;
-	String url;
+	public String url;
 	String jsonUrl = null;
 	String stateAbv;
 

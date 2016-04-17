@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.sept01.main.WeatherStation;
+import com.sept01.model.WeatherStation;
 
 public class WeatherTest {
 	@Test

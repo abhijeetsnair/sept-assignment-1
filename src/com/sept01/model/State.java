@@ -5,7 +5,7 @@
  * it then creates objects for objects for the areas and passes their table to them
  *
  */
-package com.sept01.main;
+package com.sept01.model;
 
 import java.io.IOException;
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.sept01.main;
+package com.sept01.utility;
 
 import java.awt.Point;
 import java.io.BufferedWriter;

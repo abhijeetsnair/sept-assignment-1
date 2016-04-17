@@ -1,8 +1,10 @@
-package com.sept01.main;
+package com.sept01.utility;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import com.sept01.model.Singleton;
 /*
  * NOTE :-
  *SAVE FAVOURIATE :-

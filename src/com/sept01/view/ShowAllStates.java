@@ -1,4 +1,4 @@
-package com.sept01.controller;
+package com.sept01.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,9 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.sept01.main.Area;
-import com.sept01.main.Singleton;
-import com.sept01.main.State;
+import com.sept01.controller.AreaButtonListener;
+import com.sept01.controller.CityClickListener;
+import com.sept01.model.Area;
+import com.sept01.model.Singleton;
+import com.sept01.model.State;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.WestPanel;
 /*NOTE:

@@ -1,10 +1,11 @@
-package com.sept01.main;
+package com.sept01.model;
 
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sept01.main.WISApplication;
 import com.sept01.view.MainView;
 import com.sept01.view.areas.WestPanel;
 /*

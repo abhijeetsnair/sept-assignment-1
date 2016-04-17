@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.sept01.main.Singleton;
+import com.sept01.model.Singleton;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.EastPanel;
 import com.sept01.view.areas.NorthPanel;

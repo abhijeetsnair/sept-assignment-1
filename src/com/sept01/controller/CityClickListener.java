@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import com.sept01.main.WeatherStation;
+import com.sept01.model.WeatherStation;
 import com.sept01.view.areas.Dialog;
 /*NOTE :
  * CITY CLICK LISTENER GETS CALLED WHEN A CITY IS CLICKED

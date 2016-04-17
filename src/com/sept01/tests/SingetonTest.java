@@ -4,9 +4,9 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import com.sept01.main.Singleton;
 import com.sept01.main.WISApplication;
-import com.sept01.main.Weather;
+import com.sept01.model.Singleton;
+import com.sept01.model.Weather;
 
 /** Checking if no two instances of the same class are created */
 public class SingetonTest {

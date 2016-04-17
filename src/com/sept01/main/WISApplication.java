@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.sept01.model.Favourites;
+import com.sept01.model.Singleton;
+import com.sept01.model.State;
+import com.sept01.model.Weather;
+import com.sept01.utility.ErrorLog;
 import com.sept01.view.MainView;
 
 /**

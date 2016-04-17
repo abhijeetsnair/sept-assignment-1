@@ -3,9 +3,9 @@ package com.sept01.view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.sept01.main.Favourites;
-import com.sept01.main.Singleton;
-import com.sept01.main.WeatherStation;
+import com.sept01.model.Favourites;
+import com.sept01.model.Singleton;
+import com.sept01.model.WeatherStation;
 /*
  * SIMPLY REMOVES
  * FAVORIATES FROM THE FAVORIATES LIST IN THE 
