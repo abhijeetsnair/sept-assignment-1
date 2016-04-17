@@ -1,6 +1,7 @@
 package com.sept01.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -66,7 +67,10 @@ public class MainView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		setContentPane(panel);
-		panel.setLayout(new BorderLayout(0, 10));
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		panel.setForeground(Color.ORANGE);
+		
 
 		/** SET THE MENU BAR OF THE PANEL */
 		this.setJMenuBar(new OptionMenu());
