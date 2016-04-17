@@ -30,8 +30,6 @@ import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
-import com.sun.glass.events.WindowEvent;
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class Dialog extends JDialog {
 	/**
@@ -169,7 +167,7 @@ public class Dialog extends JDialog {
 			    	while(run){
 			      DataRefresh(refresh);
 			    	try {
-						this.sleep(10000);
+						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						run = false;
 					}
