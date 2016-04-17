@@ -164,6 +164,21 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
+		  Thread thread = new Thread(){
+			    public void run(){
+			    	while(true){
+			      DataRefresh(refresh);
+			    	try {
+						this.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    	}
+			    }
+			  };
+
+			  thread.start();
 	}
 
 	/**
