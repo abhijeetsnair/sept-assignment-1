@@ -1,8 +1,11 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +49,7 @@ public class Dialog extends JDialog {
 	String weather_station, message;
 	WeatherStation weatherStation;
 	String data[][];
+
 	private String[] coloumns = { "Date", "Air Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir",
 			"Spd kmh", "Gust kmh", "Spd kt", "Gust kt", "QNH", "MSL", "Rain since 9am", "Cloud", "Cloud Base M",
 			"Cloud Oktas", "Cloud Type", "Vis km" };
@@ -59,13 +63,23 @@ public class Dialog extends JDialog {
 		this.weatherStation = weatherStation;
 		// Fetch the data for the table
 		data = getTData(data);
-
+		Color background = Color.decode("#3d3f47");
+		Color foreground = Color.orange;
 		// Adding a Table to display the weather information
 		jt = new JTable(data, coloumns);
+		jt.setBackground(background);
+		jt.setForeground(foreground);
+		jt.setFont(new Font("Verdana", Font.PLAIN, 12));
+		jt.getTableHeader().setBackground(background);
+		jt.getTableHeader().setForeground(foreground);
 		jt.setPreferredScrollableViewportSize(new Dimension(900, 500));
 		jt.setFillsViewportHeight(true);
 		jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		JScrollPane jps = new JScrollPane(jt);
+		jps.setBackground(background);
+		jps.setForeground(foreground);
+		jps.getVerticalScrollBar().setBackground(background.brighter());
+		jps.getHorizontalScrollBar().setBackground(background.brighter());
 		/**
 		 * Checks if the particular station is already present in the favorite
 		 * list
@@ -73,14 +87,21 @@ public class Dialog extends JDialog {
 		addorRemoveFav = CheckifPresentinFav(weather_station);
 		// Main Panel
 		JPanel showInfo = new JPanel();
+		showInfo.setBackground(background);
+		showInfo.setForeground(foreground);
 		showInfo.setLayout(new BoxLayout(showInfo, BoxLayout.Y_AXIS));
 		// Adding a scroll pane to the JPanel
 		// Displaying the Message Label and hide label
 		JPanel messagePanel = new JPanel();
 		messagePanel.setLayout(new BorderLayout());
 		JLabel msgLabel = new JLabel(message, JLabel.CENTER);
+		msgLabel.setForeground(foreground);
+		msgLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
 		messagePanel.add(msgLabel, BorderLayout.CENTER);
+		messagePanel.setBackground(background);
+		messagePanel.setForeground(foreground);
 		JPanel labelPanel = new JPanel();
+		labelPanel.setBackground(background);
 
 		/***
 		 * THE REFRESH BUTTON ENABLES THE USER TO REFERSH THE PAGE TO SHOW THE
@@ -88,6 +109,9 @@ public class Dialog extends JDialog {
 		 */
 		JButton refresh = new JButton("Refresh");
 		labelPanel.add(refresh);
+		refresh.setBackground(background.brighter());
+		refresh.setForeground(foreground);
+		refresh.setFont(new Font("Verdana", Font.PLAIN, 12));
 		refresh.addActionListener(e -> DataRefresh(refresh));
 
 		/***
@@ -99,6 +123,8 @@ public class Dialog extends JDialog {
 		if (addorRemoveFav == false) {
 			JButton add = new JButton("+ Add Favourites");
 			add.addActionListener(new AddtoFavListener(weather_station, weatherStation));
+			add.setBackground(background.brighter());
+			add.setForeground(foreground);
 			labelPanel.add(add);
 		}
 
@@ -110,6 +136,8 @@ public class Dialog extends JDialog {
 		else if (addorRemoveFav == true) {
 			JButton remove = new JButton("- Remove Favourites");
 			remove.addActionListener(new RemFavListener(weather_station, weatherStation));
+			remove.setBackground(background.brighter());
+			remove.setForeground(foreground);
 			labelPanel.add(remove);
 		}
 		messagePanel.add(labelPanel, BorderLayout.EAST);
@@ -121,19 +149,28 @@ public class Dialog extends JDialog {
 
 		infoPane.add(messagePanel);
 		infoPane.add(jps, BorderLayout.WEST);
+		
 		showInfo.add(infoPane);
+		infoPane.setBackground(background);
+		infoPane.setForeground(foreground);
 
 		// Graph Pane to display graph information
 		JPanel showGraph = new JPanel();
 		showGraph.setLayout(new BorderLayout());
+		showGraph.setBackground(background);
+		showGraph.setForeground(foreground);
 
 		JPanel labelNGraph = new JPanel();
 		labelNGraph.setLayout(new BoxLayout(labelNGraph, BoxLayout.Y_AXIS));
-
+		labelNGraph.setBackground(background);
+		labelNGraph.setForeground(foreground);
 		JPanel graphLabel = new JPanel();
 		graphLabel.setLayout(new BorderLayout());
 		JLabel label = new JLabel("Temperature graphs for 9 am,3pm,max and min", JLabel.CENTER);
+		label.setForeground(foreground);
 		graphLabel.add(label);
+		graphLabel.setBackground(background);
+		graphLabel.setForeground(foreground);
 
 		JPanel tempgraphs = new JPanel();
 		tempgraphs.setLayout(new BoxLayout(tempgraphs, BoxLayout.X_AXIS));
@@ -161,69 +198,68 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
-		  Thread updateThread = new Thread(){
-			    public void run(){
-			    	Boolean run = true;
-			    	while(run){
-			      DataRefresh(refresh);
-			    	try {
+
+		// updates the data at 10 second intervals
+		Thread updateThread = new Thread() {
+			public void run() {
+				Boolean run = true;
+				while (run) {
+					DataRefresh(refresh);
+					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						run = false;
 					}
-			    	}
-			    }
-			  };
+				}
+			}
+		};
 
-			  updateThread.start();
-			 
-			  this.addWindowListener(new WindowListener() {
-				
-				@Override
-				public void windowOpened(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void windowIconified(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void windowDeiconified(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void windowDeactivated(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void windowClosing(java.awt.event.WindowEvent e) {
-					updateThread.interrupt();
-				}
-				
-				@Override
-				public void windowClosed(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void windowActivated(java.awt.event.WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			
-				
-				  
-			  }
-			  );
+		updateThread.start();
+		//closes thread on window close
+		this.addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				updateThread.interrupt();
+			}
+
+			@Override
+			public void windowClosed(java.awt.event.WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowActivated(java.awt.event.WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
 	}
 
 	/**
@@ -287,7 +323,7 @@ public class Dialog extends JDialog {
 		DefaultTableModel model = new DefaultTableModel(data, coloumns);
 		jt.setModel(model);
 		model.fireTableDataChanged();
-		
+
 		this.setTitle(oldTitle + " Done");
 		this.setTitle(oldTitle);
 	}
