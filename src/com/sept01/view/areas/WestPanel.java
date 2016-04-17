@@ -1,20 +1,15 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-import com.sept01.controller.StateButtonHoverListener;
-import com.sept01.controller.StateButtonListener;
+import com.sept01.AreaController.StateButtonHoverListener;
+import com.sept01.AreaController.StateButtonListener;
 import com.sept01.view.MainView;
 
 /**
@@ -111,15 +106,6 @@ public class WestPanel extends JPanel {
      
 
     this.add(TextPanel);
-
-    Border blackline;
-
-    blackline = BorderFactory.createLineBorder(Color.black);
-    // TextPanel.setBorder(blackline);
-
-    // TextPanel.setBackground(Color.BLUE);
-
-    // image = new ImageIcon("images/west_back.png").getImage();
 
   }
   

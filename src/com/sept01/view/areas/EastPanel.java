@@ -12,12 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.sept01.controller.AreaButtonListener;
-import com.sept01.controller.CityClickListener;
+import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.model.Favourites;
 import com.sept01.model.Singleton;
 import com.sept01.view.MainView;
 import com.sept01.view.Metrics;
+import com.sept01.view.listener.CityClickListener;
 
 /**
  * The {@link JPanel} Class that refers to the eastern-most Panel in the GUI,

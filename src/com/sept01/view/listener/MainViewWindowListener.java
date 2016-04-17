@@ -3,7 +3,6 @@ package com.sept01.view.listener;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import com.sept01.main.*;
 import com.sept01.utility.ReadScreenLoc;
 import com.sept01.utility.SaveFavourite;
 import com.sept01.utility.SaveScreenLocation;

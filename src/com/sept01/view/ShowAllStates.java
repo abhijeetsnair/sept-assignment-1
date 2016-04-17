@@ -10,13 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.sept01.controller.AreaButtonListener;
-import com.sept01.controller.CityClickListener;
+import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.model.Area;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.WestPanel;
+import com.sept01.view.listener.CityClickListener;
 /*NOTE:
  *SHOW ALL STATES CLASS ENSURES THAT ALL THE STATES ARE SHOWN ON THE 
  *SLIDEBAR PANEL WHICH IS A CLICKABLE PANEL.THE PANEL IS SHOWN WHEN 

@@ -7,7 +7,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import com.sept01.controller.CenterViewListener;
+import com.sept01.AreaController.CenterViewListener;
 import com.sept01.view.MainView;
 import com.sept01.view.Metrics;
 
