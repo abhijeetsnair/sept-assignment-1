@@ -8,6 +8,15 @@ import org.junit.Test;
 
 import com.sept01.model.WeatherStation;
 
+/**
+ * <p>
+ * A test class that handles the testing of WeatherData in the requirements. The ability to obtain the data
+ * , verify its contents and integrity of data are all assessed whether they conform to the standard requirements in the specifications.
+ * </p>
+ * 
+ * @version 1.0
+ *
+ */
 public class WeatherTest {
 	@Test
 	public void checkifWeatherCreated() {

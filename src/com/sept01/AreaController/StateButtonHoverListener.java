@@ -9,6 +9,20 @@ import com.sept01.view.ShowAllStates;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.WestPanel;
 
+
+/**
+ * <p>
+ * A Button Listener that tracks the hovering event of the user on any of the State buttons
+ * in the western panel. It also changes the image of the Center panel accordingly to
+ * the hovered state.
+ * </p>
+ * 
+ *  @see WestPanel
+ *  @see CenterPanel
+ * 
+ * @author Joshua
+ *
+ */
 /*NOTE:-
  * THE STATE BUTTON HOVER LISTENER GETS TRIGGERED WHEN THE 
  * WE HOVER OVER DIFFERENT STATES CAUSING THE STATE 

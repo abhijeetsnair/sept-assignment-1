@@ -55,6 +55,12 @@ import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 
+/**
+ * <p>
+ * The Dialog class that shows a popup window of weather data, pulled from the website.
+ * It also presents the data in a table and 2 visual graphs
+ * </p>
+ */
 public class Dialog extends JDialog {
 	/**
 	 * DIALOG SHOWS INFORMATION IN THE FORM OF 1) TABLE 2) CHART TABLE SHOWS

@@ -14,11 +14,15 @@ import com.sept01.model.Favourites;
 import com.sept01.model.Singleton;
 import com.sept01.model.WeatherStation;
 
-/*
+/**
+ * <p>
  * Tests favoriate such that
  * 1) No dupliate favouriates are shown
  * 2) favoriate cannot be null 
- * 3) They must have both name and url information 
+ * 3) They must have both name and url information
+ * </p>
+ * 
+ *  @version 1.0
  */
 public class FavTest {
 	private ArrayList<Favourites> favlist = new ArrayList<Favourites>();

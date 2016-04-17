@@ -3,6 +3,14 @@ package com.sept01.tests;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+/**
+ * <p>
+ * Implement basic unit testing program.
+ * </p>
+ * 
+ * @version 1.0
+ *
+ */
 public class UnitTests{
 	
 	@Test
