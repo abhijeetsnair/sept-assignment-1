@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.sept01.AreaController.CenterViewListener;
+import com.sept01.main.WISApplication;
 import com.sept01.view.MainView;
 import com.sept01.view.Metrics;
 
@@ -57,7 +58,9 @@ public class CenterPanel extends JPanel {
 
 		if (location.compareTo("NSW") == 0) {
 			bg = new ImageIcon("images/NSW.PNG").getImage();
-			System.out.println(this.getWidth());
+			if(WISApplication.debug == true){
+				System.out.println(this.getWidth());
+			}
 		}
 
 		if (location.compareTo("VIC") == 0) {

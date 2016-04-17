@@ -7,12 +7,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.sept01.main.WISApplication;
 import com.sept01.model.Favourites;
 import com.sept01.model.Singleton;
 import com.sept01.model.WeatherStation;
 
+//Handles User Preferences such as Screen Location and Favourite Weather Stations
 public class Preferences {
 
+	//Reads the stored favourite weather stations from a text file
 	public void readFavourites() {
 		String fileName = "Fav/fav.txt";
 		String station;
@@ -20,24 +23,33 @@ public class Preferences {
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
-			System.out.println("--------");
+			if(WISApplication.debug == true){
+				System.out.println("--------");
+			}
 			while ((station = br.readLine()) != null) {
 				Favourites fav = new Favourites();
 				String[] token = null;
-				System.out.println(station);
+				if(WISApplication.debug == true){
+					System.out.println(station);
+				}
 				String line = station;
 				token = line.split("-");
 				fav.setStation(new WeatherStation(token[1], token[0]));
 				Singleton.getInstance().getApplication().addFav(fav);
-				System.out.println("Fav Area read from the file : " + fav);
+				if(WISApplication.debug == true){
+					System.out.println("Fav Area read from the file : " + fav);
+				}
 			}
 			br.close();
 
 		} catch (IOException e) {
-			System.out.println("Reading has issues");
+			if(WISApplication.debug == true){
+				System.out.println("Reading has issues");
+			}
 		}
 	}
 
+	//Reads the previous instance of the applications position on the screen
 	public void readScreenLocation() {
 
 		// file name where it stores the screen location
@@ -47,7 +59,9 @@ public class Preferences {
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
-			System.out.println("--------");
+			if(WISApplication.debug == true){
+				System.out.println("--------");
+			}
 			// reads the x and y coodinates one by one and stores it in the
 			// program
 			while ((loc = br.readLine()) != null) {
@@ -60,19 +74,27 @@ public class Preferences {
 					Singleton.getInstance().setYloc(Integer.parseInt(loc));
 				}
 
-				System.out.println(loc);
+				if(WISApplication.debug == true){
+					System.out.println(loc);
+				}
 
 			}
-			System.out.println(Singleton.getInstance().getXloc() + " sdsds"
+			if(WISApplication.debug == true){
+				System.out.println(Singleton.getInstance().getXloc() + " sdsds"
 					+ Singleton.getInstance().getYloc());
+			}
 			br.close();
 
 		} catch (IOException e) {
-			System.out.println("Reading has issues");
+			if(WISApplication.debug == true){
+				System.out.println("Reading has issues");
+			}
 		}
 
 	}
-
+	
+	//saves the users favourite weather stations to a text 
+	//file for next time the application is opened
 	public void saveFavourite() {
 		String fileName = "Fav/fav.txt";
 		try {
@@ -99,12 +121,16 @@ public class Preferences {
 			// Always close files.
 			bufferedWriter.close();
 		} catch (IOException ex) {
-			System.out.println("Error writing to file '" + fileName + "'");
+			if(WISApplication.debug == true){
+				System.out.println("Error writing to file '" + fileName + "'");
+			}
 			// Or we could just do this:
 			// ex.printStackTrace();
 		}
 	}
 
+	//saves the location of the appliation on the screen to a text file
+	//for the next time the application is opened
 	public void saveScreenLocation(Point loc) {
 		String fileName = "Fav/loc.txt";
 		try {

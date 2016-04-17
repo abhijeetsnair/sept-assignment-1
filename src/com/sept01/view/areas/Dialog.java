@@ -41,8 +41,12 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleEdge;
 
+<<<<<<< HEAD
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.AreaController.StateButtonListener;
+=======
+import com.sept01.main.WISApplication;
+>>>>>>> origin/master
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
@@ -306,9 +310,10 @@ public class Dialog extends JDialog {
 					weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
 					for (int j = 0; j < weatherD.length; j++) {
 
-						System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
+						if(WISApplication.debug == true){
+							System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
 								+ " Weather station " + weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt")
-								+ "kmh" + "Name :" + weatherD[j].get("name"));
+								+ "kmh" + "Name :" + weatherD[j].get("name"));}
 					}
 				}
 
@@ -363,12 +368,14 @@ public class Dialog extends JDialog {
 	 * if is it present then returns true otherwise returns false
 	 */
 	private boolean CheckifPresentinFav(String weather_station) {
-		System.out.println("This is Checkin Fav " + weather_station);
+		if(WISApplication.debug == true){
+			System.out.println("This is Checkin Fav " + weather_station);
+		}
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
 			if (weather_station
 					.compareTo(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == 0) {
-				System.out.println("This is Checkin Fav " + weather_station + " with "
-						+ Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+				if(WISApplication.debug == true){System.out.println("This is Checkin Fav " + weather_station + " with "
+						+ Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());}
 
 				return true;
 			}
@@ -386,9 +393,9 @@ public class Dialog extends JDialog {
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 		for (int i = 0; i < data.length; i++) {
-			System.out.println(
+			if(WISApplication.debug == true){System.out.println(
 					data[i][0] + data[i][1] + "Matches with " + data[i][0].contains(new Date().getDate() + "/09:00am")
-							+ data[i][0].contains(new Date().getDate() + "/03:00pm"));
+							+ data[i][0].contains(new Date().getDate() + "/03:00pm"));}
 
 			if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
 					|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
@@ -470,7 +477,9 @@ public class Dialog extends JDialog {
 		for (int i = 0; i < data.length; i++) {
 			String segments[] = data[i][0].split("/");
 			String date = segments[0];
-			System.out.println("Substring" + date);
+			if(WISApplication.debug == true){
+				System.out.println("Substring" + date);
+			}
 			// Current highest Temperature
 			if ((data[i][0].toLowerCase()).contains(("" + new Date().getDate()).toLowerCase())) {
 
@@ -511,10 +520,12 @@ public class Dialog extends JDialog {
 			}
 
 		}
-		System.out.println(today_h + current_h + " " + today_l + current_l);
-		System.out.println(prev_h + previous_h + " " + prev_l + previous_l);
-		System.out.println(day_bef_h + day_before_h + " " + day_bef_l + day_before_l);
-		System.out.println(" Previous " + previous_h + " " + previous_l);
+		if(WISApplication.debug == true){
+			System.out.println(today_h + current_h + " " + today_l + current_l);
+			System.out.println(prev_h + previous_h + " " + prev_l + previous_l);
+			System.out.println(day_bef_h + day_before_h + " " + day_bef_l + day_before_l);
+			System.out.println(" Previous " + previous_h + " " + previous_l);
+		}
 		JFreeChart lineChartObject = ChartFactory.createLineChart("Maximum vs Minimum", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
 

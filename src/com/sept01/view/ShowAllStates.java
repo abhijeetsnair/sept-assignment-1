@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.sept01.AreaController.AreaButtonListener;
+import com.sept01.main.WISApplication;
 import com.sept01.model.Area;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
@@ -93,7 +94,9 @@ public class ShowAllStates {
 				buttonPanel.setFocusable(false);
 				buttonPanel.setBackground(null);
 				buttonPanel.setOpaque(true);
-				System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
+				if(WISApplication.debug == true){
+					System.out.println(state.getAreas().get(x).getWeatherStations().get(i).getName());
+				}
 				String name = (String) state.getAreas().get(x).getWeatherStations().get(i).getName();
 				//Adds the states/stations to the slidebar panel
 				JButton stations = new JButton(name);

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.sept01.main.WISApplication;
 import com.sept01.model.Singleton;
 import com.sept01.view.areas.CenterPanel;
 import com.sept01.view.areas.EastPanel;
@@ -67,7 +68,9 @@ public class MainView extends JFrame {
 		/** SET THE MENU BAR OF THE PANEL */
 		this.setJMenuBar(new OptionMenu());
 		this.addWindowListener(new MainViewWindowListener(this));
-		System.out.println("This " + Singleton.getInstance().getXloc() + " " + Singleton.getInstance().getYloc());
+		if(WISApplication.debug == true){
+			System.out.println("This " + Singleton.getInstance().getXloc() + " " + Singleton.getInstance().getYloc());
+		}
 		this.setLocation(new Point(Singleton.getInstance().getXloc(), Singleton.getInstance().getYloc()));
 		east = new EastPanel(this);
 		north = new NorthPanel(this);

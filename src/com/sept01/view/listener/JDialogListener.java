@@ -2,7 +2,10 @@ package com.sept01.view.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+
+import com.sept01.main.WISApplication;
 import com.sept01.view.areas.Dialog;
 
 /*
@@ -27,7 +30,9 @@ public class JDialogListener implements ActionListener {
 		String buttonType = ((JButton) arg0.getSource()).getText();
 		// CHECKS TO SEE IF CLICKED BY THE CLOSE ME BUTTON
 		if (buttonType.compareTo("Close me") == 0) {
-			System.out.println("disposing the window..");
+			if(WISApplication.debug == true){
+				System.out.println("disposing the window..");
+			}
 			dialog.dispose();
 		}
 

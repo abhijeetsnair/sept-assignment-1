@@ -130,7 +130,9 @@ public class Weather {
 	private boolean initialize(HashMap<String, State> states) {
 		// initialize states with abbreviations as name
 		int perDone;
-		System.out.println("Loading classes please wait");
+		if(WISApplication.debug == true){
+			System.out.println("Loading classes please wait");
+		}
 
 		// LOADING SCREEN
 		JWindow window = new JWindow();
@@ -153,11 +155,15 @@ public class Weather {
 
 			states.put(statesAbv[i], new State(statesAbv[i]));
 			perDone = (int) (((float) i) / ((float) statesAbv.length) * 100);
-			System.out.println(perDone + "% done");
+			if(WISApplication.debug == true){
+				System.out.println(perDone + "% done");
+			}
 			Loading_label.setText("LOADING: " + perDone + "%");
 		}
 
-		System.out.println(100 + "% done");
+		if(WISApplication.debug == true){
+			System.out.println(100 + "% done");
+		}
 		window.setVisible(false);
 		window.dispose();
 
