@@ -1,6 +1,8 @@
 package com.sept01.view;
 
 import java.awt.BorderLayout;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 
@@ -58,7 +60,8 @@ public class MainView extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 		setTitle("WISApplication");
 		// setSize(800, 600);
-		setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
+		//setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
+		setSize(getRelativeSizeX(), getRelativeSizeY());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
@@ -107,7 +110,21 @@ public class MainView extends JFrame {
 		// });
 
 	}
+	
+	public int getRelativeSizeX(){
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int width = gd.getDisplayMode().getWidth();
+		width = (int) (width * 0.6f);
+		return width;
+	}
 
+	public int getRelativeSizeY(){
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int height = gd.getDisplayMode().getHeight();
+		height = (int) (height * 0.6f);
+		return height;
+	}
+	
 	public EastPanel getEast() {
 		return east;
 	}
