@@ -61,21 +61,24 @@ public class WeatherStation {
 	/**
 	 * Obtains data from the JSON URL and stores it into a hashmap of data
 	 * 
-	 * @return
+	 * @return hashmap array of weather data
 	 */
 
-	@SuppressWarnings("unchecked")
+
 	public HashMap<String,String>[] getData() {
 		// Loads data from JSON URL
 		loadData();
 		// creates HASHMAP for storing data
 		dataMap = new HashMap[data.length()];
+		//Go through the raw json data
 		for (int i = 0; i < data.length(); i++) {
+			//for each new object in the json array create a new hashmap to store the key value pairs.
 			HashMap<String, String> pairs = new HashMap<String, String>();
 			JSONObject j = data.optJSONObject(i);
 			Iterator<String> it = j.keys();
 			while (it.hasNext()) {
 				String n = (String) it.next();
+				//convert the raw time value into parsable format of "yyyy:MM:dd hh:mm:ss zzz"
 				if (n.compareTo("local_date_time_full") == 0) {
 					String timeString = (String) j.get(n);
 					timeString = new StringBuilder(timeString).insert(4, ":").toString();
@@ -84,9 +87,10 @@ public class WeatherStation {
 					timeString = new StringBuilder(timeString).insert(13, ":").toString();
 					timeString = new StringBuilder(timeString).insert(16, ":").toString();
 					timeString = new StringBuilder(timeString).append(" A" + timeZone).toString();
-
+					
 					j.put(n, timeString);
 				}
+				//Casting the values based on what types they are
 				if (j.get(n).getClass().getName() == "java.lang.Double") {
 					pairs.put(n, Double.toString((double) j.get(n)));
 				} else if (j.get(n).getClass().getName() == "java.lang.Integer") {
@@ -97,7 +101,7 @@ public class WeatherStation {
 					pairs.put(n, (String) j.get(n));
 				}
 			}
-			// Add hash map pairs to array
+			// Add key vaulue pairs to array
 			dataMap[i] = pairs;
 		}
 		// return array of hash maps

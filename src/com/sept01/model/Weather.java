@@ -21,8 +21,6 @@ import org.jsoup.Jsoup;
 
 import com.sept01.main.WISApplication;
 
-import sun.swing.SwingUtilities2;
-
 /**
  * <p>
  * The Weather Class, which is responsible for mining the data on the government
