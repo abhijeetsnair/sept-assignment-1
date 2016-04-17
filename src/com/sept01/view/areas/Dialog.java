@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.Font;import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.PaintContext;
 import java.awt.Rectangle;
@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.RectangularShape;
 import java.awt.image.ColorModel;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,7 +36,10 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarPainter;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.RectangleEdge;
 
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.AreaController.StateButtonListener;
@@ -208,6 +212,8 @@ public class Dialog extends JDialog {
 		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] {CloseMe}, closeMe));
 		closeMe.setBorder(null);
 		CloseMe.add(closeMe);
+		
+		CloseMe.setBackground(new Color(64, 64, 72));
 
 		// set action listener on the button
 		closeMe.addActionListener(new JDialogListener(this));
@@ -395,20 +401,46 @@ public class Dialog extends JDialog {
 		}
 		JFreeChart lineChartObject = ChartFactory.createLineChart("9am,3pm Temperatures", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
+	
+		
+		
 		ChartPanel panel = new ChartPanel(lineChartObject);
 		
+		//lineChartObject.
 		
 		StandardChartTheme theme = new StandardChartTheme("name");
 		//theme.setBac
 		theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
 		theme.setAxisLabelPaint(Color.orange);
 		theme.setDomainGridlinePaint(Color.orange);
+		theme.setBaselinePaint(Color.orange);
+		theme.setItemLabelPaint(Color.orange);
+		theme.setPlotOutlinePaint(Color.orange);
+		theme.setCrosshairPaint(Color.orange);
+		theme.setLabelLinkPaint(Color.orange);
+		theme.setThermometerPaint(Color.orange);
+		theme.setTitlePaint(Color.orange);
+		theme.setRangeGridlinePaint(Color.orange);
+		
+		//theme.setCrosshairPaint(Color.white);
+		theme.setPlotBackgroundPaint(Color.decode("#444444"));
+		theme.setSubtitlePaint(Color.orange);
+		//theme.setChartBackgroundPaint(Color.decode("#000000"));
+		
+		
+		theme.setTickLabelPaint(Color.orange);
+		
+		theme.setLegendItemPaint(Color.orange);
+		theme.setLegendBackgroundPaint(Color.decode("#444455"));
+		
+		//theme.setDomainGridlinePaint(paint);
 		
 		//theme.setRegularFont();
 		
 		ChartFactory.setChartTheme(theme);
 		
 		ChartUtilities.applyCurrentTheme(lineChartObject);
+		
 		
 		//panel.setBackground(Color.RED);
 		
