@@ -30,7 +30,7 @@ public class JDialogListener implements ActionListener {
 		String buttonType = ((JButton) arg0.getSource()).getText();
 		// CHECKS TO SEE IF CLICKED BY THE CLOSE ME BUTTON
 		if (buttonType.compareTo("Close me") == 0) {
-			if(WISApplication.debug){
+			if(WISApplication.debug == true){
 				System.out.println("disposing the window..");
 			}
 			dialog.dispose();

@@ -40,7 +40,9 @@ public class DataTest {
 		State state = weather.getStateWeather("vic");
 		ArrayList<Area> area = state.getAreas();
 		area.get(1).getWeatherStations().get(1).getData();
-		System.out.println(area.get(1).getWeatherStations().get(1).getStateName());
+		if(WISApplication.debug == true){
+			System.out.println(area.get(1).getWeatherStations().get(1).getStateName());
+		}
 	
 	}
 	@Test

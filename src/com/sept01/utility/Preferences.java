@@ -74,11 +74,15 @@ public class Preferences {
 					Singleton.getInstance().setYloc(Integer.parseInt(loc));
 				}
 
-				System.out.println(loc);
+				if(WISApplication.debug == true){
+					System.out.println(loc);
+				}
 
 			}
-			if(WISApplication.debug == true){System.out.println(Singleton.getInstance().getXloc() + " sdsds"
-					+ Singleton.getInstance().getYloc());}
+			if(WISApplication.debug == true){
+				System.out.println(Singleton.getInstance().getXloc() + " sdsds"
+					+ Singleton.getInstance().getYloc());
+			}
 			br.close();
 
 		} catch (IOException e) {
@@ -117,7 +121,7 @@ public class Preferences {
 			// Always close files.
 			bufferedWriter.close();
 		} catch (IOException ex) {
-			if(WISApplication.debug){
+			if(WISApplication.debug == true){
 				System.out.println("Error writing to file '" + fileName + "'");
 			}
 			// Or we could just do this:

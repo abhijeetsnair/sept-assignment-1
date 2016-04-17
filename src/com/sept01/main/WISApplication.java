@@ -1,5 +1,6 @@
 package com.sept01.main;
 import java.util.ArrayList;
+
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -153,7 +154,9 @@ public class WISApplication {
 	public void testFav() {
 
 		for (int i = 0; i < fav.size(); i++) {
-			System.out.println(fav.get(i).getStation().getName() + "    " + fav.get(i).getStation().url);
+			if(debug){
+				System.out.println(fav.get(i).getStation().getName() + "    " + fav.get(i).getStation().url);
+			}
 		}
 
 	}
@@ -162,7 +165,9 @@ public class WISApplication {
 		for (int i = 0; i < getFav().size(); i++) {
 			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
 				if(debug) {
-					System.out.println("----------Removing this guy :" + fav.getStation().getName());
+					if(debug){
+						System.out.println("----------Removing this guy :" + fav.getStation().getName());
+					}
 				}
 				this.fav.remove(i);
 			}
