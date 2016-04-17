@@ -2,36 +2,35 @@ package com.sept01.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import com.sept01.view.areas.Dialog;
 
+/*
+ *NOTE:-
+ *LISTENER FOR THE DIALOG IN THE DIALOG 
+ * WHICH SHOWS CITY INFORMATION
+ * THE LISTENER LISTENS TO A CLOSE ME BUTTON
+ * WHEREIN IT DISPOSES THE DIALOG ON CLICKING THE
+ * CLOSE ME BUTTON
+ *
+ */
 public class JDialogListener implements ActionListener {
-	
-	Dialog dialog;	
-	
+
+	Dialog dialog;
+
 	public JDialogListener(Dialog dialog) {
-	this.dialog =dialog;
+		this.dialog = dialog;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		String buttonType =((JButton) arg0.getSource()).getText();
-		if(buttonType.compareTo("Close me")==0)
-		{
+		String buttonType = ((JButton) arg0.getSource()).getText();
+		// CHECKS TO SEE IF CLICKED BY THE CLOSE ME BUTTON
+		if (buttonType.compareTo("Close me") == 0) {
 			System.out.println("disposing the window..");
-		dialog.dispose();
+			dialog.dispose();
 		}
-			
-		if(buttonType.compareTo("Show Graph")==0)
-		{	
-			 final ImageIcon icon = new ImageIcon("histogram.PNG");
-		        JOptionPane.showMessageDialog(null, "Blah blah blah", "About", JOptionPane.INFORMATION_MESSAGE, icon);	
-		}
+
 	}
 
 }

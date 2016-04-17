@@ -1,11 +1,10 @@
 package com.sept01.main;
-
 import java.util.ArrayList;
-
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.sept01.view.MainView;
+
 /**
  * <p>
  * The Main Client Class for the application.
@@ -30,62 +29,62 @@ public class WISApplication {
 		Singleton.getInstance().setApplication(this);
 	}
 
-	
 	/**
 	 * Starting main() method
-	 * @param args args
+	 * 
+	 * @param args
+	 *            args
 	 */
 	public static void main(String[] args) {
-			
-		/**
-		 * Changes the look and feel of the application to the nimbus look and feel
-		 * 
-		 * 	 changeLookAndFeel();	
 
+		/**
+		 * Changes the look and feel of the application to the nimbus look and
+		 * feel
+		 * 
+		 * changeLookAndFeel();
+		 * 
 		 */
-		
-		
-		//changeLookAndFeel();	
+		// changeLookAndFeel();
 		new WISApplication();
 		System.out.println("Hello");
 		System.out.println(" :D ");
-		System.setProperty("awt.useSystemAAFontSettings","on");
+		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
 		initializeWeather();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 		MainView view = new MainView();
-		//view.show();
+		// view.show();
 		view.setVisible(true);
-		
+
 	}
 
+	@SuppressWarnings("unused")
 	private static void changeLookAndFeel() {
 		/*
-		 * Makes the UI  look more beautiful and appealing
+		 * Makes the UI look more beautiful and appealing
 		 */
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
 		} catch (Exception e) {
-		    // If Nimbus is not available, fall back to cross-platform
-		    try {
-		        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		    } catch (Exception ex) {
-		    	ErrorLog.createErrorPopup(ex);
-		    }
+			// If Nimbus is not available, fall back to cross-platform
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (Exception ex) {
+				ErrorLog.createErrorPopup(ex);
+			}
 		}
-			
-		
+
 	}
 
 	/**
-	 * Initialises a new Weather instance, which handles information gathering regarding external Data, that will be
-	 * displayed in the GUI format.
+	 * Initialises a new Weather instance, which handles information gathering
+	 * regarding external Data, that will be displayed in the GUI format.
 	 */
 	public static void initializeWeather() {
 		weather = new Weather();
@@ -111,17 +110,19 @@ public class WISApplication {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void getUser() {
 		return;
 	}
 
+	@SuppressWarnings("unused")
 	private void getInto(State state) {
 		return;
 	}
 
 	public void addFav(Favourites fav) {
 		boolean fav_exists = false;
-			
+
 		for (int i = 0; i < getFav().size(); i++) {
 			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
 				fav_exists = true;
@@ -130,18 +131,15 @@ public class WISApplication {
 
 		if (fav_exists == false) {
 			this.fav.add(fav);
-		//	fav.saveNewFavourite(fav);
+			// fav.saveNewFavourite(fav);
 		}
-		
 
 	}
-	
 
-	
 	public void testFav() {
 
 		for (int i = 0; i < fav.size(); i++) {
-		 System.out.println(fav.get(i).getStation().getName()+"    "+ fav.get(i).getStation().url);
+			System.out.println(fav.get(i).getStation().getName() + "    " + fav.get(i).getStation().url);
 		}
 
 	}
@@ -149,10 +147,10 @@ public class WISApplication {
 	public void removeFav(Favourites fav) {
 		for (int i = 0; i < getFav().size(); i++) {
 			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
-				System.out.println("----------Removing this guy :" +fav.getStation().getName());
+				System.out.println("----------Removing this guy :" + fav.getStation().getName());
 				this.fav.remove(i);
 			}
 		}
-		
+
 	}
 }

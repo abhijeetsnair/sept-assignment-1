@@ -3,7 +3,13 @@ package com.sept01.main;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/*
+ * NOTE :-
+ *SAVE FAVOURIATE :-
+ *THE SAVE FAVOURITE CLASS SAVES FAVOURITES SUCH THAT EACH TIME
+ *THE APPLICATION IS ACCESSED THE FAVORITAES PERMANENTLY GET STORED TO A TEXT FILE
+ *EACH TIME THE APPLICATION IS ACCESSED THE FAVORIATES GET SHOWN TO THE USER
+ */
 public class SaveFavourite {
 	
 	private String fileName = "Fav/fav.txt";

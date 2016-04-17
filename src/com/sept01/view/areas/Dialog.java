@@ -30,13 +30,14 @@ import com.sept01.main.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.RemFavListener;
 
-import javafx.scene.shape.Box;
-
 public class Dialog extends JDialog {
-
+/**DIALOG SHOWS INFORMATION IN THE FORM OF 
+ * 1) TABLE
+ * 2) CHART
+ * TABLE SHOWS INFORMATON ABOUT DATE,AIR,TEMP,ETC ALL THE IMPORTANT WEATHER INFORMATION PERTAINING TO LOCATION
+ */
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
-	@SuppressWarnings("unused")
 	private String state_name;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
@@ -61,7 +62,7 @@ public class Dialog extends JDialog {
 		jt = new JTable(data, coloumns);
 		jt.setPreferredScrollableViewportSize(new Dimension(900, 500));
 		jt.setFillsViewportHeight(true);
-		jt.setAutoResizeMode(jt.AUTO_RESIZE_OFF);
+		jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		JScrollPane jps = new JScrollPane(jt);
 		/**
 		 * Checks if the particular station is already present in the favorite
@@ -72,7 +73,6 @@ public class Dialog extends JDialog {
 		JPanel showInfo = new JPanel();
 		showInfo.setLayout(new BoxLayout(showInfo, BoxLayout.Y_AXIS));
 		// Adding a scroll pane to the JPanel
-		JScrollPane panelPane = new JScrollPane(showInfo);
 
 		// Displaying the Message Label and hide label
 		JPanel messagePanel = new JPanel();
@@ -225,6 +225,7 @@ public class Dialog extends JDialog {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
 
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
@@ -246,8 +247,6 @@ public class Dialog extends JDialog {
 		JFreeChart lineChartObject = ChartFactory.createLineChart("Temperature Vs Time", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
 
-		int width = 640;
-		int height = 480;
 
 		ChartPanel panel = new ChartPanel(lineChartObject);
 		panel.setLayout(new FlowLayout());
@@ -256,6 +255,7 @@ public class Dialog extends JDialog {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private void showMaxMinGraph(JPanel showInfo, String[][] data) {
 		int current_h = 0, current_l = 200;
 		int previous_h = 0, previous_l = 200;

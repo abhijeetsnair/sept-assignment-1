@@ -14,6 +14,10 @@ import javax.swing.JPanel;
  * @version 1.0
  * @see JButton
  * @see ShowAllStates
+ * Gets triggered when the area button is clicked in the 
+ * Area button listener class if we hover over an state/area the listener
+ * responds to the click.
+ * 
  */
 public class AreaButtonListener implements MouseListener {
 

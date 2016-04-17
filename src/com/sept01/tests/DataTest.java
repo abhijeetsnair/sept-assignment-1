@@ -3,23 +3,21 @@
  */
 package com.sept01.tests;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.junit.Test;
 
+import com.sept01.main.Area;
 import com.sept01.main.State;
 import com.sept01.main.WISApplication;
 import com.sept01.main.Weather;
 import com.sept01.main.WeatherStation;
-import com.sun.org.apache.xpath.internal.operations.Equals;
-import com.sept01.main.Area;
-import org.junit.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 
 public class DataTest {
 

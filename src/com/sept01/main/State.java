@@ -15,11 +15,17 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
+ * NOTE: 
+ * STATE STORES ALL THE INFORMATION PERTAINING TO THE STATE
+ * THE INSTANCES OF THE STATE GETS STORED IN A LIST SO THAT THEY 
+ * CAN BE ACCESSED BY THE APPLICATION TO GET THE STATE INFORMATION.
+ * 
  * <p>
  * A Class that represents a State (territory) of Australia.
  * </p>
  * <p>
- * This is the highest in the heirarchy, as a State will contain Areas, which will contain Weather Stations.
+ * This is the highest in the heirarchy, as a State will contain Areas, which
+ * will contain Weather Stations.
  * </p>
  * 
  * @see WeatherStation
@@ -32,7 +38,9 @@ public class State {
 
 	/**
 	 * Main constructor
-	 * @param name Name of the State
+	 * 
+	 * @param name
+	 *            Name of the State
 	 */
 	public State(String name) {
 		this.name = name.toLowerCase();
@@ -44,29 +52,28 @@ public class State {
 	}
 
 	protected boolean updateWeather() throws IOException {
-			//visit webpage
-			//find all header 2 which will have our area names
+		// visit webpage
+		// find all header 2 which will have our area names
 		Document doc;
-		if(name == "act"){
-				doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/canberra.shtml").get();
-			}else{
-				doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
+		if (name == "act") {
+			doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/canberra.shtml").get();
+		} else {
+			doc = Jsoup.connect("http://www.bom.gov.au/" + name + "/observations/" + name + "all.shtml").get();
+		}
+		Elements elements = doc.select("h2");
+		Iterator<Element> itr = elements.iterator(); // create an iterator
+		// Loop through webpage to get all area names
+		while (itr.hasNext()) {
+			Element e = itr.next();
+			// find the heading element we want
+			if (e.text().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0) {
+				// create area and also pass the table with all the weather
+				// station links
+				getAreas().add(
+						new Area(e.text(), "t" + e.attr("id"), doc.select("table[id=" + "t" + e.attr("id") + "]")));
 			}
-			Elements elements = doc.select("h2");
-			Iterator<Element> itr = elements.iterator(); // create an iterator
-			//Loop through webpage to get all area names
-			while (itr.hasNext()) {
-				Element e = itr.next();
-				//find the heading element we want
-				if (e.text().toUpperCase().compareTo("WEATHER STATION INFORMATION") != 0) {
-					//create area and also pass the table with all the weather station links
-					getAreas().add(new Area(e.text(), "t" + e.attr("id"),
-							doc.select("table[id=" + "t" + e.attr("id")+"]" )));
-				}
 
-			}
-
-		
+		}
 
 		return false;
 
