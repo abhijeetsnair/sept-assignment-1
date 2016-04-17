@@ -39,7 +39,7 @@ public class Preferences {
 	}
 
 	public void readScreenLocation() {
-		
+
 		// file name where it stores the screen location
 		int i = 0;
 		String fileName = "Fav/loc.txt";
@@ -63,46 +63,46 @@ public class Preferences {
 				System.out.println(loc);
 
 			}
-			System.out.println(Singleton.getInstance().getXloc() + " sdsds" + Singleton.getInstance().getYloc());
+			System.out.println(Singleton.getInstance().getXloc() + " sdsds"
+					+ Singleton.getInstance().getYloc());
 			br.close();
 
 		} catch (IOException e) {
 			System.out.println("Reading has issues");
 		}
-		
+
 	}
 
 	public void saveFavourite() {
 		String fileName = "Fav/fav.txt";
-	    try {
-	        // Assume default encoding.
-	        FileWriter fileWriter =
-	            new FileWriter(fileName);
+		try {
+			// Assume default encoding.
+			FileWriter fileWriter = new FileWriter(fileName);
 
-	        // Always wrap FileWriter in BufferedWriter.
-	        BufferedWriter bufferedWriter =
-	            new BufferedWriter(fileWriter);
+			// Always wrap FileWriter in BufferedWriter.
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-	        // Note that write() does not automatically
-	        // append a newline character.	
-	        	
-	        for(int i=0;i<Singleton.getInstance().getApplication().getFav().size();i++)
-	        {	
-	        		
-	            bufferedWriter.write(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()+"-"+Singleton.getInstance().getApplication().getFav().get(i).getStation().url);
-		        //	        bufferedWriter.append(fav.getStation().getName()+"-"+fav.getStation().url);
-		        bufferedWriter.newLine();	
-	        }
-	        // Always close files.
-	        bufferedWriter.close();
-	    }
-	    catch(IOException ex) {
-	        System.out.println(
-	            "Error writing to file '"
-	            + fileName + "'");
-	        // Or we could just do this:
-	        // ex.printStackTrace();
-	    }
+			// Note that write() does not automatically
+			// append a newline character.
+
+			for (int i = 0; i < Singleton.getInstance().getApplication()
+					.getFav().size(); i++) {
+
+				bufferedWriter.write(Singleton.getInstance().getApplication()
+						.getFav().get(i).getStation().getName()
+						+ "-"
+						+ Singleton.getInstance().getApplication().getFav()
+								.get(i).getStation().url);
+				// bufferedWriter.append(fav.getStation().getName()+"-"+fav.getStation().url);
+				bufferedWriter.newLine();
+			}
+			// Always close files.
+			bufferedWriter.close();
+		} catch (IOException ex) {
+			System.out.println("Error writing to file '" + fileName + "'");
+			// Or we could just do this:
+			// ex.printStackTrace();
+		}
 	}
 
 	public void saveScreenLocation(Point loc) {
@@ -126,7 +126,7 @@ public class Preferences {
 			// Or we could just do this:
 			// ex.printStackTrace();
 		}
-		
+
 	}
 
 }
