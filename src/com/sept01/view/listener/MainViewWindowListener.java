@@ -3,9 +3,7 @@ package com.sept01.view.listener;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import com.sept01.utility.ReadScreenLoc;
-import com.sept01.utility.SaveFavourite;
-import com.sept01.utility.SaveScreenLocation;
+import com.sept01.utility.Preferences;
 import com.sept01.view.MainView;
 
 /*	
@@ -15,9 +13,11 @@ import com.sept01.view.MainView;
  * WHEREAS ON CLOSING THE APPLICAION IT SAVES ALL OF THE FAVORIATES TO THE TEXT FILE 
  */
 public class MainViewWindowListener implements WindowListener {
-
+	
+	Preferences prefs = new Preferences();
+	
 	public MainViewWindowListener(MainView mainView) {
-		new ReadScreenLoc();
+		prefs.readScreenLocation();
 	}
 
 	@Override
@@ -32,8 +32,8 @@ public class MainViewWindowListener implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		Point loc = arg0.getWindow().getLocationOnScreen();
-		new SaveScreenLocation(loc);
-		new SaveFavourite();
+		prefs.saveScreenLocation(loc);
+		prefs.saveFavourite();
 
 	}
 
