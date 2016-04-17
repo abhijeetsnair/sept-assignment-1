@@ -1,18 +1,13 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowListener;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -29,11 +24,11 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.sept01.controller.JDialogListener;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
+import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 import com.sun.glass.events.WindowEvent;
 import com.sun.java.swing.plaf.windows.resources.windows;
