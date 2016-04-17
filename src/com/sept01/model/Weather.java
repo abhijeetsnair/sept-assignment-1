@@ -9,6 +9,7 @@
 package com.sept01.model;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -19,6 +20,8 @@ import javax.swing.SwingConstants;
 import org.jsoup.Jsoup;
 
 import com.sept01.main.WISApplication;
+
+import sun.swing.SwingUtilities2;
 
 /**
  * <p>
@@ -128,8 +131,9 @@ public class Weather {
 		System.out.println("Loading classes please wait");
 		// LOADING SCREEN
 		JWindow window = new JWindow();
-		window.getContentPane().setBackground(Color.decode("#003366"));
+		window.getContentPane().setBackground(Color.decode("#3d3f47"));
 		JLabel Loading_label = new JLabel("LOADING", SwingConstants.CENTER);
+		Loading_label.setFont(new Font("Verdana", Font.BOLD, 16));
 		Loading_label.setForeground(Color.WHITE);
 		window.getContentPane().add(Loading_label);
 		window.setBounds(500, 150, 300, 200);
