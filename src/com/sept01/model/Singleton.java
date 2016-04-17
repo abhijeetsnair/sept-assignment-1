@@ -149,7 +149,9 @@ public class Singleton {
 
 	/* Other methods protected by singleton-ness */
 	protected static void demoMethod() {
-		System.out.println("demoMethod for singleton");
+		if(WISApplication.debug == true){
+			System.out.println("demoMethod for singleton");
+		}
 	}
 
 	// public State getState(String state) {
@@ -170,7 +172,9 @@ public class Singleton {
 			for (int j = 0; j < states.size(); j++) {
 
 				if (states.get(i).getAreas().get(j).getName() == area) {
-					System.out.println("This is it" + states.get(i).getAreas().get(j));
+					if(WISApplication.debug == true){
+						System.out.println("This is it" + states.get(i).getAreas().get(j));
+					}
 					return states.get(i).getAreas().get(j);
 				}
 			}

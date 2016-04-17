@@ -17,6 +17,7 @@ import com.sept01.view.MainView;
  * </p>
  */
 public class WISApplication {
+	public static boolean debug = false;
 	public static Weather weather;
 	
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
@@ -43,7 +44,7 @@ public class WISApplication {
 	 *            args
 	 */
 	public static void main(String[] args) {
-
+		
 		/**
 		 * Changes the look and feel of the application to the nimbus look and
 		 * feel
@@ -54,8 +55,11 @@ public class WISApplication {
 		// changeLookAndFeel();
 
 		new WISApplication();
-		System.out.println("Hello");
-		System.out.println(" :D ");
+		if(debug){		
+			System.out.println("Hello");
+			System.out.println(" :D ");
+		}
+
 		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
 		initializeWeather();
@@ -157,7 +161,9 @@ public class WISApplication {
 	public void removeFav(Favourites fav) {
 		for (int i = 0; i < getFav().size(); i++) {
 			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
-				System.out.println("----------Removing this guy :" + fav.getStation().getName());
+				if(debug) {
+					System.out.println("----------Removing this guy :" + fav.getStation().getName());
+				}
 				this.fav.remove(i);
 			}
 		}
