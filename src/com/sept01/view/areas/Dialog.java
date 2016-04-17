@@ -1,12 +1,16 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -87,7 +91,7 @@ public class Dialog extends JDialog {
 		 */
 		JButton refresh = new JButton("Refresh");
 		labelPanel.add(refresh);
-		refresh.addActionListener(e -> DataRefresh());
+		refresh.addActionListener(e -> DataRefresh(refresh));
 
 		/***
 		 * THE ADD TO FAVORIATES OR REMOVE FAVORIATES OPENS UP DEPENDING ON
@@ -215,11 +219,17 @@ public class Dialog extends JDialog {
 	}
 
 	// Gets new data and updates the tables data source
-	private void DataRefresh() {
+	private void DataRefresh(JButton refresh) {
+		String oldTitle = this.getTitle();
+		this.setTitle(oldTitle + " Getting data");
+
 		data = getTData(data);
 		DefaultTableModel model = new DefaultTableModel(data, coloumns);
 		jt.setModel(model);
 		model.fireTableDataChanged();
+		
+		this.setTitle(oldTitle + " Done");
+		this.setTitle(oldTitle);
 	}
 
 	/*
@@ -240,12 +250,11 @@ public class Dialog extends JDialog {
 		}
 		return false;
 	}
-	
+
 	/*
-	 * Displays the 9 am  pm temperatures
-	 * by locating the 9 am and 3pm temeratures from the list
-	 * the 9 am and 3pm temperatures  are then plotted on the graph which uses
-	 * Jfreecharts as the plotting tool
+	 * Displays the 9 am pm temperatures by locating the 9 am and 3pm
+	 * temeratures from the list the 9 am and 3pm temperatures are then plotted
+	 * on the graph which uses Jfreecharts as the plotting tool
 	 */
 	@SuppressWarnings("deprecation")
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
@@ -272,12 +281,11 @@ public class Dialog extends JDialog {
 		showInfo.add(panel);
 
 	}
-	
+
 	/*
-	 * Displays the Maximum and minimum temperatures for the day
-	 * by locating the max and min temeratures from the list
-	 * the max and min temperatures  are then plotted on the graph which uses
-	 * Jfreecharts as the plotting tool
+	 * Displays the Maximum and minimum temperatures for the day by locating the
+	 * max and min temeratures from the list the max and min temperatures are
+	 * then plotted on the graph which uses Jfreecharts as the plotting tool
 	 */
 	@SuppressWarnings("deprecation")
 	private void showMaxMinGraph(JPanel showInfo, String[][] data) {
