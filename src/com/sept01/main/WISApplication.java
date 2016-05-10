@@ -5,6 +5,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.sept01.model.Favourites;
+import com.sept01.model.Forecaster;
+import com.sept01.model.ForecasterFactory;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
@@ -35,6 +37,8 @@ public class WISApplication {
 	 * Initialise singleton pattern creation
 	 */
 	public WISApplication() {
+		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
+		forecaster.getHourly();
 		Singleton.getInstance().setApplication(this);
 	}
 
