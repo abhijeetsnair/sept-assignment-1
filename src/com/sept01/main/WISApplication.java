@@ -11,6 +11,7 @@ import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
 import com.sept01.view.MainView;
+import com.sept01.view.areas.ForeCastIODialog;
 
 /**
  * <p>
@@ -56,6 +57,8 @@ public class WISApplication {
 		// changeLookAndFeel();
 
 		new WISApplication();
+		ForeCastIODialog dialog = new ForeCastIODialog();
+		dialog.show();
 		if(debug){		
 			System.out.println("Hello");
 			System.out.println(" :D ");

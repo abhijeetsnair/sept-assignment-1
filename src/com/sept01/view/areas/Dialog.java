@@ -36,6 +36,7 @@ import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
+import com.sept01.view.listener.ForecastClickListener;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 
@@ -116,6 +117,20 @@ public class Dialog extends JDialog {
 		 * THE REFRESH BUTTON ENABLES THE USER TO REFERSH THE PAGE TO SHOW THE
 		 * LATEST INFORMATION ABOUT THE APPLICATION
 		 */
+		
+		
+		/*Assignment 2 addition*/
+		
+		JButton forecastInfo = new JButton("Forecast Info");
+		labelPanel.add(forecastInfo);
+		forecastInfo.setBackground(background.brighter());
+		forecastInfo.setForeground(foreground);
+		forecastInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
+		forecastInfo.addActionListener(new ForecastClickListener());
+		forecastInfo.setBorder(null);
+		
+		
+		
 		JButton refresh = new JButton("Refresh");
 		labelPanel.add(refresh);
 		refresh.setBackground(background.brighter());
