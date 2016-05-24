@@ -17,7 +17,7 @@ public class OpenWeatherMap implements Forecaster {
 	   //log.log(Level.INFO,"lat " + lat + "lon" + lon);
 	   
 	   String doc = null;
-	   String url = "https://api.openweathermap.org/data/2.5/forecast?id=7839805&APPID="+APIKEY;
+	   String url = "http://api.openweathermap.org/data/2.5/forecast?id=7839805&APPID="+APIKEY;
 	   
 	   try {
 			// connect and download the json
@@ -29,25 +29,38 @@ public class OpenWeatherMap implements Forecaster {
 				Thread.sleep(1000);
 				doc = Jsoup.connect(url).ignoreContentType(true).execute().body();
 			} catch (InterruptedException | IOException e2) {
-				//ErrorLog.createErrorPopup(e2);
-				//log.log(Level.SEVERE, e2.getMessage());
+				ErrorLog.createErrorPopup(e2);
+				log.log(Level.SEVERE, e2.getMessage());
 			}
-			//ErrorLog.createErrorPopup(e1);
-			//log.log(Level.SEVERE, e1.getMessage());
+			ErrorLog.createErrorPopup(e1);
+			log.log(Level.SEVERE, e1.getMessage());
 		}
 		System.out.println(doc);
 		System.out.println("OPENWEATHER API!!!");
 		JSONObject ret = new JSONObject(doc);
 		log.log(Level.INFO,ret.toString());
 		return ret;
-	   
-	   
 	}
 	
 	
 	public HashMap<String, Object> getHourly(){
-			callApi(3,4);
+		
+		   Logger.getLogger("com.sept01.model.OpenWeatherMap").setLevel(Level.ALL);
+		   log.log(Level.INFO,"Getting data");
+		   
+			JSONObject temp = callApi(3,4);
+			
+			log.log(Level.INFO,temp.toString());
+			temp = (JSONObject) temp.get("list");
+			String summary = (String) temp.get("description");
+			log.log(Level.INFO, summary);
 			HashMap<String, Object> hourly = new HashMap<>();
+			
+			hourly.put("summary", summary);
+			hourly.put("data", temp.get("data"));
+			JSONArray ta = (JSONArray) hourly.get("data");
+			temp = (JSONObject) ta.get(0);
+			
 			return hourly;	
 	}
 	

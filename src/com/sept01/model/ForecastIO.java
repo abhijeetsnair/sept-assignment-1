@@ -59,9 +59,9 @@ public class ForecastIO implements Forecaster {
 			ErrorLog.createErrorPopup(e1);
 			log.log(Level.SEVERE, e1.getMessage());
 		}
-		System.out.println(doc);
+		//System.out.println(doc);
 		JSONObject ret = new JSONObject(doc);
-		log.log(Level.INFO,ret.toString());
+		//log.log(Level.INFO,ret.toString());
 		return ret;
 	}
 }
