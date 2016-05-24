@@ -1,5 +1,5 @@
 # sept-assignment-1
-[![Build Status](http://wolfzimmermann.ddns.net:8080/buildStatus/icon?job=Sept assignment 1)](http://wolfzimmermann.ddns.net:8080/job/Sept assignment 1)
+[![Build Status](http://wolfzimmermann.ddns.net:8080/buildStatus/icon?job=Sept%20assignment%201)](http://wolfzimmermann.ddns.net:8080/job/Sept assignment 1)
 
 s3477089 - Sarah Vasiliki Giapitzakis
 
