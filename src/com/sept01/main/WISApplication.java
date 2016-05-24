@@ -7,6 +7,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.sept01.model.Favourites;
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
+import com.sept01.model.OpenWeatherMap;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
@@ -40,6 +41,9 @@ public class WISApplication {
 		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
 		forecaster.getHourly();
 		Singleton.getInstance().setApplication(this);
+		
+		//Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+		//owm.getHourly();
 	}
 
 	/**
