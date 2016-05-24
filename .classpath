@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="libs/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="C:/Users/wolfz/Documents/GitHub/sept-assignment-1/src/ForeCastIOLib/ForecastIOLib-1.5.2-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="/ForeCastIOLibrary/jar/ForecastIOLib-1.5.3-SNAPSHOT-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wolfz/Documents/GitHub/sept-assignment-1/libs/minimal-json-0.9.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
