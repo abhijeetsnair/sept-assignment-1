@@ -20,7 +20,6 @@ public class ForecastInfoSource implements ActionListener{
 	}
 		else if (buttonType.compareTo("OpenWeatherIO.org") == 0) {
 			OpenWeatherDialog openDialog = new OpenWeatherDialog();
-		
 	}
 
 
