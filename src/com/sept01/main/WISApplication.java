@@ -16,6 +16,7 @@ import com.sept01.view.areas.ForeCastIODialog;
 /**
  * <p>
  * The Main Client Class for the application.
+ * 
  * </p>
  */
 public class WISApplication {
