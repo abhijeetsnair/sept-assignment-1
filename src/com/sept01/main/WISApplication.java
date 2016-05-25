@@ -65,8 +65,10 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
-		Forecaster foreCastIO = ForecasterFactory.getForecaster("forecastio");
-		HashMap<String, Object> data = foreCastIO.getHourly();
+		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+		owm.getForecast();
+		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
+		fio.getForecast();
 		
 		new WISApplication();
 		ForeCastIODialog dialog = new ForeCastIODialog();
