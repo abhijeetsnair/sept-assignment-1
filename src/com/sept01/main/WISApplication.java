@@ -1,10 +1,13 @@
 package com.sept01.main;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.sept01.model.Favourites;
+import com.sept01.model.Forecaster;
+import com.sept01.model.ForecasterFactory;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
@@ -56,7 +59,9 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
-
+		Forecaster foreCastIO = ForecasterFactory.getForecaster("forecastio");
+		HashMap<String, Object> data = foreCastIO.getHourly();
+		
 		new WISApplication();
 		ForeCastIODialog dialog = new ForeCastIODialog();
 		dialog.show();
