@@ -1,4 +1,5 @@
 # sept-assignment-1
+[![Build Status](http://ec2-54-206-33-185.ap-southeast-2.compute.amazonaws.com:8080/job/Sept%20assignment%201/badge/icon)](http://ec2-54-206-33-185.ap-southeast-2.compute.amazonaws.com:8080/job/Sept%20assignment%201/)
 
 s3477089 - Sarah Vasiliki Giapitzakis
 

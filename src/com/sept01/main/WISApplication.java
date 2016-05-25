@@ -1,5 +1,6 @@
 package com.sept01.main;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -14,10 +15,12 @@ import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
 import com.sept01.view.MainView;
+import com.sept01.view.areas.ForeCastIODialog;
 
 /**
  * <p>
  * The Main Client Class for the application.
+ * 
  * </p>
  */
 public class WISApplication {
@@ -62,8 +65,12 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
-
+		Forecaster foreCastIO = ForecasterFactory.getForecaster("forecastio");
+		HashMap<String, Object> data = foreCastIO.getHourly();
+		
 		new WISApplication();
+		ForeCastIODialog dialog = new ForeCastIODialog();
+		dialog.show();
 		if(debug){		
 			System.out.println("Hello");
 			System.out.println(" :D ");
@@ -77,7 +84,7 @@ public class WISApplication {
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 		MainView view = new MainView();
-		// view.show();
+		 view.show();
 		view.setVisible(true);
 
 	}

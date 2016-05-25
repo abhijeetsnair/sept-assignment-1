@@ -47,7 +47,6 @@ public class AreaButtonListener implements MouseListener {
     this.jPanel = jPanel;
     this.jButton = jButton;
     
-
     jButton.setForeground(Color.ORANGE);
 
     jButton.setFont(new Font("Verdana", Font.PLAIN, 12));
