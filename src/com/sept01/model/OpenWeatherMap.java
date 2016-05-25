@@ -13,21 +13,29 @@ public class OpenWeatherMap implements Forecaster {
 	
 	private final String APIKEY = "2a8527d22267d97306e806834e6d992a";
 	private static final Logger log= Logger.getLogger("com.sept01.model.OpenWeatherMap");
-	
+	/*
 	public HashMap<String, Object> getHourly(){
 		
 		   Logger.getLogger("com.sept01.model.OpenWeatherMap").setLevel(Level.ALL);
 		   log.log(Level.INFO,"Getting data");
-		   
-			JSONObject tempObj = callApi("7839805");
-			JSONArray tempArr = new JSONArray();
+		   //melbourne ID 7839805
+		   //set up some objects
+			JSONObject tempObj = callApi(-37.783817, 100.934818);
+			JSONArray list = new JSONArray();
+			JSONObject main = new JSONObject();
 			
 			//Logging
 			log.log(Level.INFO,tempObj.toString());
 			
-			tempArr = (JSONArray) tempObj.get("list");
-			String summary = (String) tempObj.get("not sure what goes here");
+			//get the JSONArray "list"
+			list = (JSONArray) tempObj.get("list");
 			
+			//get the main information, temp ect
+			main = (JSONObject) list.getJSONObject(1);
+			
+			//get the description of the weather
+			
+			String summary = "NULL";
 			log.log(Level.INFO, summary);
 			HashMap<String, Object> hourly = new HashMap<>();
 			
@@ -38,12 +46,12 @@ public class OpenWeatherMap implements Forecaster {
 			
 			return hourly;	
 	}
-	
-	private JSONObject callApi(String cityID)
+	*/
+	private JSONObject callApi(double lat, double lon)
 	{
 	   
 	   String doc = null;
-	   String url = "http://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&APPID=" + APIKEY;
+	   String url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon +  "&APPID=" + APIKEY;
 	   
 	   try {
 			// connect and download the json
@@ -63,9 +71,51 @@ public class OpenWeatherMap implements Forecaster {
 		}
 		System.out.println(doc);
 		System.out.println("OPENWEATHER API!!!");
+		
 		JSONObject ret = new JSONObject(doc);
 		log.log(Level.INFO,ret.toString());
 		return ret;
+	}
+	
+	public void getForecast(){
+		JSONObject newData = callApi(-37.783817, 100.934818); //call the API to get the raw data
+		formatJSON(newData); //format the JSON
+		checkData();
+		return;// newData; //return 5d 3h data
+
+	}
+	
+	private void checkData(){
+		//print the data
+		return;
+	}
+	
+	private JSONObject formatJSON(JSONObject data){
+		
+		JSONObject newData = new JSONObject();
+		
+		//contents of the data structures
+		JSONObject city = new JSONObject();
+		String name; //name of the city
+		
+		JSONObject coord = new JSONObject();
+		double lon; //lon position
+		double lat; //lat position
+		
+		JSONArray forecast = new JSONArray();
+		String description; //description of the weather
+		int dateTime; //date time in unix format
+		int temp; //tempreature forcast
+		int humidity; //humidity forecase
+		float speed; //wind speed
+		float winddeg; //??
+		float pressure; //??
+		int cloud; //if it's cloudy
+		
+		//format the data
+		
+		return newData;
+		
 	}
 
 	
