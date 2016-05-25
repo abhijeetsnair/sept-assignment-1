@@ -37,7 +37,7 @@ public class OpenWeatherMap implements Forecaster {
 			log.log(Level.SEVERE, e1.getMessage());
 		}
 		System.out.println(doc);
-		System.out.println("OPENWEATHER API!!!");
+		//System.out.println("OPENWEATHER API!!!");
 		
 		JSONObject ret = new JSONObject(doc);
 		log.log(Level.INFO,ret.toString());
@@ -91,11 +91,6 @@ public class OpenWeatherMap implements Forecaster {
 		name = dataCity.getString("name");
 		lon = cityCoord.getDouble("lon");
 		lat = cityCoord.getDouble("lat");
-		
-
-		
-		//example currData
-
 		
 		//format the data (put into new JSON object)
 		

@@ -42,8 +42,8 @@ public class WISApplication {
 		forecaster.getHourly();
 		Singleton.getInstance().setApplication(this);
 		
-		//Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		//((OpenWeatherMap) owm).getForecast();
+		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+		owm.getForecast();
 	}
 
 	/**
