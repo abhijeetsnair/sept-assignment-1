@@ -91,13 +91,13 @@ public class OpenWeatherMap implements Forecaster {
 	}
 	
 	private JSONObject formatJSON(JSONObject data){
-		
+		int numForecasts = 10;
 		JSONObject newData = new JSONObject();
+		JSONObject currData = new JSONObject();
 		
 		//contents of the data structures
 		JSONObject city = new JSONObject();
 		String name; //name of the city
-		
 		JSONObject coord = new JSONObject();
 		double lon; //lon position
 		double lat; //lat position
@@ -116,6 +116,9 @@ public class OpenWeatherMap implements Forecaster {
 		name = "Melbourne";
 		lon = 4.0;
 		lat = 3.0;
+		
+		//FORECAST LIST
+		description = "very windy!";
 		dateTime = 1;
 		humidity = 99;
 		speed = 40.5f;
@@ -123,12 +126,32 @@ public class OpenWeatherMap implements Forecaster {
 		pressure = 54.5f;
 		cloud = 0;
 		
+		//example currData
+		currData.put("description", description);
+		currData.put("dateTime", dateTime);
+		currData.put("humidity", humidity);
+		currData.put("speed", speed);
+		currData.put("winddeg", winddeg);
+		currData.put("pressure", pressure);
+		currData.put("cloud", cloud);
+		
 		//format the data (put into new JSON object)
+		
+		//for loop over the number of forecast objects!
+		for(int i = 0; i < numForecasts; i++){
+			forecast.put(currData);
+		}
+		
+		coord.put("lon", lon);
+		coord.put("lat", lat);
 		city.put("name", name);
 		city.put("coord", coord);
 		
 		newData.put("city", city);
+		newData.put("forecast", forecast);
 		
+		
+		log.log(Level.INFO,newData.toString());
 		return newData;
 		
 	}
