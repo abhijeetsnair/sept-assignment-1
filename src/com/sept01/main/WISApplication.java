@@ -43,7 +43,7 @@ public class WISApplication {
 		Singleton.getInstance().setApplication(this);
 		
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		owm.getForecast();
+		((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
 	}
 
 	/**
