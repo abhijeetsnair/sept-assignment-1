@@ -66,9 +66,9 @@ public class WISApplication {
 		 */
 		// changeLookAndFeel();
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		owm.getForecast();
+		owm.getForecast(10.00,10.00);
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
-		fio.getForecast();
+		fio.getForecast(10.00,10.00);
 		
 		new WISApplication();
 		ForeCastIODialog dialog = new ForeCastIODialog();

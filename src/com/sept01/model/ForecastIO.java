@@ -17,7 +17,7 @@ public class ForecastIO implements Forecaster {
 
 	private final String APIKEY = "699838f9a5ee6e0e948b3579477efdc0";
 
-	public HashMap<String, Object> getHourly() {
+	public JSONObject getForecast(double lat, double lon){
 
 		JSONObject data = new JSONObject();
 		JSONObject cityInfo = new JSONObject();
@@ -29,23 +29,15 @@ public class ForecastIO implements Forecaster {
 		// data.append("city",);
 		Logger.getLogger("com.sept01.model.ForecastIO").setLevel(Level.ALL);
 		log.log(Level.INFO, "Getting data");
-		JSONObject temp = callApi(-37.783817, 100.934818);
+		JSONObject temp = callApi(lat, lon);
 		cityInfo.put("name", "Forecast IO cannot get the area name at this time!");
 		coords.put("lat", temp.get("latitude"));
 		coords.put("lon", temp.get("longitude"));
 		cityInfo.put("coords", coords);
 		data.put("city", cityInfo);
 		data.put("forecast", forecast);
-		// log.log(Level.INFO,temp.toString());
 		temp = (JSONObject) temp.get("hourly");
-		String summary = (String) temp.get("summary");
-		// log.log(Level.INFO, summary);
-
-		HashMap<String, Object> hourly = new HashMap<>();
-
-		hourly.put("summary", summary);
-		hourly.put("data", temp.get("data"));
-		JSONArray ta = (JSONArray) hourly.get("data");
+		JSONArray ta = temp.getJSONArray("data");
 		temp = (JSONObject) ta.get(0);
 		// System.out.println(temp.get("windSpeed"));
 		// System.out.println(hourly.get("data"));
@@ -70,7 +62,7 @@ public class ForecastIO implements Forecaster {
 		// System.out.println(temp.get("windSpeed"));
 		// System.out.println(hourly.get("data"));
 		log.log(Level.INFO, data.toString());
-		return hourly;
+		return data;
 	}
 
 	private JSONObject callApi(double lat, double lon) {

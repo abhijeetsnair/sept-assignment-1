@@ -14,7 +14,7 @@ public interface Forecaster {
 		return null;
 	};
 	
-	public default JSONObject getForecast(){
+	public default JSONObject getForecast(double lat, double lon){
 		return null;
 	};
 
