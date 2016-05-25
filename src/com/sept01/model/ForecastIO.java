@@ -12,17 +12,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.experimental.theories.Theories;
 
+
 import com.eclipsesource.json.JsonObject;
 import com.sept01.utility.ErrorLog;
 
 
 
-public class ForecastIO implements Forecaster {
+
+public class ForecastIO implements Forecaster{
    private static final Logger log= Logger.getLogger("com.sept01.model.ForecastIO");
    
    private final String APIKEY = "699838f9a5ee6e0e948b3579477efdc0";
 	
 	public HashMap<String, Object> getHourly(){
+
 		JSONObject data = new JSONObject();
 		JSONObject cityInfo = new JSONObject();
 		JSONObject coords = new JSONObject();
@@ -44,11 +47,19 @@ public class ForecastIO implements Forecaster {
 		temp = (JSONObject) temp.get("hourly");
 		String summary = (String) temp.get("summary");
 		//log.log(Level.INFO, summary);
+
 		HashMap<String, Object> hourly = new HashMap<>();
 		
 		hourly.put("summary", summary);
 		hourly.put("data", temp.get("data"));
 		JSONArray ta = (JSONArray) hourly.get("data");
+		temp = (JSONObject) ta.get(0);
+//		System.out.println(temp.get("windSpeed"));
+//		System.out.println(hourly.get("data"));
+	
+		
+	
+
 		System.out.println(ta.length());
 		for(Object Ob : ta){
 			JSONObject JSOb = (JSONObject)Ob;
@@ -70,8 +81,9 @@ public class ForecastIO implements Forecaster {
 //		System.out.println(hourly.get("data"));
 		log.log(Level.INFO, data.toString());
 		return hourly;
-		
 	}
+
+
 	private JSONObject callApi(double lat, double lon) {
 		String doc = null;
 		String url = "https://api.forecast.io/forecast/" + APIKEY + "/" + lat + "," + lon;
@@ -97,4 +109,3 @@ public class ForecastIO implements Forecaster {
 		return ret;
 	}
 }
-
