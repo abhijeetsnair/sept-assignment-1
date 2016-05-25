@@ -13,40 +13,7 @@ public class OpenWeatherMap implements Forecaster {
 	
 	private final String APIKEY = "2a8527d22267d97306e806834e6d992a";
 	private static final Logger log= Logger.getLogger("com.sept01.model.OpenWeatherMap");
-	/*
-	public HashMap<String, Object> getHourly(){
-		
-		   Logger.getLogger("com.sept01.model.OpenWeatherMap").setLevel(Level.ALL);
-		   log.log(Level.INFO,"Getting data");
-		   //melbourne ID 7839805
-		   //set up some objects
-			JSONObject tempObj = callApi(-37.783817, 100.934818);
-			JSONArray list = new JSONArray();
-			JSONObject main = new JSONObject();
-			
-			//Logging
-			log.log(Level.INFO,tempObj.toString());
-			
-			//get the JSONArray "list"
-			list = (JSONArray) tempObj.get("list");
-			
-			//get the main information, temp ect
-			main = (JSONObject) list.getJSONObject(1);
-			
-			//get the description of the weather
-			
-			String summary = "NULL";
-			log.log(Level.INFO, summary);
-			HashMap<String, Object> hourly = new HashMap<>();
-			
-			hourly.put("summary", summary);
-			hourly.put("data", tempObj.get("data"));
-			JSONArray ta = (JSONArray) hourly.get("data");
-			tempObj = (JSONObject) ta.get(0);
-			
-			return hourly;	
-	}
-	*/
+
 	private JSONObject callApi(double lat, double lon)
 	{
 	   
@@ -77,23 +44,31 @@ public class OpenWeatherMap implements Forecaster {
 		return ret;
 	}
 	
-	public void getForecast(){
-		JSONObject newData = callApi(-37.783817, 100.934818); //call the API to get the raw data
-		formatJSON(newData); //format the JSON
-		checkData();
-		return;// newData; //return 5d 3h data
+	public JSONObject getForecast(double lat, double lon){
+		//JSONObject newData = callApi(-37.783817, 100.934818); //test call of the API
+		JSONObject data = callApi(lat, lon); //call the API to get the raw data
+		JSONObject newData = formatJSON(data); //format the JSON
+		return newData; //return 5d 3h data
 
-	}
-	
-	private void checkData(){
-		//print the data
-		return;
 	}
 	
 	private JSONObject formatJSON(JSONObject data){
 		int numForecasts = 10;
 		JSONObject newData = new JSONObject();
 		JSONObject currData = new JSONObject();
+		
+		//data accessors
+		JSONObject dataCity = data.getJSONObject("city");
+		JSONObject cityCoord = dataCity.getJSONObject("coord");
+		JSONArray dataList = data.getJSONArray("list");
+		
+		JSONObject currListMain;
+		JSONArray currListWeather;
+		JSONObject currListClouds;
+		JSONObject currListWind;
+		JSONObject currListRain;
+		JSONObject tempObject = new JSONObject();
+		JSONObject tempWeatherObj = new JSONObject();
 		
 		//contents of the data structures
 		JSONObject city = new JSONObject();
@@ -105,40 +80,56 @@ public class OpenWeatherMap implements Forecaster {
 		JSONArray forecast = new JSONArray();
 		String description; //description of the weather
 		int dateTime; //date time in unix format
-		int temp; //tempreature forcast
+		double temp; //tempreature forcast
 		int humidity; //humidity forecase
-		float speed; //wind speed
-		float winddeg; //??
-		float pressure; //??
+		double speed; //wind speed
+		double winddeg; //??
+		double pressure; //??
 		int cloud; //if it's cloudy
 		
-		//get the data EXAMPLE DATA
-		name = "Melbourne";
-		lon = 4.0;
-		lat = 3.0;
+		//get the data
+		name = dataCity.getString("name");
+		lon = cityCoord.getDouble("lon");
+		lat = cityCoord.getDouble("lat");
 		
-		//FORECAST LIST
-		description = "very windy!";
-		dateTime = 1;
-		humidity = 99;
-		speed = 40.5f;
-		winddeg = 4.3f;
-		pressure = 54.5f;
-		cloud = 0;
+
 		
 		//example currData
-		currData.put("description", description);
-		currData.put("dateTime", dateTime);
-		currData.put("humidity", humidity);
-		currData.put("speed", speed);
-		currData.put("winddeg", winddeg);
-		currData.put("pressure", pressure);
-		currData.put("cloud", cloud);
+
 		
 		//format the data (put into new JSON object)
 		
 		//for loop over the number of forecast objects!
-		for(int i = 0; i < numForecasts; i++){
+		for(int i = 0; i < dataList.length(); i++){
+			
+			tempObject = dataList.getJSONObject(i);
+			currListMain = tempObject.getJSONObject("main");
+			currListWeather = tempObject.getJSONArray("weather");
+			currListClouds = tempObject.getJSONObject("clouds");
+			currListWind = tempObject.getJSONObject("wind");
+			currListRain = tempObject.getJSONObject("rain");
+			
+			tempWeatherObj = currListWeather.getJSONObject(0);
+					
+			//FORECAST LIST
+			description = tempWeatherObj.getString("description");
+			dateTime = tempObject.getInt("dt");
+			humidity = currListMain.getInt("humidity");
+			speed = currListWind.getDouble("speed");
+			winddeg = currListWind.getDouble("deg");
+			pressure = currListMain.getDouble("pressure");
+			cloud = currListClouds.getInt("all");
+			temp = currListMain.getDouble("temp");
+			
+			//fill currData
+			currData.put("description", description);
+			currData.put("dateTime", dateTime);
+			currData.put("humidity", humidity);
+			currData.put("speed", speed);
+			currData.put("winddeg", winddeg);
+			currData.put("pressure", pressure);
+			currData.put("cloud", cloud);
+			
 			forecast.put(currData);
 		}
 		
