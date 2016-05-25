@@ -78,7 +78,7 @@ public class ForecastIO implements Forecaster {
 		String url = "https://api.forecast.io/forecast/" + APIKEY + "/" + lat + "," + lon;
 		try {
 			// connect and download the json
-			log.log(Level.INFO, "JSON URL " + url);
+			log.log(Level.INFO, "aJSON URL " + url);
 			doc = Jsoup.connect(url).ignoreContentType(true).execute().body();
 
 		} catch (IOException e1) {
