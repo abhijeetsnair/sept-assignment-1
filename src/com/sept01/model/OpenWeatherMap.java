@@ -112,7 +112,22 @@ public class OpenWeatherMap implements Forecaster {
 		float pressure; //??
 		int cloud; //if it's cloudy
 		
-		//format the data
+		//get the data EXAMPLE DATA
+		name = "Melbourne";
+		lon = 4.0;
+		lat = 3.0;
+		dateTime = 1;
+		humidity = 99;
+		speed = 40.5f;
+		winddeg = 4.3f;
+		pressure = 54.5f;
+		cloud = 0;
+		
+		//format the data (put into new JSON object)
+		city.put("name", name);
+		city.put("coord", coord);
+		
+		newData.put("city", city);
 		
 		return newData;
 		
