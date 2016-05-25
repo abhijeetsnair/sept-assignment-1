@@ -73,8 +73,8 @@ public class WISApplication {
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 		MainView view = new MainView();
-		// view.show();
-	//	view.setVisible(true);
+		 view.show();
+		view.setVisible(true);
 
 	}
 
