@@ -10,14 +10,40 @@ import org.jsoup.Jsoup;
 
 import com.sept01.utility.ErrorLog;
 public class OpenWeatherMap implements Forecaster {
+	
 	private final String APIKEY = "2a8527d22267d97306e806834e6d992a";
 	private static final Logger log= Logger.getLogger("com.sept01.model.OpenWeatherMap");
-	private JSONObject callApi(double lat, double lon)
+	
+	public HashMap<String, Object> getHourly(){
+		
+		   Logger.getLogger("com.sept01.model.OpenWeatherMap").setLevel(Level.ALL);
+		   log.log(Level.INFO,"Getting data");
+		   
+			JSONObject tempObj = callApi("7839805");
+			JSONArray tempArr = new JSONArray();
+			
+			//Logging
+			log.log(Level.INFO,tempObj.toString());
+			
+			tempArr = (JSONArray) tempObj.get("list");
+			String summary = (String) tempObj.get("not sure what goes here");
+			
+			log.log(Level.INFO, summary);
+			HashMap<String, Object> hourly = new HashMap<>();
+			
+			hourly.put("summary", summary);
+			hourly.put("data", tempObj.get("data"));
+			JSONArray ta = (JSONArray) hourly.get("data");
+			tempObj = (JSONObject) ta.get(0);
+			
+			return hourly;	
+	}
+	
+	private JSONObject callApi(String cityID)
 	{
-	   //log.log(Level.INFO,"lat " + lat + "lon" + lon);
 	   
 	   String doc = null;
-	   String url = "http://api.openweathermap.org/data/2.5/forecast?id=7839805&APPID="+APIKEY;
+	   String url = "http://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&APPID=" + APIKEY;
 	   
 	   try {
 			// connect and download the json
@@ -41,27 +67,6 @@ public class OpenWeatherMap implements Forecaster {
 		log.log(Level.INFO,ret.toString());
 		return ret;
 	}
-	
-	
-	public HashMap<String, Object> getHourly(){
-		
-		   Logger.getLogger("com.sept01.model.OpenWeatherMap").setLevel(Level.ALL);
-		   log.log(Level.INFO,"Getting data");
-		   
-			JSONObject temp = callApi(3,4);
-			
-			log.log(Level.INFO,temp.toString());
-			temp = (JSONObject) temp.get("list");
-			String summary = (String) temp.get("description");
-			log.log(Level.INFO, summary);
-			HashMap<String, Object> hourly = new HashMap<>();
-			
-			hourly.put("summary", summary);
-			hourly.put("data", temp.get("data"));
-			JSONArray ta = (JSONArray) hourly.get("data");
-			temp = (JSONObject) ta.get(0);
-			
-			return hourly;	
-	}
+
 	
 }

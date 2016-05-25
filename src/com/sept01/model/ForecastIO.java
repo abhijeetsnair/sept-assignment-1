@@ -14,8 +14,6 @@ import org.junit.experimental.theories.Theories;
 
 import com.sept01.utility.ErrorLog;
 
-
-
 public class ForecastIO implements Forecaster {
    private static final Logger log= Logger.getLogger("com.sept01.model.ForecastIO");
    
@@ -24,11 +22,16 @@ public class ForecastIO implements Forecaster {
 	public HashMap<String, Object> getHourly(){
 	   Logger.getLogger("com.sept01.model.ForecastIO").setLevel(Level.ALL);
 	   log.log(Level.INFO,"Getting data");
+	   
 		JSONObject temp = callApi(-37.783817, 100.934818);
+		
 		log.log(Level.INFO,temp.toString());
+		
 		temp = (JSONObject) temp.get("hourly");
 		String summary = (String) temp.get("summary");
+		
 		log.log(Level.INFO, summary);
+		
 		HashMap<String, Object> hourly = new HashMap<>();
 		
 		hourly.put("summary", summary);
@@ -40,6 +43,9 @@ public class ForecastIO implements Forecaster {
 		return hourly;
 		
 	}
+	
+	
+	
 	private JSONObject callApi(double lat, double lon) {
 		String doc = null;
 		String url = "https://api.forecast.io/forecast/" + APIKEY + "/" + lat + "," + lon;
@@ -59,9 +65,9 @@ public class ForecastIO implements Forecaster {
 			ErrorLog.createErrorPopup(e1);
 			log.log(Level.SEVERE, e1.getMessage());
 		}
-		//System.out.println(doc);
+		System.out.println(doc);
 		JSONObject ret = new JSONObject(doc);
-		//log.log(Level.INFO,ret.toString());
+		log.log(Level.INFO,ret.toString());
 		return ret;
 	}
 }
