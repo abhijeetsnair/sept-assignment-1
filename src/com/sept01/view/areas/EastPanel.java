@@ -83,6 +83,7 @@ public class EastPanel extends JPanel {
 
 	// Adds favorites as buttons to the list of favorites on the UI
 	public void addFavourites() {
+		Singleton.getInstance().getApplication();
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
 			// check if the fav exists on the panel
 			if (checkifFavExists(
