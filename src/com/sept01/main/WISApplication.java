@@ -1,17 +1,12 @@
 package com.sept01.main;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.util.ArrayList;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import com.sept01.model.Favourites;
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
-import com.sept01.model.OpenWeatherMap;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
@@ -29,7 +24,7 @@ import com.sept01.view.areas.ForeCastIODialog;
 public class WISApplication {
 	public static boolean debug = false;
 	public static Weather weather;
-	
+
 	private ArrayList<Favourites> fav = new ArrayList<Favourites>();
 
 	public ArrayList<Favourites> getFav() {
@@ -44,12 +39,13 @@ public class WISApplication {
 	 * Initialise singleton pattern creation
 	 */
 	public WISApplication() {
-//		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
-//		forecaster.getHourly();
+		// Forecaster forecaster =
+		// ForecasterFactory.getForecaster("forecastio");
+		// forecaster.getHourly();
 		Singleton.getInstance().setApplication(this);
-//		
-//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-//		((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
+		//
+		// Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+		// ((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
 	}
 
 	/**
@@ -59,7 +55,7 @@ public class WISApplication {
 	 *            args
 	 */
 	public static void main(String[] args) {
-		
+
 		/**
 		 * Changes the look and feel of the application to the nimbus look and
 		 * feel
@@ -69,22 +65,64 @@ public class WISApplication {
 		 */
 		// changeLookAndFeel();
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		owm.getForecast(10.00,10.00);
-		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
-		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
+		JSONObject owf =owm.getForecast(10.00, 10.00);
 		
-		JSONArray forecasts = fioF.getJSONArray("forecast");
-		for(Object fob : forecasts){
+		
+		JSONArray forecasts = owf.getJSONArray("forecast");
+
+	System.out.println(">>>Open Weather");
+		int  i=0;
+		for (Object fob : forecasts) {	
+		System.out.println("Day : " + i++);	
+			System.out.println();
 			JSONObject fore = (JSONObject) fob;
-			System.out.println(fore.get("description"));
+			System.out.println("dateTime:" +fore.get("dateTime"));
+			System.out.println("humidity:" +fore.get("humidity"));
+			System.out.println("speed:" +fore.get("speed"));
+			System.out.println("winddeg:" +fore.get("winddeg"));
+			System.out.println("pressure:" +fore.get("pressure"));
+			System.out.println("cloud:" +fore.get("cloud"));
+			System.out.println("description:" +fore.get("description"));
+
+		}	
+		
+		
+		System.out.println(">>>Forecast IO");
+				
+		
+		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
+		JSONObject fioF = fio.getForecast(37.8267, -122.423);
+
+		 forecasts = fioF.getJSONArray("forecast");
+		 i =0;
+		
+		for (Object fob : forecasts) {	
+		System.out.println("Day : " + i++);	
+			System.out.println();
+			JSONObject fore = (JSONObject) fob;
+			System.out.println("dateTime:" +fore.get("dateTime"));
+			System.out.println("temp:" +fore.get("temp"));
+			System.out.println("humidity:" +fore.get("humidity"));
+			System.out.println("speed:" +fore.get("speed"));
+			System.out.println("winddeg:" +fore.get("winddeg"));
+			System.out.println("pressure:" +fore.get("pressure"));
+			System.out.println("cloud:" +fore.get("cloud"));
+			System.out.println("description:" +fore.get("description"));
+
 		}
 		
+			
+			
+			
 		
 		
+		
+			
+			
 		new WISApplication();
 		ForeCastIODialog dialog = new ForeCastIODialog();
 		dialog.show();
-		if(debug){		
+		if (debug) {
 			System.out.println("Hello");
 			System.out.println(" :D ");
 		}
@@ -97,7 +135,7 @@ public class WISApplication {
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
 		MainView view = new MainView();
-		 view.show();
+		view.show();
 		view.setVisible(true);
 
 	}
@@ -182,7 +220,7 @@ public class WISApplication {
 	public void testFav() {
 
 		for (int i = 0; i < fav.size(); i++) {
-			if(debug){
+			if (debug) {
 				System.out.println(fav.get(i).getStation().getName() + "    " + fav.get(i).getStation().url);
 			}
 		}
@@ -192,8 +230,8 @@ public class WISApplication {
 	public void removeFav(Favourites fav) {
 		for (int i = 0; i < getFav().size(); i++) {
 			if (getFav().get(i).getStation().getName().compareTo(fav.getStation().getName()) == 0) {
-				if(debug) {
-					if(debug){
+				if (debug) {
+					if (debug) {
 						System.out.println("----------Removing this guy :" + fav.getStation().getName());
 					}
 				}
