@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -45,15 +46,28 @@ public class ErrorLog {
 	}
 	public static void createErrorPopup(Exception e){
 		JFrame frame = new JFrame("ERROR");
+		// assuming a JFrame called frame...
+		JOptionPane optionPane = new JOptionPane("ERROR"); 
+		optionPane.setMessage(eToString(e.getMessage()));
+		JDialog eDialog = optionPane.createDialog(frame, "ERROR");
 		
-		JOptionPane.showMessageDialog(frame, eToString(e.getMessage()),"ERROR ",JOptionPane.ERROR_MESSAGE);
+		eDialog.setModal(false);
+		eDialog.setVisible(true);
+//		JOptionPane.showMessageDialog(frame, eToString(e.getMessage()),"ERROR ",JOptionPane.ERROR_MESSAGE);
 
 		
 	}
 	public static void createErrorPopup(String e){
 		JFrame frame = new JFrame("ERROR");
+		// assuming a JFrame called frame...
+		JOptionPane optionPane = new JOptionPane("ERROR"); 
+		optionPane.setMessage(eToString(e));
+		JDialog eDialog = optionPane.createDialog(frame, "ERROR");
 		
-		JOptionPane.showMessageDialog(frame, eToString(e),"ERROR ",JOptionPane.ERROR_MESSAGE);
+		eDialog.setModal(false);
+		eDialog.setVisible(true);
+		
+//		JOptionPane.showMessageDialog(frame, eToString(e),"ERROR ",JOptionPane.ERROR_MESSAGE);
 
 		
 	}
