@@ -39,7 +39,7 @@ public class ForecastIO implements Forecaster {
 		/**
 		 * Put items into the formatted json objects
 		 * **/
-		cityInfo.put("name", "Forecast IO cannot get the area name at this time!");
+		cityInfo.put("name", Geocoder.getName(lat, lon));
 		coords.put("lat", temp.get("latitude"));
 		coords.put("lon", temp.get("longitude"));
 		cityInfo.put("coords", coords);
