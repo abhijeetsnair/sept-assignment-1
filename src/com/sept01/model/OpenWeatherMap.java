@@ -102,7 +102,7 @@ public class OpenWeatherMap implements Forecaster {
 			currListWeather = tempObject.getJSONArray("weather");
 			currListClouds = tempObject.getJSONObject("clouds");
 			currListWind = tempObject.getJSONObject("wind");
-			currListRain = tempObject.getJSONObject("rain");
+//			currListRain = tempObject.getJSONObject("rain");
 			
 			tempWeatherObj = currListWeather.getJSONObject(0);
 					

@@ -54,6 +54,7 @@ public class Dialog extends JDialog {
 	private boolean addorRemoveFav = false;
 	String weather_station, message;
 	WeatherStation weatherStation;
+	String lat,lon;
 	String data[][];
 
 	private String[] coloumns = { "Date", "Air Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir",
@@ -126,7 +127,7 @@ public class Dialog extends JDialog {
 		forecastInfo.setBackground(background.brighter());
 		forecastInfo.setForeground(foreground);
 		forecastInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
-		forecastInfo.addActionListener(new ForecastClickListener());
+		forecastInfo.addActionListener(new ForecastClickListener(lat,lon,this));
 		forecastInfo.setBorder(null);
 		
 		
@@ -347,7 +348,9 @@ public class Dialog extends JDialog {
 			data[i][15] = (String) weatherD[i].get("cloud_base_m");
 			data[i][16] = (String) weatherD[i].get("cloud_oktas");
 			data[i][17] = (String) weatherD[i].get("cloud_type");
-			data[i][18] = (String) weatherD[i].get("vis_km");
+			data[i][18] = (String) weatherD[i].get("vis_km");	
+			lat=(String) weatherD[i].get("lat");	
+			lon=(String) weatherD[i].get("lon");	
 
 		}
 		return data;

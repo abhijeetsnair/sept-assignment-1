@@ -69,8 +69,8 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
-//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-//		JSONObject owmF = owm.getForecast(37.8267,-122.423);
+		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+		JSONObject owmF = owm.getForecast(37.8267,-122.423);
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
 		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
 		
@@ -80,19 +80,18 @@ public class WISApplication {
 			System.out.println("FIO: "+fore.get("description"));
 		}
 		
-//		forecasts = owmF.getJSONArray("forecast");
-//		for(Object fob : forecasts){
-//			JSONObject fore = (JSONObject) fob;
-//			System.out.println("OWM: "+fore.get("description"));
-//		}
-//		
+		forecasts = owmF.getJSONArray("forecast");
+		for(Object fob : forecasts){
+			JSONObject fore = (JSONObject) fob;
+			System.out.println("OWM: "+fore.get("description"));
+		}
+		
 		JSONObject loc = Geocoder.getCoOrds("113 cecil street fitzroy");
 		System.out.println(Geocoder.getName(loc.getDouble("lat"), loc.getDouble("lng")));
 		System.out.println(loc.toString());
 		
 		new WISApplication();
-		ForeCastIODialog dialog = new ForeCastIODialog();
-		dialog.show();
+	 
 		if(debug){		
 			System.out.println("Hello");
 			System.out.println(" :D ");

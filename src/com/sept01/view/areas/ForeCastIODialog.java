@@ -251,7 +251,7 @@ public class ForeCastIODialog extends JDialog {
 		for (int j = 0; j < h.length; j++) {
 			comboLanguage.addItem(h[j]);
 		}
-		comboLanguage.addActionListener(new GraphSelector(comboLanguage, fio, panel3));
+//		comboLanguage.addActionListener(new GraphSelector(comboLanguage, fio, panel3));
 		System.out.println("\n");
 
 	}
