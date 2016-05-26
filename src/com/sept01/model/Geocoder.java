@@ -13,6 +13,13 @@ import com.sept01.utility.ErrorLog;
 
 public class Geocoder {
 	private static final Logger log = Logger.getLogger("geocoder");
+	
+	public static JSONObject getName(double lat, double lon){
+		String url = "https://maps.google.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDveZ8e-JyrtProLFiKY0V2Ytqjbl4Kw6k";
+		return null;
+		
+	}
+	
 	/**
 	 * @author wolfz
 	 * @return JSONObject with keys lat and lng
