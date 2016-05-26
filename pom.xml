@@ -3,19 +3,26 @@
   <groupId>sept-assignment-1</groupId>
   <artifactId>sept-assignment-1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src/com/sept01/tests/</testSourceDirectory> 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.3</version>
         <configuration>
-          <source/>
-          <target/>
+
+	    <source>1.8</source>
+    	<target>1.8</target>
+
         </configuration>
       </plugin>
+     
     </plugins>
   </build>
+  
   
  <dependencies>
   
@@ -42,6 +49,20 @@
     <artifactId>junit</artifactId>
     <version>4.12</version>
 	</dependency>
+	<!-- http://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20160212</version>
+</dependency>
+
+<!-- http://mvnrepository.com/artifact/com.eclipsesource.minimal-json/minimal-json -->
+<dependency>
+    <groupId>com.eclipsesource.minimal-json</groupId>
+    <artifactId>minimal-json</artifactId>
+    <version>0.9.4</version>
+</dependency>
+
 	
  </dependencies>
   

@@ -3,6 +3,8 @@ package com.sept01.tests;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;import org.hamcrest.core.Is;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import com.sept01.model.Forecaster;
@@ -15,21 +17,15 @@ public class ForecastIOTest
    @Test
    public void downloadData()
    {
-      HashMap<String, Object> data = f.getHourly();
+      JSONObject data = f.getForecast(10.00, 10.00);
       assertNotNull(data);
-   }
-   @Test
-   public void summary()
-   {
-      HashMap<String, Object> data = f.getHourly();
-      assertNotNull(data.get("summary"));    
-      
    }
    @Test
    public void data()
    {
-      HashMap<String, Object> data = f.getHourly();
-      assertNotNull(data.get("data"));    
+	   JSONObject data = f.getForecast(10.00, 10.00);
+	   JSONArray forecasts = data.getJSONArray("forecast");
+      assertNotNull(forecasts);    
       
    }
 
