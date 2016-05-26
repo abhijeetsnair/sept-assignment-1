@@ -69,14 +69,20 @@ public class WISApplication {
 		 */
 		// changeLookAndFeel();
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		owm.getForecast(10.00,10.00);
+		JSONObject owmF = owm.getForecast(37.8267,-122.423);
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
 		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
 		
 		JSONArray forecasts = fioF.getJSONArray("forecast");
 		for(Object fob : forecasts){
 			JSONObject fore = (JSONObject) fob;
-			System.out.println(fore.get("description"));
+			System.out.println("FIO: "+fore.get("description"));
+		}
+		
+		forecasts = owmF.getJSONArray("forecast");
+		for(Object fob : forecasts){
+			JSONObject fore = (JSONObject) fob;
+			System.out.println("OWM: "+fore.get("description"));
 		}
 		
 		
