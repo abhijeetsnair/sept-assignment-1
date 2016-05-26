@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
+import org.hamcrest.CoreMatchers;
 
 public class ForecastFactoryTest
 {
