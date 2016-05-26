@@ -5,6 +5,9 @@ import java.util.HashMap;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.sept01.model.Favourites;
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
@@ -41,12 +44,12 @@ public class WISApplication {
 	 * Initialise singleton pattern creation
 	 */
 	public WISApplication() {
-		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
-		forecaster.getHourly();
-		Singleton.getInstance().setApplication(this);
-		
-		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
+//		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
+//		forecaster.getHourly();
+//		Singleton.getInstance().setApplication(this);
+//		
+//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+//		((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
 	}
 
 	/**
@@ -68,7 +71,15 @@ public class WISApplication {
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
 		owm.getForecast(10.00,10.00);
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
-		fio.getForecast(10.00,10.00);
+		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
+		
+		JSONArray forecasts = fioF.getJSONArray("forecast");
+		for(Object fob : forecasts){
+			JSONObject fore = (JSONObject) fob;
+			System.out.println(fore.get("description"));
+		}
+		
+		
 		
 		new WISApplication();
 		ForeCastIODialog dialog = new ForeCastIODialog();
