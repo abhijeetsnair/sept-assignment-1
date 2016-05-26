@@ -14,9 +14,29 @@ import com.sept01.utility.ErrorLog;
 public class Geocoder {
 	private static final Logger log = Logger.getLogger("geocoder");
 	
-	public static JSONObject getName(double lat, double lon){
+	/**
+	 * @author wolfz
+	 * @return Name of area of co-ords
+	 * **/
+	public static String getName(double lat, double lon){
 		String url = "https://maps.google.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDveZ8e-JyrtProLFiKY0V2Ytqjbl4Kw6k";
-		return null;
+		
+		try {
+			url = new URL(url).toString();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JSONObject json = callAPI(url);
+		JSONArray res = json.getJSONArray("address_components");
+		for(Object ob : res){
+			JSONObject JSOb = (JSONObject) ob;
+			if(JSOb.getJSONArray("types").get(0).toString().contains("locality")){
+				return JSOb.getString("short_name");
+			}
+		}
+		
+		return "Cannot get name";
 		
 	}
 	

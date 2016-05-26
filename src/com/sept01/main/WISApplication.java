@@ -87,6 +87,7 @@ public class WISApplication {
 //		}
 //		
 		JSONObject loc = Geocoder.getCoOrds("113 cecil street fitzroy");
+		System.out.println(Geocoder.getName(loc.getDouble("lat"), loc.getDouble("lng")));
 		System.out.println(loc.toString());
 		
 		new WISApplication();
