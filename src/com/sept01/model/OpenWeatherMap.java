@@ -119,11 +119,14 @@ public class OpenWeatherMap implements Forecaster {
 			//fill currData
 			currData.put("description", description);
 			currData.put("dateTime", dateTime);
+			currData.put("temp", temp);
 			currData.put("humidity", humidity);
 			currData.put("speed", speed);
 			currData.put("winddeg", winddeg);
 			currData.put("pressure", pressure);
 			currData.put("cloud", cloud);
+			
+			log.log(Level.INFO,currData.toString());
 			
 			forecast.put(currData);
 		}
