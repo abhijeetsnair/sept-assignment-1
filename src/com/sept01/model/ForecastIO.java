@@ -64,6 +64,7 @@ public class ForecastIO implements Forecaster {
 			FJSOb.put("winddeg", JSOb.get("windBearing"));
 			FJSOb.put("pressure", JSOb.get("pressure"));
 			FJSOb.put("cloud", JSOb.get("cloudCover"));
+			FJSOb.put("rain", JSOb.get("precipProbability"));
 			data.getJSONArray("forecast").put(FJSOb);
 
 		}

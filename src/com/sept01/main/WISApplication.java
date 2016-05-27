@@ -1,5 +1,7 @@
 package com.sept01.main;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.*;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import org.json.JSONArray;
@@ -15,6 +17,8 @@ import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
 import com.sept01.view.MainView;
 
+
+
 /**
  * <p>
  * The Main Client Class for the application.
@@ -22,6 +26,7 @@ import com.sept01.view.MainView;
  * </p>
  */
 public class WISApplication {
+
 	public static boolean debug = false;
 	public static Weather weather;
 	
@@ -63,6 +68,17 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
+		Logger logger = Logger.getLogger("");
+		FileHandler fh = null;
+		try {
+			fh = new FileHandler("log.log");
+		} catch (SecurityException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.addHandler(fh);
+		
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
 		JSONObject owmF = owm.getForecast(37.8267,-122.423);
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");

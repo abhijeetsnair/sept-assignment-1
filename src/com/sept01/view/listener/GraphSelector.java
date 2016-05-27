@@ -20,12 +20,16 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+ 
 /*
  *ALLOWS THE USER TO SELECT GRAPHS BASED ON THE THIER CHOICE OF FILEDS 
  * THE USER SELECTS THE GRAPH TYPE AND THIS IS DISPLAYED ON THE SCREEN
  * THE UI UPDATES TO DISPLAY GRAPHS ON DIFFERENT DATA SUCH AS 
  * RAIN, TEMPERATURE,HUMIDITY,ETC 
  */
+ 
+
+ 
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
 	JComponent panel;
