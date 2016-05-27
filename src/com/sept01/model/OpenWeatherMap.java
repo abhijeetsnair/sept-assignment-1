@@ -97,6 +97,8 @@ public class OpenWeatherMap implements Forecaster {
 		//for loop over the number of forecast objects!
 		for(int i = 0; i < dataList.length(); i++){
 			
+			currData = new JSONObject();
+			
 			tempObject = dataList.getJSONObject(i);
 			currListMain = tempObject.getJSONObject("main");
 			currListWeather = tempObject.getJSONArray("weather");
