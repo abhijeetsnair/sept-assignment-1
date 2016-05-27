@@ -79,7 +79,7 @@ public class WISApplication {
 		Logger logger = Logger.getLogger("");
 		FileHandler fh = null;
 		try {
-			fh = new FileHandler("log.txt");
+			fh = new FileHandler("log.log");
 		} catch (SecurityException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
