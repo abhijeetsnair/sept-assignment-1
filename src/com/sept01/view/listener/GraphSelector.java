@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
@@ -27,8 +28,6 @@ import org.json.JSONObject;
  * THE UI UPDATES TO DISPLAY GRAPHS ON DIFFERENT DATA SUCH AS 
  * RAIN, TEMPERATURE,HUMIDITY,ETC 
  */
- 
-
  
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
@@ -67,12 +66,14 @@ public class GraphSelector implements ActionListener {
 		 * IF THE UNITS PANEL EXISTS ON THE UI THEN IT WILL REMOVE THE EXISTING
 		 * UNITS REPLACE THE EXISTING UNITS WITH THE NEW DISPLAY OF UNITS
 		 */
+	
 		if (chartpanel != null)
 			panel.remove(chartpanel);
 		if (displayUnits != null)
 			panel.remove(displayUnits);
 
 		String item = comboLanguage.getSelectedItem().toString();
+		log.log(Level.INFO, "Selected Item to display Graph :"+ item);
 		System.out.println("This is the selected Item" + item);
 		{
 
@@ -99,14 +100,20 @@ public class GraphSelector implements ActionListener {
 			JSONArray forecasts = forecast.getJSONArray("forecast");
 			for (Object fob : forecasts) {
 				JSONObject fore = (JSONObject) fob;
+				
+				//Supresses the iterator warnings to the rawtypes
+				@SuppressWarnings("rawtypes")
 				Set keys = fore.keySet();
+				@SuppressWarnings("rawtypes")
 				Iterator a = keys.iterator();
 				while (a.hasNext()) {
 					String key = (String) a.next();
 					// loop to get the dynamic key
 					String value = fore.get(key).toString();
-					System.out.print("key : " + key);
-					System.out.println(" value :" + value);
+					
+					log.log(Level.INFO, key);
+					log.log(Level.INFO, value);
+					
 					if (key.compareToIgnoreCase(item) == 0) {
 						dataset.addValue(Double.parseDouble(value), key, "" + (i + 1));
 						i++;
@@ -122,6 +129,9 @@ public class GraphSelector implements ActionListener {
 			JFreeChart lineChart = ChartFactory.createLineChart(item, "Hours past the current hour", "Values", dataset,
 					PlotOrientation.VERTICAL, true, true, false);
 			chartpanel = new ChartPanel(lineChart);
+			
+			// The minimum drawable width is 1000 as any values lower than 1000 will be shrink
+			// the values above 1000 will cause the graph to expand
 			chartpanel.setMinimumDrawWidth(1000);
 			// Chart Panel is scalable
 			chartpanel.addComponentListener(new ScaleChartListener(chartpanel));

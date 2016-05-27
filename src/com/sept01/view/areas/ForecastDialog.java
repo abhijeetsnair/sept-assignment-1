@@ -1,7 +1,6 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -44,6 +43,8 @@ import com.sept01.view.listener.GraphSelector;
  */
 
 public class ForecastDialog extends JDialog {
+
+	// Implments Java logger
 	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
 
 	private static final long serialVersionUID = 1L;
@@ -66,22 +67,18 @@ public class ForecastDialog extends JDialog {
 		JComponent panel1 = makeTextPanel("Hourly Forecast");
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-
 		currentData = displayForecastDataonTab1(panel1, currentData);
-		Color background = Color.decode("#3d3f47");
-		Color foreground = Color.orange;
 		jt = new JTable(currentData, coloumns);
 		JScrollPane jps = new JScrollPane(jt);
 		panel1.add(jps);
-
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 1));
 		JButton button = new JButton("Show Hourly Graphs");
 		buttonPanel.add(button);
 		panel1.add(buttonPanel);
 
-		
-		// DISPLAYS GRAPHS ON A NEW TAB THE USER CAN SELECT GRAPHS THEY WANT TO SEE
+		// DISPLAYS GRAPHS ON A NEW TAB THE USER CAN SELECT GRAPHS THEY WANT TO
+		// SEE
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -89,30 +86,39 @@ public class ForecastDialog extends JDialog {
 			}
 
 		});
-
+		// adds the tabbed pane to the view
 		add(tabbedPane);
 
+		// sets the tabbbed pane to do the follows
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 		setLocationRelativeTo(null);
 		setSize(new Dimension(720, 720));
 
 	}
-/*
- * DISPLAYS THE FORECAST DATA IN THE FORM OF THE DATA ON THE
- * FIRST TAB. THE USER IS CONFRONTED WILL ALL THE DATA
- * UNTILL 48 HOURS FROM THE CURRENT TIME
- * THE USER FROM THERE CAN NAVIGATE TO SEE GRAPHS
- */
+
+	/*
+	 * DISPLAYS THE FORECAST DATA IN THE FORM OF THE DATA ON THE FIRST TAB. THE
+	 * USER IS CONFRONTED WILL ALL THE DATA UNTILL 48 HOURS FROM THE CURRENT
+	 * TIME THE USER FROM THERE CAN NAVIGATE TO SEE GRAPHS
+	 */
 	private String[][] displayForecastDataonTab1(JComponent panel1, String[][] data) {
 		int i = 0;
+
+		// creates a data array such that its length is the same as that of all
+		// the elements in the
+		// object multiplied by the number of elements in the JSON array. It
+		// will have a width of 2
+		// since we use a simple table to display elements and its values
 		data = new String[forecast.getJSONArray("forecast").length()
 				* forecast.getJSONArray("forecast").getJSONObject(0).length()][2];
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 
 		for (Object fob : forecasts) {
 			JSONObject fore = (JSONObject) fob;
+			@SuppressWarnings("rawtypes")
 			Set keys = fore.keySet();
+			@SuppressWarnings("rawtypes")
 			Iterator a = keys.iterator();
 			while (a.hasNext()) {
 				String key = (String) a.next();
@@ -146,9 +152,9 @@ public class ForecastDialog extends JDialog {
 	}
 
 	/*
-	 * DISPLAYS THE GRAPHS TO THE USER, THE SHOW GRAPHS METHOD
-	 * ALLOWS THE USER TO SELECT FROM A LIST OF ALL POSSIBLE VALUE
-	 * OF GRPAHS. THE USER CAN CHOOSE A FIELD AND GRAPH THAT FIELD
+	 * DISPLAYS THE GRAPHS TO THE USER, THE SHOW GRAPHS METHOD ALLOWS THE USER
+	 * TO SELECT FROM A LIST OF ALL POSSIBLE VALUE OF GRPAHS. THE USER CAN
+	 * CHOOSE A FIELD AND GRAPH THAT FIELD
 	 */
 	public void showGraphs() {
 		JComboBox<String> comboLanguage = new JComboBox<String>();
@@ -160,7 +166,10 @@ public class ForecastDialog extends JDialog {
 		JSONObject object = forecasts.getJSONObject(0);
 
 		log.log(Level.INFO, "Graph data showing graphs");
+
+		@SuppressWarnings("rawtypes")
 		Set keys = object.keySet();
+		@SuppressWarnings("rawtypes")
 		Iterator a = keys.iterator();
 		while (a.hasNext()) {
 			String key = (String) a.next();
@@ -176,11 +185,11 @@ public class ForecastDialog extends JDialog {
 		panel4.add(panel2);
 	}
 
-/*
- * CUSTOMISES A TEXT PANEL TO DISPLAY THE TABLE.
- * IT SETS THE LAYOUT SO BOX LAYOUT SO THAT A TABLE USING BOX LAYOUT
- * CAN BE EASILY DISPLAYED ON THE FIRST TAB
- */
+	/*
+	 * CUSTOMISES A TEXT PANEL TO DISPLAY THE TABLE. IT SETS THE LAYOUT SO BOX
+	 * LAYOUT SO THAT A TABLE USING BOX LAYOUT CAN BE EASILY DISPLAYED ON THE
+	 * FIRST TAB
+	 */
 	protected JComponent makeTextPanel(String text) {
 
 		// Creates a text panel to display table
@@ -191,11 +200,11 @@ public class ForecastDialog extends JDialog {
 		panel.add(filler);
 		return panel;
 	}
-/* THE MAKE GRAPH METHOD MAKES A COMPONENT TO DISPLAY THE 
- * GRAPHS ON. THE GRAPH IS THEN DISPLAYED ON THIS PANEL
- * THE GRAPH HAS ITS LAYOUT SET TO 
- * 
- */
+
+	/*
+	 * THE MAKE GRAPH METHOD MAKES A COMPONENT TO DISPLAY THE GRAPHS ON. THE
+	 * GRAPH IS THEN DISPLAYED ON THIS PANEL THE GRAPH HAS ITS LAYOUT SET TO
+	 */
 	protected JComponent makeGraphPanel() {
 
 		// Makes a graph panel to display graphs
@@ -226,10 +235,11 @@ public class ForecastDialog extends JDialog {
 		panel.add(banner);
 		return panel;
 	}
-/*
- * CREATES AN IMAGE ICON FOR THE TAB. THE TAB DISPLAYS THE ICON
- * FOR HOURLY DATA AND THE DISPLAY GRAPHS TAB.
- */
+
+	/*
+	 * CREATES AN IMAGE ICON FOR THE TAB. THE TAB DISPLAYS THE ICON FOR HOURLY
+	 * DATA AND THE DISPLAY GRAPHS TAB.
+	 */
 	protected static ImageIcon createImageIcon(String path) {
 		log.log(Level.INFO, "Creates the icon for the tab display");
 		Image imgURL = Toolkit.getDefaultToolkit().getImage("images/icon.png");

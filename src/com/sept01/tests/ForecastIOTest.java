@@ -1,11 +1,8 @@
 package com.sept01.tests;
 
 import static org.junit.Assert.*;
-
-import java.util.HashMap;import org.hamcrest.core.Is;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.sept01.model.Forecaster;

@@ -1,9 +1,7 @@
 package com.sept01.model;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.*;
@@ -12,6 +10,11 @@ import java.net.*;
 import com.sept01.utility.ErrorLog;
 
 public class Geocoder {
+	
+	/* IMPLEMENTS GEOCODER WHICH BASICALLY RETRIEVES THE LAT AND LONG
+	 * GIVEN AN ADDRESS. WE CAN THEN USE THE LAT AND LONG TO OBTAIN FORECAST
+	 * INFORMATION ABOUT THE LOCATION
+	 */
 	private static final Logger log = Logger.getLogger("geocoder");
 	
 	/**

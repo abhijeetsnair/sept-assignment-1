@@ -1,4 +1,5 @@
 package com.sept01.model;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,49 +10,52 @@ import org.jsoup.Jsoup;
 import com.sept01.utility.ErrorLog;
 
 public class ForecastIO implements Forecaster {
+	// IMPLEMENTS LOGGING TO FILE FOR THE CLASS FORECASTIO
 	private static final Logger log = Logger.getLogger("com.sept01.model.ForecastIO");
 
+	// API KEY FOR THE CALL TO THE WEB SERVICE
 	private final String APIKEY = "699838f9a5ee6e0e948b3579477efdc0";
 
-	public JSONObject getForecast(double lat, double lon){
+	// RETRIEVES THE FORECAST INFORMATION BASED ON THE LAT AND LONG PROVIDED TO
+	// THE WEBSERVICE
+	public JSONObject getForecast(double lat, double lon) {
 		Logger.getLogger("com.sept01.model.ForecastIO").setLevel(Level.ALL);
 		log.log(Level.INFO, "Getting data");
 
 		JSONObject data = new JSONObject();
 		JSONObject cityInfo = new JSONObject();
 		JSONObject coords = new JSONObject();
-		
+
 		coords.append("lon", 0);
 		coords.append("lat", 0);
 		JSONArray forecast = new JSONArray();
 		cityInfo.append("name", "");
-		
+
 		/**
-		 * Call the API.
-		 * and store in a json object
-		 * */
+		 * Call the API. and store in a json object
+		 */
 		JSONObject temp = callApi(lat, lon);
-		
+
 		/**
 		 * Put items into the formatted json objects
-		 * **/
+		 **/
 		cityInfo.put("name", Geocoder.getName(lat, lon));
 		coords.put("lat", temp.get("latitude"));
 		coords.put("lon", temp.get("longitude"));
 		cityInfo.put("coords", coords);
 		data.put("city", cityInfo);
 		data.put("forecast", forecast);
-		
+
 		/**
 		 * Get the hourly data from the raw json from the api
-		 * **/
+		 **/
 		temp = (JSONObject) temp.get("hourly");
 		JSONArray ta = temp.getJSONArray("data");
 		System.out.println(temp.toString());
 
 		/**
 		 * Load up the forcast json objects into the forecast array
-		 * **/
+		 **/
 		System.out.println(ta.length());
 		for (Object Ob : ta) {
 			JSONObject JSOb = (JSONObject) Ob;
@@ -73,6 +77,7 @@ public class ForecastIO implements Forecaster {
 		return data;
 	}
 
+	// MAKES A DYNAMIC CALL TO THE API WITH ELEMENTS APPENDED TO THE STRING
 	private JSONObject callApi(double lat, double lon) {
 		String doc = null;
 		String url = "https://api.forecast.io/forecast/" + APIKEY + "/" + lat + "," + lon;
@@ -90,6 +95,7 @@ public class ForecastIO implements Forecaster {
 				log.log(Level.SEVERE, e2.getMessage());
 				e2.printStackTrace();
 			}
+			// REPORTS AN ERROR IF PROBLEMS CONNECTING TO THE API
 			ErrorLog.createErrorPopup(e1);
 			log.log(Level.SEVERE, e1.getMessage());
 		}

@@ -24,7 +24,15 @@ public class ScaleChartListener implements ComponentListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+/*
+ *ALLOWS SCALLING OF THE GRAPHS AT RUNTIME
+ *EVEN THOUGH THE GRAPH IS SHRINKED. THE GRAPH WILL
+ *TRY TO READJUST AND TRY TO DISPLAY MAXIMUM INFORMATION
+ *IN THE SMALL AREA AS POSSIBLE
+ * WHEN EXPNANDED THE GRAPH WILL TRY TO ZOOM ITSELF
+ * (non-Javadoc)
+ * @see java.awt.event.ComponentListener#componentResized(java.awt.event.ComponentEvent)
+ */
 	@Override
 	public void componentResized(ComponentEvent e) {
 		// TODO Auto-generated method stub
