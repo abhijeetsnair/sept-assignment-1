@@ -41,6 +41,7 @@ public class GraphSelector implements ActionListener {
 	int i = 0;
 	JPanel displayUnits;
 	DefaultCategoryDataset dataset;
+	//Implements logging  for graph selector
 	private static final Logger log = Logger.getLogger("com.sept01.view.listener.GraphSelector");
 
 	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent panel4) {

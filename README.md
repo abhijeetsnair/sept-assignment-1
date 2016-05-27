@@ -11,6 +11,8 @@ s3400586 - Jeet
 
 # Potential Bonus Marks (Marker Look Here!)
 
+Assignment 1)
+
 + 1) Implemented Singleton pattern and the MVC pattern
 + 2) Implemented JUnit tests for all the core classes and objects
 + 3) Implemented resizing of the screen and remembering the screen locations
@@ -18,6 +20,9 @@ s3400586 - Jeet
 + 5) The UI updates automatically to get the data without disturbing the main thread
 + 6) The layout of the UI is intuitive in which every panel is self-contained
 + 7) The screen is divided into locations such as EastPanel, WestPanel, SouthPanel, NorthPanel, CentrePanel
+
+Assigmment 2)
+
 
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis

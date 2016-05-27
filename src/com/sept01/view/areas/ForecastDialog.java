@@ -31,7 +31,6 @@ import javax.swing.JTable;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.sept01.view.listener.GraphSelector;
 
 /*DISPLAYS THE FORECAST DIALOG TO THE USER
@@ -158,10 +157,13 @@ public class ForecastDialog extends JDialog {
 	 */
 	public void showGraphs() {
 		JComboBox<String> comboLanguage = new JComboBox<String>();
-		JComponent panel4 = makeGraphPanel();
-		tabbedPane.addTab("Tab 2", icon, panel4, "Shows Hourly Graphs");
+		JComponent graph_panel = makeGraphPanel();
+		tabbedPane.addTab("Tab 2", icon, graph_panel, "Shows Hourly Graphs");
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-		JPanel panel2 = new JPanel();
+		JPanel selector_panel = new JPanel();
+		JPanel selector_holder = new JPanel();
+		
+		selector_panel.setLayout(new BoxLayout(selector_panel,BoxLayout.Y_AXIS));
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 		JSONObject object = forecasts.getJSONObject(0);
 
@@ -180,9 +182,12 @@ public class ForecastDialog extends JDialog {
 			log.log(Level.INFO, value);
 
 		}
-		comboLanguage.addActionListener(new GraphSelector(comboLanguage, forecast, panel4));
-		panel2.add(comboLanguage);
-		panel4.add(panel2);
+		selector_holder.add(comboLanguage);
+		selector_panel.add(selector_holder);
+		graph_panel.add(selector_panel);
+		comboLanguage.addActionListener(new GraphSelector(comboLanguage, forecast, selector_panel));
+	
+		
 	}
 
 	/*
@@ -212,15 +217,16 @@ public class ForecastDialog extends JDialog {
 		JPanel panel = new JPanel(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JPanel banner = new JPanel();
+		banner.setLayout(new BorderLayout());
+		
 		JPanel customise = new JPanel();
 		customise.setLayout(new BorderLayout());
 
 		JLabel filler = new JLabel("Show Hourly Forecast", JLabel.CENTER);
-		customise.add(filler, BorderLayout.CENTER);
+		customise.add(filler,BorderLayout.CENTER);
 		JButton button = new JButton("X");
-		customise.add(button, BorderLayout.EAST);
+		customise.add(button,BorderLayout.EAST);
 		button.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.log(Level.INFO, "Removing the tab from the tab pane");
@@ -229,11 +235,9 @@ public class ForecastDialog extends JDialog {
 			}
 		});
 
-		banner.add(customise);
-		banner.setMinimumSize(getMinimumSize());
-
+		banner.add(customise, BorderLayout.PAGE_START);
 		panel.add(banner);
-		return panel;
+		return banner;
 	}
 
 	/*
