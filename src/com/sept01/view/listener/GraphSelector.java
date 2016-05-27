@@ -1,10 +1,10 @@
 package com.sept01.view.listener;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -12,7 +12,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -21,8 +20,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.scene.shape.Box;
-
+/*
+ *ALLOWS THE USER TO SELECT GRAPHS BASED ON THE THIER CHOICE OF FILEDS 
+ * THE USER SELECTS THE GRAPH TYPE AND THIS IS DISPLAYED ON THE SCREEN
+ * THE UI UPDATES TO DISPLAY GRAPHS ON DIFFERENT DATA SUCH AS 
+ * RAIN, TEMPERATURE,HUMIDITY,ETC 
+ */
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
 	JComponent panel;
@@ -35,6 +38,7 @@ public class GraphSelector implements ActionListener {
 	int i = 0;
 	JPanel displayUnits;
 	DefaultCategoryDataset dataset;
+	private static final Logger log = Logger.getLogger("com.sept01.view.listener.GraphSelector");
 
 	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent panel4) {
 		this.comboLanguage = comboLanguage;
@@ -43,10 +47,22 @@ public class GraphSelector implements ActionListener {
 
 	}
 
+	/*
+	 * DETECTS THE SELECTION AND UPDATES THE UI TO SHOW THE PARTICULAR TYPE OF
+	 * CHART. THE CHART TYPES GETS UPDATED EACH TIME THE USER CHOOSES A
+	 * PARTICULAR TYPE THE UI SHOWS 48 VALUES FROM THE CURRENT HOUR.
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		/*
+		 * IF CHART PANEL EXISTS ON THE UI THE IT WILL REMOVE THE EXISTING PANEL
+		 * IF THE UNITS PANEL EXISTS ON THE UI THEN IT WILL REMOVE THE EXISTING
+		 * UNITS REPLACE THE EXISTING UNITS WITH THE NEW DISPLAY OF UNITS
+		 */
 		if (chartpanel != null)
 			panel.remove(chartpanel);
 		if (displayUnits != null)
@@ -55,20 +71,24 @@ public class GraphSelector implements ActionListener {
 		String item = comboLanguage.getSelectedItem().toString();
 		System.out.println("This is the selected Item" + item);
 		{
-			
-			  displayUnits = new JPanel();
+
+			displayUnits = new JPanel();
 			displayUnits.setLayout(new BoxLayout(displayUnits, BoxLayout.Y_AXIS));
 			String Xinfo = "X-label : Displays forecast information for number of hours ,past the current hour for upto 48 hours";
 			String Yinfo = "Y-label : Displays values of selected fields";
-			
+
 			x_infolabel = new JLabel(Xinfo);
-			y_infolabel =new JLabel(Yinfo);
-			
+			y_infolabel = new JLabel(Yinfo);
+
 			displayUnits.add(x_infolabel);
 			displayUnits.add(y_infolabel);
 			panel.add(displayUnits);
 			
-			
+			/*	
+			 * 	CREATES A DATASET TO DISPLAY THE FORECAST DATA
+			 * 	THE DATA UPDATES DYNAMICALLY IRERESSPECTIVE OF THE SOURCE
+			 * WHERETHER OPENWEATHER OR FORECAST IO
+			 */
 			i = 0;
 			dataset = new DefaultCategoryDataset();
 			dataset.clear();
@@ -90,784 +110,24 @@ public class GraphSelector implements ActionListener {
 				}
 
 			}
+			/*
+			 * FREE LINE CHARTS TO DISPLAY THE VALUE OF GRAPHS
+			 * IT DISPLAYS THE NO OF HOURS ON THE X AXIS
+			 * IT DISPLAYS THE VALUES ON THE Y AXIS
+			 */
 			JFreeChart lineChart = ChartFactory.createLineChart(item, "Hours past the current hour", "Values", dataset,
 					PlotOrientation.VERTICAL, true, true, false);
 			chartpanel = new ChartPanel(lineChart);
-//			chartpanel.setSize(new java.awt.Dimension(1200, 300));
 			chartpanel.setMinimumDrawWidth(1000);
 			// Chart Panel is scalable
 			chartpanel.addComponentListener(new ScaleChartListener(chartpanel));
 			panel.add(chartpanel);
 			System.out.println("\n");
-			
+
 			panel.repaint();
 			panel.revalidate();
-			
 
 		}
-
-		// private void updatetemperatureMin(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatecloudcover(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updateprecipIntensity(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatevisibility(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updateprecipprobability(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatesunriseTime(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatewindSpeed(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatemoonPhase(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatehumidity(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatepreciptime(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatesunsetTime(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		// }
-		//
-		// private void updateapparenttemperaturemintime(String field) {
-		//
-		// // FIODaily daily = new FIODaily(fio);
-		// // // In case there is no daily data available
-		// // if (daily.days() < 0) {
-		// // JLabel label = new JLabel("No daily data.");
-		// // } else {
-		// // JLabel label = new JLabel("Daily Weather Data.");
-		// // }
-		// // // Print daily data
-		// //
-		// // for (int i = 0; i < daily.days(); i++) {
-		// // String[] h = daily.getDay(i).getFieldsArray();
-		// // System.out.println("Day #" + (i + 1));
-		// // for (int j = 0; j < h.length; j++) {
-		// // if (h[j].compareToIgnoreCase(field) == 0) {
-		// // System.out.println(h[j] + " : " + daily.getDay(i).getByKey(h[j]));
-		// // }
-		// //
-		// // }
-		// //
-		// // System.out.println("\n");
-		// // }
-		// // Updatde code
-		//
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(field) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), field, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(field, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updateapparenttemperaturemin(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updatetemperaturemaxtime(String string) {
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		// }
-		//
-		// private void updateozone() {
-		// // TODO Auto-generated method stub
-		//
-		// }
-		//
-		// private void updatewindbearing(String string) {
-		//
-		//
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		//
-		//
-		//
-		//
-		// }
-		//
-		// private void updateprecipintensitymax(String string) {
-		//
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		//
-		//
-		//
-		//
-		// }
-		//
-		// private void updateicon() {
-		// // TODO Auto-generated method stub
-		//
-		// }
-		//
-		// private void updatetemperaturemax(String string) {
-		// /*
-		// * Displays graph on updates on temperature apparent temperature min
-		// * times
-		// *
-		// */
-		//
-		//
-		//
-		// if(chartpanel!=null)
-		// panel.remove(chartpanel);
-		//
-		//
-		// FIODaily daily = new FIODaily(fio);
-		// // In case there is no daily data available
-		// if (daily.days() < 0) {
-		// JLabel label = new JLabel("No daily data.");
-		// } else {
-		// JLabel label = new JLabel("Daily Weather Data.");
-		// }
-		// // Print daily data
-		// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		// for (int i = 0; i < daily.days(); i++) {
-		// String[] h = daily.getDay(i).getFieldsArray();
-		// System.out.println("Day #" + (i + 1));
-		// for (int j = 0; j < h.length; j++) {
-		// if (h[j].compareToIgnoreCase(string) == 0) {
-		//
-		// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		// dataset.addValue(Double.parseDouble(temp[0]), string, "Day #" + (i +
-		// 1));
-		// System.out.println(h[j] + " : " + Double.parseDouble(temp[0]));
-		// }
-		//
-		// }
-		// }
-		//
-		// JFreeChart lineChart = ChartFactory.createLineChart(string, "Day",
-		// "Time", dataset,
-		// PlotOrientation.VERTICAL, true, true, false);
-		// chartpanel = new ChartPanel(lineChart);
-		// panel.add(chartpanel);
-		// System.out.println("\n");
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//// FIODaily daily = new FIODaily(fio);
-		//// // In case there is no daily data available
-		//// if (daily.days() < 0) {
-		//// JLabel label = new JLabel("No daily data.");
-		//// } else {
-		//// JLabel label = new JLabel("Daily Weather Data.");
-		//// }
-		//// // Print daily data
-		//// DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		////
-		//// for (int i = 0; i < daily.days(); i++) {
-		//// String[] h = daily.getDay(i).getFieldsArray();
-		//// System.out.println("Day #" + (i + 1));
-		//// for (int j = 0; j < h.length; j++) {
-		////
-		//// System.out.println(h[j] + " : " + daily.getDay(i).getByKey(h[j]));
-		//// String temp[] = daily.getDay(i).getByKey(h[j]).split(":");
-		//// dataset.addValue(Double.parseDouble(temp[0]), string, h[j]);
-		//// }
-		////
-		//// JFreeChart lineChart = ChartFactory.createLineChart(string,
-		// "Degrees", "Day", dataset,
-		//// PlotOrientation.VERTICAL, true, true, false);
-		////
-		//// ChartPanel chartPanel = new ChartPanel(lineChart);
-		//// chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-		//// panel.add(chartPanel);
-		//// panel.repaint();
-		//// panel.revalidate();
-		////
-		//// System.out.println("\n");
-		//// }
-		//
-		//
 
 	}
 

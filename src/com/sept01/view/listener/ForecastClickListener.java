@@ -11,7 +11,6 @@ import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
 import com.sept01.view.areas.Dialog;
 import com.sept01.view.areas.ForecastDialog;
-import com.sept01.view.areas.ForecastOptionDialog;
 
 
 public class ForecastClickListener implements ActionListener{
@@ -23,7 +22,6 @@ public class ForecastClickListener implements ActionListener{
 		this.lat =lat;
 		this.lon=lon;
 		this.dialog=dialog;
-		
 		
 	}
 

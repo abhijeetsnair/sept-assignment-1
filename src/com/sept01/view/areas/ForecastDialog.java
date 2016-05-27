@@ -1,5 +1,6 @@
 package com.sept01.view.areas;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -14,6 +15,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -32,7 +35,16 @@ import org.json.JSONObject;
 
 import com.sept01.view.listener.GraphSelector;
 
+/*DISPLAYS THE FORECAST DIALOG TO THE USER
+ * THE FORECAST DIALOG CLASS IS  COMMON TO 
+ * BOTH THE FORECAST IO AND OPENWEATHER IO
+ * THE FORECAST USES AN FACTORY INSTANCES SUCH THAT 
+ * THE ELEMENTS COMMON TO BOTH FORECASTIO AND OPENWEATHER 
+ * GET DISPLAYED
+ */
+
 public class ForecastDialog extends JDialog {
+	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
 
 	private static final long serialVersionUID = 1L;
 	JSONObject forecast;
@@ -50,7 +62,7 @@ public class ForecastDialog extends JDialog {
 		this.setLayout(new GridLayout(1, 1));
 		tabbedPane = new JTabbedPane();
 		icon = createImageIcon("images/icon.png");
-
+		log.log(Level.INFO, "Displaying the hourly forecast");
 		JComponent panel1 = makeTextPanel("Hourly Forecast");
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -68,46 +80,30 @@ public class ForecastDialog extends JDialog {
 		buttonPanel.add(button);
 		panel1.add(buttonPanel);
 
+		
+		// DISPLAYS GRAPHS ON A NEW TAB THE USER CAN SELECT GRAPHS THEY WANT TO SEE
 		button.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showGraphs();
-
 			}
 
 		});
 
-		// JComponent panel2 = makeTextPanel("Panel #2");
-		// tabbedPane.addTab("Tab 2", icon, panel2,
-		// "Does twice as much nothing");
-		// tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-		//
-		// JComponent panel3 = makeTextPanel("Panel #3");
-		// tabbedPane.addTab("Tab 3", icon, panel3,
-		// "Still does nothing");
-		// tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-		//
-		// JComponent panel4 = makeTextPanel(
-		// "Panel #4 (has a preferred size of 410 x 50).");
-		// panel4.setPreferredSize(new Dimension(410, 50));
-		// tabbedPane.addTab("Tab 4", icon, panel4,
-		// "Does nothing at all");
-		// tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-
-		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
-		// The following line enables to use scrolling tabs.
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
-		// Showing the data on the Panel
 
 		setLocationRelativeTo(null);
 		setSize(new Dimension(720, 720));
 
 	}
-
+/*
+ * DISPLAYS THE FORECAST DATA IN THE FORM OF THE DATA ON THE
+ * FIRST TAB. THE USER IS CONFRONTED WILL ALL THE DATA
+ * UNTILL 48 HOURS FROM THE CURRENT TIME
+ * THE USER FROM THERE CAN NAVIGATE TO SEE GRAPHS
+ */
 	private String[][] displayForecastDataonTab1(JComponent panel1, String[][] data) {
 		int i = 0;
 		data = new String[forecast.getJSONArray("forecast").length()
@@ -122,14 +118,17 @@ public class ForecastDialog extends JDialog {
 				String key = (String) a.next();
 				// loop to get the dynamic key
 				String value = fore.get(key).toString();
-				System.out.print("key : " + key);
-				System.out.println(" value :" + value);
+
+				log.log(Level.INFO, key);
+				log.log(Level.INFO, value);
+
 				if (key == "dateTime") {
-					Date date = new Date(Long.parseLong(value)*1000);
+					Date date = new Date(Long.parseLong(value) * 1000);
 					DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					format.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
 					String formatted = format.format(date);
-					System.out.println(formatted);
+					// displaying formatted date and time
+					log.log(Level.INFO, formatted);
 					data[i][0] = "Forecast date and time ";
 					data[i][1] = formatted;
 					i++;
@@ -146,88 +145,21 @@ public class ForecastDialog extends JDialog {
 
 	}
 
-	// private String[][] displayForecastDataonTab2(JComponent panel2,
-	// String[][] data) {
-	//
-	// // fio = new ForecastIO("5370c63bf884c9970205d009908f1575");
-	//
-	// System.out.println("Latitude: " + fio.getLatitude());
-	// System.out.println("Longitude: " + fio.getLongitude());
-	// System.out.println("Timezone: " + fio.getTimezone());
-	// System.out.println("Offset: " + fio.offset());
-	//
-	// // FIOCurrently currently = new FIOCurrently(fio);
-	// // // Print currently data
-	// // System.out.println("\nCurrently\n");
-	// // String[] f = currently.get().getFieldsArray();
-	// // data = new String[f.length][2];
-	// // for (int i = 0; i < f.length; i++) {
-	// // System.out.println("Displays" + f[i]);
-	// // System.out.println("Displays" + currently.get().getByKey(f[i]));
-	// // data[i][0] = f[i];
-	// // data[i][1] = currently.get().getByKey(f[i]);
-	// // }
-	//
-	// // This is the daily report we need for the assignment
-	// FIODaily daily = new FIODaily(fio);
-	// // In case there is no daily data available
-	// if (daily.days() < 0) {
-	// JLabel label = new JLabel("No daily data.");
-	// } else {
-	// JLabel label = new JLabel("Daily Weather Data.");
-	// }
-	// int d = 0;
-	// // Print daily data
-	//
-	// data = new String[daily.days() *
-	// daily.getDay(1).getFieldsArray().length][2];
-	// for (int i = 0; i < daily.days(); i++) {
-	// String[] h = daily.getDay(i).getFieldsArray();
-	// data[d][0] = "Day #" + (i + 1);
-	// data[d][1] = "28/07/2014";
-	// d++;
-	// System.out.println("Day #" + (i + 1));
-	// for (int j = 0; j < h.length; j++) {
-	// data[d][0] = h[j];
-	// data[d][1] = daily.getDay(i).getByKey(h[j]);
-	// d++;
-	// }
-	//
-	// System.out.println("\n");
-	// }
-	//
-	// return data;
-	//
-	// }
-	//
-	// public void showDailyForecast() {
-	//
-	// JComponent panel2 = makeTextPanel("Daily Forecast");
-	// dailyData = displayForecastDataonTab2(panel2, dailyData);
-	// tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
-	//
-	// String[] coloumns = { "Parameter", "Value" };
-	// Color background = Color.decode("#3d3f47");
-	// Color foreground = Color.orange;
-	// jt = new JTable(dailyData, coloumns);
-	// JScrollPane jps = new JScrollPane(jt);
-	// panel2.add(jps);
-	//
-	// tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-	// }
-	//
+	/*
+	 * DISPLAYS THE GRAPHS TO THE USER, THE SHOW GRAPHS METHOD
+	 * ALLOWS THE USER TO SELECT FROM A LIST OF ALL POSSIBLE VALUE
+	 * OF GRPAHS. THE USER CAN CHOOSE A FIELD AND GRAPH THAT FIELD
+	 */
 	public void showGraphs() {
-
 		JComboBox<String> comboLanguage = new JComboBox<String>();
-		JComponent panel4 = makeTextPanel("Shows Hourly Graphs");
+		JComponent panel4 = makeGraphPanel();
 		tabbedPane.addTab("Tab 2", icon, panel4, "Shows Hourly Graphs");
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		JPanel panel2 = new JPanel();
-
 		JSONArray forecasts = forecast.getJSONArray("forecast");
-
 		JSONObject object = forecasts.getJSONObject(0);
 
+		log.log(Level.INFO, "Graph data showing graphs");
 		Set keys = object.keySet();
 		Iterator a = keys.iterator();
 		while (a.hasNext()) {
@@ -235,25 +167,71 @@ public class ForecastDialog extends JDialog {
 			// loop to get the dynamic key
 			String value = object.get(key).toString();
 			comboLanguage.addItem(key);
+			log.log(Level.INFO, key);
+			log.log(Level.INFO, value);
 
 		}
-
 		comboLanguage.addActionListener(new GraphSelector(comboLanguage, forecast, panel4));
 		panel2.add(comboLanguage);
 		panel4.add(panel2);
-
 	}
 
+/*
+ * CUSTOMISES A TEXT PANEL TO DISPLAY THE TABLE.
+ * IT SETS THE LAYOUT SO BOX LAYOUT SO THAT A TABLE USING BOX LAYOUT
+ * CAN BE EASILY DISPLAYED ON THE FIRST TAB
+ */
 	protected JComponent makeTextPanel(String text) {
+
+		// Creates a text panel to display table
+		log.log(Level.INFO, "Creating a text panel to display table");
 		JPanel panel = new JPanel(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		JLabel filler = new JLabel(text,JLabel.CENTER);
+		JLabel filler = new JLabel(text, JLabel.CENTER);
 		panel.add(filler);
 		return panel;
 	}
+/* THE MAKE GRAPH METHOD MAKES A COMPONENT TO DISPLAY THE 
+ * GRAPHS ON. THE GRAPH IS THEN DISPLAYED ON THIS PANEL
+ * THE GRAPH HAS ITS LAYOUT SET TO 
+ * 
+ */
+	protected JComponent makeGraphPanel() {
 
+		// Makes a graph panel to display graphs
+		log.log(Level.INFO, "Creating a graph panel to display graphs");
+		JPanel panel = new JPanel(false);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JPanel banner = new JPanel();
+		JPanel customise = new JPanel();
+		customise.setLayout(new BorderLayout());
+
+		JLabel filler = new JLabel("Show Hourly Forecast", JLabel.CENTER);
+		customise.add(filler, BorderLayout.CENTER);
+		JButton button = new JButton("X");
+		customise.add(button, BorderLayout.EAST);
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				log.log(Level.INFO, "Removing the tab from the tab pane");
+				tabbedPane.remove(1);
+
+			}
+		});
+
+		banner.add(customise);
+		banner.setMinimumSize(getMinimumSize());
+
+		panel.add(banner);
+		return panel;
+	}
+/*
+ * CREATES AN IMAGE ICON FOR THE TAB. THE TAB DISPLAYS THE ICON
+ * FOR HOURLY DATA AND THE DISPLAY GRAPHS TAB.
+ */
 	protected static ImageIcon createImageIcon(String path) {
-
+		log.log(Level.INFO, "Creates the icon for the tab display");
 		Image imgURL = Toolkit.getDefaultToolkit().getImage("images/icon.png");
 		if (imgURL != null) {
 			return new ImageIcon(imgURL);
