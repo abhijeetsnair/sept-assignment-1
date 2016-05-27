@@ -1,12 +1,17 @@
 package com.sept01.view.listener;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -16,31 +21,54 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.scene.shape.Box;
+
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
 	JComponent panel;
 	JSONObject forecast;
 	ChartPanel chartpanel;
+	JPanel panel3;
+	JScrollPane pane;
+	JLabel x_infolabel;
+	JLabel y_infolabel;
 	int i = 0;
+	JPanel displayUnits;
 	DefaultCategoryDataset dataset;
 
-	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent panel3) {
+	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent panel4) {
 		this.comboLanguage = comboLanguage;
 		this.forecast = forecast;
-		this.panel = panel3;
+		this.panel = panel4;
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
-		if(chartpanel!=null)
+
+		if (chartpanel != null)
 			panel.remove(chartpanel);
-		
+		if (displayUnits != null)
+			panel.remove(displayUnits);
+
 		String item = comboLanguage.getSelectedItem().toString();
 		System.out.println("This is the selected Item" + item);
-		{	
+		{
+			
+			  displayUnits = new JPanel();
+			displayUnits.setLayout(new BoxLayout(displayUnits, BoxLayout.Y_AXIS));
+			String Xinfo = "X-label : Displays forecast information for number of hours ,past the current hour for upto 48 hours";
+			String Yinfo = "Y-label : Displays values of selected fields";
+			
+			x_infolabel = new JLabel(Xinfo);
+			y_infolabel =new JLabel(Yinfo);
+			
+			displayUnits.add(x_infolabel);
+			displayUnits.add(y_infolabel);
+			panel.add(displayUnits);
+			
+			
 			i = 0;
 			dataset = new DefaultCategoryDataset();
 			dataset.clear();
@@ -62,11 +90,19 @@ public class GraphSelector implements ActionListener {
 				}
 
 			}
-			JFreeChart lineChart = ChartFactory.createLineChart(item, "Day", "Time", dataset, PlotOrientation.VERTICAL,
-					true, true, false);
+			JFreeChart lineChart = ChartFactory.createLineChart(item, "Hours past the current hour", "Values", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
 			chartpanel = new ChartPanel(lineChart);
+//			chartpanel.setSize(new java.awt.Dimension(1200, 300));
+			chartpanel.setMinimumDrawWidth(1000);
+			// Chart Panel is scalable
+			chartpanel.addComponentListener(new ScaleChartListener(chartpanel));
 			panel.add(chartpanel);
 			System.out.println("\n");
+			
+			panel.repaint();
+			panel.revalidate();
+			
 
 		}
 

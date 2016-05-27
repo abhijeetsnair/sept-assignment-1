@@ -8,8 +8,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -40,7 +44,7 @@ public class ForecastDialog extends JDialog {
 	JTabbedPane tabbedPane;
 
 	public ForecastDialog(JSONObject forecast) {
-	 this.forecast =forecast;
+		this.forecast = forecast;
 
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
@@ -48,7 +52,7 @@ public class ForecastDialog extends JDialog {
 		icon = createImageIcon("images/icon.png");
 
 		JComponent panel1 = makeTextPanel("Hourly Forecast");
-		tabbedPane.addTab("Tab 1", icon, panel1, "Shows Hourly Forecast");
+		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
 		currentData = displayForecastDataonTab1(panel1, currentData);
@@ -60,7 +64,7 @@ public class ForecastDialog extends JDialog {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 1));
-		JButton button = new JButton("Show Daily Forecast");
+		JButton button = new JButton("Show Hourly Graphs");
 		buttonPanel.add(button);
 		panel1.add(buttonPanel);
 
@@ -104,159 +108,146 @@ public class ForecastDialog extends JDialog {
 
 	}
 
-	//
-	//
-	//
-	// private String[][] getTData(String data[][]) {
-	//
-	// FIOCurrently currently = new FIOCurrently(fio);
-	// //Print currently data
-	// System.out.println("\nCurrently\n");
-	//
-	// String [] f = currently.get().getFieldsArray();
-	// data = new String[f.length][19];
-	// for(int i = 0; i<f.length;i++){
-	// data[i][0 ]= currently.get().getByKey(f[i]);
-	//
-	// }
-	// return data;
-	//
-	// }
-	//
-	//
-	
 	private String[][] displayForecastDataonTab1(JComponent panel1, String[][] data) {
-		int i=0;
-		data = new String[forecast .getJSONArray("forecast").length()* forecast .getJSONArray("forecast").getJSONObject(0).length()][2];
-		JSONArray forecasts = forecast .getJSONArray("forecast");
-		
-		
-		for(Object fob : forecasts){
+		int i = 0;
+		data = new String[forecast.getJSONArray("forecast").length()
+				* forecast.getJSONArray("forecast").getJSONObject(0).length()][2];
+		JSONArray forecasts = forecast.getJSONArray("forecast");
+
+		for (Object fob : forecasts) {
 			JSONObject fore = (JSONObject) fob;
 			Set keys = fore.keySet();
-		    Iterator a = keys.iterator();
-		    while(a.hasNext()) {
-		    	String key = (String)a.next();
-		        // loop to get the dynamic key
-		        String value =  fore.get(key).toString();
-		        System.out.print("key : "+key);
-		        System.out.println(" value :"+value);
-				data[i][0] = key;
-				data[i][1] = value;
-		        i++;
-		        
-		    }
-			
-			
+			Iterator a = keys.iterator();
+			while (a.hasNext()) {
+				String key = (String) a.next();
+				// loop to get the dynamic key
+				String value = fore.get(key).toString();
+				System.out.print("key : " + key);
+				System.out.println(" value :" + value);
+				if (key == "dateTime") {
+					Date date = new Date(Long.parseLong(value)*1000);
+					DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+					format.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
+					String formatted = format.format(date);
+					System.out.println(formatted);
+					data[i][0] = "Forecast date and time ";
+					data[i][1] = formatted;
+					i++;
+				} else {
+					data[i][0] = key;
+					data[i][1] = value;
+					i++;
+				}
+			}
+
 		}
-		
-		
-		
 
 		return data;
 
 	}
 
-//	private String[][] displayForecastDataonTab2(JComponent panel2, String[][] data) {
-//
-//		// fio = new ForecastIO("5370c63bf884c9970205d009908f1575");
-//
-//		System.out.println("Latitude: " + fio.getLatitude());
-//		System.out.println("Longitude: " + fio.getLongitude());
-//		System.out.println("Timezone: " + fio.getTimezone());
-//		System.out.println("Offset: " + fio.offset());
-//
-//		// FIOCurrently currently = new FIOCurrently(fio);
-//		// // Print currently data
-//		// System.out.println("\nCurrently\n");
-//		// String[] f = currently.get().getFieldsArray();
-//		// data = new String[f.length][2];
-//		// for (int i = 0; i < f.length; i++) {
-//		// System.out.println("Displays" + f[i]);
-//		// System.out.println("Displays" + currently.get().getByKey(f[i]));
-//		// data[i][0] = f[i];
-//		// data[i][1] = currently.get().getByKey(f[i]);
-//		// }
-//
-//		// This is the daily report we need for the assignment
-//		FIODaily daily = new FIODaily(fio);
-//		// In case there is no daily data available
-//		if (daily.days() < 0) {
-//			JLabel label = new JLabel("No daily data.");
-//		} else {
-//			JLabel label = new JLabel("Daily Weather Data.");
-//		}
-//		int d = 0;
-//		// Print daily data
-//
-//		data = new String[daily.days() * daily.getDay(1).getFieldsArray().length][2];
-//		for (int i = 0; i < daily.days(); i++) {
-//			String[] h = daily.getDay(i).getFieldsArray();
-//			data[d][0] = "Day #" + (i + 1);
-//			data[d][1] = "28/07/2014";
-//			d++;
-//			System.out.println("Day #" + (i + 1));
-//			for (int j = 0; j < h.length; j++) {
-//				data[d][0] = h[j];
-//				data[d][1] = daily.getDay(i).getByKey(h[j]);
-//				d++;
-//			}
-//
-//			System.out.println("\n");
-//		}
-//
-//		return data;
-//
-//	}
-//
-//	public void showDailyForecast() {
-//
-//		JComponent panel2 = makeTextPanel("Daily Forecast");
-//		dailyData = displayForecastDataonTab2(panel2, dailyData);
-//		tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
-//
-//		String[] coloumns = { "Parameter", "Value" };
-//		Color background = Color.decode("#3d3f47");
-//		Color foreground = Color.orange;
-//		jt = new JTable(dailyData, coloumns);
-//		JScrollPane jps = new JScrollPane(jt);
-//		panel2.add(jps);
-//
-//		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-//	}
-//
+	// private String[][] displayForecastDataonTab2(JComponent panel2,
+	// String[][] data) {
+	//
+	// // fio = new ForecastIO("5370c63bf884c9970205d009908f1575");
+	//
+	// System.out.println("Latitude: " + fio.getLatitude());
+	// System.out.println("Longitude: " + fio.getLongitude());
+	// System.out.println("Timezone: " + fio.getTimezone());
+	// System.out.println("Offset: " + fio.offset());
+	//
+	// // FIOCurrently currently = new FIOCurrently(fio);
+	// // // Print currently data
+	// // System.out.println("\nCurrently\n");
+	// // String[] f = currently.get().getFieldsArray();
+	// // data = new String[f.length][2];
+	// // for (int i = 0; i < f.length; i++) {
+	// // System.out.println("Displays" + f[i]);
+	// // System.out.println("Displays" + currently.get().getByKey(f[i]));
+	// // data[i][0] = f[i];
+	// // data[i][1] = currently.get().getByKey(f[i]);
+	// // }
+	//
+	// // This is the daily report we need for the assignment
+	// FIODaily daily = new FIODaily(fio);
+	// // In case there is no daily data available
+	// if (daily.days() < 0) {
+	// JLabel label = new JLabel("No daily data.");
+	// } else {
+	// JLabel label = new JLabel("Daily Weather Data.");
+	// }
+	// int d = 0;
+	// // Print daily data
+	//
+	// data = new String[daily.days() *
+	// daily.getDay(1).getFieldsArray().length][2];
+	// for (int i = 0; i < daily.days(); i++) {
+	// String[] h = daily.getDay(i).getFieldsArray();
+	// data[d][0] = "Day #" + (i + 1);
+	// data[d][1] = "28/07/2014";
+	// d++;
+	// System.out.println("Day #" + (i + 1));
+	// for (int j = 0; j < h.length; j++) {
+	// data[d][0] = h[j];
+	// data[d][1] = daily.getDay(i).getByKey(h[j]);
+	// d++;
+	// }
+	//
+	// System.out.println("\n");
+	// }
+	//
+	// return data;
+	//
+	// }
+	//
+	// public void showDailyForecast() {
+	//
+	// JComponent panel2 = makeTextPanel("Daily Forecast");
+	// dailyData = displayForecastDataonTab2(panel2, dailyData);
+	// tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
+	//
+	// String[] coloumns = { "Parameter", "Value" };
+	// Color background = Color.decode("#3d3f47");
+	// Color foreground = Color.orange;
+	// jt = new JTable(dailyData, coloumns);
+	// JScrollPane jps = new JScrollPane(jt);
+	// panel2.add(jps);
+	//
+	// tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+	// }
+	//
 	public void showGraphs() {
 
 		JComboBox<String> comboLanguage = new JComboBox<String>();
-		JComponent panel3 = makeTextPanel("Shows Hourly Graphs");
-		tabbedPane.addTab("Tab 2", icon, panel3, "Shows Hourly Graphs");
+		JComponent panel4 = makeTextPanel("Shows Hourly Graphs");
+		tabbedPane.addTab("Tab 2", icon, panel4, "Shows Hourly Graphs");
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		JPanel panel2 = new JPanel();
-	
-		JSONArray forecasts = forecast .getJSONArray("forecast");
-		
-		JSONObject object  = forecasts.getJSONObject(0);
-		
-			Set keys = object.keySet();
-		    Iterator a = keys.iterator();
-		    while(a.hasNext()) {
-		    	String key = (String)a.next();
-		        // loop to get the dynamic key
-		        String value =  object.get(key).toString();
-		        comboLanguage.addItem(key);
-		        
-		    }
- 
-		comboLanguage.addActionListener(new GraphSelector(comboLanguage,forecast, panel3));
+
+		JSONArray forecasts = forecast.getJSONArray("forecast");
+
+		JSONObject object = forecasts.getJSONObject(0);
+
+		Set keys = object.keySet();
+		Iterator a = keys.iterator();
+		while (a.hasNext()) {
+			String key = (String) a.next();
+			// loop to get the dynamic key
+			String value = object.get(key).toString();
+			comboLanguage.addItem(key);
+
+		}
+
+		comboLanguage.addActionListener(new GraphSelector(comboLanguage, forecast, panel4));
 		panel2.add(comboLanguage);
-		panel3.add(panel2);
+		panel4.add(panel2);
 
 	}
 
 	protected JComponent makeTextPanel(String text) {
 		JPanel panel = new JPanel(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		JLabel filler = new JLabel(text);
+		JLabel filler = new JLabel(text,JLabel.CENTER);
 		panel.add(filler);
 		return panel;
 	}
@@ -272,10 +263,3 @@ public class ForecastDialog extends JDialog {
 		}
 	}
 }
-
-
-
-	
-	
-	
-	
