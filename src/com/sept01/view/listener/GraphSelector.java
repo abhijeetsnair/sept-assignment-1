@@ -21,7 +21,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.scene.shape.Box;
 
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
