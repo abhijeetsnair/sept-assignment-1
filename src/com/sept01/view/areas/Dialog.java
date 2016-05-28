@@ -237,7 +237,7 @@ public class Dialog extends JDialog {
 		// set action listener on the button
 		closeMe.addActionListener(new JDialogListener(this,dataset));
 
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		JSplitPane splitPaneV = new JSplitPane(JSplitPane. HORIZONTAL_SPLIT);
 		splitPaneV.setOneTouchExpandable(true);
 		splitPaneV.setLeftComponent(infoPane);
 		splitPaneV.setDividerLocation(500);
