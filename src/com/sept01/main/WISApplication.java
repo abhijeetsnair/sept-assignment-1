@@ -15,6 +15,7 @@ import com.sept01.model.State;
 import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
+import com.sept01.view.InitOptionsView;
 import com.sept01.view.MainView;
 
 
@@ -46,6 +47,10 @@ public class WISApplication {
 	public WISApplication() {
 //		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
 //		forecaster.getHourly();
+	  
+	  
+	  
+	  
 		Singleton.getInstance().setApplication(this);
 //		
 //		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
@@ -114,8 +119,12 @@ public class WISApplication {
 		prefs.readFavourites();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
-		MainView view = new MainView();
-		view.setVisible(true);
+		
+		InitOptionsView initOptionsView = new InitOptionsView();
+		initOptionsView.setVisible(true);
+		
+/*		MainView view = new MainView();
+		view.setVisible(true);*/
 
 	}
 
