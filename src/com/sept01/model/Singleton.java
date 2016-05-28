@@ -34,6 +34,8 @@ public class Singleton {
 	private com.sept01.view.areas.NorthPanel NorthPanel;
 	private com.sept01.view.areas.SouthPanel SouthPanel;
 	private static WISApplication application;
+	
+	public int source = -1;
 
 	private Weather weather;
 

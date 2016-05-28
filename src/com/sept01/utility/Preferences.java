@@ -68,10 +68,19 @@ public class Preferences {
 
 				++i;
 				if (i == 1) {
-					Singleton.getInstance().setXloc(Integer.parseInt(loc));
+				  Singleton.getInstance().setXloc(Integer.parseInt(loc));
+				  
+				  if (Singleton.getInstance().getXloc() < 0) {
+				    Singleton.getInstance().setXloc(200);
+				  }
 
 				} else {
 					Singleton.getInstance().setYloc(Integer.parseInt(loc));
+					
+					if (Singleton.getInstance().getYloc() < 0) {
+            Singleton.getInstance().setYloc(200);
+          }
+					
 				}
 
 				if(WISApplication.debug == true){

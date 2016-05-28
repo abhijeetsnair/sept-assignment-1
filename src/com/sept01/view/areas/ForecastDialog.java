@@ -1,6 +1,8 @@
 package com.sept01.view.areas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -28,6 +30,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,13 +68,62 @@ public class ForecastDialog extends JDialog {
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
 		tabbedPane = new JTabbedPane();
+		
 		icon = createImageIcon("images/icon.png");
 		log.log(Level.INFO, "Displaying the hourly forecast for "+ weatherStation);
 		JComponent panel1 = makeTextPanel("Hourly Forecast for "+ weatherStation);
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
+		
+		
+//		tabbedPane.setBackground(new Color(32, 32, 72));
+		
+		panel1.setBackground(new Color(64, 64, 72));
+		panel1.setForeground(Color.LIGHT_GRAY);
+		
 		jt = new JTable(currentData, coloumns);
+		
+		DefaultTableModel tableModel = new DefaultTableModel() {
+
+	    @Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
+
+		
+//		jt.setModel(tableModel);
+	 
+	jt.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer()
+  {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+    {
+        final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        c.setBackground(new Color(32, 32, 40));
+        c.setForeground(Color.ORANGE);
+//        c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new Color(92, 92, 100));
+//        c.setForeground(row % 9 == 0 ? Color.ORANGE : Color.LIGHT_GRAY);
+        return c;
+    }
+});
+	
+	jt.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
+	{
+	    @Override
+	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	    {
+	        final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	        c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new Color(92, 92, 100));
+          c.setForeground(row % 9 == 0 ? Color.ORANGE : Color.LIGHT_GRAY);
+	        return c;
+	    }
+	});
+
+		
+		
 		JScrollPane jps = new JScrollPane(jt);
 		panel1.add(jps);
 		JPanel buttonPanel = new JPanel();
@@ -98,6 +152,27 @@ public class ForecastDialog extends JDialog {
 
 	}
 	
+	public class MyModel extends AbstractTableModel{
+
+    @Override
+    public int getRowCount() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    @Override
+    public int getColumnCount() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+      // TODO Auto-generated method stub
+      return null;
+    }
+    //not necessary
+}
 	
 	public String getWeatherStation() {
 		return weatherStation;
@@ -217,6 +292,7 @@ public class ForecastDialog extends JDialog {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JLabel filler = new JLabel(text, JLabel.CENTER);
 		panel.add(filler);
+		filler.setForeground(Color.LIGHT_GRAY);
 		return panel;
 	}
 
@@ -235,11 +311,22 @@ public class ForecastDialog extends JDialog {
 		
 		JPanel customise = new JPanel();
 		customise.setLayout(new BorderLayout());
+		
+	
+		
 
 		JLabel filler = new JLabel("Show Hourly Graphs for "+weatherStation, JLabel.CENTER);
 		customise.add(filler,BorderLayout.CENTER);
 		JButton button = new JButton("X");
 		customise.add(button,BorderLayout.EAST);
+		
+		
+		panel.setBackground(new Color(32, 32, 40));
+		
+		filler.setBackground(new Color(32, 32, 40));
+		filler.setForeground(Color.LIGHT_GRAY);
+		
+		
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
