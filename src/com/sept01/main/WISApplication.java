@@ -1,22 +1,17 @@
 package com.sept01.main;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import com.sept01.model.Favourites;
-import com.sept01.model.Forecaster;
-import com.sept01.model.ForecasterFactory;
-import com.sept01.model.Geocoder;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
 import com.sept01.view.InitOptionsView;
-import com.sept01.view.MainView;
 
 
 

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,6 +42,7 @@ import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.ForecastClickListener;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
+import com.sun.org.apache.xalan.internal.utils.FeatureManager.Feature;
 
 public class Dialog extends JDialog {
 	/**
@@ -200,7 +204,7 @@ public class Dialog extends JDialog {
 		labelNGraph.setForeground(foreground);
 		JPanel graphLabel = new JPanel();
 		graphLabel.setLayout(new BorderLayout());
-		JLabel label = new JLabel("Temperature graphs for 9 am,3pm,max and min", JLabel.CENTER);
+		JLabel label = new JLabel("Choose Graph to Display", JLabel.CENTER);
 		label.setForeground(foreground);
 		graphLabel.add(label);
 		graphLabel.setBackground(background);
@@ -208,8 +212,11 @@ public class Dialog extends JDialog {
 
 		JPanel tempgraphs = new JPanel();
 		tempgraphs.setLayout(new BoxLayout(tempgraphs, BoxLayout.X_AXIS));
-		show9pm3pmGraph(tempgraphs, data);
-		showMaxMinGraph(tempgraphs, data);
+		// Getting rid of maximum and minimum temperatures
+		displayRemoveablegraphs(tempgraphs,data);
+		
+//		show9pm3pmGraph(tempgraphs, data);
+//		showMaxMinGraph(tempgraphs, data);
 
 		labelNGraph.add(graphLabel);
 		labelNGraph.add(tempgraphs);
@@ -298,6 +305,236 @@ public class Dialog extends JDialog {
 			}
 
 		});
+	}
+
+	private void displayRemoveablegraphs(JPanel tempgraphs, String data[][]) {
+		 
+	
+		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_dir", "wind_spd_kmh", "gust_kmh","wind_spd_kt","gust_kt", "press_qnh", "press_msl", "rain_trace", "cloud", "cloud_base_m" , "cloud_oktas", "cloud_type", "vis_km"};
+		//Create the combo box, select item at index 4.
+		//Indices start at 0, so 4 specifies the pig.
+		JComboBox fields_list = new JComboBox(fields);
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+		tempgraphs.add(fields_list);
+		//if the value selected is from the above then
+		fields_list.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ChartPanel chartPanel = null;
+				String selectedBook = (String) fields_list.getSelectedItem();
+				if(selectedBook.equalsIgnoreCase(fields[0]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][1]);
+							dataset.addValue( Double.parseDouble(data[i][1]) , fields[0] ,Integer.toString(i) );
+						 
+					}
+				}
+				
+				if(selectedBook.equalsIgnoreCase(fields[1]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][2]);
+						 
+							dataset.addValue( Double.parseDouble(data[i][2]) , fields[1] ,Integer.toString(i) );
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[2]))
+				{
+				
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][3]);
+							dataset.addValue( Double.parseDouble(data[i][3]) , fields[2] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[3]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][4]);
+							dataset.addValue( Double.parseDouble(data[i][4]) , fields[3] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[4]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][5]);
+							dataset.addValue( Double.parseDouble(data[i][5]) , fields[4] ,Integer.toString(i) );
+
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[5]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][6]);
+							dataset.addValue( Double.parseDouble(data[i][6]) , fields[5] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[6]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][7]);
+							dataset.addValue( Double.parseDouble(data[i][7]) , fields[6] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[7]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][8]);
+							dataset.addValue( Double.parseDouble(data[i][8]) , fields[7] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[8]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][9]);
+							dataset.addValue( Double.parseDouble(data[i][9]) , fields[8] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[9]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][10]);
+							dataset.addValue( Double.parseDouble(data[i][10]) , fields[9] ,Integer.toString(i) );
+
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[10]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][11]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[11]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][12]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[12]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][13]);
+						 
+					}
+				}
+				
+				if(selectedBook.equalsIgnoreCase(fields[13]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][14]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[14]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][15]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[15]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][16]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[16]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][17]);
+						 
+					}
+				}
+				if(selectedBook.equalsIgnoreCase(fields[17]))
+				{
+					for(int i=0;i<data.length;i++)
+					{	
+						 
+							System.out.println(data[i][18]);
+						 
+					}
+				}
+				
+				
+				JFreeChart lineChart = ChartFactory.createLineChart(
+						selectedBook,
+				         "Points",selectedBook,
+				         dataset,
+				         PlotOrientation.VERTICAL,
+				         true,true,false);
+				
+				         if(chartPanel!=null)
+				         {
+				        	 tempgraphs.remove(chartPanel);
+				         }
+				         chartPanel = new ChartPanel( lineChart );
+				      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+				      tempgraphs.add(chartPanel);
+				      tempgraphs.repaint();
+				      tempgraphs.revalidate();
+					
+			}
+		});
+		
+		
+	
+	
+	
+		
+		
+		
+		
 	}
 
 	/**
