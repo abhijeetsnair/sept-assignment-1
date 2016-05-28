@@ -1,0 +1,12 @@
+Additions to the Assignment :
+Product Quality
+
+1)Forecaster
+2)ForecasterFactory
+3)Geocoder
+4)ForecastIO
+5)Geocoder.java
+6)OpenWeatherMap
+7)ForecastDialog
+8)ForecastClickListener
+9) GraphSelector
