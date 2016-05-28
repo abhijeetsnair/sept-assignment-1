@@ -84,26 +84,26 @@ public class WISApplication {
 		
 		logger.addHandler(fh);
 		
-		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-		JSONObject owmF = owm.getForecast(37.8267,-122.423);
-		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
-		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
-		
-		JSONArray forecasts = fioF.getJSONArray("forecast");
-		for(Object fob : forecasts){
-			JSONObject fore = (JSONObject) fob;
-			System.out.println("FIO: "+fore.get("description"));
-		}
-		
-		forecasts = owmF.getJSONArray("forecast");
-		for(Object fob : forecasts){
-			JSONObject fore = (JSONObject) fob;
-			System.out.println("OWM: "+fore.get("description"));
-		}
-		
-		JSONObject loc = Geocoder.getCoOrds("113 cecil street fitzroy");
-		System.out.println(Geocoder.getName(loc.getDouble("lat"), loc.getDouble("lng")));
-		System.out.println(loc.toString());
+//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+//		JSONObject owmF = owm.getForecast(37.8267,-122.423);
+//		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
+//		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
+//		
+//		JSONArray forecasts = fioF.getJSONArray("forecast");
+//		for(Object fob : forecasts){
+//			JSONObject fore = (JSONObject) fob;
+//			System.out.println("FIO: "+fore.get("description"));
+//		}
+//		
+//		forecasts = owmF.getJSONArray("forecast");
+//		for(Object fob : forecasts){
+//			JSONObject fore = (JSONObject) fob;
+//			System.out.println("OWM: "+fore.get("description"));
+//		}
+//		
+//		JSONObject loc = Geocoder.getCoOrds("113 cecil street fitzroy");
+//		System.out.println(Geocoder.getName(loc.getDouble("lat"), loc.getDouble("lng")));
+//		System.out.println(loc.toString());
 		
 		new WISApplication();
 	 
