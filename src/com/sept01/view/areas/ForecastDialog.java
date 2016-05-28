@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.sept01.view.listener.GraphSelector;
+import com.sept01.view.listener.ForecastGraphSelector;
 
 /*DISPLAYS THE FORECAST DIALOG TO THE USER
  * THE FORECAST DIALOG CLASS IS  COMMON TO 
@@ -274,7 +274,7 @@ public class ForecastDialog extends JDialog {
 		selector_holder.add(comboLanguage);
 		selector_panel.add(selector_holder);
 		graph_panel.add(selector_panel);
-		comboLanguage.addActionListener(new GraphSelector(comboLanguage, forecast, selector_panel));
+		comboLanguage.addActionListener(new ForecastGraphSelector(comboLanguage, forecast, selector_panel));
 	
 		
 	}

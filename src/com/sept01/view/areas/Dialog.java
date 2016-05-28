@@ -32,6 +32,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.Dataset;
 
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.main.WISApplication;
@@ -40,6 +41,7 @@ import com.sept01.model.State;
 import com.sept01.model.WeatherStation;
 import com.sept01.view.listener.AddtoFavListener;
 import com.sept01.view.listener.ForecastClickListener;
+import com.sept01.view.listener.HistoricalDataGraphSelector;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 import com.sun.org.apache.xalan.internal.utils.FeatureManager.Feature;
@@ -53,11 +55,13 @@ public class Dialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
 	private String state_name;
+	private 	ChartPanel chartPanel = null;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
 	private boolean addorRemoveFav = false;
 	String weather_station, message;
 	WeatherStation weatherStation;
+	DefaultCategoryDataset dataset;
 	String lat,lon;
 	String data[][];
 
@@ -211,7 +215,7 @@ public class Dialog extends JDialog {
 		graphLabel.setForeground(foreground);
 
 		JPanel tempgraphs = new JPanel();
-		tempgraphs.setLayout(new BoxLayout(tempgraphs, BoxLayout.X_AXIS));
+		tempgraphs.setLayout(new BoxLayout(tempgraphs, BoxLayout.Y_AXIS));
 		// Getting rid of maximum and minimum temperatures
 		displayRemoveablegraphs(tempgraphs,data);
 		
@@ -222,16 +226,16 @@ public class Dialog extends JDialog {
 		labelNGraph.add(tempgraphs);
 		showGraph.add(labelNGraph, BorderLayout.NORTH);
 
-		JPanel CloseMe = new JPanel();
-		JButton closeMe = new JButton("Close me");
-		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] {CloseMe}, closeMe));
+		JPanel clear = new JPanel();
+		JButton closeMe = new JButton("clear");
+		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] {clear}, closeMe));
 		closeMe.setBorder(null);
-		CloseMe.add(closeMe);
+		clear.add(closeMe);
 		
-		CloseMe.setBackground(new Color(64, 64, 72));
+		clear.setBackground(new Color(64, 64, 72));
 
 		// set action listener on the button
-		closeMe.addActionListener(new JDialogListener(this));
+		closeMe.addActionListener(new JDialogListener(this,dataset));
 
 		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		splitPaneV.setOneTouchExpandable(true);
@@ -239,7 +243,7 @@ public class Dialog extends JDialog {
 		splitPaneV.setDividerLocation(500);
 		splitPaneV.setRightComponent(showGraph);
 		getContentPane().add(splitPaneV);
-		getContentPane().add(CloseMe, BorderLayout.PAGE_END);
+		getContentPane().add(clear, BorderLayout.PAGE_END);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
@@ -313,220 +317,11 @@ public class Dialog extends JDialog {
 		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_dir", "wind_spd_kmh", "gust_kmh","wind_spd_kt","gust_kt", "press_qnh", "press_msl", "rain_trace", "cloud", "cloud_base_m" , "cloud_oktas", "cloud_type", "vis_km"};
 		//Create the combo box, select item at index 4.
 		//Indices start at 0, so 4 specifies the pig.
-		JComboBox fields_list = new JComboBox(fields);
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+		JComboBox<Object> fields_list = new JComboBox<Object>(fields);
+		  dataset = new DefaultCategoryDataset( );
 		tempgraphs.add(fields_list);
-		//if the value selected is from the above then
-		fields_list.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ChartPanel chartPanel = null;
-				String selectedBook = (String) fields_list.getSelectedItem();
-				if(selectedBook.equalsIgnoreCase(fields[0]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][1]);
-							dataset.addValue( Double.parseDouble(data[i][1]) , fields[0] ,Integer.toString(i) );
-						 
-					}
-				}
+		fields_list.addActionListener(new HistoricalDataGraphSelector(fields_list,dataset,data,fields,tempgraphs,weather_station));
 				
-				if(selectedBook.equalsIgnoreCase(fields[1]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][2]);
-						 
-							dataset.addValue( Double.parseDouble(data[i][2]) , fields[1] ,Integer.toString(i) );
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[2]))
-				{
-				
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][3]);
-							dataset.addValue( Double.parseDouble(data[i][3]) , fields[2] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[3]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][4]);
-							dataset.addValue( Double.parseDouble(data[i][4]) , fields[3] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[4]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][5]);
-							dataset.addValue( Double.parseDouble(data[i][5]) , fields[4] ,Integer.toString(i) );
-
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[5]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][6]);
-							dataset.addValue( Double.parseDouble(data[i][6]) , fields[5] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[6]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][7]);
-							dataset.addValue( Double.parseDouble(data[i][7]) , fields[6] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[7]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][8]);
-							dataset.addValue( Double.parseDouble(data[i][8]) , fields[7] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[8]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][9]);
-							dataset.addValue( Double.parseDouble(data[i][9]) , fields[8] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[9]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][10]);
-							dataset.addValue( Double.parseDouble(data[i][10]) , fields[9] ,Integer.toString(i) );
-
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[10]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][11]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[11]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][12]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[12]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][13]);
-						 
-					}
-				}
-				
-				if(selectedBook.equalsIgnoreCase(fields[13]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][14]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[14]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][15]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[15]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][16]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[16]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][17]);
-						 
-					}
-				}
-				if(selectedBook.equalsIgnoreCase(fields[17]))
-				{
-					for(int i=0;i<data.length;i++)
-					{	
-						 
-							System.out.println(data[i][18]);
-						 
-					}
-				}
-				
-				
-				JFreeChart lineChart = ChartFactory.createLineChart(
-						selectedBook,
-				         "Points",selectedBook,
-				         dataset,
-				         PlotOrientation.VERTICAL,
-				         true,true,false);
-				
-				         if(chartPanel!=null)
-				         {
-				        	 tempgraphs.remove(chartPanel);
-				         }
-				         chartPanel = new ChartPanel( lineChart );
-				      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
-				      tempgraphs.add(chartPanel);
-				      tempgraphs.repaint();
-				      tempgraphs.revalidate();
-					
-			}
-		});
-		
 		
 	
 	

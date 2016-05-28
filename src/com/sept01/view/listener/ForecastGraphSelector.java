@@ -26,7 +26,7 @@ import org.json.JSONObject;
  * RAIN, TEMPERATURE,HUMIDITY,ETC 
  */
 
-public class GraphSelector implements ActionListener {
+public class ForecastGraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
 	JComponent display_panel;
 	JSONObject forecast;
@@ -41,7 +41,7 @@ public class GraphSelector implements ActionListener {
 	// Implements logging for graph selector
 	private static final Logger log = Logger.getLogger("com.sept01.view.listener.GraphSelector");
 
-	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent display_panel) {
+	public ForecastGraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent display_panel) {
 		this.comboLanguage = comboLanguage;
 		this.forecast = forecast;
 		this.display_panel = display_panel;
