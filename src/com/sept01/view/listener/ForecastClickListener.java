@@ -24,14 +24,15 @@ public class ForecastClickListener implements ActionListener {
 	String lat;
 	String lon;
 	Dialog dialog;
+	String weather_station;
 	// Implments Java logger
 	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
 
-	public ForecastClickListener(String lat, String lon, Dialog dialog) {
+	public ForecastClickListener(String lat, String lon, Dialog dialog, String weather_station) {
 		this.lat = lat;
 		this.lon = lon;
 		this.dialog = dialog;
-
+		this.weather_station=weather_station;
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class ForecastClickListener implements ActionListener {
 				Forecaster fio = ForecasterFactory.getForecaster("forecastio");
 				JSONObject forecast = fio.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
 				log.log(Level.INFO, "ForecastIO forecast Information :" + forecast.toString());
-				ForecastDialog dialog = new ForecastDialog(forecast);
+				ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
 				dialog.setVisible(true);
 			}
 			// IF THE USER CHOOSES OPENWEATHER_IO AT RUNTIME
@@ -62,7 +63,7 @@ public class ForecastClickListener implements ActionListener {
 				Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
 				JSONObject forecast = owm.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
 				log.log(Level.INFO, "OpenWeather forecast Information :" + forecast.toString());
-				ForecastDialog dialog = new ForecastDialog(forecast);
+				ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
 				dialog.setVisible(true);
 			}
 

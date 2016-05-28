@@ -42,6 +42,8 @@ import com.sept01.view.listener.GraphSelector;
  */
 
 public class ForecastDialog extends JDialog {
+	
+	String weatherStation;
 
 	// Implments Java logger
 	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
@@ -55,15 +57,15 @@ public class ForecastDialog extends JDialog {
 	ImageIcon icon;
 	JTabbedPane tabbedPane;
 
-	public ForecastDialog(JSONObject forecast) {
+	public ForecastDialog(JSONObject forecast, String weather_station) {
 		this.forecast = forecast;
-
+		this.weatherStation=weather_station;
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
 		tabbedPane = new JTabbedPane();
 		icon = createImageIcon("images/icon.png");
-		log.log(Level.INFO, "Displaying the hourly forecast");
-		JComponent panel1 = makeTextPanel("Hourly Forecast");
+		log.log(Level.INFO, "Displaying the hourly forecast for "+ weatherStation);
+		JComponent panel1 = makeTextPanel("Hourly Forecast for "+ weatherStation);
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
@@ -95,6 +97,15 @@ public class ForecastDialog extends JDialog {
 		setSize(new Dimension(720, 720));
 
 	}
+	
+	
+	public String getWeatherStation() {
+		return weatherStation;
+	}
+
+	public void setWeatherStation(String weatherStation) {
+		this.weatherStation = weatherStation;
+	}
 
 	/*
 	 * DISPLAYS THE FORECAST DATA IN THE FORM OF THE DATA ON THE FIRST TAB. THE
@@ -113,12 +124,15 @@ public class ForecastDialog extends JDialog {
 				* forecast.getJSONArray("forecast").getJSONObject(0).length()][2];
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 
+		//Looping through all the forecast objects present in the array
 		for (Object fob : forecasts) {
 			JSONObject fore = (JSONObject) fob;
 			@SuppressWarnings("rawtypes")
 			Set keys = fore.keySet();
 			@SuppressWarnings("rawtypes")
 			Iterator a = keys.iterator();
+			//Loops through the keys using the iterator
+			// this avoids the need to fetch using key.get("description")
 			while (a.hasNext()) {
 				String key = (String) a.next();
 				// loop to get the dynamic key
@@ -222,7 +236,7 @@ public class ForecastDialog extends JDialog {
 		JPanel customise = new JPanel();
 		customise.setLayout(new BorderLayout());
 
-		JLabel filler = new JLabel("Show Hourly Forecast", JLabel.CENTER);
+		JLabel filler = new JLabel("Show Hourly Graphs for "+weatherStation, JLabel.CENTER);
 		customise.add(filler,BorderLayout.CENTER);
 		JButton button = new JButton("X");
 		customise.add(button,BorderLayout.EAST);
@@ -253,5 +267,6 @@ public class ForecastDialog extends JDialog {
 			System.err.println("Couldn't find file: " + path);
 			return null;
 		}
+		
 	}
 }

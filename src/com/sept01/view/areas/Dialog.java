@@ -121,13 +121,16 @@ public class Dialog extends JDialog {
 		
 		
 		/*Assignment 2 addition*/
-		
+		/**
+		 *ENABLES THE USER TO SELECT FORECAST INFORMATION BY CLICKING THE 
+		 *FORECAST INFO BUTTON THE BUTTON DISPLAYS FORECAST VALUES FOR A LOCATION 
+		 */
 		JButton forecastInfo = new JButton("Forecast Info");
 		labelPanel.add(forecastInfo);
 		forecastInfo.setBackground(background.brighter());
 		forecastInfo.setForeground(foreground);
 		forecastInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
-		forecastInfo.addActionListener(new ForecastClickListener(lat,lon,this));
+		forecastInfo.addActionListener(new ForecastClickListener(lat,lon,this,weather_station));
 		forecastInfo.setBorder(null);
 		
 		
@@ -266,37 +269,31 @@ public class Dialog extends JDialog {
 
 			@Override
 			public void windowClosed(java.awt.event.WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowActivated(java.awt.event.WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
