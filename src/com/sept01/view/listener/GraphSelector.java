@@ -1,12 +1,10 @@
 package com.sept01.view.listener;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -21,33 +19,32 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
- 
 /*
  *ALLOWS THE USER TO SELECT GRAPHS BASED ON THE THIER CHOICE OF FILEDS 
  * THE USER SELECTS THE GRAPH TYPE AND THIS IS DISPLAYED ON THE SCREEN
  * THE UI UPDATES TO DISPLAY GRAPHS ON DIFFERENT DATA SUCH AS 
  * RAIN, TEMPERATURE,HUMIDITY,ETC 
  */
- 
+
 public class GraphSelector implements ActionListener {
 	JComboBox<String> comboLanguage;
-	JComponent panel;
+	JComponent display_panel;
 	JSONObject forecast;
 	ChartPanel chartpanel;
-	JPanel panel3;
+	// JPanel panel3;
 	JScrollPane pane;
 	JLabel x_infolabel;
 	JLabel y_infolabel;
 	int i = 0;
 	JPanel displayUnits;
 	DefaultCategoryDataset dataset;
-	//Implements logging  for graph selector
+	// Implements logging for graph selector
 	private static final Logger log = Logger.getLogger("com.sept01.view.listener.GraphSelector");
 
-	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent panel4) {
+	public GraphSelector(JComboBox<String> comboLanguage, JSONObject forecast, JComponent display_panel) {
 		this.comboLanguage = comboLanguage;
 		this.forecast = forecast;
-		this.panel = panel4;
+		this.display_panel = display_panel;
 
 	}
 
@@ -67,14 +64,14 @@ public class GraphSelector implements ActionListener {
 		 * IF THE UNITS PANEL EXISTS ON THE UI THEN IT WILL REMOVE THE EXISTING
 		 * UNITS REPLACE THE EXISTING UNITS WITH THE NEW DISPLAY OF UNITS
 		 */
-	
+
 		if (chartpanel != null)
-			panel.remove(chartpanel);
+			display_panel.remove(chartpanel);
 		if (displayUnits != null)
-			panel.remove(displayUnits);
+			display_panel.remove(displayUnits);
 
 		String item = comboLanguage.getSelectedItem().toString();
-		log.log(Level.INFO, "Selected Item to display Graph :"+ item);
+		log.log(Level.INFO, "Selected Item to display Graph :" + item);
 		System.out.println("This is the selected Item" + item);
 		{
 
@@ -88,12 +85,12 @@ public class GraphSelector implements ActionListener {
 
 			displayUnits.add(x_infolabel);
 			displayUnits.add(y_infolabel);
-			panel.add(displayUnits);
-			
-			/*	
-			 * 	CREATES A DATASET TO DISPLAY THE FORECAST DATA
-			 * 	THE DATA UPDATES DYNAMICALLY IRERESSPECTIVE OF THE SOURCE
-			 * WHERETHER OPENWEATHER OR FORECAST IO
+			display_panel.add(displayUnits);
+
+			/*
+			 * CREATES A DATASET TO DISPLAY THE FORECAST DATA THE DATA UPDATES
+			 * DYNAMICALLY IRERESSPECTIVE OF THE SOURCE WHERETHER OPENWEATHER OR
+			 * FORECAST IO
 			 */
 			i = 0;
 			dataset = new DefaultCategoryDataset();
@@ -101,8 +98,8 @@ public class GraphSelector implements ActionListener {
 			JSONArray forecasts = forecast.getJSONArray("forecast");
 			for (Object fob : forecasts) {
 				JSONObject fore = (JSONObject) fob;
-				
-				//Supresses the iterator warnings to the rawtypes
+
+				// Supresses the iterator warnings to the rawtypes
 				@SuppressWarnings("rawtypes")
 				Set keys = fore.keySet();
 				@SuppressWarnings("rawtypes")
@@ -111,10 +108,9 @@ public class GraphSelector implements ActionListener {
 					String key = (String) a.next();
 					// loop to get the dynamic key
 					String value = fore.get(key).toString();
-					
 					log.log(Level.INFO, key);
 					log.log(Level.INFO, value);
-					
+
 					if (key.compareToIgnoreCase(item) == 0) {
 						dataset.addValue(Double.parseDouble(value), key, "" + (i + 1));
 						i++;
@@ -123,24 +119,22 @@ public class GraphSelector implements ActionListener {
 
 			}
 			/*
-			 * FREE LINE CHARTS TO DISPLAY THE VALUE OF GRAPHS
-			 * IT DISPLAYS THE NO OF HOURS ON THE X AXIS
-			 * IT DISPLAYS THE VALUES ON THE Y AXIS
+			 * FREE LINE CHARTS TO DISPLAY THE VALUE OF GRAPHS IT DISPLAYS THE
+			 * NO OF HOURS ON THE X AXIS IT DISPLAYS THE VALUES ON THE Y AXIS
 			 */
 			JFreeChart lineChart = ChartFactory.createLineChart(item, "Hours past the current hour", "Values", dataset,
 					PlotOrientation.VERTICAL, true, true, false);
 			chartpanel = new ChartPanel(lineChart);
-			
-			// The minimum drawable width is 1000 as any values lower than 1000 will be shrink
+
+			// The minimum drawable width is 1000 as any values lower than 1000
+			// will be shrink
 			// the values above 1000 will cause the graph to expand
 			chartpanel.setMinimumDrawWidth(1000);
 			// Chart Panel is scalable
 			chartpanel.addComponentListener(new ScaleChartListener(chartpanel));
-			panel.add(chartpanel);
-			System.out.println("\n");
-
-			panel.repaint();
-			panel.revalidate();
+			display_panel.add(chartpanel);
+			display_panel.repaint();
+			display_panel.revalidate();
 
 		}
 

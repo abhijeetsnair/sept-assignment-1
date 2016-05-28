@@ -22,8 +22,13 @@ Assignment 1)
 + 7) The screen is divided into locations such as EastPanel, WestPanel, SouthPanel, NorthPanel, CentrePanel
 
 Assigmment 2)
-
-
++ 1) Extended the Singleton pattern and the MVC pattern from Assignment1 and additionally 
+implemented a Factory pattern consisting of classes Forecaster.java,ForecastIO.java,OpenWeatherIO.java,ForecasterFactory.java
+(PLEASE CHECK THE DESIGNPATTERNS.DOCX FILE UNDER DOCUMENTS FOLDER FOR EXPLANATION)
+ + 2) Implemented JUnit tests for all the core classes and objects
+ +3) Used a continous integration tool Jenekins
++4) Product quality documented and additions of classes to assignment 2 shown in ProductQuality.txt
+file under documents folder
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
 + Percentage Contributed : 25 %
