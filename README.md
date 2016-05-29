@@ -40,11 +40,11 @@ Assigmment 2)
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
 + Percentage Contributed : 25 %
-+ Worked On : Testing,program structure
++ Worked On : Testing,program structure, openweathermap api, factory.
 
 #####s3495671 - Wolf Zimmermann
 + Percentage Contributed : 25 %
-+ Worked On : Getting the data from the website and creating the data system.
++ Worked On : Getting the data from the website and creating the data system. ForecastIO api and worked on the factory implementation, setup & admin jenkins + webserver, Unit testing for data, maven setup for testing, compile and jenkins.
 
 #####s3485769 - Joshua
 + Percentage Contributed :25 %
