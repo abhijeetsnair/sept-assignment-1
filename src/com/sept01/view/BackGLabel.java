@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 
 public class BackGLabel extends JPanel {
   
-  /**
-	 * 
+  /** LABEL PAINTS THE BACK PANEL AND DISPLAYS THE IMAGE
+	 * backg.png. IT DRAWS THE IMAGE USING GRAPHICS IN THE BACKGROUND
 	 */
 	
 	private static final long serialVersionUID = 1L;

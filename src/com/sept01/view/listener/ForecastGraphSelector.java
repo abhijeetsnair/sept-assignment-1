@@ -1,4 +1,5 @@
 package com.sept01.view.listener;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,14 +86,11 @@ public class ForecastGraphSelector implements ActionListener {
 
 			x_infolabel = new JLabel(Xinfo);
 			y_infolabel = new JLabel(Yinfo);
-			
-			
+
 			displayUnits.setBackground(new Color(64, 64, 72));
 			display_panel.setBackground(new Color(64, 64, 72));
 			x_infolabel.setForeground(Color.ORANGE);
 			y_infolabel.setForeground(Color.ORANGE);
-			
-			
 
 			displayUnits.add(x_infolabel);
 			displayUnits.add(y_infolabel);
@@ -129,40 +127,41 @@ public class ForecastGraphSelector implements ActionListener {
 				}
 
 			}
-			
-			
-			
+			/*
+			 * APPLIES THE CHART THEME TO JFREECHARTS THIS CHANGES THE DISPLAY
+			 * OF THE CHART THE THEME COLORS ARE SELELCTED TO SUIT THE DISPLAY
+			 * OF THE UI
+			 */
 			StandardChartTheme theme = new StandardChartTheme("name");
-	    //theme.setBac
-	    theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
-	    theme.setAxisLabelPaint(Color.orange);
-	    theme.setDomainGridlinePaint(Color.orange);
-	    theme.setBaselinePaint(Color.orange);
-	    theme.setItemLabelPaint(Color.orange);
-	    theme.setPlotOutlinePaint(Color.orange);
-	    theme.setCrosshairPaint(Color.orange);
-	    theme.setLabelLinkPaint(Color.orange);
-	    theme.setThermometerPaint(Color.orange);
-	    theme.setTitlePaint(Color.orange);
-	    theme.setRangeGridlinePaint(Color.orange);
-	    
-	    //theme.setCrosshairPaint(Color.white);
-	    theme.setPlotBackgroundPaint(Color.decode("#444444"));
-	    theme.setSubtitlePaint(Color.orange);
-	    //theme.setChartBackgroundPaint(Color.decode("#000000"));
-	    
-	    
-	    theme.setTickLabelPaint(Color.orange);
-	    
-	    theme.setLegendItemPaint(Color.orange);
-	    theme.setLegendBackgroundPaint(Color.decode("#444455"));
-	    
-	    //theme.setDomainGridlinePaint(paint);
-	    
-	    //theme.setRegularFont();
-	    
-	    ChartFactory.setChartTheme(theme);
-	    
+			// theme.setBac
+			theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
+			theme.setAxisLabelPaint(Color.orange);
+			theme.setDomainGridlinePaint(Color.orange);
+			theme.setBaselinePaint(Color.orange);
+			theme.setItemLabelPaint(Color.orange);
+			theme.setPlotOutlinePaint(Color.orange);
+			theme.setCrosshairPaint(Color.orange);
+			theme.setLabelLinkPaint(Color.orange);
+			theme.setThermometerPaint(Color.orange);
+			theme.setTitlePaint(Color.orange);
+			theme.setRangeGridlinePaint(Color.orange);
+
+			// theme.setCrosshairPaint(Color.white);
+			theme.setPlotBackgroundPaint(Color.decode("#444444"));
+			theme.setSubtitlePaint(Color.orange);
+			// theme.setChartBackgroundPaint(Color.decode("#000000"));
+
+			theme.setTickLabelPaint(Color.orange);
+
+			theme.setLegendItemPaint(Color.orange);
+			theme.setLegendBackgroundPaint(Color.decode("#444455"));
+
+			// theme.setDomainGridlinePaint(paint);
+
+			// theme.setRegularFont();
+
+			ChartFactory.setChartTheme(theme);
+
 			/*
 			 * FREE LINE CHARTS TO DISPLAY THE VALUE OF GRAPHS IT DISPLAYS THE
 			 * NO OF HOURS ON THE X AXIS IT DISPLAYS THE VALUES ON THE Y AXIS

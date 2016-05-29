@@ -17,7 +17,10 @@ import com.sept01.model.Singleton;
 public class InitOptionsView extends JFrame {
 
 	/**
-	 * 
+	 * INTI OPTION VIEW INITIALISES THE VIEW SO THAT THE USER CAN CHOOSE BETWEEN
+	 * FORECAST IO OR OPENWEATHER THIS CHOICE THEN PERSISTS TILLTHE TIME THE
+	 * APPLICATION RUNS THE CHOICE MADE BY THE USER IS REMEMBERED THROUGHOUT THE
+	 * APPLICATION
 	 */
 	private static final long serialVersionUID = 1L;
 	InitOptionsView view;
@@ -35,6 +38,7 @@ public class InitOptionsView extends JFrame {
 	 */
 	private void initialize() {
 		setResizable(false);
+
 		setBounds(200, 200, 700, 350);
 
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -49,6 +53,11 @@ public class InitOptionsView extends JFrame {
 		lblSelectSource.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panel.add(lblSelectSource);
 
+		/*
+		 * THE DISPLAY HAS TWO BUTTONS FORECASTIO BUTTON AND OPENWEATHER.PNG
+		 * BUTTON. THE USER CAN CHOOSE BETWEEN THE TWO THE CHOICE MADE BY THE
+		 * USER IS THEN STORED IN THE SINGLETON
+		 */
 		BackGLabel panelButtons = new BackGLabel();
 		panelButtons.setBackground(new Color(64, 64, 72));
 		getContentPane().add(panelButtons, BorderLayout.CENTER);
@@ -56,7 +65,7 @@ public class InitOptionsView extends JFrame {
 
 		@SuppressWarnings("unused")
 		ImageIcon myImage = new ImageIcon("images/myImage.jpg");
-
+		// UI COMPONENTS TO SELECT FORECAST.IO
 		JButton buttonLeft = new JButton(new ImageIcon("images/forecast.png"));
 		buttonLeft.setOpaque(false);
 		buttonLeft.setContentAreaFilled(false);
@@ -74,7 +83,7 @@ public class InitOptionsView extends JFrame {
 		});
 
 		panelButtons.add(buttonLeft);
-
+		//UI COMPONENTS TO SELECT OPENWEATHER.ORG
 		JButton buttonRight = new JButton(new ImageIcon("images/openweather.png"));
 		buttonRight.setOpaque(false);
 		buttonRight.setContentAreaFilled(false);
@@ -93,7 +102,7 @@ public class InitOptionsView extends JFrame {
 			}
 		});
 	}
-
+// CLOSES THE DISPLAY
 	public void close() {
 		dispose();
 	}
