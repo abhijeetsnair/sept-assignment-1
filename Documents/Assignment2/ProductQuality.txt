@@ -1,6 +1,5 @@
-Additions to the Assignment :
-Product Quality
-
+Additions to the Assignment2 :
+Product Quality :
 Commented and added the log testing for the following :
 1)Forecaster
 2)ForecasterFactory

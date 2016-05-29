@@ -35,7 +35,7 @@ Assigmment 2)
 +8)Liecenses for OpenSource code acessed is mentioned licences.txt folder under Documents/liecenses.txt
 +9)Automated Build using Maven
 +10)Forecast Display is tabbed(similar to tabbed browsing to display multiple graphs at once)
-
++11) Trello and Slack correspondance and progress is also shown under Documents/Assignnment2
 
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
