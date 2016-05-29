@@ -38,7 +38,7 @@ import com.sept01.view.listener.ForecastClickListener;
 import com.sept01.view.listener.HistoricalDataGraphSelector;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
-import com.sun.org.apache.xalan.internal.utils.FeatureManager.Feature;
+
 
 public class Dialog extends JDialog {
 	/**
