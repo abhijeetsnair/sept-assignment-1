@@ -15,7 +15,8 @@ public class ForecasterFactory {
    private static final Logger log= Logger.getLogger("ForecastFactory");
 	public static Forecaster getForecaster(String forecaster){
 		Forecaster forecastApi = null;
-		/*CHECKS FOR THE INSTANCE OF FORECAST*/
+		/*CHECKS FOR THE INSTANCE OF FORECAST
+		 *CORE CLASSES HAVE TO IMPLEMENT THIS INTERFACE*/
 		switch(forecaster.toLowerCase()){
 		case "forecastio": 	forecastApi = new ForecastIO();
 		log.log(Level.INFO,"Loading ForecastIO");

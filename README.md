@@ -33,7 +33,7 @@ Assigmment 2)
 +6) UML diagrams can be found under UML/Assignment2
 +7)Documentation on how to use the program present under Documents/Assignment2
 +8)Liecenses for OpenSource code acessed is mentioned licences.txt folder under Documents/liecenses.txt
-+9)Automated Build using Maven
++9)Automated Build using Maven (see Documents/Assigment2/Buildtools)
 +10)Forecast Display is tabbed(similar to tabbed browsing to display multiple graphs at once)
 +11) Trello and Slack correspondance and progress is also shown under Documents/Assignnment2
 
