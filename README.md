@@ -48,7 +48,7 @@ Assigmment 2)
 
 #####s3485769 - Joshua
 + Percentage Contributed :25 %
-+ Worked On : Gui + ux
++ Worked On : Gui + ux, code cleanup, maven setup, user stories and user documentation
 
 #####s3400586 - Jeet
 + Percentage Contributed : 25 %
