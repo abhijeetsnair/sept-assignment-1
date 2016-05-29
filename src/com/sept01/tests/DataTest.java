@@ -18,7 +18,11 @@ import com.sept01.model.Area;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
 import com.sept01.model.WeatherStation;
-
+/*
+ * Tests the underlying model for different cases to ensure all the cases work
+ * Performs different types of testing on the implementations to check the
+ * instantiation of different classes 
+ */
 
 public class DataTest {
 

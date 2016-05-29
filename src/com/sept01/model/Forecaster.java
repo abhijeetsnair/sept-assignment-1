@@ -13,7 +13,7 @@ import org.json.JSONObject;
  */
 
 public interface Forecaster {
-	//Retrives the hourly data for 48 hours
+	//Retrieves the hourly data for 48 hours
 	public default HashMap<String, Object> getHourly(){
 		return null;
 	};
