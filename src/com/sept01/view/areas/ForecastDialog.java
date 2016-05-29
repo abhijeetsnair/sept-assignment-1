@@ -29,7 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,7 +73,7 @@ public class ForecastDialog extends JDialog {
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
-
+		this.setTitle("Weather forecast for "+weather_station);
 		setBackground(new Color(32, 32, 40));
 		tabbedPane.setBackground(new Color(32, 32, 40));
 		tabbedPane.setForeground(new Color(32, 32, 40));
@@ -83,17 +82,6 @@ public class ForecastDialog extends JDialog {
 		panel1.setForeground(Color.LIGHT_GRAY);
 
 		jt = new JTable(currentData, coloumns);
-
-		DefaultTableModel tableModel = new DefaultTableModel() {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				// all cells false
-				return false;
-			}
-		};
-
-		// jt.setModel(tableModel);
-
 		jt.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
