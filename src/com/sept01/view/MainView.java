@@ -53,15 +53,10 @@ public class MainView extends JFrame {
 		 * ACTIVATED NOT MANDATORY FOR THE PROGRAM TO RUN. THE PROGRAM DOES NOT
 		 * GET AFFECTED
 		 */
-		// try {
-		// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 		setTitle("WISApplication");
-		// setSize(800, 600);
-		//setSize(Metrics.defaultApplicationSizeX, Metrics.defaultApplicationSizeY);
+
 		setSize(getRelativeSizeX(), getRelativeSizeY());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -97,18 +92,7 @@ public class MainView extends JFrame {
 		add(west, BorderLayout.WEST);
 		add(south, BorderLayout.SOUTH);
 		add(center, BorderLayout.CENTER);
-		// FORCE 16:9
-		// this.addComponentListener(new ComponentAdapter() {
-		// @Override
-		// public void componentResized(ComponentEvent arg0) {
-		// int W = 16;
-		// int H = 9;
-		// Rectangle b = arg0.getComponent().getBounds();
-		// arg0.getComponent().setBounds(b.x, b.y, b.width, b.width*H/W);
-		//
-		// }
-		//
-		// });
+
 
 	}
 	

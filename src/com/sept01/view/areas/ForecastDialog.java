@@ -71,30 +71,26 @@ public class ForecastDialog extends JDialog {
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
 		
+		/**
+		 * Initialise UIManager look and feel setting variables.
+		 */
 		UIManager.put("TabbedPane.contentAreaColor", new Color(32, 32, 40));
 		UIManager.put("TabbedPane.background", new Color(32, 32, 40));
 		UIManager.put("TabbedPane.foreground", new Color(32, 32, 40));
 		UIManager.put("TabbedPane.tabAreaBackground", new Color(32, 32, 40));
 		UIManager.put("TabbedPane.selected",new Color(64, 64, 72));
-		
 		UIManager.put("TabbedPane.unselectedBackground", new Color(32, 32, 40));
 		UIManager.put("TabbedPane.unselectedTabBackground", new Color(32, 32, 40));
-		
-		
 		UIManager.put("TabbedPane.tabInsets", new Insets(0, 0, 0, 0));
 		UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
 		UIManager.put("TabbedPane.tabAreaInsets", new Insets(0, 0, 0, 0));
 		UIManager.put("TabbedPane.selectedTabPadInsets", new Insets(0, 0, 0, 0));
-		
 		UIManager.put("TabbedPane.borderHightlightColor", new Color(0, 0, 0, 0));
 		UIManager.put("TabbedPane.selectHighlight", new Color(0, 0, 0, 0));
-		
 		UIManager.put("TabbedPane.focus", new Color(0, 0, 0, 0));
 		UIManager.put("TabbedPane.border", new Color(0, 0, 0, 0));
 		
 		tabbedPane = new JTabbedPane();
-		
-		//tabbedPane.setBackground(colorTab);
 		
 
 		icon = createImageIcon("images/icon.png");
