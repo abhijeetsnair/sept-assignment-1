@@ -30,10 +30,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.sept01.view.listener.ForecastGraphSelector;
 
 /*DISPLAYS THE FORECAST DIALOG TO THE USER
@@ -46,12 +45,9 @@ import com.sept01.view.listener.ForecastGraphSelector;
 
 public class ForecastDialog extends JDialog {
 
-	String weatherStation;
-
-	// Implments Java logger
-	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
-
+	// Implements Java logger
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
 	JSONObject forecast;
 	String currentData[][];
 	String dailyData[][];
@@ -59,7 +55,9 @@ public class ForecastDialog extends JDialog {
 	JTable jt;
 	ImageIcon icon;
 	JTabbedPane tabbedPane;
+	String weatherStation;
 
+	@SuppressWarnings("serial")
 	public ForecastDialog(JSONObject forecast, String weather_station) {
 		this.forecast = forecast;
 		this.weatherStation = weather_station;
@@ -73,11 +71,10 @@ public class ForecastDialog extends JDialog {
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
-		this.setTitle("Weather forecast for "+weather_station);
+		this.setTitle("Weather forecast for " + weather_station);
 		setBackground(new Color(32, 32, 40));
 		tabbedPane.setBackground(new Color(32, 32, 40));
 		tabbedPane.setForeground(new Color(32, 32, 40));
-
 		panel1.setBackground(new Color(64, 64, 72));
 		panel1.setForeground(Color.LIGHT_GRAY);
 
@@ -90,10 +87,6 @@ public class ForecastDialog extends JDialog {
 						column);
 				c.setBackground(new Color(32, 32, 40));
 				c.setForeground(Color.ORANGE);
-				// c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new
-				// Color(92, 92, 100));
-				// c.setForeground(row % 9 == 0 ? Color.ORANGE :
-				// Color.LIGHT_GRAY);
 				return c;
 			}
 		});
@@ -129,16 +122,14 @@ public class ForecastDialog extends JDialog {
 		});
 		// adds the tabbed pane to the view
 		add(tabbedPane);
-
 		// sets the tabbbed pane to do the follows
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
 		setLocationRelativeTo(null);
+		// Standard screen dimensions, even the smallest screen size will be
+		// able to accomodate for the screen
 		setSize(new Dimension(720, 720));
 
 	}
-
-
 
 	public String getWeatherStation() {
 		return weatherStation;
@@ -281,32 +272,31 @@ public class ForecastDialog extends JDialog {
 
 		// Makes a graph panel to display graphs
 		log.log(Level.INFO, "Creating a graph panel to display graphs");
+		// Creates a panel to display graph
 		JPanel panel = new JPanel(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		// Creates a banner to display the layout on the view
 		JPanel banner = new JPanel();
 		banner.setLayout(new BorderLayout());
-
+		// Creates a JPanel whose layout is border layout
 		JPanel customise = new JPanel();
 		customise.setLayout(new BorderLayout());
-
+		// Label to show hourly graphs for the station
 		JLabel filler = new JLabel("Show Hourly Graphs for " + weatherStation, JLabel.CENTER);
 		customise.add(filler, BorderLayout.CENTER);
+		// Closes the graph display tab
 		JButton button = new JButton("X");
 		customise.add(button, BorderLayout.EAST);
-
 		customise.setBackground(new Color(32, 32, 40));
-
 		panel.setBackground(new Color(32, 32, 40));
-
 		filler.setBackground(new Color(32, 32, 40));
 		filler.setForeground(Color.LIGHT_GRAY);
-
+		// Removes a tab from the pane
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.log(Level.INFO, "Removing the tab from the tab pane");
 				tabbedPane.remove(1);
-
 			}
 		});
 

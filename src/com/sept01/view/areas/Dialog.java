@@ -296,7 +296,8 @@ public class Dialog extends JDialog {
 
 		});
 	}
-
+	
+	//Adds a graph that can be removed from the display panel
 	private void displayRemoveablegraphs(JPanel tempgraphs, String data[][]) {
 
 		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_spd_kmh", "gust_kmh",

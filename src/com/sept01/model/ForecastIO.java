@@ -51,12 +51,11 @@ public class ForecastIO implements Forecaster {
 		 **/
 		temp = (JSONObject) temp.get("hourly");
 		JSONArray ta = temp.getJSONArray("data");
-		System.out.println(temp.toString());
+		 log.log(Level.INFO ,temp.toString());
 
 		/**
 		 * Load up the forcast json objects into the forecast array
 		 **/
-		System.out.println(ta.length());
 		for (Object Ob : ta) {
 			JSONObject JSOb = (JSONObject) Ob;
 			JSONObject FJSOb = new JSONObject();
