@@ -192,7 +192,7 @@ public class HistoricalDataGraphSelector implements ActionListener {
 		if (selected_field.equalsIgnoreCase(fields[9])) {
 			for (int i = 0; i < data.length; i++) {
 				// DISPLAYS THE RAIN TRACE DATA FOR 9 AM AND 3PM
-				System.out.println(data[i][10]);
+				log.log(Level.INFO,data[i][10]);
 				if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
 						|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
 						|| (data[i][0].contains((new Date().getDate() - 1) + "/09:00am"))

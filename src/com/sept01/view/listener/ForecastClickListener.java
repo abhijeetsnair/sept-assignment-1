@@ -23,7 +23,7 @@ public class ForecastClickListener implements ActionListener {
 	String lon;
 	Dialog dialog;
 	String weather_station;
-	// Implments Java logger
+	// Implements Java logger
 	private static final Logger log = Logger.getLogger("com.sept01.areas.ForecastDialog");
 
 	public ForecastClickListener(String lat, String lon, Dialog dialog, String weather_station) {
@@ -43,6 +43,7 @@ public class ForecastClickListener implements ActionListener {
 	      if (Singleton.getInstance().source == 0) {
 	        log.log(Level.INFO, "ForecastIO selected as source for weather information");
 	        Forecaster fio = ForecasterFactory.getForecaster("forecastio");
+	        // TRIGGERS AN INSTANCE OF FORECASTIO
 	        JSONObject forecast = fio.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
 	        log.log(Level.INFO, "ForecastIO forecast Information :" + forecast.toString());
 	        ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
@@ -53,6 +54,7 @@ public class ForecastClickListener implements ActionListener {
 	        //log choices
 	        log.log(Level.INFO, "OpenWeather selected as source for weather information");
 	        Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+	        //TRIGGERS AN INSTANCE OF OPENWEATHER
 	        JSONObject forecast = owm.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
 	        log.log(Level.INFO, "OpenWeather forecast Information :" + forecast.toString());
 	        ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
@@ -63,40 +65,5 @@ public class ForecastClickListener implements ActionListener {
 
 	  }
 
-/*	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		//user choice
-		final String[] forecast_opt = { "ForecastIO", "OpenWeather" };
-
-		String chosen_source = (String) JOptionPane.showInputDialog(dialog, "Select forecast source", "Forecast Source",
-				JOptionPane.QUESTION_MESSAGE, null, forecast_opt, forecast_opt[0]);
-		log.log(Level.INFO, "Forecast location" + lat + ":" + lon);
-		
-		 * IF USER DECIDED TO CANCEL THE CHOICE GETS INITIALISED TO NULL
-		 
-		if (chosen_source != null) {
-			// IF THE USER CHOOSES FORECAST_IO AT RUNTIME
-			if (chosen_source.compareTo("ForecastIO") == 0) {
-				log.log(Level.INFO, "ForecastIO selected as source for weather information");
-				Forecaster fio = ForecasterFactory.getForecaster("forecastio");
-				JSONObject forecast = fio.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
-				log.log(Level.INFO, "ForecastIO forecast Information :" + forecast.toString());
-				ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
-				dialog.setVisible(true);
-			}
-			// IF THE USER CHOOSES OPENWEATHER_IO AT RUNTIME
-			if (chosen_source.compareTo("OpenWeather") == 0) {
-				//log choices
-				log.log(Level.INFO, "OpenWeather selected as source for weather information");
-				Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
-				JSONObject forecast = owm.getForecast(Double.parseDouble(lat), Double.parseDouble(lon));
-				log.log(Level.INFO, "OpenWeather forecast Information :" + forecast.toString());
-				ForecastDialog dialog = new ForecastDialog(forecast,weather_station);
-				dialog.setVisible(true);
-			}
-
-		}
-
-	}*/
 
 }

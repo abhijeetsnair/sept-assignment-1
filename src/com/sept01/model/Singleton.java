@@ -34,7 +34,11 @@ public class Singleton {
 	private com.sept01.view.areas.NorthPanel NorthPanel;
 	private com.sept01.view.areas.SouthPanel SouthPanel;
 	private static WISApplication application;
-	
+	/*
+	 * GETTERS AND SETTERS FOR  ALL THE ABOVE VALUES 
+	 * PANELS AND VIEWS
+	 * 
+	 */
 	public int source = -1;
 
 	private Weather weather;
@@ -190,16 +194,6 @@ public class Singleton {
 		fav.add(favoriate);
 	}
 
-	// public void remFav(Favourites favourite) {
-	//
-	// for (int i = 0; i < fav.size(); i++) {
-	// if
-	// (fav.get(i).getArea().getName().compareTo(favourite.getArea().getName())
-	// == 0) {
-	// fav.remove(i);
-	// }
-	// }
-	// }
 
 	public int getXloc() {
 		return xloc;
