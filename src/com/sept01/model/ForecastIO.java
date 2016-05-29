@@ -18,6 +18,11 @@ public class ForecastIO implements Forecaster {
 
 	// RETRIEVES THE FORECAST INFORMATION BASED ON THE LAT AND LONG PROVIDED TO
 	// THE WEBSERVICE
+	/**
+	 * @author wolfz
+	 * @param latatude and longitude 
+	 * @return JSONObject contain formatted data
+	 * **/
 	public JSONObject getForecast(double lat, double lon) {
 		Logger.getLogger("com.sept01.model.ForecastIO").setLevel(Level.ALL);
 		log.log(Level.INFO, "Getting data");
