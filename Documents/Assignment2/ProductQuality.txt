@@ -10,3 +10,9 @@ Commented and added the log testing for the following :
 7)ForecastDialog
 8)ForecastClickListener
 9) GraphSelector
+
+Logging logs to console as well as a file.
+The history of all the logs also gets recorded.
+Since the log file gets large quickly a rotater 
+has also been used to manage the file size and 
+delete the file size as the size increases.

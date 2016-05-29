@@ -1,0 +1,61 @@
+﻿Merge remote-tracking branch 'origin/dev' into dev
+
+# Conflicts:
+#	log.log.1
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch dev
+# Your branch and 'origin/dev' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   Documents/Assignment2/DesignPatterns.docx
+#	modified:   Documents/Assignment2/ProductQuality.txt
+#	new file:   Documents/Assignment2/TestPlan_septgroupteam-assignment (1) - LEANTESTING EXPORT.csv
+#	deleted:    Documents/Assignment2/Trello/(3) SEPT Assignment 01 _ Trello.html
+#	modified:   Documents/Assignment2/Trello/trello.html
+#	modified:   log.log.1
+#	modified:   src/com/sept01/model/ForecastIO.java
+#	modified:   src/com/sept01/model/OpenWeatherMap.java
+#	new file:   userdoc/bootstrap-3.3.6-dist/css/bootstrap.min.css
+#	new file:   userdoc/bootstrap-3.3.6-dist/css/bootstrap.min.css.map
+#	new file:   userdoc/bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.eot
+#	new file:   userdoc/bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.svg
+#	new file:   userdoc/bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.ttf
+#	new file:   userdoc/bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff
+#	new file:   userdoc/bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2
+#	new file:   userdoc/bootstrap-3.3.6-dist/js/bootstrap.js
+#	new file:   userdoc/bootstrap-3.3.6-dist/js/bootstrap.min.js
+#	new file:   userdoc/bootstrap-3.3.6-dist/js/npm.js
+#	new file:   userdoc/images/application_addedfavourite.png
+#	new file:   userdoc/images/application_addfavourite.png
+#	new file:   userdoc/images/application_areas.png
+#	new file:   userdoc/images/application_graph.png
+#	new file:   userdoc/images/application_removefavourite.png
+#	new file:   userdoc/images/application_states.png
+#	new file:   userdoc/images/application_weather_station.png
+#	new file:   userdoc/images/application_weather_station_select.png
+#	new file:   userdoc/images/application_weather_station_show_graph.png
+#	new file:   userdoc/images/applictaion_overview_01.png
+#	new file:   userdoc/images/applictaion_overview_02.png
+#	new file:   userdoc/images/drop_down.png
+#	new file:   userdoc/images/graph.png
+#	new file:   userdoc/images/menu.png
+#	new file:   userdoc/images/popup.png
+#	new file:   userdoc/images/popup_1.png
+#	new file:   userdoc/images/popup_2.png
+#	new file:   userdoc/images/popup_3.png
+#	new file:   userdoc/images/select.png
+#	new file:   userdoc/userdoc.html
+#
+

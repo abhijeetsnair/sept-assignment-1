@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -64,11 +66,10 @@ public class ForecastDialog extends JDialog {
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
 		tabbedPane = new JTabbedPane();
-
 		icon = createImageIcon("images/icon.png");
 		log.log(Level.INFO, "Displaying the hourly forecast for " + weatherStation);
 		JComponent panel1 = makeTextPanel("Hourly Forecast for " + weatherStation);
-		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
+		tabbedPane.addTab("Display Forecast Data", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
 		this.setTitle("Weather forecast for " + weather_station);
@@ -204,7 +205,7 @@ public class ForecastDialog extends JDialog {
 	public void showGraphs() {
 		JComboBox<String> comboLanguage = new JComboBox<String>();
 		JComponent graph_panel = makeGraphPanel();
-		tabbedPane.addTab("Tab 2", icon, graph_panel, "Shows Hourly Graphs");
+		tabbedPane.addTab("Show Graphs", icon, graph_panel, "Shows Hourly Graphs");
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		JPanel selector_panel = new JPanel();
 		JPanel selector_holder = new JPanel();
@@ -320,4 +321,6 @@ public class ForecastDialog extends JDialog {
 		}
 
 	}
+	
+	
 }
