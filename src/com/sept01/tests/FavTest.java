@@ -23,7 +23,7 @@ import com.sept01.model.WeatherStation;
 public class FavTest {
 	private ArrayList<Favourites> favlist = new ArrayList<Favourites>();
 	private WISApplication app = new WISApplication();
-/*Object manupulation is happening correctly**/
+/*Object manipulation is happening correctly**/
 	@Test
 	public void checkFav() {
 		String stationName = "Casino";
@@ -33,7 +33,7 @@ public class FavTest {
 		assertThat(stationName, is(equalTo(stationName)));
 	}
 
-	// Tests for duplication in the favoriates class
+	// Tests for duplication in the favorites class
 	@Test
 	public void voidtestDuplication() {
 
@@ -42,12 +42,12 @@ public class FavTest {
 		int count = 0;
 		String stationName = "Casino";
 
-		// Adding Favourites once
+		// Adding Favorites once
 		Favourites fav = new Favourites();
 		fav.setStation(new WeatherStation("http://", stationName));
 		Singleton.getInstance().getApplication().addFav(fav);
 
-		// Adding Favourites twice
+		// Adding Favorites twice
 		Favourites fav2 = new Favourites();
 		fav2.setStation(new WeatherStation("http://", stationName));
 		Singleton.getInstance().getApplication().addFav(fav2);
