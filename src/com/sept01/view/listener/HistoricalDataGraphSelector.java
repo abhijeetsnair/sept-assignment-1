@@ -13,7 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
+// ALLOWS THE USER TO SELECT APPROPRIATE GRAPH VALUES
 public class HistoricalDataGraphSelector implements ActionListener {
 	JComboBox<Object> fields_list;
 	DefaultCategoryDataset dataset;
@@ -40,7 +40,6 @@ public class HistoricalDataGraphSelector implements ActionListener {
 	 * LIMITED TO : 1) AIR TEMPERATURE 2)APPARENT TEMPERATURE 3) DEW POINT 4)
 	 * RELATIVE HUMIDITY 5) WIND SPD 6)GUST_KMPH 7)WIND SPD 8)RAIN TRACE
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
@@ -90,6 +89,12 @@ public class HistoricalDataGraphSelector implements ActionListener {
 			// DISPLAYS THE DEW POINT TEMPERATURE DATA FOR 9 AM AND 3PM
 			for (int i = 0; i < data.length; i++) {
 				System.out.println(data[i][3]);
+				if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
+						|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
+						|| (data[i][0].contains((new Date().getDate() - 1) + "/09:00am"))
+						|| (data[i][0].contains((new Date().getDate() - 1) + "/03:00pm"))
+						|| (data[i][0].contains((new Date().getDate() - 2) + "/09:00am"))
+						|| (data[i][0].contains((new Date().getDate() - 2) + "/03:00pm")))
 				dataset.addValue(Double.parseDouble(data[i][3]), fields[2], data[i][0]);
 
 			}
@@ -191,10 +196,12 @@ public class HistoricalDataGraphSelector implements ActionListener {
 
 			}
 		}
-
+		
+		// INITIALSES THE LINE CHART TO THE APPROPRIATE VALUES
 		lineChart = ChartFactory.createLineChart("Weather Data for " + weatherStation, "Points", "Values", dataset,
 				PlotOrientation.VERTICAL, true, true, false);
-
+		
+		//REMOVES THE PANEL FROM THE UI IF THE PANEL ALREADY EXISTS
 		if (chartpanel != null) {
 			tempgraphs.remove(chartpanel);
 		}
