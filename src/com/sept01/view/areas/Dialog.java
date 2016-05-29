@@ -32,6 +32,7 @@ import com.sept01.view.listener.HistoricalDataGraphSelector;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
 
+
 public class Dialog extends JDialog {
 	/**
 	 * DIALOG SHOWS INFORMATION IN THE FORM OF 1) TABLE 2) CHART TABLE SHOWS
