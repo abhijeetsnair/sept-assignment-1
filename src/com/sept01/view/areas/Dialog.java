@@ -1,14 +1,11 @@
 package com.sept01.view.areas;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,13 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.StandardChartTheme;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.main.WISApplication;
 import com.sept01.model.Singleton;
@@ -38,7 +31,6 @@ import com.sept01.view.listener.ForecastClickListener;
 import com.sept01.view.listener.HistoricalDataGraphSelector;
 import com.sept01.view.listener.JDialogListener;
 import com.sept01.view.listener.RemFavListener;
-import com.sun.org.apache.xalan.internal.utils.FeatureManager.Feature;
 
 public class Dialog extends JDialog {
 	/**
@@ -49,6 +41,7 @@ public class Dialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
 	private String state_name;
+	@SuppressWarnings("unused")
 	private ChartPanel chartPanel;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
@@ -410,174 +403,5 @@ public class Dialog extends JDialog {
 		return false;
 	}
 
-	/*
-	 * Displays the 9 am pm temperatures by locating the 9 am and 3pm
-	 * temeratures from the list the 9 am and 3pm temperatures are then plotted
-	 * on the graph which uses Jfreecharts as the plotting tool
-	 */
-	@SuppressWarnings("deprecation")
-	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
-		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-		for (int i = 0; i < data.length; i++) {
-			if (WISApplication.debug == true) {
-				System.out.println(data[i][0] + data[i][1] + "Matches with "
-						+ data[i][0].contains(new Date().getDate() + "/09:00am")
-						+ data[i][0].contains(new Date().getDate() + "/03:00pm"));
-			}
-
-			if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
-					|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
-					|| (data[i][0].contains((new Date().getDate() - 1) + "/09:00am"))
-					|| (data[i][0].contains((new Date().getDate() - 1) + "/03:00pm"))
-					|| (data[i][0].contains((new Date().getDate() - 2) + "/09:00am"))
-					|| (data[i][0].contains((new Date().getDate() - 2) + "/03:00pm"))) {
-				line_chart_dataset.addValue((int) Double.parseDouble(data[i][1]), "temp", data[i][0]);
-			}
-		}
-		JFreeChart lineChartObject = ChartFactory.createLineChart("9am,3pm Temperatures", "Time", " Temperature",
-				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
-
-		ChartPanel panel = new ChartPanel(lineChartObject);
-
-		// lineChartObject.
-
-		StandardChartTheme theme = new StandardChartTheme("name");
-		// theme.setBac
-		theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
-		theme.setAxisLabelPaint(Color.orange);
-		theme.setDomainGridlinePaint(Color.orange);
-		theme.setBaselinePaint(Color.orange);
-		theme.setItemLabelPaint(Color.orange);
-		theme.setPlotOutlinePaint(Color.orange);
-		theme.setCrosshairPaint(Color.orange);
-		theme.setLabelLinkPaint(Color.orange);
-		theme.setThermometerPaint(Color.orange);
-		theme.setTitlePaint(Color.orange);
-		theme.setRangeGridlinePaint(Color.orange);
-
-		// theme.setCrosshairPaint(Color.white);
-		theme.setPlotBackgroundPaint(Color.decode("#444444"));
-		theme.setSubtitlePaint(Color.orange);
-		// theme.setChartBackgroundPaint(Color.decode("#000000"));
-
-		theme.setTickLabelPaint(Color.orange);
-
-		theme.setLegendItemPaint(Color.orange);
-		theme.setLegendBackgroundPaint(Color.decode("#444455"));
-
-		// theme.setDomainGridlinePaint(paint);
-
-		// theme.setRegularFont();
-
-		ChartFactory.setChartTheme(theme);
-
-		ChartUtilities.applyCurrentTheme(lineChartObject);
-
-		// panel.setBackground(Color.RED);
-		JScrollPane pane = new JScrollPane(panel);
-		panel.setLayout(new FlowLayout());
-		panel.setPreferredSize(new java.awt.Dimension(600, 300));
-		showInfo.add(pane);
-
-	}
-
-	/*
-	 * Displays the Maximum and minimum temperatures for the day by locating the
-	 * max and min temeratures from the list the max and min temperatures are
-	 * then plotted on the graph which uses Jfreecharts as the plotting tool
-	 */
-	@SuppressWarnings("deprecation")
-	private void showMaxMinGraph(JPanel showInfo, String[][] data) {
-		int current_h = 0, current_l = 200;
-		int previous_h = 0, previous_l = 200;
-		int day_before_h = 0, day_before_l = 200;
-
-		String today_h = null, today_l = null;
-		String prev_h = null, prev_l = null;
-		String day_bef_h = null, day_bef_l = null;
-
-		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-
-		for (int i = 0; i < data.length; i++) {
-			String segments[] = data[i][0].split("/");
-			String date = segments[0];
-			if (WISApplication.debug == true) {
-				System.out.println("Substring" + date);
-			}
-			// Current highest Temperature
-			if ((data[i][0].toLowerCase()).contains(("" + new Date().getDate()).toLowerCase())) {
-
-				if ((int) Double.parseDouble(data[i][1]) > current_h) {
-					current_h = (int) Double.parseDouble(data[i][1]);
-					today_h = data[i][0];
-				}
-				if ((int) Double.parseDouble(data[i][1]) < current_l) {
-					current_l = (int) Double.parseDouble(data[i][1]);
-					today_l = data[i][0];
-				}
-
-			}
-			// Previous days highest temperature
-			if ((data[i][0].toLowerCase()).contains(("" + (new Date().getDate() - 1)).toLowerCase())) {
-
-				if ((int) Double.parseDouble(data[i][1]) > previous_h) {
-					previous_h = (int) Double.parseDouble(data[i][1]);
-					prev_h = data[i][0];
-				}
-				if ((int) Double.parseDouble(data[i][1]) < previous_l) {
-					previous_l = (int) Double.parseDouble(data[i][1]);
-					prev_l = data[i][0];
-
-				}
-			}
-			if ((data[i][0].toLowerCase()).contains(("" + (new Date().getDate() - 2)).toLowerCase())) {
-
-				if ((int) Double.parseDouble(data[i][1]) > day_before_h) {
-					day_before_h = (int) Double.parseDouble(data[i][1]);
-					day_bef_h = data[i][0];
-
-				}
-				if ((int) Double.parseDouble(data[i][1]) < day_before_l) {
-					day_before_l = (int) Double.parseDouble(data[i][1]);
-					day_bef_l = data[i][0];
-				}
-			}
-
-		}
-		if (WISApplication.debug == true) {
-			System.out.println(today_h + current_h + " " + today_l + current_l);
-			System.out.println(prev_h + previous_h + " " + prev_l + previous_l);
-			System.out.println(day_bef_h + day_before_h + " " + day_bef_l + day_before_l);
-			System.out.println(" Previous " + previous_h + " " + previous_l);
-		}
-		JFreeChart lineChartObject = ChartFactory.createLineChart("Maximum vs Minimum", "Time", " Temperature",
-				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
-
-		/* Check if current days data is available */
-
-		if (current_h != 0 && today_h != null)
-			line_chart_dataset.addValue((current_h), "temp", today_h);
-
-		if (current_l != 200 && today_l != null)
-			line_chart_dataset.addValue((current_l), "temp", today_l);
-
-		if (previous_h != 0 && prev_h != null)
-			line_chart_dataset.addValue((previous_h), "temp", prev_h);
-
-		if (previous_l != 200 && prev_l != null)
-			line_chart_dataset.addValue((previous_l), "temp", prev_l);
-
-		if (day_before_h != 0 && day_bef_h != null)
-			line_chart_dataset.addValue((day_before_h), "temp", day_bef_h);
-
-		if (day_before_l != 200 && day_bef_l != null)
-			line_chart_dataset.addValue((day_before_l), "temp", day_bef_l);
-
-		ChartPanel panel = new ChartPanel(lineChartObject);
-		JScrollPane pane = new JScrollPane(panel);
-		panel.setPreferredSize(new java.awt.Dimension(600, 300));
-		showInfo.add(pane);
-
-	}
-
+	
 }

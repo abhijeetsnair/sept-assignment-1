@@ -1,11 +1,8 @@
 package com.sept01.view.listener;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 import org.json.JSONObject;
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;

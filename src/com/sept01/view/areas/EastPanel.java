@@ -77,7 +77,6 @@ public class EastPanel extends JPanel {
 		TextPanel.setBorder(null);
 
 		pane.setBorder(null);
-
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 	}
 

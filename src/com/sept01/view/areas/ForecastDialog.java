@@ -276,9 +276,12 @@ public class ForecastDialog extends JDialog {
 			String key = (String) a.next();
 			// loop to get the dynamic key
 			String value = object.get(key).toString();
+			if(key.compareToIgnoreCase("dateTime")!=0 &&key.compareToIgnoreCase("description")!=0)
+			{
 			comboLanguage.addItem(key);
 			log.log(Level.INFO, key);
 			log.log(Level.INFO, value);
+			}
 
 		}
 		selector_holder.add(comboLanguage);

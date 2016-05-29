@@ -23,12 +23,20 @@ Assignment 1)
 
 Assigmment 2)
 + 1) Extended the Singleton pattern and the MVC pattern from Assignment1 and additionally 
-implemented a Factory pattern consisting of classes Forecaster.java,ForecastIO.java,OpenWeatherIO.java,ForecasterFactory.java
-(PLEASE CHECK THE DESIGNPATTERNS.DOCX FILE UNDER DOCUMENTS FOLDER FOR EXPLANATION)
- + 2) Implemented JUnit tests for all the core classes and objects
- +3) Used a continous integration tool Jenekins
+	implemented a Factory pattern consisting of classes 	Forecaster.java,ForecastIO.java,OpenWeatherIO.java,ForecasterFactory.java
+	(PLEASE CHECK THE DESIGNPATTERNS.DOCX FILE UNDER DOCUMENTS FOLDER FOR EXPLANATION)
++2) Implemented JUnit tests for all the core classes and objects
++3) Used a continous integration tool Jenkins
 +4) Product quality documented and additions of classes to assignment 2 shown in ProductQuality.txt
-file under documents folder
+	file under documents folder (Documents/Assignment2/ProductQuality.txt)
++5) Functionality implemented for both ForecastIO and OpenWeather
++6) UML diagrams can be found under UML/Assignment2
++7)Documentation on how to use the program present under Documents/Assignment2
++8)Liecenses for OpenSource code acessed is mentioned licences.txt folder under Documents/liecenses.txt
++9)Automated Build using Maven
++10)Forecast Display is tabbed(similar to tabbed browsing to display multiple graphs at once)
+
+
 # Peer Reviews
 #####s3477089 - Sarah Vasiliki Giapitzakis
 + Percentage Contributed : 25 %
@@ -44,7 +52,7 @@ file under documents folder
 
 #####s3400586 - Jeet
 + Percentage Contributed : 25 %
-+ Worked On : Gui
++ Worked On : GUI (Forecast UI and BOM UI), Class diagrams, Design documentation, ForecastIO intial implementation
 
 #Tutor
 aditya jagtap
