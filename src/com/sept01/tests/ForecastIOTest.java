@@ -8,30 +8,38 @@ import org.junit.Test;
 
 import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
-
+/*
+ * COMPREHENSIVE TESTING FOR FORECASTIO TESTS 
+ * THE API CALLS FOR DIFFERENT INSTANTIATIONS
+ * 
+ */
 public class ForecastIOTest {
 
 	Forecaster f = ForecasterFactory.getForecaster("forecastio");
-
+// CREATES AN INSTANCE TO CHECK IF CORRECTLY INSTANTIATED
 	@Test
 	public void TestCreate() {
 		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
 		assertNotNull(fio);
 	}
-
+// TESTS IF THE DATA IS RETRIEVED BY THE CALL
 	@Test
 	public void downloadData() {
 		JSONObject data = f.getForecast(10.00, 10.00);
 		assertNotNull(data);
 	}
-
+// TESTS IF THE JSON ARRAY IS APPROPRIATELY LOADED 
 	@Test
 	public void data() {
 		JSONObject data = f.getForecast(10.00, 10.00);
 		JSONArray forecasts = data.getJSONArray("forecast");
 		assertNotNull(forecasts);
 	}
-
+/*
+ * 
+ * TESTS  BELOW TESTTHE ELEMENTS OF THE JSON ARRAY
+ */
+	
 	@Test
 	public void dataSummary() {
 		JSONObject data = f.getForecast(10.00, 10.00);

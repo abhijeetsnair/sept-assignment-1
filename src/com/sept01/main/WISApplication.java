@@ -68,6 +68,8 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
+		
+		//Logging to the console and additonally to  a file
 		Logger logger = Logger.getLogger("");
 		FileHandler fh = null;
 		try {
@@ -79,6 +81,7 @@ public class WISApplication {
 		
 		logger.addHandler(fh);
 		
+		//Print statements that test functionality of the FORECASTIO and OPENWEATHER
 //		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
 //		JSONObject owmF = owm.getForecast(37.8267,-122.423);
 //		Forecaster fio = ForecasterFactory.getForecaster("forecastio");

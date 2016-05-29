@@ -11,13 +11,19 @@ import com.sept01.model.Forecaster;
 import com.sept01.model.ForecasterFactory;
 
 public class OpenWeatherMapTest {
-
+	/*
+	 * COMPREHENSIVE TESTING FOR OPENWEATHER API TESTS 
+	 * THE API CALLS FOR DIFFERENT INSTANTIATIONS
+	 * 
+	 */
+	// CREATES AN INSTANCE TO CHECK IF CORRECTLY INSTANTIATED
 	@Test
 	public void TestCreate() {
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
 		assertNotNull(owm);
 	}
 
+	// TESTS IF THE DATA IS RETRIEVED BY THE CALL
 	@Test
 	public void TestDownload() {
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
@@ -26,6 +32,7 @@ public class OpenWeatherMapTest {
 		assertNotNull(data.getJSONArray("forecast"));
 	}
 
+	// TESTS IF THE JSON ARRAY IS APPROPRIATELY LOADED 
 	@Test
 	public void dataSummary() {
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
@@ -39,7 +46,10 @@ public class OpenWeatherMapTest {
 			fail();
 		}
 	}
-
+	/*
+	 * 
+	 * TESTS  BELOW TESTTHE ELEMENTS OF THE JSON ARRAY
+	 */
 	@Test
 	public void dataTemp() {
 		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");

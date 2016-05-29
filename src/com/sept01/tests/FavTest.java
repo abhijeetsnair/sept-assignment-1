@@ -33,6 +33,7 @@ public class FavTest {
 		assertThat(stationName, is(equalTo(stationName)));
 	}
 
+	// Tests for duplication in the favoriates class
 	@Test
 	public void voidtestDuplication() {
 
