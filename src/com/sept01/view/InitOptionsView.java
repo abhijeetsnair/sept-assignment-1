@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -43,6 +44,9 @@ public class InitOptionsView extends JFrame {
 
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
+		setTitle("WISApplication");
+		
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.WHITE);
 		panel.setBackground(new Color(64, 64, 72));
