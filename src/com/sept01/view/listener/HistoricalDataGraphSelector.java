@@ -205,7 +205,7 @@ public class HistoricalDataGraphSelector implements ActionListener {
 		}
 
 		// INITIALSES THE LINE CHART TO THE APPROPRIATE VALUES
-		lineChart = ChartFactory.createLineChart("Weather Data for " + weatherStation, "Points", "Values", dataset,
+		lineChart = ChartFactory.createLineChart("Weather Data for " + weatherStation, "Time", "Values", dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 
 		// REMOVES THE PANEL FROM THE UI IF THE PANEL ALREADY EXISTS
@@ -240,7 +240,7 @@ public class HistoricalDataGraphSelector implements ActionListener {
 		// APPLIES THE CURRENT THEME TO THE LINE CHART
 		// SETS THE DIMENSIONS TO THE APPROPRIATE VALUES
 		ChartUtilities.applyCurrentTheme(lineChart);
-		chartpanel.setPreferredSize(new java.awt.Dimension(560, 367));
+		chartpanel.setPreferredSize(new java.awt.Dimension(580, 400));
 		tempgraphs.add(chartpanel);
 		tempgraphs.repaint();
 		tempgraphs.revalidate();

@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +46,7 @@ import com.sept01.view.listener.ForecastGraphSelector;
  */
 
 public class ForecastDialog extends JDialog {
-	
+
 	String weatherStation;
 
 	// Implments Java logger
@@ -62,73 +60,68 @@ public class ForecastDialog extends JDialog {
 	JTable jt;
 	ImageIcon icon;
 	JTabbedPane tabbedPane;
-	
-
 
 	public ForecastDialog(JSONObject forecast, String weather_station) {
 		this.forecast = forecast;
-		this.weatherStation=weather_station;
+		this.weatherStation = weather_station;
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
 		tabbedPane = new JTabbedPane();
-		
+
 		icon = createImageIcon("images/icon.png");
-		log.log(Level.INFO, "Displaying the hourly forecast for "+ weatherStation);
-		JComponent panel1 = makeTextPanel("Hourly Forecast for "+ weatherStation);
+		log.log(Level.INFO, "Displaying the hourly forecast for " + weatherStation);
+		JComponent panel1 = makeTextPanel("Hourly Forecast for " + weatherStation);
 		tabbedPane.addTab("Tab 1", icon, panel1, "Displays forecast information for 48 hours ,past the current hour");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		currentData = displayForecastDataonTab1(panel1, currentData);
-		
-		
+
 		setBackground(new Color(32, 32, 40));
 		tabbedPane.setBackground(new Color(32, 32, 40));
 		tabbedPane.setForeground(new Color(32, 32, 40));
-		
+
 		panel1.setBackground(new Color(64, 64, 72));
 		panel1.setForeground(Color.LIGHT_GRAY);
-		
+
 		jt = new JTable(currentData, coloumns);
-		
+
 		DefaultTableModel tableModel = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// all cells false
+				return false;
+			}
+		};
 
-	    @Override
-	    public boolean isCellEditable(int row, int column) {
-	       //all cells false
-	       return false;
-	    }
-	};
+		// jt.setModel(tableModel);
 
-		
-//		jt.setModel(tableModel);
-	 
-	jt.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer()
-  {
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-    {
-        final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        c.setBackground(new Color(32, 32, 40));
-        c.setForeground(Color.ORANGE);
-//        c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new Color(92, 92, 100));
-//        c.setForeground(row % 9 == 0 ? Color.ORANGE : Color.LIGHT_GRAY);
-        return c;
-    }
-});
-	
-	jt.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
-	{
-	    @Override
-	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-	    {
-	        final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-	        c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new Color(92, 92, 100));
-          c.setForeground(row % 9 == 0 ? Color.ORANGE : Color.LIGHT_GRAY);
-	        return c;
-	    }
-	});
+		jt.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+				final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+						column);
+				c.setBackground(new Color(32, 32, 40));
+				c.setForeground(Color.ORANGE);
+				// c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new
+				// Color(92, 92, 100));
+				// c.setForeground(row % 9 == 0 ? Color.ORANGE :
+				// Color.LIGHT_GRAY);
+				return c;
+			}
+		});
 
-		
-		
+		jt.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+				final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+						column);
+				c.setBackground(row % 9 == 0 ? new Color(64, 64, 72) : new Color(92, 92, 100));
+				c.setForeground(row % 9 == 0 ? Color.ORANGE : Color.LIGHT_GRAY);
+				return c;
+			}
+		});
+
 		JScrollPane jps = new JScrollPane(jt);
 		panel1.add(jps);
 		JPanel buttonPanel = new JPanel();
@@ -156,29 +149,9 @@ public class ForecastDialog extends JDialog {
 		setSize(new Dimension(720, 720));
 
 	}
-	
-	public class MyModel extends AbstractTableModel{
 
-    @Override
-    public int getRowCount() {
-      // TODO Auto-generated method stub
-      return 0;
-    }
 
-    @Override
-    public int getColumnCount() {
-      // TODO Auto-generated method stub
-      return 0;
-    }
 
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-      // TODO Auto-generated method stub
-      return null;
-    }
-    //not necessary
-}
-	
 	public String getWeatherStation() {
 		return weatherStation;
 	}
@@ -204,14 +177,14 @@ public class ForecastDialog extends JDialog {
 				* forecast.getJSONArray("forecast").getJSONObject(0).length()][2];
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 
-		//Looping through all the forecast objects present in the array
+		// Looping through all the forecast objects present in the array
 		for (Object fob : forecasts) {
 			JSONObject fore = (JSONObject) fob;
 			@SuppressWarnings("rawtypes")
 			Set keys = fore.keySet();
 			@SuppressWarnings("rawtypes")
 			Iterator a = keys.iterator();
-			//Loops through the keys using the iterator
+			// Loops through the keys using the iterator
 			// this avoids the need to fetch using key.get("description")
 			while (a.hasNext()) {
 				String key = (String) a.next();
@@ -256,13 +229,11 @@ public class ForecastDialog extends JDialog {
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		JPanel selector_panel = new JPanel();
 		JPanel selector_holder = new JPanel();
-		
-		
+
 		comboLanguage.setBackground(new Color(64, 64, 72));
 		comboLanguage.setForeground(Color.ORANGE);
-		
-		
-		selector_panel.setLayout(new BoxLayout(selector_panel,BoxLayout.Y_AXIS));
+
+		selector_panel.setLayout(new BoxLayout(selector_panel, BoxLayout.Y_AXIS));
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 		JSONObject object = forecasts.getJSONObject(0);
 
@@ -276,25 +247,23 @@ public class ForecastDialog extends JDialog {
 			String key = (String) a.next();
 			// loop to get the dynamic key
 			String value = object.get(key).toString();
-			if(key.compareToIgnoreCase("dateTime")!=0 &&key.compareToIgnoreCase("description")!=0)
-			{
-			comboLanguage.addItem(key);
-			log.log(Level.INFO, key);
-			log.log(Level.INFO, value);
+			if (key.compareToIgnoreCase("dateTime") != 0 && key.compareToIgnoreCase("description") != 0) {
+				comboLanguage.addItem(key);
+				log.log(Level.INFO, key);
+				log.log(Level.INFO, value);
 			}
 
 		}
 		selector_holder.add(comboLanguage);
 		selector_panel.add(selector_holder);
 		graph_panel.add(selector_panel);
-		
+
 		graph_panel.setBackground(new Color(64, 64, 72));
 		selector_panel.setBackground(new Color(64, 64, 72));
 		selector_holder.setBackground(new Color(64, 64, 72));
-		
+
 		comboLanguage.addActionListener(new ForecastGraphSelector(comboLanguage, forecast, selector_panel));
-	
-		
+
 	}
 
 	/*
@@ -311,7 +280,7 @@ public class ForecastDialog extends JDialog {
 		JLabel filler = new JLabel(text, JLabel.CENTER);
 		panel.add(filler);
 		filler.setForeground(Color.LIGHT_GRAY);
-		
+
 		panel.setBackground(new Color(32, 32, 40));
 		return panel;
 	}
@@ -328,27 +297,22 @@ public class ForecastDialog extends JDialog {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JPanel banner = new JPanel();
 		banner.setLayout(new BorderLayout());
-		
+
 		JPanel customise = new JPanel();
 		customise.setLayout(new BorderLayout());
-		
-	
-		
 
-		JLabel filler = new JLabel("Show Hourly Graphs for "+weatherStation, JLabel.CENTER);
-		customise.add(filler,BorderLayout.CENTER);
+		JLabel filler = new JLabel("Show Hourly Graphs for " + weatherStation, JLabel.CENTER);
+		customise.add(filler, BorderLayout.CENTER);
 		JButton button = new JButton("X");
-		customise.add(button,BorderLayout.EAST);
-		
+		customise.add(button, BorderLayout.EAST);
+
 		customise.setBackground(new Color(32, 32, 40));
-		
-		
+
 		panel.setBackground(new Color(32, 32, 40));
-		
+
 		filler.setBackground(new Color(32, 32, 40));
 		filler.setForeground(Color.LIGHT_GRAY);
-		
-		
+
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -376,6 +340,6 @@ public class ForecastDialog extends JDialog {
 			System.err.println("Couldn't find file: " + path);
 			return null;
 		}
-		
+
 	}
 }

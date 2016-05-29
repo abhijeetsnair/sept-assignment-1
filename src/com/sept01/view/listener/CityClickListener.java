@@ -36,7 +36,7 @@ public class CityClickListener implements ActionListener {
 				"Latest Weather Observation for " + weather_station_clicked,state,weatherStation);
 
 		/*set the size of the Dialog window*/
-		dialog.setSize(1100,470);
+		dialog.setSize(1150,520);
 
 	}
 	
