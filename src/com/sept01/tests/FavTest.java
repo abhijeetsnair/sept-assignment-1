@@ -15,9 +15,9 @@ import com.sept01.model.Singleton;
 import com.sept01.model.WeatherStation;
 
 /*
- * Tests favoriate such that
- * 1) No dupliate favouriates are shown
- * 2) favoriate cannot be null 
+ * Tests favorite such that
+ * 1) No duplicate favorites are shown
+ * 2) Favorite cannot be null 
  * 3) They must have both name and url information 
  */
 public class FavTest {
