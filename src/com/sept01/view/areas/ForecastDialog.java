@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +62,8 @@ public class ForecastDialog extends JDialog {
 	JTable jt;
 	ImageIcon icon;
 	JTabbedPane tabbedPane;
+	
+
 
 	public ForecastDialog(JSONObject forecast, String weather_station) {
 		this.forecast = forecast;
@@ -77,7 +80,9 @@ public class ForecastDialog extends JDialog {
 		currentData = displayForecastDataonTab1(panel1, currentData);
 		
 		
-//		tabbedPane.setBackground(new Color(32, 32, 72));
+		setBackground(new Color(32, 32, 40));
+		tabbedPane.setBackground(new Color(32, 32, 40));
+		tabbedPane.setForeground(new Color(32, 32, 40));
 		
 		panel1.setBackground(new Color(64, 64, 72));
 		panel1.setForeground(Color.LIGHT_GRAY);
@@ -252,6 +257,11 @@ public class ForecastDialog extends JDialog {
 		JPanel selector_panel = new JPanel();
 		JPanel selector_holder = new JPanel();
 		
+		
+		comboLanguage.setBackground(new Color(64, 64, 72));
+		comboLanguage.setForeground(Color.ORANGE);
+		
+		
 		selector_panel.setLayout(new BoxLayout(selector_panel,BoxLayout.Y_AXIS));
 		JSONArray forecasts = forecast.getJSONArray("forecast");
 		JSONObject object = forecasts.getJSONObject(0);
@@ -274,6 +284,11 @@ public class ForecastDialog extends JDialog {
 		selector_holder.add(comboLanguage);
 		selector_panel.add(selector_holder);
 		graph_panel.add(selector_panel);
+		
+		graph_panel.setBackground(new Color(64, 64, 72));
+		selector_panel.setBackground(new Color(64, 64, 72));
+		selector_holder.setBackground(new Color(64, 64, 72));
+		
 		comboLanguage.addActionListener(new ForecastGraphSelector(comboLanguage, forecast, selector_panel));
 	
 		
@@ -293,6 +308,8 @@ public class ForecastDialog extends JDialog {
 		JLabel filler = new JLabel(text, JLabel.CENTER);
 		panel.add(filler);
 		filler.setForeground(Color.LIGHT_GRAY);
+		
+		panel.setBackground(new Color(32, 32, 40));
 		return panel;
 	}
 
@@ -319,6 +336,8 @@ public class ForecastDialog extends JDialog {
 		customise.add(filler,BorderLayout.CENTER);
 		JButton button = new JButton("X");
 		customise.add(button,BorderLayout.EAST);
+		
+		customise.setBackground(new Color(32, 32, 40));
 		
 		
 		panel.setBackground(new Color(32, 32, 40));

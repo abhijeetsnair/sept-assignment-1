@@ -6,13 +6,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Date;
 import java.util.HashMap;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,7 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -32,8 +28,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.Dataset;
-
 import com.sept01.AreaController.AreaButtonListener;
 import com.sept01.main.WISApplication;
 import com.sept01.model.Singleton;
@@ -55,14 +49,14 @@ public class Dialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTable jt;
 	private String state_name;
-	private 	ChartPanel chartPanel = null;
+	private ChartPanel chartPanel;
 	@SuppressWarnings("rawtypes")
 	private HashMap[] weatherD;
 	private boolean addorRemoveFav = false;
 	String weather_station, message;
 	WeatherStation weatherStation;
 	DefaultCategoryDataset dataset;
-	String lat,lon;
+	String lat, lon;
 	String data[][];
 
 	private String[] coloumns = { "Date", "Air Temp", "App Temp", "Dew Point", "Rel Hum", "Delta-T", "Wind Dir",
@@ -95,10 +89,10 @@ public class Dialog extends JDialog {
 		jps.setForeground(foreground);
 		jps.getVerticalScrollBar().setBackground(background.brighter());
 		jps.getHorizontalScrollBar().setBackground(background.brighter());
-		
+
 		setLocationRelativeTo(null);
-		setSize(new Dimension(720,  720));
-		
+		setSize(new Dimension(720, 720));
+
 		/**
 		 * Checks if the particular station is already present in the favorite
 		 * list
@@ -126,30 +120,28 @@ public class Dialog extends JDialog {
 		 * THE REFRESH BUTTON ENABLES THE USER TO REFERSH THE PAGE TO SHOW THE
 		 * LATEST INFORMATION ABOUT THE APPLICATION
 		 */
-		
-		
-		/*Assignment 2 addition*/
+
+		/* Assignment 2 addition */
 		/**
-		 *ENABLES THE USER TO SELECT FORECAST INFORMATION BY CLICKING THE 
-		 *FORECAST INFO BUTTON THE BUTTON DISPLAYS FORECAST VALUES FOR A LOCATION 
+		 * ENABLES THE USER TO SELECT FORECAST INFORMATION BY CLICKING THE
+		 * FORECAST INFO BUTTON THE BUTTON DISPLAYS FORECAST VALUES FOR A
+		 * LOCATION
 		 */
 		JButton forecastInfo = new JButton("Forecast Info");
 		labelPanel.add(forecastInfo);
 		forecastInfo.setBackground(background.brighter());
 		forecastInfo.setForeground(foreground);
 		forecastInfo.setFont(new Font("Verdana", Font.PLAIN, 12));
-		forecastInfo.addActionListener(new ForecastClickListener(lat,lon,this,weather_station));
+		forecastInfo.addActionListener(new ForecastClickListener(lat, lon, this, weather_station));
 		forecastInfo.setBorder(null);
-		
-		
-		
+
 		JButton refresh = new JButton("Refresh");
 		labelPanel.add(refresh);
 		refresh.setBackground(background.brighter());
 		refresh.setForeground(foreground);
 		refresh.setFont(new Font("Verdana", Font.PLAIN, 12));
 		refresh.addActionListener(e -> DataRefresh(refresh));
-		refresh.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, refresh));
+		refresh.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel }, refresh));
 		refresh.setBorder(null);
 
 		/***
@@ -161,7 +153,7 @@ public class Dialog extends JDialog {
 		if (addorRemoveFav == false) {
 			JButton add = new JButton("+ Add Favourites");
 			add.addActionListener(new AddtoFavListener(weather_station, weatherStation));
-			add.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, add));
+			add.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel }, add));
 			add.setBackground(background.brighter());
 			add.setForeground(foreground);
 			add.setBorder(null);
@@ -176,7 +168,7 @@ public class Dialog extends JDialog {
 		else if (addorRemoveFav == true) {
 			JButton remove = new JButton("- Remove Favourites");
 			remove.addActionListener(new RemFavListener(weather_station, weatherStation));
-			remove.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel}, remove));
+			remove.addMouseListener(new AreaButtonListener(new JPanel[] { labelPanel }, remove));
 			remove.setBackground(background.brighter());
 			remove.setForeground(foreground);
 			remove.setBorder(null);
@@ -191,7 +183,7 @@ public class Dialog extends JDialog {
 
 		infoPane.add(messagePanel);
 		infoPane.add(jps, BorderLayout.WEST);
-		
+
 		showInfo.add(infoPane);
 		infoPane.setBackground(background);
 		infoPane.setForeground(foreground);
@@ -217,10 +209,10 @@ public class Dialog extends JDialog {
 		JPanel tempgraphs = new JPanel();
 		tempgraphs.setLayout(new BoxLayout(tempgraphs, BoxLayout.Y_AXIS));
 		// Getting rid of maximum and minimum temperatures
-		displayRemoveablegraphs(tempgraphs,data);
-		
-//		show9pm3pmGraph(tempgraphs, data);
-//		showMaxMinGraph(tempgraphs, data);
+		displayRemoveablegraphs(tempgraphs, data);
+
+		// show9pm3pmGraph(tempgraphs, data);
+		// showMaxMinGraph(tempgraphs, data);
 
 		labelNGraph.add(graphLabel);
 		labelNGraph.add(tempgraphs);
@@ -228,16 +220,16 @@ public class Dialog extends JDialog {
 
 		JPanel clear = new JPanel();
 		JButton closeMe = new JButton("clear");
-		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] {clear}, closeMe));
+		closeMe.addMouseListener(new AreaButtonListener(new JPanel[] { clear }, closeMe));
 		closeMe.setBorder(null);
 		clear.add(closeMe);
-		
+
 		clear.setBackground(new Color(64, 64, 72));
 
 		// set action listener on the button
-		closeMe.addActionListener(new JDialogListener(this,dataset));
+		closeMe.addActionListener(new JDialogListener(this, dataset));
 
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane. HORIZONTAL_SPLIT);
+		JSplitPane splitPaneV = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneV.setOneTouchExpandable(true);
 		splitPaneV.setLeftComponent(infoPane);
 		splitPaneV.setDividerLocation(500);
@@ -247,7 +239,7 @@ public class Dialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
-		
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/icon.png"));
 
 		// updates the data at 10 second intervals
@@ -258,19 +250,19 @@ public class Dialog extends JDialog {
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
-						if(WISApplication.debug == true){
-						System.out.println("END THREAD");
+						if (WISApplication.debug == true) {
+							System.out.println("END THREAD");
 						}
 						run = false;
 					}
 					DataRefresh(refresh);
-					
+
 				}
 			}
 		};
 
 		updateThread.start();
-		//closes thread on window close
+		// closes thread on window close
 		this.addWindowListener(new WindowListener() {
 
 			@Override
@@ -312,24 +304,17 @@ public class Dialog extends JDialog {
 	}
 
 	private void displayRemoveablegraphs(JPanel tempgraphs, String data[][]) {
-		 
-	
-		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_spd_kmh", "gust_kmh","wind_spd_kt","gust_kt","rain_trace"};
-		//Create the combo box, select item at index 4.
-		//Indices start at 0, so 4 specifies the pig.
+
+		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_spd_kmh", "gust_kmh",
+				"wind_spd_kt", "gust_kt", "rain_trace" };
+		// Create the combo box, select item at index 4.
+		// Indices start at 0, so 4 specifies the pig.
 		JComboBox<Object> fields_list = new JComboBox<Object>(fields);
-		  dataset = new DefaultCategoryDataset( );
+		dataset = new DefaultCategoryDataset();
 		tempgraphs.add(fields_list);
-		fields_list.addActionListener(new HistoricalDataGraphSelector(fields_list,dataset,data,fields,tempgraphs,weather_station));
-				
-		
-	
-	
-	
-		
-		
-		
-		
+		fields_list.addActionListener(
+				new HistoricalDataGraphSelector(fields_list, dataset, data, fields, tempgraphs, weather_station));
+
 	}
 
 	/**
@@ -345,10 +330,12 @@ public class Dialog extends JDialog {
 					weatherD = state.getAreas().get(x).getWeatherStations().get(i).getData();
 					for (int j = 0; j < weatherD.length; j++) {
 
-						if(WISApplication.debug == true){
-							System.out.println(weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
-								+ " Weather station " + weatherD[j].get("name") + " dewpt: " + weatherD[j].get("dewpt")
-								+ "kmh" + "Name :" + weatherD[j].get("name"));}
+						if (WISApplication.debug == true) {
+							System.out.println(
+									weatherD[j].get("local_date_time") + " " + state.getAreas().get(x).getName()
+											+ " Weather station " + weatherD[j].get("name") + " dewpt: "
+											+ weatherD[j].get("dewpt") + "kmh" + "Name :" + weatherD[j].get("name"));
+						}
 					}
 				}
 
@@ -377,9 +364,9 @@ public class Dialog extends JDialog {
 			data[i][15] = (String) weatherD[i].get("cloud_base_m");
 			data[i][16] = (String) weatherD[i].get("cloud_oktas");
 			data[i][17] = (String) weatherD[i].get("cloud_type");
-			data[i][18] = (String) weatherD[i].get("vis_km");	
-			lat=(String) weatherD[i].get("lat");	
-			lon=(String) weatherD[i].get("lon");	
+			data[i][18] = (String) weatherD[i].get("vis_km");
+			lat = (String) weatherD[i].get("lat");
+			lon = (String) weatherD[i].get("lon");
 
 		}
 		return data;
@@ -405,14 +392,16 @@ public class Dialog extends JDialog {
 	 * if is it present then returns true otherwise returns false
 	 */
 	private boolean CheckifPresentinFav(String weather_station) {
-		if(WISApplication.debug == true){
+		if (WISApplication.debug == true) {
 			System.out.println("This is Checkin Fav " + weather_station);
 		}
 		for (int i = 0; i < Singleton.getInstance().getApplication().getFav().size(); i++) {
 			if (weather_station
 					.compareTo(Singleton.getInstance().getApplication().getFav().get(i).getStation().getName()) == 0) {
-				if(WISApplication.debug == true){System.out.println("This is Checkin Fav " + weather_station + " with "
-						+ Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());}
+				if (WISApplication.debug == true) {
+					System.out.println("This is Checkin Fav " + weather_station + " with "
+							+ Singleton.getInstance().getApplication().getFav().get(i).getStation().getName());
+				}
 
 				return true;
 			}
@@ -430,9 +419,11 @@ public class Dialog extends JDialog {
 	private void show9pm3pmGraph(JPanel showInfo, String[][] data) {
 		DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
 		for (int i = 0; i < data.length; i++) {
-			if(WISApplication.debug == true){System.out.println(
-					data[i][0] + data[i][1] + "Matches with " + data[i][0].contains(new Date().getDate() + "/09:00am")
-							+ data[i][0].contains(new Date().getDate() + "/03:00pm"));}
+			if (WISApplication.debug == true) {
+				System.out.println(data[i][0] + data[i][1] + "Matches with "
+						+ data[i][0].contains(new Date().getDate() + "/09:00am")
+						+ data[i][0].contains(new Date().getDate() + "/03:00pm"));
+			}
 
 			if ((data[i][0].contains(new Date().getDate() + "/09:00am"))
 					|| (data[i][0].contains(new Date().getDate() + "/03:00pm"))
@@ -445,15 +436,13 @@ public class Dialog extends JDialog {
 		}
 		JFreeChart lineChartObject = ChartFactory.createLineChart("9am,3pm Temperatures", "Time", " Temperature",
 				line_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
-	
-		
-		
+
 		ChartPanel panel = new ChartPanel(lineChartObject);
-		
-		//lineChartObject.
-		
+
+		// lineChartObject.
+
 		StandardChartTheme theme = new StandardChartTheme("name");
-		//theme.setBac
+		// theme.setBac
 		theme.setChartBackgroundPaint(Color.decode("#3d3f47"));
 		theme.setAxisLabelPaint(Color.orange);
 		theme.setDomainGridlinePaint(Color.orange);
@@ -465,28 +454,26 @@ public class Dialog extends JDialog {
 		theme.setThermometerPaint(Color.orange);
 		theme.setTitlePaint(Color.orange);
 		theme.setRangeGridlinePaint(Color.orange);
-		
-		//theme.setCrosshairPaint(Color.white);
+
+		// theme.setCrosshairPaint(Color.white);
 		theme.setPlotBackgroundPaint(Color.decode("#444444"));
 		theme.setSubtitlePaint(Color.orange);
-		//theme.setChartBackgroundPaint(Color.decode("#000000"));
-		
-		
+		// theme.setChartBackgroundPaint(Color.decode("#000000"));
+
 		theme.setTickLabelPaint(Color.orange);
-		
+
 		theme.setLegendItemPaint(Color.orange);
 		theme.setLegendBackgroundPaint(Color.decode("#444455"));
-		
-		//theme.setDomainGridlinePaint(paint);
-		
-		//theme.setRegularFont();
-		
+
+		// theme.setDomainGridlinePaint(paint);
+
+		// theme.setRegularFont();
+
 		ChartFactory.setChartTheme(theme);
-		
+
 		ChartUtilities.applyCurrentTheme(lineChartObject);
-		
-		
-		//panel.setBackground(Color.RED);
+
+		// panel.setBackground(Color.RED);
 		JScrollPane pane = new JScrollPane(panel);
 		panel.setLayout(new FlowLayout());
 		panel.setPreferredSize(new java.awt.Dimension(600, 300));
@@ -514,7 +501,7 @@ public class Dialog extends JDialog {
 		for (int i = 0; i < data.length; i++) {
 			String segments[] = data[i][0].split("/");
 			String date = segments[0];
-			if(WISApplication.debug == true){
+			if (WISApplication.debug == true) {
 				System.out.println("Substring" + date);
 			}
 			// Current highest Temperature
@@ -557,7 +544,7 @@ public class Dialog extends JDialog {
 			}
 
 		}
-		if(WISApplication.debug == true){
+		if (WISApplication.debug == true) {
 			System.out.println(today_h + current_h + " " + today_l + current_l);
 			System.out.println(prev_h + previous_h + " " + prev_l + previous_l);
 			System.out.println(day_bef_h + day_before_h + " " + day_bef_l + day_before_l);
