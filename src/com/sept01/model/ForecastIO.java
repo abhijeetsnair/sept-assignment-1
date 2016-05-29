@@ -61,7 +61,7 @@ public class ForecastIO implements Forecaster {
 			JSONObject FJSOb = new JSONObject();
 			FJSOb.put("description", JSOb.get("summary"));
 			FJSOb.put("dateTime", JSOb.get("time"));
-			FJSOb.put("temp", JSOb.get("temperature"));
+			FJSOb.put("temp", ((JSOb.getDouble("temperature") - 32.00) * 5) / 9);
 			FJSOb.put("humidity", JSOb.get("humidity"));
 			FJSOb.put("speed", JSOb.get("windSpeed"));
 			FJSOb.put("winddeg", JSOb.get("windBearing"));
