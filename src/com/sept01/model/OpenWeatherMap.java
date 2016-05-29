@@ -119,7 +119,7 @@ public class OpenWeatherMap implements Forecaster {
 			pressure = currListMain.getDouble("pressure");
 			cloud = currListClouds.getInt("all");
 			temp = currListMain.getDouble("temp");
-
+			temp = temp - 273.15;
 			// fill currData
 			currData.put("description", description);
 			currData.put("dateTime", dateTime);

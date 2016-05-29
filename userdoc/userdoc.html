@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
+
+   <style>
+   .list-group-item {
+    display: list-item;
+  }
+  img{
+    width: 100%;
+
+  }
+  .jumbotron{
+    color: gold;
+    background-color: #3d3f47;
+  }
+   </style>
+
+  <body>
+    <div class="container">
+
+      <h1 id="header" class="jumbotron">Weather Information Management System [WIMS] User Documentation</h1>
+      <div class ="row">
+        <div id ="list" class= "well col-md-4" >
+          <h4>Contents</h4>
+      <ol>
+        <li> <a href="#Introduction">Introduction</a> </li>
+        <li> <a href="#Installation">Installation</a> </li>
+        <ol>
+          <li> <a href="#Installing Java">Installing Java</a> </li>
+          <li> <a href="#Installing [PROGRAM NAME]">Installing WIMS</a> </li>
+        </ol>
+        <li> <a href="#Launching the program">Launching the program</a> </li>
+        <li> <a href="#Quick Overview">Quick Overview</a> </li>
+        <li> <a href="#Checking the weather">Checking the weather</a>
+          <ol>
+            <li> <a href="#Choosing a state">Choosing a state</a> </li>
+            <li> <a href="#Finding your area">Finding your area</a> </li>
+            <li> <a href="#Finding your weather station">Finding your weather station</a> </li>
+            <li> <a href="#Displaying weather data">Displaying weather data.</a></li>
+          </ol>
+        </li>
+        <li> <a href="#Favourite weather stations">Favourite weather stations</a>
+          <ol>
+            <li> <a href="#Adding a favourite weather station">Adding a favourite weather station</a> </li>
+            <li> <a href="#Removing a favourite weather station">Removing a favourite weather station</a> </li>
+          </ol>
+        </li>
+		<li> <a href="#Viewing graph information">Viewing graph information</a>
+          <ol>
+            <li> <a href="#Viewing the interactive graph">Viewing the interactive graph</a> </li>
+          </ol>
+        </li>
+		<li> <a href="#Viewing forecast information">Viewing forecast information</a>
+          <ol>
+            <li> <a href="#Viewing the forecast graph">Viewing the forecast graph</a> </li>
+          </ol>
+        </li>
+        <li> <a href="#Uninstall">Uninstall</a> </li>
+      </ol>
+
+    </div>
+  </div>
+    <ol>
+    <li> <h1 id="Introduction">Introduction</a></h1>
+      <p> Weather Information Management System [WIMS] v1.0 is the latest version. WIMS is a self contained .jar executable
+      <br> program that fetches real time weather data from the <a href="http://www.bom.gov.au/">Bureau of Meteorolgy website</a> and displays it in a user friendly format. <br>
+      The program is written in Java 8 and requires your operating system to have Java 8 installed.  <br> </p>
+    </li>
+
+    <li> <h1 id="Installation">Installation</a></h1> </li>
+    <ol>
+      <li> <h3 id="Installing Java">Installing Java</a></h3> </li>
+      <p> To install Java head to the <a href="https://java.com/en/download/">Java website</a> and download the latest version. Follow it's installation instructions.</p>
+      <li> <h3 id="Installing [PROGRAM NAME]">Installing Weather Information Management System</a></h3> </li>
+      <p> WIMS comes as a self contained .jar executable and does not require installation in order to launch.
+    </ol>
+    <li> <h1 id="Launching the program">Launching the program</a></h1> </li>
+      <p> To launch WIMS simply double click the .jar file, or right click and select "OPEN". Users will be presented with a choice at the start, so just select
+	  any option as the main source of information.</p>
+	  <img src="images/select.png" alt="Select">
+    <li> <h1 id="Quick Overview">Quick Overview</a></h1> </li>
+    <p>
+      <img src="images/applictaion_overview_01.png" alt="Application overview">
+      <br>
+      Upon launch, WIMS should look similar to the above image. This screen contains all you need to begin navigating the program.</p><p>
+        <img src="images/applictaion_overview_02.png" alt="Application overview">
+        <ol>
+          <li>Section 1 in the image above is the list of states weather data is provided for. Clicking any of these will open up a selection of weather stations to view.</li>
+          <li>Section 2 in the image above is the map display. This is simply a graphical display to assist in visualising selecting a state from the list. </li>
+          <li>Section 3 in the image above is the list of favourite weather stations stored. Any weather stations added to favourites will appear here.</li>
+        </ol>
+    </p>
+    <li> <h1 id="Checking the weather">Checking the weather</a></h1> </li>
+      <ol>
+        <li> <h3 id="Choosing a state">Choosing a state</a></h3> </li>
+        <p> When the program is initially opened, a list of states is displayed on the left-hand side. (See box 1 for list of states) <br>
+            Simply hover or click on the state in order to reveal a panel containing that state's areas and weather stations. (See box 2 for example of a state) </p>
+        <img src="images/application_states.png" alt="Listing the states">
+        <li> <h3 id="Finding your area">Finding your area</a></h3> </li>
+        <p> Once you've chosen a state, simply scroll through the list of areas until you find your desired area. [ ! Perhaps I can implement alphabetical sorting?] </p>
+        <img src="images/application_areas.png" alt="Listing the areas">
+        <li> <h3 id="Finding your weather station">Finding your weather station</a></h3> </li>
+        <p> To find your weather station, simply scroll through the list of areas weather stations. </p>
+        <li> <h3 id="Displaying weather data">Displaying weather data</a></h3></li>
+          <p> To display weather data for your desired weather station simply click on the weather station's name. </p>
+          <img src="images/application_weather_station_select.png" alt="sometext2"><br>
+          <p> The weather data for that weather station will appear in a table format similar to the one below. <br></p>
+          <img src="images/application_weather_station.png" alt="sometext2">
+          <p>  To display the data in a more visual form, simply click the down arrow to display a graph of the data.</p>
+          <img src="images/application_graph.png" alt="sometext2">
+          <p></p>
+      </ol>
+      <li> <h1 id="Favourite weather stations">Favourite weather stations</a></h1> </li>
+        <ol>
+          <li> <h3 id="Adding a favourite weather station">Adding a favourite weather station</a></h3> </li>
+          <p> To add a weather station to your favourites list, simply open that weather station to view it's data <br>
+              and left click the button "+ Add Favourite" <br>
+            </p>
+            <img src="images/application_addfavourite.png" alt="sometext2">
+            <img src="images/application_addedfavourite.png" alt="sometext2">
+          <li> <h3 id="Removing a favourite weather station">Removing a favourite weather station</a></h3> </li>
+          <p> To remove a weather station from your favourites list, simply open that weather station to view it's data <br>
+              and left click the button "- Remove Favourite" <br>
+            </p>
+            <img src="images/application_removefavourite.png" alt="sometext2">
+        </ol>
+		
+		<li> <h1 id="Viewing graph information">Viewing graph information</a></h1> </li>
+        <ol>
+          <li> <h3 id="Viewing the interactive graph">Viewing the interactive graph</a></h3> </li>
+          <p> To view graph information, simply head to the right part of the screen and click on the drop down box to select which
+		  graph you wish to view. Click on the option that you want and the graph should appear below.<br>
+            </p>
+            <img src="images/menu.png" alt="sometext2">
+            <img src="images/drop_down.png" alt="sometext2">
+			<img src="images/graph.png" alt="sometext2">
+          <li> <h3 id="Removing a favourite weather station">Removing a favourite weather station</a></h3> </li>
+          <p> To remove a weather station from your favourites list, simply open that weather station to view it's data <br>
+              and left click the button "- Remove Favourite" <br>
+            </p>
+            <img src="images/application_removefavourite.png" alt="sometext2">
+        </ol>
+		
+		
+		
+		<li> <h1 id="Viewing forecast information">Viewing forecast information</a></h1> </li>
+        <ol>
+          <li> <h3 id="Viewing the forecast graph">Viewing the forecast graph</a></h3> </li>
+          <p> To view graph information, simply head to the top part of the screen and click on "Forecast Info" button.<br></p>
+            <img src="images/menu.png" alt="sometext2">
+			<p> Click on the button on the bottom, to open up a new tab on the right. You can also scroll through the table information without having to open a new tab.<br></p>
+			<img src="images/popup_1.png" alt="sometext2">
+			<p> Click on the newly opened tab and you will see a drop-down box. Select an option here to view its graph.<br></p>
+			<img src="images/popup_2.png" alt="sometext2">
+			<p> The forecast information will be shown.<br></p>
+			<img src="images/popup_3.png" alt="sometext2">
+        </ol>
+		
+		
+		
+		
+		
+    <li> <h1 id="Uninstall">Uninstall</a></h1> </li>
+    <p> The program does not need a proper uninstallation to be removed, as it does not need to be installed. Instead, simply delete the .jar file and any assosicated files.
+    </p>
+  </ol>
+</div>
+  </body>
+</html>
