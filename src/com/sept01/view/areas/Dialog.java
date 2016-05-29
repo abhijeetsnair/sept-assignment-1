@@ -314,7 +314,7 @@ public class Dialog extends JDialog {
 	private void displayRemoveablegraphs(JPanel tempgraphs, String data[][]) {
 		 
 	
-		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_dir", "wind_spd_kmh", "gust_kmh","wind_spd_kt","gust_kt", "press_qnh", "press_msl", "rain_trace", "cloud", "cloud_base_m" , "cloud_oktas", "cloud_type", "vis_km"};
+		String[] fields = { "air_temp", "apparent_t", "dewpt", "rel_hum", "delta_t", "wind_spd_kmh", "gust_kmh","wind_spd_kt","gust_kt","rain_trace"};
 		//Create the combo box, select item at index 4.
 		//Indices start at 0, so 4 specifies the pig.
 		JComboBox<Object> fields_list = new JComboBox<Object>(fields);
