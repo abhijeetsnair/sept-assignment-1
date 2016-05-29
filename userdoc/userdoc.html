@@ -31,6 +31,7 @@
         <ol>
           <li> <a href="#Installing Java">Installing Java</a> </li>
           <li> <a href="#Installing [PROGRAM NAME]">Installing WIMS</a> </li>
+          <li> <a href="#Compile [PROGRAM NAME]">Compile WIMS</a> </li>
         </ol>
         <li> <a href="#Launching the program">Launching the program</a> </li>
         <li> <a href="#Quick Overview">Quick Overview</a> </li>
@@ -76,6 +77,10 @@
       <p> To install Java head to the <a href="https://java.com/en/download/">Java website</a> and download the latest version. Follow it's installation instructions.</p>
       <li> <h3 id="Installing [PROGRAM NAME]">Installing Weather Information Management System</a></h3> </li>
       <p> WIMS comes as a self contained .jar executable and does not require installation in order to launch.
+        <li> <h3 id="Compile [PROGRAM NAME]">Compile Weather Information Management System </a></h3> </li>
+        <p> WIMS is a maven project and the pom.xml is in the root. To compile using maven first if you have not installed maven
+          head to <a href="http://maven.apache.org/download.cgi"> the maven website</a> and install maven. Once maven is setup you can CD to the folder that contains the pom and run "mvn install"
+          which will compile the code and produce a executable jar in /target
     </ol>
     <li> <h1 id="Launching the program">Launching the program</a></h1> </li>
       <p> To launch WIMS simply double click the .jar file, or right click and select "OPEN". Users will be presented with a choice at the start, so just select
@@ -127,7 +132,7 @@
             </p>
             <img src="images/application_removefavourite.png" alt="sometext2">
         </ol>
-		
+
 		<li> <h1 id="Viewing graph information">Viewing graph information</a></h1> </li>
         <ol>
           <li> <h3 id="Viewing the interactive graph">Viewing the interactive graph</a></h3> </li>
@@ -143,9 +148,9 @@
             </p>
             <img src="images/application_removefavourite.png" alt="sometext2">
         </ol>
-		
-		
-		
+
+
+
 		<li> <h1 id="Viewing forecast information">Viewing forecast information</a></h1> </li>
         <ol>
           <li> <h3 id="Viewing the forecast graph">Viewing the forecast graph</a></h3> </li>
@@ -158,11 +163,11 @@
 			<p> The forecast information will be shown.<br></p>
 			<img src="images/popup_3.png" alt="sometext2">
         </ol>
-		
-		
-		
-		
-		
+
+
+
+
+
     <li> <h1 id="Uninstall">Uninstall</a></h1> </li>
     <p> The program does not need a proper uninstallation to be removed, as it does not need to be installed. Instead, simply delete the .jar file and any assosicated files.
     </p>
