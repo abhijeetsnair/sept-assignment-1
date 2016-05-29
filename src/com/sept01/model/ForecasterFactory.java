@@ -8,12 +8,14 @@ import java.util.logging.Logger;
 
 /**
  * @author wolf
- *
+ * USES A FACTORY IMPLEMENTATION TO DYNAMICALLY  DECIDE AND SET THE SOURCE OF INFORMATION
+ * TO FORECASTIO OR OPENWEATHER.BOTH OPENWEATHER AND FORECASTIO IMPLEMENT FORECASTER INTERFACE
  */
 public class ForecasterFactory {
    private static final Logger log= Logger.getLogger("ForecastFactory");
 	public static Forecaster getForecaster(String forecaster){
 		Forecaster forecastApi = null;
+		/*CHECKS FOR THE INSTANCE OF FORECAST*/
 		switch(forecaster.toLowerCase()){
 		case "forecastio": 	forecastApi = new ForecastIO();
 		log.log(Level.INFO,"Loading ForecastIO");

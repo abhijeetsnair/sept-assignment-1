@@ -19,7 +19,7 @@ import com.sept01.view.Metrics;
 public class CenterPanel extends JPanel {
   
   /**
-   * Refernece to the background image.
+   * Reference to the background image.
    */
 	private Image bg;
 	

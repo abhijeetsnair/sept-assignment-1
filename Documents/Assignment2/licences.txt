@@ -1,0 +1,8 @@
+Forecast data obtained from the Website http://forecast.io/
+License key used to get the information:699838f9a5ee6e0e948b3579477efdc0
+
+Forecast data was also obtained from Website http://openweathermap.org/
+License key used to get the information:2a8527d22267d97306e806834e6d992a
+
+ThridParty library used to create charts and graphs :JFREECHARTS
+http://www.jfree.org/jfreechart/

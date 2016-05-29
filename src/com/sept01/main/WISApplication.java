@@ -1,24 +1,28 @@
 package com.sept01.main;
+import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-
 import com.sept01.model.Favourites;
 import com.sept01.model.Singleton;
 import com.sept01.model.State;
 import com.sept01.model.Weather;
 import com.sept01.utility.ErrorLog;
 import com.sept01.utility.Preferences;
-import com.sept01.view.MainView;
-import com.sept01.view.areas.ForeCastIODialog;
+import com.sept01.view.InitOptionsView;
+
+
 
 /**
  * <p>
  * The Main Client Class for the application.
+ * 
  * </p>
  */
 public class WISApplication {
+
 	public static boolean debug = false;
 	public static Weather weather;
 	
@@ -36,7 +40,16 @@ public class WISApplication {
 	 * Initialise singleton pattern creation
 	 */
 	public WISApplication() {
+//		Forecaster forecaster = ForecasterFactory.getForecaster("forecastio");
+//		forecaster.getHourly();
+	  
+	  
+	  
+	  
 		Singleton.getInstance().setApplication(this);
+//		
+//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+//		((OpenWeatherMap) owm).getForecast(-37.783817, 100.934818);
 	}
 
 	/**
@@ -55,10 +68,40 @@ public class WISApplication {
 		 * 
 		 */
 		// changeLookAndFeel();
-
+		Logger logger = Logger.getLogger("");
+		FileHandler fh = null;
+		try {
+			fh = new FileHandler("log.log");
+		} catch (SecurityException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.addHandler(fh);
+		
+//		Forecaster owm = ForecasterFactory.getForecaster("openweathermap");
+//		JSONObject owmF = owm.getForecast(37.8267,-122.423);
+//		Forecaster fio = ForecasterFactory.getForecaster("forecastio");
+//		JSONObject fioF =  fio.getForecast(37.8267,-122.423);
+//		
+//		JSONArray forecasts = fioF.getJSONArray("forecast");
+//		for(Object fob : forecasts){
+//			JSONObject fore = (JSONObject) fob;
+//			System.out.println("FIO: "+fore.get("description"));
+//		}
+//		
+//		forecasts = owmF.getJSONArray("forecast");
+//		for(Object fob : forecasts){
+//			JSONObject fore = (JSONObject) fob;
+//			System.out.println("OWM: "+fore.get("description"));
+//		}
+//		
+//		JSONObject loc = Geocoder.getCoOrds("113 cecil street fitzroy");
+//		System.out.println(Geocoder.getName(loc.getDouble("lat"), loc.getDouble("lng")));
+//		System.out.println(loc.toString());
+		
 		new WISApplication();
-		ForeCastIODialog dialog = new ForeCastIODialog();
-		dialog.show();
+	 
 		if(debug){		
 			System.out.println("Hello");
 			System.out.println(" :D ");
@@ -71,9 +114,12 @@ public class WISApplication {
 		prefs.readFavourites();
 		// Weather instance saved to singleton class
 		Singleton.getInstance().setWeather(weather);
-		MainView view = new MainView();
-		// view.show();
-	//	view.setVisible(true);
+		
+		InitOptionsView initOptionsView = new InitOptionsView();
+		initOptionsView.setVisible(true);
+		
+/*		MainView view = new MainView();
+		view.setVisible(true);*/
 
 	}
 

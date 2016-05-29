@@ -43,5 +43,11 @@ public class SingetonTest {
 		assertSame(value, yloc);
 
 	}
+	@Test
+	public void checkifForecastInitialised() {
+		int value = -1;
+		int source = Singleton.getInstance().source;
+		assertSame(value, source);
 
+	}
 }

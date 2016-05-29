@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.sept01.main.WISApplication;
 import com.sept01.view.areas.Dialog;
 
@@ -20,20 +22,21 @@ import com.sept01.view.areas.Dialog;
 public class JDialogListener implements ActionListener {
 
 	Dialog dialog;
-
-	public JDialogListener(Dialog dialog) {
+	DefaultCategoryDataset dataset;
+	public JDialogListener(Dialog dialog, DefaultCategoryDataset dataset) {
 		this.dialog = dialog;
+		this.dataset=dataset;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String buttonType = ((JButton) arg0.getSource()).getText();
 		// CHECKS TO SEE IF CLICKED BY THE CLOSE ME BUTTON
-		if (buttonType.compareTo("Close me") == 0) {
+		if (buttonType.compareTo("clear") == 0) {
 			if(WISApplication.debug == true){
 				System.out.println("disposing the window..");
 			}
-			dialog.dispose();
+			dataset.clear();
 		}
 
 	}
