@@ -1,4 +1,4 @@
 /target/
 *log
 *.lck
-*.log*
+*.log.*
