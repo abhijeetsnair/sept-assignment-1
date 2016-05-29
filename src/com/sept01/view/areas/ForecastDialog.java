@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +32,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.json.JSONArray;
@@ -59,13 +64,40 @@ public class ForecastDialog extends JDialog {
 	JTabbedPane tabbedPane;
 	String weatherStation;
 
+
 	@SuppressWarnings("serial")
 	public ForecastDialog(JSONObject forecast, String weather_station) {
 		this.forecast = forecast;
 		this.weatherStation = weather_station;
 		// Displaying current forecast on the tab
 		this.setLayout(new GridLayout(1, 1));
+		
+		UIManager.put("TabbedPane.contentAreaColor", new Color(32, 32, 40));
+		UIManager.put("TabbedPane.background", new Color(32, 32, 40));
+		UIManager.put("TabbedPane.foreground", new Color(32, 32, 40));
+		UIManager.put("TabbedPane.tabAreaBackground", new Color(32, 32, 40));
+		UIManager.put("TabbedPane.selected",new Color(64, 64, 72));
+		
+		UIManager.put("TabbedPane.unselectedBackground", new Color(32, 32, 40));
+		UIManager.put("TabbedPane.unselectedTabBackground", new Color(32, 32, 40));
+		
+		
+		UIManager.put("TabbedPane.tabInsets", new Insets(0, 0, 0, 0));
+		UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
+		UIManager.put("TabbedPane.tabAreaInsets", new Insets(0, 0, 0, 0));
+		UIManager.put("TabbedPane.selectedTabPadInsets", new Insets(0, 0, 0, 0));
+		
+		UIManager.put("TabbedPane.borderHightlightColor", new Color(0, 0, 0, 0));
+		UIManager.put("TabbedPane.selectHighlight", new Color(0, 0, 0, 0));
+		
+		UIManager.put("TabbedPane.focus", new Color(0, 0, 0, 0));
+		UIManager.put("TabbedPane.border", new Color(0, 0, 0, 0));
+		
 		tabbedPane = new JTabbedPane();
+		
+		//tabbedPane.setBackground(colorTab);
+		
+
 		icon = createImageIcon("images/icon.png");
 		log.log(Level.INFO, "Displaying the hourly forecast for " + weatherStation);
 		JComponent panel1 = makeTextPanel("Hourly Forecast for " + weatherStation);
@@ -75,7 +107,8 @@ public class ForecastDialog extends JDialog {
 		this.setTitle("Weather forecast for " + weather_station);
 		setBackground(new Color(32, 32, 40));
 		tabbedPane.setBackground(new Color(32, 32, 40));
-		tabbedPane.setForeground(new Color(32, 32, 40));
+		tabbedPane.setForeground(Color.WHITE);
+		
 		panel1.setBackground(new Color(64, 64, 72));
 		panel1.setForeground(Color.LIGHT_GRAY);
 
@@ -207,6 +240,12 @@ public class ForecastDialog extends JDialog {
 		JComponent graph_panel = makeGraphPanel();
 		tabbedPane.addTab("Show Graphs", icon, graph_panel, "Shows Hourly Graphs");
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+		
+		for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+		  //tabbedPane.getComponentAt(i).setForeground(foregroundColor);
+		  tabbedPane.getComponentAt(i).setBackground(new Color(32, 32, 40));
+	}
+		
 		JPanel selector_panel = new JPanel();
 		JPanel selector_holder = new JPanel();
 
@@ -287,9 +326,19 @@ public class ForecastDialog extends JDialog {
 		customise.add(filler, BorderLayout.CENTER);
 		// Closes the graph display tab
 		JButton button = new JButton("X");
+		
+		button.setBackground(new Color(32, 32, 40));
+		button.setForeground(Color.ORANGE);
+		button.setFocusable(false);
+		button.setBorderPainted(false);
+		
 		customise.add(button, BorderLayout.EAST);
 		customise.setBackground(new Color(32, 32, 40));
+		customise.setFocusable(false);
+		
+		banner.setBackground(new Color(32, 32, 40));
 		panel.setBackground(new Color(32, 32, 40));
+		setBackground(new Color(32, 32, 40));
 		filler.setBackground(new Color(32, 32, 40));
 		filler.setForeground(Color.LIGHT_GRAY);
 		// Removes a tab from the pane
@@ -312,7 +361,7 @@ public class ForecastDialog extends JDialog {
 	 */
 	protected static ImageIcon createImageIcon(String path) {
 		log.log(Level.INFO, "Creates the icon for the tab display");
-		Image imgURL = Toolkit.getDefaultToolkit().getImage("images/icon.png");
+		Image imgURL = Toolkit.getDefaultToolkit().getImage("images/icon2.png");
 		if (imgURL != null) {
 			return new ImageIcon(imgURL);
 		} else {
