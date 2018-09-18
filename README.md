@@ -7,7 +7,7 @@ s3495671 - Wolf Zimmermann
 
 s3485769 - Joshua
 
-s3400586 - Jeet
+s3400586 - Abhijeet Sathyaprakash Nair
 
 # Potential Bonus Marks (Marker Look Here!)
 
